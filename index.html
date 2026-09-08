@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UmrahOne — A Guided Companion for the Journey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+  :root{
+    --night:#0E2A28;
+    --teal:#144C46;
+    --turquoise:#3FA79A;
+    --gold:#B7862C;
+    --gold-soft:#E7C77E;
+    --ivory:#F6F1E4;
+    --ivory-dim:#EDE6D3;
+    --ink:#1B1B18;
+    --line:rgba(183,134,44,0.35);
+    --radius:2px;
+    --max:1120px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ivory);
+    color:var(--ink);
+    font-family:'Work Sans',sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4,.serif{
+    font-family:'Amiri',serif;
+    font-weight:700;
+    margin:0;
+    color:var(--night);
+  }
+  a{color:inherit;}
+  p{margin:0 0 1em;}
+  .container{max-width:var(--max);margin:0 auto;padding:0 24px;}
+  img,svg{display:block;max-width:100%;}
+  button{font-family:inherit;cursor:pointer;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important;animation-iteration-count:1 !important;transition-duration:0.001ms !important;scroll-behavior:auto !important;}
+  }
+
+  /* ---------- NAV ---------- */
+  header.site-nav{
+    position:sticky;top:0;z-index:100;
+    background:rgba(14,42,40,0.96);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid rgba(183,134,44,0.4);
+  }
+  .nav-row{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 24px;max-width:var(--max);margin:0 auto;
+  }
+  .brand{display:flex;align-items:center;gap:10px;color:var(--ivory);text-decoration:none;}
+  .brand svg{width:26px;height:26px;}
+  .brand-text{font-family:'Amiri',serif;font-size:1.25rem;color:var(--ivory);}
+  .brand-text small{display:block;font-family:'Work Sans',sans-serif;font-size:0.6rem;letter-spacing:0.08em;color:var(--gold-soft);font-weight:500;}
+  nav.links{display:none;gap:26px;}
+  nav.links a{
+    color:var(--ivory);text-decoration:none;font-size:0.92rem;font-weight:500;
+    padding:6px 0;border-bottom:1px solid transparent;transition:border-color .2s, color .2s;
+  }
+  nav.links a:hover{border-color:var(--gold);color:var(--gold-soft);}
+  .burger{
+    display:flex;flex-direction:column;justify-content:center;gap:5px;
+    background:none;border:none;padding:6px;
+  }
+  .share-btn{
+    background:none;border:1px solid rgba(231,199,126,0.4);border-radius:50%;
+    width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+    padding:0;transition:border-color .2s, background .2s;
+  }
+  .share-btn:hover{background:rgba(231,199,126,0.12);border-color:var(--gold-soft);}
+  .share-btn svg{width:18px;height:18px;}
+  .burger span{width:24px;height:2px;background:var(--ivory);display:block;transition:transform .25s, opacity .25s;}
+  .mobile-panel{
+    display:none;flex-direction:column;background:var(--night);
+    border-top:1px solid rgba(183,134,44,0.3);
+  }
+  .mobile-panel.open{display:flex;}
+  .mobile-panel a{
+    color:var(--ivory);text-decoration:none;padding:14px 24px;
+    border-bottom:1px solid rgba(255,255,255,0.06);font-size:0.98rem;
+  }
+  @media(min-width:860px){
+    nav.links{display:flex;}
+    .burger{display:none;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;overflow:hidden;
+    background:radial-gradient(ellipse at 30% -10%, #1c5f57 0%, var(--night) 60%);
+    color:var(--ivory);
+    padding:88px 24px 96px;
+  }
+  .hero-pattern{
+    position:absolute;inset:0;opacity:0.16;
+    animation:driftPattern 90s linear infinite;
+  }
+  @keyframes driftPattern{
+    from{transform:translate(0,0) rotate(0deg);}
+    to{transform:translate(-120px,-80px) rotate(6deg);}
+  }
+  .hero-inner{position:relative;max-width:var(--max);margin:0 auto;text-align:center;}
+  .bismillah{
+    font-family:'Amiri',serif;color:var(--gold-soft);font-size:1.6rem;margin-bottom:18px;
+    opacity:0;animation:fadeIn 1s ease-out .2s forwards;
+  }
+  .hero h1{
+    font-size:clamp(2.1rem,5.5vw,3.6rem);line-height:1.15;color:var(--ivory);
+    max-width:720px;margin:0 auto 18px;
+    opacity:0;animation:fadeIn 1s ease-out .45s forwards;
+  }
+  .hero p.lede{
+    max-width:540px;margin:0 auto 34px;color:#CFE3DF;font-size:1.05rem;
+    opacity:0;animation:fadeIn 1s ease-out .7s forwards;
+  }
+  @keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+  .hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;
+    opacity:0;animation:fadeIn 1s ease-out .95s forwards;}
+  .btn{
+    display:inline-block;padding:13px 26px;border-radius:var(--radius);
+    text-decoration:none;font-weight:600;font-size:0.94rem;border:1px solid transparent;
+    transition:transform .18s, background .2s, border-color .2s;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-gold{background:var(--gold);color:var(--night);}
+  .btn-gold:hover{background:var(--gold-soft);}
+  .btn-outline{border-color:rgba(247,241,228,0.5);color:var(--ivory);}
+  .btn-outline:hover{border-color:var(--gold-soft);color:var(--gold-soft);}
+
+  /* ---------- SECTION HEADERS ---------- */
+  section{padding:76px 0;}
+  .section-head{margin-bottom:44px;}
+  .kicker-ar{font-family:'Amiri',serif;color:var(--gold);font-size:1.5rem;margin-bottom:6px;}
+  .section-head h2{font-size:clamp(1.6rem,3.4vw,2.3rem);max-width:640px;}
+  .section-head .desc{max-width:600px;color:#4a4a44;margin-top:10px;}
+  .band-teal{background:var(--teal);color:var(--ivory);}
+  .band-teal h2, .band-teal .kicker-ar{color:var(--ivory);}
+  .band-teal .desc{color:#CFE3DF;}
+  .band-ivory-dim{background:var(--ivory-dim);}
+
+  /* ---------- JOURNEY TIMELINE ---------- */
+  .timeline{position:relative;padding-left:0;}
+  .timeline-track{
+    position:relative;display:flex;flex-direction:column;gap:0;
+  }
+  .tl-item{
+    position:relative;display:flex;gap:20px;padding:0 0 44px 0;
+  }
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-node-col{display:flex;flex-direction:column;align-items:center;}
+  .tl-node{
+    width:40px;height:40px;border-radius:50%;
+    background:var(--night);border:2px solid var(--gold);
+    color:var(--gold-soft);font-family:'Amiri',serif;font-weight:700;
+    display:flex;align-items:center;justify-content:center;font-size:1.05rem;
+    flex-shrink:0;
+  }
+  .tl-line{flex:1;width:2px;background:var(--line);margin-top:4px;}
+  .tl-content{padding-top:4px;}
+  .tl-content h3{font-size:1.25rem;margin-bottom:6px;}
+  .tl-content .ar{font-family:'Amiri',serif;color:var(--gold);font-size:1.05rem;margin-bottom:8px;}
+  .tl-content p{color:#4a4a44;max-width:600px;}
+
+  /* ---------- DUA ACCORDION ---------- */
+  .step-card{
+    border:1px solid var(--line);
+    background:#fff;
+    margin-bottom:16px;
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .step-toggle{
+    width:100%;background:none;border:none;text-align:left;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px 22px;gap:16px;
+  }
+  .step-toggle-left{display:flex;align-items:center;gap:14px;}
+  .step-num{
+    font-family:'Amiri',serif;color:var(--gold);font-size:1.1rem;
+    border:1px solid var(--line);border-radius:50%;width:34px;height:34px;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .step-toggle h3{font-size:1.08rem;}
+  .step-toggle .plus{font-size:1.4rem;color:var(--gold);transition:transform .25s;line-height:1;}
+  .step-card.open .plus{transform:rotate(45deg);}
+  .step-body{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+  .step-card.open .step-body{max-height:2400px;}
+  .step-body-inner{padding:0 22px 26px;}
+  .step-body-inner > p.intro{color:#4a4a44;margin-bottom:18px;}
+
+  .dua-block{border-top:1px dashed var(--line);padding:18px 0;}
+  .dua-block:first-of-type{border-top:none;padding-top:0;}
+  .dua-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:10px;}
+  .dua-head h4{font-size:1rem;color:var(--night);}
+  .dua-actions{display:flex;gap:8px;flex-wrap:wrap;}
+  .play-btn{
+    background:var(--ivory-dim);border:1px solid var(--line);color:var(--teal);
+    font-size:0.78rem;padding:6px 12px;border-radius:20px;font-weight:600;
+    display:inline-flex;align-items:center;gap:6px;transition:background .2s;
+  }
+  .play-btn:hover{background:var(--gold-soft);}
+  .play-btn.playing{background:var(--gold);color:var(--night);}
+  .arabic{
+    font-family:'Amiri',serif;font-size:1.5rem;line-height:2.1;color:var(--night);
+    direction:rtl;text-align:right;margin-bottom:10px;
+  }
+  .translit{font-style:italic;color:#6b6b62;font-size:0.92rem;margin-bottom:8px;}
+  .translation{color:#333;font-size:0.96rem;margin-bottom:0;}
+  .ref{font-size:0.78rem;color:#8a8578;margin-top:4px;}
+
+  /* ---------- REGS / GRID CARDS ---------- */
+  .grid-3{display:grid;grid-template-columns:1fr;gap:22px;}
+  @media(min-width:760px){.grid-3{grid-template-columns:repeat(3,1fr);}}
+  @media(min-width:760px){.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:26px;}}
+  .panel{
+    border:1px solid var(--line);padding:26px;background:#fff;border-radius:var(--radius);
+  }
+  .panel h3{font-size:1.1rem;margin-bottom:10px;}
+  .panel ul{margin:0;padding-left:18px;color:#3f3f38;font-size:0.94rem;}
+  .panel ul li{margin-bottom:6px;}
+  .check-list{list-style:none;padding:0;margin:0;}
+  .check-list li{margin-bottom:10px;}
+  .check-list label{display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:0.94rem;color:#3f3f38;}
+  .check-list input[type="checkbox"]{
+    appearance:none;-webkit-appearance:none;width:18px;height:18px;flex-shrink:0;margin-top:2px;
+    border:1.5px solid var(--gold);border-radius:3px;position:relative;background:#fff;
+  }
+  .check-list input[type="checkbox"]:checked{background:var(--gold);}
+  .check-list input[type="checkbox"]:checked::after{
+    content:"";position:absolute;left:4px;top:0px;width:5px;height:9px;
+    border:solid var(--night);border-width:0 2px 2px 0;transform:rotate(45deg);
+  }
+  .check-list label:has(input:checked) span{color:#8a8578;text-decoration:line-through;}
+  .tag{
+    display:inline-block;font-size:0.72rem;font-weight:600;color:var(--teal);
+    background:rgba(63,167,154,0.12);padding:4px 10px;border-radius:20px;margin-bottom:12px;
+  }
+  .note-box{
+    border-left:3px solid var(--gold);background:var(--ivory-dim);
+    padding:16px 20px;font-size:0.9rem;color:#4a4a3f;margin-top:28px;
+  }
+  .note-box strong{color:var(--night);}
+
+  /* ---------- NUSUK / RAWDAH STEPS ---------- */
+  .flow{display:flex;flex-direction:column;gap:0;}
+  .flow-step{display:flex;gap:18px;padding:20px 0;border-bottom:1px solid var(--line);}
+  .flow-step:last-child{border-bottom:none;}
+  .flow-num{font-family:'Amiri',serif;font-size:1.4rem;color:var(--gold);width:34px;flex-shrink:0;}
+  .flow-step h4{font-size:1.02rem;margin-bottom:4px;color:var(--night);}
+  .flow-step p{color:#4a4a44;font-size:0.94rem;margin:0;}
+
+  .feature-grid{display:grid;grid-template-columns:1fr;gap:2px;background:var(--line);border:1px solid var(--line);margin-top:10px;}
+  @media(min-width:640px){.feature-grid{grid-template-columns:1fr 1fr;}}
+  @media(min-width:960px){.feature-grid{grid-template-columns:1fr 1fr 1fr;}}
+  .feature-cell{background:var(--night);color:var(--ivory);padding:22px;}
+  .feature-cell h4{color:var(--gold-soft);font-size:0.98rem;margin-bottom:6px;font-family:'Work Sans',sans-serif;font-weight:600;}
+  .feature-cell p{color:#CFE3DF;font-size:0.86rem;margin:0;}
+
+  /* ---------- PLACES ---------- */
+  .city-tabs{display:flex;gap:10px;margin-bottom:30px;border-bottom:1px solid var(--line);}
+  .city-tab{
+    background:none;border:none;padding:12px 4px;margin-right:26px;
+    font-family:'Amiri',serif;font-size:1.15rem;color:#9a9587;
+    border-bottom:2px solid transparent;transition:color .2s, border-color .2s;
+  }
+  .city-tab.active{color:var(--night);border-color:var(--gold);}
+  .place-grid{display:none;grid-template-columns:1fr;gap:20px;}
+  .place-grid.active{display:grid;}
+  @media(min-width:700px){.place-grid{grid-template-columns:1fr 1fr;}}
+  .place-card{border:1px solid var(--line);background:#fff;display:flex;gap:16px;padding:20px;border-radius:var(--radius);}
+  .place-icon{
+    width:56px;height:56px;flex-shrink:0;border-radius:50%;background:var(--ivory-dim);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .place-icon svg{width:28px;height:28px;stroke:var(--teal);}
+  .place-card h4{font-size:1.02rem;margin-bottom:6px;color:var(--night);}
+  .place-card p{font-size:0.9rem;color:#4a4a44;margin:0;}
+
+  /* ---------- MAP ---------- */
+  #map{height:460px;width:100%;border:1px solid var(--line);}
+  .map-toggle{display:flex;gap:10px;margin-bottom:18px;}
+  .map-toggle button{
+    padding:9px 20px;border:1px solid var(--line);background:#fff;color:var(--night);
+    font-weight:600;font-size:0.88rem;border-radius:20px;
+  }
+  .map-toggle button.active{background:var(--night);color:var(--gold-soft);border-color:var(--night);}
+  .map-legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:14px;font-size:0.82rem;color:#5a5a50;}
+  .map-legend span{display:inline-flex;align-items:center;gap:6px;}
+  .dot{width:9px;height:9px;border-radius:50%;background:var(--gold);display:inline-block;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--night);color:#B9C9C5;padding:56px 0 30px;}
+  footer h4{color:var(--ivory);font-size:1rem;margin-bottom:12px;}
+  footer .foot-grid{display:grid;grid-template-columns:1fr;gap:30px;}
+  @media(min-width:760px){footer .foot-grid{grid-template-columns:1.4fr 1fr 1fr;}}
+  footer p{font-size:0.86rem;color:#9DB2AD;}
+  footer .foot-bottom{
+    border-top:1px solid rgba(255,255,255,0.1);margin-top:36px;padding-top:20px;
+    font-size:0.78rem;color:#7C938D;
+  }
+
+  .divider-mark{display:flex;justify-content:center;margin:0 0 40px;}
+  .divider-mark svg{width:34px;height:34px;opacity:0.5;}
+
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-row">
+    <a href="#home" class="brand">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M50 4 L61 34 L94 34 L67 53 L78 84 L50 65 L22 84 L33 53 L6 34 L39 34 Z" stroke="#E7C77E" stroke-width="4" stroke-linejoin="round"/></svg>
+      <span class="brand-text">UmrahOne<small>A companion for the journey</small></span>
+    </a>
+    <nav class="links">
+      <a href="#journey">Journey</a>
+      <a href="#duas">Du'as</a>
+      <a href="#regulations">Regulations</a>
+      <a href="#nusuk">Nusuk</a>
+      <a href="#rawdah">Rawdah</a>
+      <a href="#essentials">Essentials</a>
+      <a href="#places">Places</a>
+      <a href="#shopping">Shop &amp; Eat</a>
+      <a href="#map">Map</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:6px;">
+      <button class="share-btn" id="shareBtn" aria-label="Share this site" title="Share">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#E7C77E" stroke-width="1.8"><circle cx="18" cy="5" r="2.4"/><circle cx="6" cy="12" r="2.4"/><circle cx="18" cy="19" r="2.4"/><path d="M8.1 10.7l7.8-4.4M8.1 13.3l7.8 4.4"/></svg>
+      </button>
+      <button class="burger" id="burgerBtn" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-panel" id="mobilePanel">
+    <a href="#journey">Journey</a>
+    <a href="#duas">Du'as</a>
+    <a href="#regulations">Regulations</a>
+    <a href="#nusuk">Nusuk App</a>
+    <a href="#rawdah">Rawdah Booking</a>
+    <a href="#essentials">Travel Essentials</a>
+    <a href="#places">Famous Places</a>
+    <a href="#shopping">Shopping &amp; Eateries</a>
+    <a href="#map">Map</a>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <svg class="hero-pattern" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <pattern id="starPattern" width="80" height="80" patternUnits="userSpaceOnUse">
+        <path d="M40 4 L48 30 L74 30 L52 46 L60 72 L40 56 L20 72 L28 46 L6 30 L32 30 Z" fill="none" stroke="#E7C77E" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="400" height="400" fill="url(#starPattern)"/>
+  </svg>
+  <div class="hero-inner">
+    <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+    <h1>A quiet companion for your Umrah — from niyyah to Tawaf al-Wada'</h1>
+    <p class="lede">Every step, every du'a in Arabic and English with audio, the rules that govern travel today, and the ground you'll walk in Makkah and Madinah.</p>
+    <div class="hero-ctas">
+      <a href="#journey" class="btn btn-gold">Begin the journey</a>
+      <a href="#duas" class="btn btn-outline">Go straight to the du'as</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= JOURNEY ================= -->
+<section id="journey">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="kicker-ar">رحلة العمرة</div>
+      <h2>The journey, stage by stage</h2>
+      <p class="desc">Umrah has a fixed order — four pillars, in sequence. This overview gives you the shape of the whole trip; the next section opens each stage with its exact wording.</p>
+    </div>
+    <div class="timeline">
+      <div class="timeline-track">
+        <div class="tl-item reveal">
+          <div class="tl-node-col"><div class="tl-node">١</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <h3>Ihram</h3>
+            <div class="ar">الإحرام</div>
+            <p>At or before the miqat: ghusl, the ihram garments, the intention, and the Talbiyah — the state you enter and stay in until the final trim.</p>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-node-col"><div class="tl-node">٢</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <h3>Tawaf</h3>
+            <div class="ar">الطواف</div>
+            <p>Seven circuits of the Ka'bah beginning at the Black Stone, then two rak'ahs near Maqam Ibrahim and a drink of Zamzam.</p>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-node-col"><div class="tl-node">٣</div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <h3>Sa'i</h3>
+            <div class="ar">السعي</div>
+            <p>Seven passes between Safa and Marwah, retracing Hajar's search for water — the walk that gave Zamzam its name.</p>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-node-col"><div class="tl-node">٤</div></div>
+          <div class="tl-content">
+            <h3>Halq or Taqsir</h3>
+            <div class="ar">الحلق أو التقصير</div>
+            <p>Shaving or trimming the hair closes Umrah and releases you from ihram — the visit is complete.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DUAS / STEP DETAIL ================= -->
+<section id="duas" class="band-ivory-dim">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="kicker-ar">الأدعية</div>
+      <h2>Every step, with its wording</h2>
+      <p class="desc">Arabic text, transliteration and an English rendering for each stage, drawn from the Qur'an and authentic hadith. Tap a stage to open it, and use the audio buttons to hear either language spoken aloud.</p>
+    </div>
+
+    <!-- STEP 1: IHRAM -->
+    <div class="step-card open">
+      <button class="step-toggle" data-target="s1">
+        <span class="step-toggle-left"><span class="step-num">1</span><h3>Ihram — intention and Talbiyah</h3></span>
+        <span class="plus">+</span>
+      </button>
+      <div class="step-body" id="s1">
+        <div class="step-body-inner">
+          <p class="intro">Perform ghusl — a full purifying bath, the Prophet's ﷺ own practice before entering ihram — then wear the ihram garments (unstitched white cloths for men; plain, modest clothing for women — the face and hands remain uncovered), make your intention, and begin reciting the Talbiyah, which you repeat often until you start Tawaf.</p>
+
+          <div class="dua-block">
+            <div class="dua-head">
+              <h4>Intention (niyyah) for Umrah</h4>
+              <div class="dua-actions">
+                <button class="play-btn" data-lang="ar-SA" data-target="niyyah-ar">🔊 Arabic</button>
+                <button class="play-btn" data-lang="en-US" data-target="niyyah-en">🔊 English</button>
+              </div>
+            </div>
+            <p class="arabic" id="niyyah-ar" dir="rtl" lang="ar">اللَّهُمَّ إِنِّي أُرِيدُ الْعُمْرَةَ فَيَسِّرْهَا لِي وَتَقَبَّلْهَا مِنِّي</p>
+            <p class="translit">Allāhumma innī urīdul-'umrata fa yassirhā lī wa taqabbalhā minnī</p>
+            <p class="translation" id="niyyah-en">O Allah, I intend to perform Umrah — make it easy for me, and accept it from me.</p>
+            <p class="ref">Intention is an act of the heart; this wording is a commonly taught form, not a fixed recitation.</p>
+          </div>
+
+          <div class="dua-block">
+            <div class="dua-head">
+              <h4>The Talbiyah</h4>
+              <div class="dua-actions">
+                <button class="play-btn" data-lang="ar-SA" data-target="talbiyah-ar">🔊 Arabic</button>
+                <button class="play-btn" data-lang="en-US" data-target="talbiyah-en">🔊 English</button>
+              </div>
+            </div>
+            <p class="arabic" id="talbiyah-ar" dir="rtl" lang="ar">لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لَا شَرِيكَ لَكَ لَبَّيْكَ، إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ، لَا شَرِيكَ لَكَ</p>
+            <p class="translit">Labbayk Allāhumma labbayk, labbayka lā sharīka laka labbayk, innal-ḥamda wan-ni'mata laka wal-mulk, lā sharīka lak</p>
+            <p class="translation" id="talbiyah-en">Here I am, O Allah, here I am. Here I am, You have no partner, here I am. Verily all praise, grace and dominion are Yours. You have no partner.</p>
+            <p class="ref">Sahih al-Bukhari &amp; Sahih Muslim. Men recite it aloud; women say it quietly.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2: ENTERING HARAM -->
+    <div class="step-card">
+      <button class="step-toggle" data-target="s2">
+        <span class="step-toggle-left"><span class="step-num">2</span><h3>Entering Masjid al-Haram</h3></span>
+        <span class="plus">+</span>
+      </button>
+      <div class="step-body" id="s2">
+        <div class="step-body-inner">
+          <p class="intro">Enter with the right foot, as with any mosque, and lower your gaze in humility as the Ka'bah comes into view. Many raise their hands and make personal du'a at first sight — there's no single wording required for that moment; speak to Allah in your own words.</p>
+          <div class="dua-block">
+            <div class="dua-head">
+              <h4>Entering the mosque</h4>
+              <div class="dua-actions">
+                <button class="play-btn" data-lang="ar-SA" data-target="enter-ar">🔊 Arabic</button>
+                <button class="play-btn" data-lang="en-US" data-target="enter-en">🔊 English</button>
+              </div>
+            </div>
+            <p class="arabic" id="enter-ar" dir="rtl" lang="ar">اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ</p>
+            <p class="translit">Allāhumma-ftaḥ lī abwāba raḥmatik</p>
+            <p class="translation" id="enter-en">O Allah, open the gates of Your mercy for me.</p>
+            <p class="ref">Sahih Muslim — the general dua for entering any mosque.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3: TAWAF -->
+    <div class="step-card">
+      <button class="step-toggle" data-target="s3">
+        <span class="step-toggle-left"><span class="step-num">3</span><h3>Tawaf — circling the Ka'bah</h3></span>
+        <span class="plus">+</span>
+      </button>
+      <div class="step-body" id="s3">
+        <div class="step-body-inner">
+          <p class="intro">Begin level with the Black Stone (Hajar al-Aswad), Ka'bah on your left. Say the takbir at the start of each of the seven circuits — kissing or touching the stone if possible, otherwise gesturing toward it without pushing. Between the Yemeni Corner and the Black Stone, recite the verse below; elsewhere, any dhikr or personal du'a is fine. Close with two rak'ahs near Maqam Ibrahim (Surah al-Kafirun, then al-Ikhlas) and a drink of Zamzam.</p>
+
+          <div class="dua-block">
+            <div class="dua-head">
+              <h4>Starting each circuit</h4>
+              <div class="dua-actions">
+                <button class="play-btn" data-lang="ar-SA" data-target="tawaf-start-ar">🔊 Arabic</button>
+              </div>
+            </div>
+            <p class="arabic" id="tawaf-start-ar" dir="rtl" lang="ar">بِسْمِ اللَّهِ، وَاللَّهُ أَكْبَرُ</p>
+            <p class="translit">Bismillāh, wallāhu akbar</p>
+            <p class="translation">In the name of Allah, and Allah is the Greatest.</p>
+          </div>
+
+          <div class="dua-block">
+            <div class="dua-head">
+              <h4>Between the Yemeni Corner and the Black Stone</h4>
+              <div class="dua-actions">
+                <button class="play-btn" data-lang="ar-SA" data-target="rabbana-ar">🔊 Arabic</button>
+                <button class="play-btn" data-lang="en-US" data-target="rabbana-en">🔊 English</button>
+              </div>
+            </div>
+            <p class="arabic" id="rabbana-ar" dir="rtl" lang="ar">رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ</p>
+            <p class="translit">Rabbanā ātinā fid-dunyā ḥasanatan wa fil-ākhirati ḥasanatan wa qinā 'adhāban-nār</p>
+            <p class="translation" id="rabbana-en">Our Lord, give us good in this world and good in the Hereafter, and protect us from the punishment of the Fire.</p>
+            <p class="ref">Qur'an 2:201, repeated by the Prophet ﷺ on this exact stretch of Tawaf (Sunan Abu Dawud).</p>
+          </div>
+
+          <div class="dua-block">
+            <div class="dua-head">
+              <h4>After Tawaf, at Maqam Ibrahim</h4>
+              <div class="dua-actions">
+                <button class="play-btn" data-lang="ar-SA" data-target="maqam-ar">🔊 Arabic</button>
+                <button class="play-btn" data-lang="en-US" data-target="maqam-en">🔊 English</button>
+              </div>
+            </div>
+            <p class="arabic" id="maqam-ar" dir="rtl" lang="ar">وَاتَّخِذُوا مِنْ مَقَامِ إِبْرَاهِيمَ مُصَلًّى</p>
+            <p class="translit">Wattakhidhū min maqāmi Ibrāhīma muṣallā</p>
+            <p class="translation" id="maqam-en">And take the station of Ibrahim as a place of prayer.</p>
+            <p class="ref">Qur'an 2:125 — recited before the two rak'ahs. Pray them anywhere in the mosque if the area is crowded.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4: SAI -->
+    <div class="step-card">
+      <button class="step-toggle" data-target="s4">
+        <span class="step-toggle-left"><span class="step-num">4</span><h3>Sa'i — between Safa and Marwah</h3></span>
+        <span class="plus">+</span>
+      </button>
+      <div class="step-body" id="s4">
+        <div class="step-body-inner">
+          <p class="intro">Approach Safa reciting the verse below, then climb it, face the Ka'bah, and say the takbir three times followed by the dhikr — repeating the whole sequence three times with your own du'a in between. Walk to Marwah (this is one circuit), repeat the same dhikr there, and continue for seven one-way trips in total, ending at Marwah.</p>
+
+          <div class="dua-block">
+            <div class="dua-head">
+              <h4>Approaching Safa</h4>
+              <div class="dua-actions">
+                <button class="play-btn" data-lang="ar-SA" data-target="safa-ar">🔊 Arabic</button>
+                <button class="play-btn" data-lang="en-US" data-target="safa-en">🔊 English</button>
+              </div>
+            </div>
+            <p class="arabic" id="safa-ar" dir="rtl" lang="ar">إِنَّ الصَّفَا وَالْمَرْوَةَ مِنْ شَعَائِرِ اللَّهِ ﴿١٥٨﴾ أَبْدَأُ بِمَا بَدَأَ اللَّهُ بِهِ</p>
+            <p class="translit">Innaṣ-ṣafā wal-marwata min sha'ā'irillāh — abda'u bimā bada'a Allāhu bih</p>
+            <p class="translation" id="safa-en">Indeed, Safa and Marwah are among the symbols of Allah. I begin with what Allah began with.</p>
+            <p class="ref">Qur'an 2:158, with the Prophet's ﷺ own opening words (Sahih Muslim).</p>
+          </div>
+
+          <div class="dua-block">
+            <div class="dua-head">
+              <h4>On Safa and on Marwah</h4>
+              <div class="dua-actions">
+                <button class="play-btn" data-lang="ar-SA" data-target="saimarwah-ar">🔊 Arabic</button>
+                <button class="play-btn" data-lang="en-US" data-target="saimarwah-en">🔊 English</button>
+              </div>
+            </div>
+            <p class="arabic" id="saimarwah-ar" dir="rtl" lang="ar">لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ يُحْيِي وَيُمِيتُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ، أَنْجَزَ وَعْدَهُ وَنَصَرَ عَبْدَهُ وَهَزَمَ الْأَحْزَابَ وَحْدَهُ</p>
+            <p class="translit">Lā ilāha illallāhu waḥdahu lā sharīka lah, lahul-mulku wa lahul-ḥamdu yuḥyī wa yumītu wa huwa 'alā kulli shay'in qadīr. Lā ilāha illallāhu waḥdah, anjaza wa'dahu wa naṣara 'abdahu wa hazamal-aḥzāba waḥdah</p>
+            <p class="translation" id="saimarwah-en">There is no god but Allah alone, with no partner. His is the dominion and His is all praise; He gives life and causes death, and He has power over all things. There is no god but Allah alone, who fulfilled His promise, granted victory to His servant, and defeated the enemy alliance alone.</p>
+            <p class="ref">Sahih Muslim — said three times, facing the Qiblah, with personal du'a after each repetition.</p>
+          </div>
+
+          <div class="dua-block">
+            <div class="dua-head">
+              <h4>Drinking Zamzam</h4>
+              <div class="dua-actions">
+                <button class="play-btn" data-lang="ar-SA" data-target="zamzam-ar">🔊 Arabic</button>
+                <button class="play-btn" data-lang="en-US" data-target="zamzam-en">🔊 English</button>
+              </div>
+            </div>
+            <p class="arabic" id="zamzam-ar" dir="rtl" lang="ar">اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا، وَرِزْقًا وَاسِعًا، وَشِفَاءً مِنْ كُلِّ دَاءٍ</p>
+            <p class="translit">Allāhumma innī as'aluka 'ilman nāfi'an, wa rizqan wāsi'an, wa shifā'an min kulli dā'</p>
+            <p class="translation" id="zamzam-en">O Allah, I ask You for beneficial knowledge, ample provision, and healing from every illness.</p>
+            <p class="ref">A widely used form drawn on the hadith "Zamzam water is for whatever it is drunk for" (Ibn Majah) — make it your own du'a, this need not be recited verbatim.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 5: HALQ -->
+    <div class="step-card">
+      <button class="step-toggle" data-target="s5">
+        <span class="step-toggle-left"><span class="step-num">5</span><h3>Halq or Taqsir — closing ihram</h3></span>
+        <span class="plus">+</span>
+      </button>
+      <div class="step-body" id="s5">
+        <div class="step-body-inner">
+          <p class="intro">Men shave the head completely (halq) or trim evenly all over (taqsir); the Prophet ﷺ prayed for those who shave three times and for those who trim once — shaving is the more complete option for men. Women cut roughly a fingertip's length from a gathered lock of hair. Once done, ihram restrictions end and your Umrah is complete — no fixed du'a is prescribed for this step itself.</p>
+          <div class="note-box"><strong>A note on authenticity.</strong> Every Arabic text above comes from the Qur'an or from hadith in Sahih al-Bukhari, Sahih Muslim, Sunan Abu Dawud or Sunan Ibn Majah, referenced beside each one. Where scholars differ on wording or where no fixed text exists, that's noted rather than papered over. This page is a study companion, not a fatwa — for rulings on your specific situation, ask a qualified local scholar.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= REGULATIONS ================= -->
+<section id="regulations" class="band-teal">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="kicker-ar">الأنظمة</div>
+      <h2>Saudi regulations for Umrah travellers</h2>
+      <p class="desc">A summary of how entry and pilgrimage permits currently work. Rules are set and updated by Saudi Arabia's Ministry of Hajj and Umrah — treat this as an orientation and always re-check the Nusuk platform before you book or travel.</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="panel">
+        <span class="tag">Route 1</span>
+        <h3>Saudi Tourist e-Visa</h3>
+        <ul>
+          <li>Multiple entries, valid one year, up to 90 days per entry</li>
+          <li>Open to citizens of dozens of eligible countries; fully online, usually issued within a few days</li>
+          <li>Lets you perform Umrah and travel elsewhere in the Kingdom on the same trip</li>
+          <li>Still requires a separate Umrah permit through Nusuk before entering Masjid al-Haram</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <span class="tag">Route 2</span>
+        <h3>Official Umrah Visa</h3>
+        <ul>
+          <li>Issued through licensed travel agents, dedicated to religious pilgrimage</li>
+          <li>Bundled with an approved service package (accommodation, transport) purchased via Nusuk</li>
+          <li>Traditional route for travellers who prefer a packaged trip</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <span class="tag">Newer option</span>
+        <h3>One-year multiple-entry Umrah visa</h3>
+        <ul>
+          <li>Valid 365 days from issue; cumulative stay across all visits capped at 90 days</li>
+          <li>A new service package must be bought via Nusuk before each entry, and matched by a fresh Umrah permit</li>
+          <li>Visa pauses when you leave the Kingdom and resumes on your next entry; unused days carry forward</li>
+          <li>Not valid during the Hajj season (1 Dhul Qa'dah – 13 Dhul Hijjah)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note-box" style="background:rgba(247,241,228,0.08);border-color:var(--gold-soft);color:#DCE9E5;">
+      <strong>The rule that applies to everyone:</strong> whichever visa gets you into the country, you still need a separate, timed Umrah permit issued through the Nusuk app before you can enter Masjid al-Haram — and a further permit if you want to visit Al-Rawdah in Madinah. Entry windows, stay durations and health requirements (such as vaccination rules) are amended periodically by the Ministry, so confirm the current terms on Nusuk shortly before you travel rather than relying on any single source, including this one.
+    </div>
+  </div>
+</section>
+
+<!-- ================= NUSUK ================= -->
+<section id="nusuk">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="kicker-ar">تطبيق نسك</div>
+      <h2>The Nusuk App</h2>
+      <p class="desc">Nusuk is Saudi Arabia's official platform for pilgrims — the Ministry of Hajj and Umrah's single point for permits, bookings and on-the-ground support. Registration takes your passport or visa details, a verification code sent to your phone, and a password; once your account is active, everything below sits inside it.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-cell"><h4>Umrah permit</h4><p>A timed entry slot to Masjid al-Haram — mandatory for every pilgrim before entering, regardless of visa type.</p></div>
+      <div class="feature-cell"><h4>Rawdah appointment</h4><p>A separate booking for the small, high-demand area inside Masjid an-Nabawi known as Al-Rawdah Al-Sharifah.</p></div>
+      <div class="feature-cell"><h4>Companion management</h4><p>Add family members or children to your account so their permits move together with yours.</p></div>
+      <div class="feature-cell"><h4>Ziyarat reservations</h4><p>Optional visits to historic sites around Makkah and Madinah, booked the same way as your main permits.</p></div>
+      <div class="feature-cell"><h4>Transport &amp; stay</h4><p>Haramain High-Speed Rail tickets, hotel accommodation and flight bookings through approved providers.</p></div>
+      <div class="feature-cell"><h4>In the moment</h4><p>Live crowd-density readings, maps and guided tours, the Qur'an, collected du'as, prayer times and Qiblah direction.</p></div>
+    </div>
+    <div class="note-box">
+      <strong>Getting registered.</strong> Download Nusuk (iOS or Android) or use the web platform, choose your pilgrim type (tourist e-visa holder or Umrah-visa holder), and enter your passport or visa number, date of birth and nationality. A one-time code arrives by SMS and email — enter both to activate the account, then set your password. Keep your registered phone number reachable while abroad; that's where Nusuk sends permit confirmations and codes.
+    </div>
+  </div>
+</section>
+
+<!-- ================= RAWDAH ================= -->
+<section id="rawdah" class="band-ivory-dim">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="kicker-ar">الروضة الشريفة</div>
+      <h2>Booking a visit to Al-Rawdah</h2>
+      <p class="desc">The area between the Prophet's ﷺ pulpit and his house — described in hadith as one of the gardens of Paradise — admits visitors only by timed permit. Booking is free; the whole process runs through Nusuk, and any paid third-party "booking service" should be treated with suspicion.</p>
+    </div>
+    <div class="flow">
+      <div class="flow-step">
+        <span class="flow-num">1</span>
+        <div><h4>Confirm your account is complete</h4><p>Your Nusuk profile and passport details need to be fully verified before Rawdah booking becomes available — an incomplete profile is the most common reason the option won't open.</p></div>
+      </div>
+      <div class="flow-step">
+        <span class="flow-num">2</span>
+        <div><h4>Go to Services → Book Rawdah Visit</h4><p>It sits apart from the Umrah permit screen — a frequent first-time mix-up is booking one and assuming it covers both.</p></div>
+      </div>
+      <div class="flow-step">
+        <span class="flow-num">3</span>
+        <div><h4>Pick a date and time slot</h4><p>Slots typically release 7–14 days ahead (tightening to 3–5 days during Ramadan and the Hajj season), so an empty calendar further out is normal, not an error.</p></div>
+      </div>
+      <div class="flow-step">
+        <span class="flow-num">4</span>
+        <div><h4>Confirm to receive your QR permit</h4><p>The confirmed appointment and its QR code appear under My Profile → My Bookings, and are also emailed to your registered address as a backup.</p></div>
+      </div>
+      <div class="flow-step">
+        <span class="flow-num">5</span>
+        <div><h4>Arrive within your window with the QR ready</h4><p>Stewards scan the code at the entry point; without a valid permit, entry to the Rawdah itself isn't permitted, though the rest of Masjid an-Nabawi remains open.</p></div>
+      </div>
+    </div>
+    <div class="note-box">
+      <strong>If something isn't working:</strong> log out and back in to refresh a blank bookings screen; enter your mobile number with its full international dialling code if a verification code isn't arriving, wait 10–15 minutes before requesting another, and use Nusuk's in-app live chat or its 24-hour support line as a last resort. Nusuk has also added an instant-booking option for pilgrims already near the mosque with capacity available, plus a waitlist for fully booked slots.
+    </div>
+  </div>
+</section>
+
+<!-- ================= TRAVEL ESSENTIALS ================= -->
+<section id="essentials" class="band-ivory-dim">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="kicker-ar">قائمة السفر</div>
+      <h2>What to pack</h2>
+      <p class="desc">A reference checklist, not a rulebook — tick off items as you pack. Nothing here is saved once you close the page, so treat it as a last check rather than a running list.</p>
+    </div>
+    <div class="grid-3">
+      <div class="panel checklist">
+        <span class="tag">Documents</span>
+        <h3>Travel documents</h3>
+        <ul class="check-list">
+          <li><label><input type="checkbox"><span>Passport, with at least six months' validity</span></label></li>
+          <li><label><input type="checkbox"><span>Visa printout or confirmation</span></label></li>
+          <li><label><input type="checkbox"><span>Nusuk account set up, with Umrah and Rawdah permits saved offline</span></label></li>
+          <li><label><input type="checkbox"><span>Flight and hotel confirmations</span></label></li>
+          <li><label><input type="checkbox"><span>Travel insurance policy and vaccination certificate</span></label></li>
+          <li><label><input type="checkbox"><span>Passport-size photographs and photocopies of key documents</span></label></li>
+          <li><label><input type="checkbox"><span>Local currency (Saudi Riyal) and a travel card</span></label></li>
+        </ul>
+      </div>
+      <div class="panel checklist">
+        <span class="tag">Health</span>
+        <h3>Medicines &amp; prescriptions</h3>
+        <ul class="check-list">
+          <li><label><input type="checkbox"><span>Regular medication, in original packaging, for the full trip plus a few spare days</span></label></li>
+          <li><label><input type="checkbox"><span>A copy of your prescription, especially for any controlled or injectable medicine</span></label></li>
+          <li><label><input type="checkbox"><span>Basic first-aid: blister plasters, pain relief, rehydration salts</span></label></li>
+          <li><label><input type="checkbox"><span>Motion-sickness tablets for the journey</span></label></li>
+          <li><label><input type="checkbox"><span>Unscented sunscreen and lip balm — fragrance is restricted in ihram</span></label></li>
+          <li><label><input type="checkbox"><span>Hand sanitiser and a small pack of tissues</span></label></li>
+        </ul>
+      </div>
+      <div class="panel checklist">
+        <span class="tag">Ihram &amp; clothing</span>
+        <h3>Clothing &amp; ihram</h3>
+        <ul class="check-list">
+          <li><label><input type="checkbox"><span>Two sets of ihram cloths for men, plus an ihram belt and safety pins</span></label></li>
+          <li><label><input type="checkbox"><span>Modest, loose everyday clothing for women, in plain colours</span></label></li>
+          <li><label><input type="checkbox"><span>Comfortable sandals that slip on and off easily for the mosque</span></label></li>
+          <li><label><input type="checkbox"><span>A light jacket or shawl for air-conditioned mosque halls</span></label></li>
+          <li><label><input type="checkbox"><span>Spare underclothes and socks</span></label></li>
+          <li><label><input type="checkbox"><span>A cap, scarf or umbrella for sun protection</span></label></li>
+        </ul>
+      </div>
+      <div class="panel checklist">
+        <span class="tag">Accessories</span>
+        <h3>Everyday accessories</h3>
+        <ul class="check-list">
+          <li><label><input type="checkbox"><span>A small crossbody bag or money pouch for the mosque</span></label></li>
+          <li><label><input type="checkbox"><span>Reusable water bottle for Zamzam</span></label></li>
+          <li><label><input type="checkbox"><span>A lightweight prayer mat</span></label></li>
+          <li><label><input type="checkbox"><span>Tasbih (prayer beads) and a pocket Qur'an or app copy</span></label></li>
+          <li><label><input type="checkbox"><span>A small padlock for hotel or locker storage</span></label></li>
+        </ul>
+      </div>
+      <div class="panel checklist">
+        <span class="tag">Electronics</span>
+        <h3>Chargers &amp; electronics</h3>
+        <ul class="check-list">
+          <li><label><input type="checkbox"><span>Phone charger and cable</span></label></li>
+          <li><label><input type="checkbox"><span>Universal travel adapter (Saudi Arabia uses type G sockets)</span></label></li>
+          <li><label><input type="checkbox"><span>Portable power bank, charged before departure</span></label></li>
+          <li><label><input type="checkbox"><span>Earphones — useful for listening to the du'a audio in this guide</span></label></li>
+        </ul>
+      </div>
+      <div class="panel checklist">
+        <span class="tag">Good to have</span>
+        <h3>Extras worth packing</h3>
+        <ul class="check-list">
+          <li><label><input type="checkbox"><span>A foldable bag for dates, Zamzam cans or gifts on the way back</span></label></li>
+          <li><label><input type="checkbox"><span>Wet wipes and a small laundry bag</span></label></li>
+          <li><label><input type="checkbox"><span>Earplugs and an eye mask for rest between prayers</span></label></li>
+          <li><label><input type="checkbox"><span>A printed emergency contact list, kept separate from your phone</span></label></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PLACES ================= -->
+<section id="places">
+  <div class="container tabbed-block">
+    <div class="section-head reveal">
+      <div class="kicker-ar">المعالم</div>
+      <h2>Famous places worth knowing</h2>
+      <p class="desc">Beyond the two mosques, both cities hold sites tied closely to the Seerah. Many are optional ziyarat stops rather than rites of Umrah itself.</p>
+    </div>
+    <div class="city-tabs">
+      <button class="city-tab active" data-city="makkah" data-target="grid-makkah">Makkah</button>
+      <button class="city-tab" data-city="madinah" data-target="grid-madinah">Madinah</button>
+    </div>
+
+    <div class="place-grid active" id="grid-makkah">
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="6" y="6" width="12" height="12"/><path d="M6 6l6 6 6-6"/></svg></div>
+        <div><h4>Masjid al-Haram</h4><p>The Grand Mosque surrounding the Ka'bah — the direction every Muslim faces in prayer, and the heart of both Umrah and Hajj.</p></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M3 19l6-12 4 7 3-5 5 10z"/></svg></div>
+        <div><h4>Jabal al-Nour &amp; Cave of Hira</h4><p>The mountain where the Prophet ﷺ received the first revelation inside the cave of Hira, reached by a steep climb east of the Haram.</p></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M3 20l6-14 4 8 3-6 5 12z"/><circle cx="12" cy="9" r="1.4"/></svg></div>
+        <div><h4>Jabal Thawr</h4><p>South of the city, where the Prophet ﷺ and Abu Bakr sheltered in a cave during the migration to Madinah while being pursued.</p></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 20h16M8 20V10l4-4 4 4v10"/></svg></div>
+        <div><h4>Mina</h4><p>The tented valley where Hajj pilgrims stay for several days — a short distance from the Haram, quiet outside the Hajj season.</p></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><path d="M12 4v2M12 18v2M4 12h2M18 12h2"/></svg></div>
+        <div><h4>Mount Arafat</h4><p>Where the Prophet ﷺ gave his Farewell Sermon; standing here is the single obligatory pillar of Hajj, though it lies outside Umrah.</p></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 18l4-8 4 4 4-10 4 14z"/></svg></div>
+        <div><h4>Muzdalifah</h4><p>The open plain between Arafat and Mina where Hajj pilgrims gather pebbles and spend the night under open sky.</p></div>
+      </div>
+    </div>
+
+    <div class="place-grid" id="grid-madinah">
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 20V10l8-6 8 6v10"/><path d="M9 20v-6h6v6"/></svg></div>
+        <div><h4>Masjid an-Nabawi</h4><p>The Prophet's ﷺ Mosque in the heart of Madinah, built around his original house and expanded into one of the world's largest mosques.</p></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 3l2 5h5l-4 3.5L16.5 17 12 13.8 7.5 17 9 11.5 5 8h5z"/></svg></div>
+        <div><h4>Al-Rawdah Al-Sharifah</h4><p>The garden of Paradise on earth, described in hadith — the space between the Prophet's ﷺ pulpit and his house, now permit-only.</p></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 5v14M15 5v14"/></svg></div>
+        <div><h4>Quba Mosque</h4><p>The first mosque in Islamic history, founded by the Prophet ﷺ on arrival in Madinah — praying two rak'ahs here carries the reward of an Umrah, per hadith.</p></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 20h16M6 20V8l3 2 3-4 3 4 3-2v12"/></svg></div>
+        <div><h4>Masjid al-Qiblatain</h4><p>The Mosque of the Two Qiblahs, where the direction of prayer changed mid-salah from Jerusalem to Makkah.</p></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M2 19l5-14 5 9 4-11 6 16z"/></svg></div>
+        <div><h4>Mount Uhud</h4><p>Site of the second major battle of early Islam; the martyrs' cemetery at its foot, including Hamzah ibn Abd al-Muttalib, is a common ziyarat stop.</p></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 3v4M6 9h12M8 9v10h8V9"/></svg></div>
+        <div><h4>Jannat al-Baqi</h4><p>Madinah's historic cemetery beside the Prophet's Mosque, resting place of many of his family and companions.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SHOPPING & EATERIES ================= -->
+<section id="shopping" class="band-ivory-dim">
+  <div class="container tabbed-block">
+    <div class="section-head reveal">
+      <div class="kicker-ar">التسوق والمطاعم</div>
+      <h2>Shopping &amp; famous eateries</h2>
+      <p class="desc">Where pilgrims usually pick up gifts, essentials and a good meal, near both mosques.</p>
+    </div>
+    <div class="city-tabs">
+      <button class="city-tab active" data-city="makkah" data-target="grid-shop-makkah">Makkah</button>
+      <button class="city-tab" data-city="madinah" data-target="grid-shop-madinah">Madinah</button>
+    </div>
+
+    <div class="place-grid active" id="grid-shop-makkah">
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 8h16l-1.5 12h-13z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></div>
+        <div><h4>Abraj Al Bait (Clock Tower) Mall</h4><p>A vast mall directly beside Masjid al-Haram — prayer wear, abayas, perfumes, dates and souvenirs across several floors, with mosque views from the upper levels.</p></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M3 9l9-6 9 6-9 6z"/><path d="M3 9v6l9 6 9-6V9"/></svg></div>
+        <div><h4>Souq al-Zal</h4><p>An older, closer-in market for prayer beads, oud and attar (alcohol-free perfume), abayas and modest wear at more traditional prices.</p></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><path d="M8 12h8M12 8v8"/></svg></div>
+        <div><h4>Bin Dawood &amp; Panda supermarkets</h4><p>Reliable chains scattered around the Haram for dates, Zamzam packs, snacks and everyday essentials at fixed prices.</p></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 21V10l8-6 8 6v11"/><path d="M10 21v-6h4v6"/></svg></div>
+        <div><h4>Al Baik</h4><p>The fried-chicken chain pilgrims from around the world talk about — queues are part of the experience, especially near Haram branches after Isha.</p></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M5 4h14v4H5zM7 8v12h10V8"/></svg></div>
+        <div><h4>Mandi &amp; Kabsa houses</h4><p>Family-style rice-and-meat restaurants around Ajyad and Ibrahim al-Khalil streets — generous plates meant for sharing.</p></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 4v16M4 4h16v6H4"/></svg></div>
+        <div><h4>Clock Tower rooftop cafés</h4><p>Coffee and light meals with a direct view down onto the Haram and the Ka'bah — worth the elevator queue at least once.</p></div>
+      </div>
+    </div>
+
+    <div class="place-grid" id="grid-shop-madinah">
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 8h16l-1.5 12h-13z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></div>
+        <div><h4>Al Noor Mall</h4><p>Directly facing Masjid an-Nabawi's King Fahd Gate — a straightforward stop for clothing, perfume and gifts between prayers.</p></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="14" r="7"/><path d="M12 3v4M9 5h6"/></svg></div>
+        <div><h4>Madinah date markets</h4><p>Stalls and shops around the mosque and near Quba selling Ajwa and other Madinah dates by the box — a favourite gift to carry home.</p></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M3 9l9-6 9 6-9 6z"/><path d="M3 9v6l9 6 9-6V9"/></svg></div>
+        <div><h4>Taibah &amp; Bab al-Majidi markets</h4><p>Older souq streets a short walk from the mosque, good for prayer mats, modest clothing and everyday shopping at local prices.</p></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 21V10l8-6 8 6v11"/><path d="M10 21v-6h4v6"/></svg></div>
+        <div><h4>Al Baik &amp; Al Tazaj</h4><p>The same beloved fried-chicken and grilled-chicken chains familiar from Makkah, with branches close to the Haram in Madinah too.</p></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M5 4h14v4H5zM7 8v12h10V8"/></svg></div>
+        <div><h4>Madani Mandi restaurants</h4><p>Local mandi and mutabbaq maqluba spots around the mosque's southern side — hearty, affordable, and popular after Fajr and Isha.</p></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 4v16M4 4h16v6H4"/></svg></div>
+        <div><h4>Cafés along Al Haram Street</h4><p>Quiet cafés facing the mosque's courtyards — a good place to sit with tea between the five daily prayers.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MAP ================= -->
+<section id="map" class="band-teal">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="kicker-ar">الخريطة</div>
+      <h2>Finding your way around</h2>
+      <p class="desc">Key sites in both cities, plotted together. Switch cities to re-centre the map.</p>
+    </div>
+    <div class="map-toggle">
+      <button id="btn-makkah" class="active">Makkah</button>
+      <button id="btn-madinah">Madinah</button>
+    </div>
+    <div id="map"></div>
+    <div class="map-legend">
+      <span><span class="dot"></span> Mosques &amp; mataf</span>
+      <span><span class="dot" style="background:#3FA79A;"></span> Historic &amp; Hajj sites</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container foot-grid">
+    <div>
+      <h4>UmrahOne</h4>
+      <p>A study companion for Umrah — the rites, their wording in Arabic and English, current Saudi entry rules, what to pack, and the geography of both holy cities. Built for orientation and reflection, not as a substitute for a qualified teacher.</p>
+    </div>
+    <div>
+      <h4>Sources</h4>
+      <p>Qur'an; Sahih al-Bukhari; Sahih Muslim; Sunan Abu Dawud; Sunan Ibn Majah; Ministry of Hajj &amp; Umrah / Nusuk platform for current regulations.</p>
+    </div>
+    <div>
+      <h4>Before you travel</h4>
+      <p>Regulations, visa terms and app features change. Always confirm current requirements directly on the Nusuk app or platform close to your travel date.</p>
+    </div>
+  </div>
+  <div class="container foot-bottom">
+    <div>May it be accepted. — لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ</div>
+    <div style="margin-top:8px;">Built by Syed Rashad for the Ummah</div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+  // ---- Mobile nav ----
+  const burger = document.getElementById('burgerBtn');
+  const panel = document.getElementById('mobilePanel');
+  burger.addEventListener('click', () => panel.classList.toggle('open'));
+  panel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => panel.classList.remove('open')));
+
+  // ---- Share ----
+  async function shareSite() {
+    const shareData = {
+      title: document.title,
+      text: "UmrahOne — rites, du'as in Arabic and English with audio, current regulations, Nusuk, Rawdah booking, and the geography of Makkah and Madinah.",
+      url: window.location.href
+    };
+    if (navigator.share) {
+      try { await navigator.share(shareData); } catch (e) { /* user cancelled */ }
+    } else if (navigator.clipboard) {
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        alert('Link copied — share it with anyone.');
+      } catch (e) {
+        window.prompt('Copy this link to share:', window.location.href);
+      }
+    } else {
+      window.prompt('Copy this link to share:', window.location.href);
+    }
+  }
+  document.getElementById('shareBtn').addEventListener('click', shareSite);
+
+  // ---- Accordion ----
+  document.querySelectorAll('.step-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.step-card');
+      card.classList.toggle('open');
+    });
+  });
+
+  // ---- Speech ----
+  let currentUtterance = null;
+  document.querySelectorAll('.play-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-target');
+      const lang = btn.getAttribute('data-lang');
+      const el = document.getElementById(targetId);
+      if (!el) return;
+      if (!('speechSynthesis' in window)) {
+        alert('Audio playback is not supported in this browser. The text is still shown above.');
+        return;
+      }
+      document.querySelectorAll('.play-btn.playing').forEach(b => b.classList.remove('playing'));
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(el.textContent.trim());
+      utter.lang = lang;
+      utter.rate = 0.82;
+      utter.onstart = () => btn.classList.add('playing');
+      utter.onend = () => btn.classList.remove('playing');
+      utter.onerror = () => btn.classList.remove('playing');
+      currentUtterance = utter;
+      window.speechSynthesis.speak(utter);
+    });
+  });
+
+  // ---- City tabs (places, shopping) — scoped per section so they don't cross-affect ----
+  document.querySelectorAll('.tabbed-block').forEach(block => {
+    const tabs = block.querySelectorAll('.city-tab');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const targetId = tab.getAttribute('data-target');
+        block.querySelectorAll('.place-grid').forEach(g => g.classList.remove('active'));
+        document.getElementById(targetId).classList.add('active');
+      });
+    });
+  });
+
+  // ---- Scroll reveal ----
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal, .tl-item').forEach(el => { el.classList.add('reveal'); io.observe(el); });
+
+  // ---- Leaflet map ----
+  const makkahSites = [
+    { name: "Masjid al-Haram", lat: 21.4225, lng: 39.8262, type: "mosque" },
+    { name: "Jabal al-Nour (Cave of Hira)", lat: 21.4578, lng: 39.8592, type: "site" },
+    { name: "Jabal Thawr", lat: 21.3833, lng: 39.8333, type: "site" },
+    { name: "Mina", lat: 21.4133, lng: 39.8933, type: "site" },
+    { name: "Mount Arafat", lat: 21.3549, lng: 39.9840, type: "site" },
+    { name: "Muzdalifah", lat: 21.3839, lng: 39.9364, type: "site" }
+  ];
+  const madinahSites = [
+    { name: "Masjid an-Nabawi", lat: 24.4672, lng: 39.6112, type: "mosque" },
+    { name: "Quba Mosque", lat: 24.4392, lng: 39.6172, type: "mosque" },
+    { name: "Masjid al-Qiblatain", lat: 24.4795, lng: 39.5928, type: "mosque" },
+    { name: "Mount Uhud", lat: 24.5017, lng: 39.6114, type: "site" },
+    { name: "Jannat al-Baqi", lat: 24.4680, lng: 39.6135, type: "site" }
+  ];
+
+  const map = L.map('map', { scrollWheelZoom: false }).setView([21.4225, 39.8262], 12);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors',
+    maxZoom: 18
+  }).addTo(map);
+
+  let markers = [];
+  function loadCity(sites, center, zoom) {
+    markers.forEach(m => map.removeLayer(m));
+    markers = [];
+    sites.forEach(s => {
+      const color = s.type === 'mosque' ? '#B7862C' : '#3FA79A';
+      const marker = L.circleMarker([s.lat, s.lng], {
+        radius: 9, color: '#0E2A28', weight: 2, fillColor: color, fillOpacity: 0.9
+      }).addTo(map);
+      marker.bindPopup('<strong>' + s.name + '</strong>');
+      markers.push(marker);
+    });
+    map.setView(center, zoom);
+  }
+  loadCity(makkahSites, [21.42, 39.87], 11);
+
+  document.getElementById('btn-makkah').addEventListener('click', function () {
+    this.classList.add('active');
+    document.getElementById('btn-madinah').classList.remove('active');
+    loadCity(makkahSites, [21.42, 39.87], 11);
+  });
+  document.getElementById('btn-madinah').addEventListener('click', function () {
+    this.classList.add('active');
+    document.getElementById('btn-makkah').classList.remove('active');
+    loadCity(madinahSites, [24.465, 39.61], 12);
+  });
+</script>
+</body>
+</html>
