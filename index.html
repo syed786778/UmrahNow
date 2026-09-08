@@ -20,6 +20,7 @@
     --line:rgba(183,134,44,0.35);
     --radius:2px;
     --max:1120px;
+    --max-header:1360px;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -57,15 +58,15 @@
   }
   .nav-row{
     display:flex;align-items:center;justify-content:space-between;
-    padding:20px 24px;max-width:var(--max);margin:0 auto;gap:20px;
+    padding:18px 24px;max-width:var(--max-header);margin:0 auto;gap:20px;flex-wrap:nowrap;
   }
   .brand{display:flex;align-items:center;gap:12px;color:var(--ivory);text-decoration:none;flex-shrink:0;}
   .brand svg{width:30px;height:30px;}
   .brand-text{font-family:'Amiri',serif;font-size:1.5rem;color:var(--ivory);line-height:1.2;}
   .brand-text small{display:block;font-family:'Work Sans',sans-serif;font-size:0.68rem;letter-spacing:0.07em;color:var(--gold-soft);font-weight:500;margin-top:2px;}
-  nav.links{display:none;gap:22px;flex-wrap:wrap;}
+  nav.links{display:none;gap:18px;flex-wrap:nowrap;flex-shrink:0;}
   nav.links a{
-    color:var(--ivory);text-decoration:none;font-size:1rem;font-weight:500;
+    color:var(--ivory);text-decoration:none;font-size:0.98rem;font-weight:500;
     padding:8px 0;border-bottom:1px solid transparent;transition:border-color .2s, color .2s;
     white-space:nowrap;
   }
@@ -91,7 +92,7 @@
     color:var(--ivory);text-decoration:none;padding:16px 24px;
     border-bottom:1px solid rgba(255,255,255,0.06);font-size:1.05rem;
   }
-  @media(min-width:1080px){
+  @media(min-width:1260px){
     nav.links{display:flex;}
     .burger{display:none;}
   }
@@ -140,7 +141,7 @@
   .btn-outline:hover{border-color:var(--gold-soft);color:var(--gold-soft);}
 
   /* ---------- SECTION HEADERS ---------- */
-  section{padding:76px 0;}
+  section{padding:76px 0;scroll-margin-top:96px;}
   .section-head{margin-bottom:44px;}
   .kicker-ar{font-family:'Amiri',serif;color:var(--gold);font-size:1.5rem;margin-bottom:6px;}
   .section-head h2{font-size:clamp(1.6rem,3.4vw,2.3rem);max-width:640px;}
@@ -1164,21 +1165,7 @@
     });
   });
 
-  // ---- Speech (Arabic only, with proper voice selection) ----
-  let availableVoices = [];
-  function refreshVoices() {
-    if ('speechSynthesis' in window) availableVoices = window.speechSynthesis.getVoices();
-  }
-  if ('speechSynthesis' in window) {
-    refreshVoices();
-    window.speechSynthesis.onvoiceschanged = refreshVoices;
-  }
-  function pickArabicVoice() {
-    if (!availableVoices.length) refreshVoices();
-    return availableVoices.find(v => v.lang === 'ar-SA')
-      || availableVoices.find(v => (v.lang || '').toLowerCase().startsWith('ar'))
-      || null;
-  }
+  // ---- Speech (Arabic only) — attempt playback first, only warn on a genuine failure ----
   document.querySelectorAll('.play-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const targetId = btn.getAttribute('data-target');
@@ -1188,22 +1175,41 @@
         alert('Audio playback is not supported in this browser. The text is still shown above.');
         return;
       }
-      const voice = pickArabicVoice();
-      if (!voice) {
-        alert("No Arabic voice is installed on this device, so audio can't play here. On Android/Chrome, Arabic voices are usually built in; on iPhone, add one under Settings → Accessibility → Spoken Content → Voices → Arabic. The text above is still accurate to read from.");
-        return;
-      }
+
+      // Re-read the voice list fresh at click time — some browsers only populate
+      // it lazily, so a value cached at page-load can be wrong by the time you click.
+      const voices = window.speechSynthesis.getVoices();
+      const voice = voices.find(v => v.lang === 'ar-SA')
+        || voices.find(v => (v.lang || '').toLowerCase().startsWith('ar'))
+        || null;
+
       document.querySelectorAll('.play-btn.playing').forEach(b => b.classList.remove('playing'));
       window.speechSynthesis.cancel();
+
       const utter = new SpeechSynthesisUtterance(el.textContent.trim());
-      utter.voice = voice;
-      utter.lang = voice.lang;
+      if (voice) utter.voice = voice;
+      utter.lang = 'ar-SA';
       utter.rate = 0.78;
       utter.pitch = 1;
-      utter.onstart = () => btn.classList.add('playing');
+
+      let started = false;
+      utter.onstart = () => { started = true; btn.classList.add('playing'); };
       utter.onend = () => btn.classList.remove('playing');
-      utter.onerror = () => btn.classList.remove('playing');
+      utter.onerror = () => {
+        btn.classList.remove('playing');
+        alert("This browser couldn't play Arabic audio. On Android/Chrome, Arabic voices are usually built in; on iPhone, add one under Settings → Accessibility → Spoken Content → Voices → Arabic. The text above is still accurate to read from.");
+      };
+
       window.speechSynthesis.speak(utter);
+
+      // A handful of browsers fail silently — no error, no start — when a language
+      // truly isn't supported. Catch that case without blocking the ones that work.
+      setTimeout(() => {
+        if (!started && !window.speechSynthesis.speaking) {
+          btn.classList.remove('playing');
+          alert("This browser doesn't seem to have an Arabic voice available, so audio can't play here. On Android/Chrome, Arabic voices are usually built in; on iPhone, add one under Settings → Accessibility → Spoken Content → Voices → Arabic. The text above is still accurate to read from.");
+        }
+      }, 700);
     });
   });
 
