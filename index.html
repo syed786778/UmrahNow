@@ -64,9 +64,9 @@
   .brand svg{width:30px;height:30px;}
   .brand-text{font-family:'Amiri',serif;font-size:1.5rem;color:var(--ivory);line-height:1.2;}
   .brand-text small{display:block;font-family:'Work Sans',sans-serif;font-size:0.68rem;letter-spacing:0.07em;color:var(--gold-soft);font-weight:500;margin-top:2px;}
-  nav.links{display:none;gap:18px;flex-wrap:nowrap;flex-shrink:0;}
+  nav.links{display:none;gap:15px;flex-wrap:nowrap;flex-shrink:0;}
   nav.links a{
-    color:var(--ivory);text-decoration:none;font-size:0.98rem;font-weight:500;
+    color:var(--ivory);text-decoration:none;font-size:0.95rem;font-weight:500;
     padding:8px 0;border-bottom:1px solid transparent;transition:border-color .2s, color .2s;
     white-space:nowrap;
   }
@@ -92,7 +92,7 @@
     color:var(--ivory);text-decoration:none;padding:16px 24px;
     border-bottom:1px solid rgba(255,255,255,0.06);font-size:1.05rem;
   }
-  @media(min-width:1260px){
+  @media(min-width:1340px){
     nav.links{display:flex;}
     .burger{display:none;}
   }
@@ -383,6 +383,7 @@
       <a href="#nusuk">Nusuk</a>
       <a href="#rawdah">Rawdah</a>
       <a href="#connect">Connect</a>
+      <a href="#seasons">Seasons</a>
       <a href="#essentials">Essentials</a>
       <a href="#places">Places</a>
       <a href="#shopping">Shop &amp; Eat</a>
@@ -404,6 +405,7 @@
     <a href="#nusuk">Nusuk App</a>
     <a href="#rawdah">Rawdah Booking</a>
     <a href="#connect">Staying Connected</a>
+    <a href="#seasons">Seasons &amp; Weather</a>
     <a href="#essentials">Travel Essentials</a>
     <a href="#places">Famous Places</a>
     <a href="#shopping">Shopping &amp; Eateries</a>
@@ -485,6 +487,7 @@
       <div class="kicker-ar">الأدعية</div>
       <h2>Every step, with its wording</h2>
       <p class="desc">Arabic text, transliteration and an English rendering for each stage, drawn from the Qur'an and authentic hadith. Tap a stage to open it, and tap "Listen" to hear the Arabic spoken aloud.</p>
+      <p class="desc" style="font-size:0.85rem;margin-top:-6px;">Playback quality depends on your device's voice, not on this page — on Android/Chrome, go to Settings → System → Languages → Text-to-speech, pick the Google engine, and download the network Arabic voice for a noticeably smoother sound than the default offline one.</p>
     </div>
 
     <!-- STEP 1: IHRAM -->
@@ -715,7 +718,10 @@
   <div class="container">
     <div class="section-head reveal">
       <div class="kicker-ar">تطبيق نسك</div>
-      <h2>The Nusuk App</h2>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div class="brand-badge" style="width:44px;height:44px;font-size:0.85rem;background:linear-gradient(135deg,#B7862C,#144C46);flex-shrink:0;">ن</div>
+        <h2>The Nusuk App</h2>
+      </div>
       <p class="desc">Nusuk is Saudi Arabia's official platform for pilgrims — the Ministry of Hajj and Umrah's single point for permits, bookings and on-the-ground support. Registration takes your passport or visa details, a verification code sent to your phone, and a password; once your account is active, everything below sits inside it.</p>
     </div>
     <div class="feature-grid">
@@ -804,7 +810,7 @@
 
     <div class="grid-3">
       <div class="panel">
-        <span class="tag">STC</span>
+        <div class="brand-badge" style="margin-bottom:12px;background:linear-gradient(135deg,#4a1e6b,#2a1040);">STC</div>
         <h3>Sawa Ziyara (visitor line)</h3>
         <ul>
           <li>Visitor packages start around SAR 35</li>
@@ -813,7 +819,7 @@
         </ul>
       </div>
       <div class="panel">
-        <span class="tag">Mobily</span>
+        <div class="brand-badge" style="margin-bottom:12px;background:linear-gradient(135deg,#0e6b4a,#083d2b);">MBL</div>
         <h3>Visitors package</h3>
         <ul>
           <li>Packages start around SAR 30</li>
@@ -822,7 +828,7 @@
         </ul>
       </div>
       <div class="panel">
-        <span class="tag">Zain</span>
+        <div class="brand-badge" style="margin-bottom:12px;background:linear-gradient(135deg,#144C46,#0E2A28);">ZN</div>
         <h3>Visitor SIM</h3>
         <ul>
           <li>Packages start around SAR 34.5</li>
@@ -853,6 +859,64 @@
 
     <div class="note-box">
       <strong>Good to know:</strong> queues at airport SIM counters can run long during Ramadan and peak Umrah weeks, so an eSIM installed before departure is worth considering if you want to be reachable the moment you land. Whichever route you take, register the SIM to your own passport — Saudi law ties every active line to a verified identity.
+    </div>
+  </div>
+</section>
+
+<!-- ================= SEASONS & WEATHER ================= -->
+<section id="seasons" class="band-teal">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="kicker-ar">المواسم والطقس</div>
+      <h2>Seasons, weather, and why timing matters</h2>
+      <p class="desc">Umrah has no fixed date on the solar calendar — the Islamic year is lunar, so your trip's Gregorian date shifts by about 10–11 days earlier each year. That means weather and crowd size are two separate things to plan around, and they don't always move together.</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="panel">
+        <span class="tag">June – September</span>
+        <h3>Summer</h3>
+        <ul>
+          <li>Daytime highs regularly pass 42–45°C in both Makkah and Madinah, with record spikes above 50°C</li>
+          <li>Dry heat, but the mataf courtyard and outdoor queues offer little shade at midday</li>
+          <li>Fewer visitors than winter — if you can handle the heat, permits and hotels are easier to get</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <span class="tag">December – February</span>
+        <h3>Winter</h3>
+        <ul>
+          <li>Daytime temperatures around 25–30°C, dropping to a cool 15–18°C at night</li>
+          <li>The most comfortable stretch of the year for standing and walking outdoors</li>
+          <li>Also the most crowded — comfortable weather draws the largest volume of visitors</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <span class="tag">Mar–May &amp; Oct–Nov</span>
+        <h3>Spring &amp; autumn</h3>
+        <ul>
+          <li>A middle ground: warm days (30–38°C) without winter's peak crowding</li>
+          <li>Occasional short, heavy rain in the shoulder months, mainly near Jeddah's coast — rare, but can cause local flash flooding</li>
+          <li>Often the best balance of manageable weather and manageable queues</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:22px;">
+      <div class="panel">
+        <span class="tag">Lunar, not seasonal</span>
+        <h3>Ramadan</h3>
+        <p style="color:#3f3f38;font-size:0.94rem;">The busiest single stretch on the calendar, regardless of what the weather is doing outside. Hotel prices climb, flights fill up months ahead, and — as noted earlier — Nusuk permit and Rawdah slots tighten to just 3–5 days out. If Ramadan is your goal, book earlier than you think you need to.</p>
+      </div>
+      <div class="panel">
+        <span class="tag">1 Dhul Qa'dah – 13 Dhul Hijjah</span>
+        <h3>The pre-Hajj &amp; Hajj window</h3>
+        <p style="color:#3f3f38;font-size:0.94rem;">Umrah visas and permits pause during this stretch so the Kingdom can focus on Hajj. Hajj itself is expected around late May 2026, and will keep drifting earlier through the Gregorian calendar in the years after — check the current Hijri dates before you plan around it.</p>
+      </div>
+    </div>
+
+    <div class="note-box" style="background:rgba(247,241,228,0.08);border-color:var(--gold-soft);color:#DCE9E5;margin-top:30px;">
+      <strong>Planning around both calendars.</strong> Pick a Gregorian window with weather you can manage, then check where it falls in the Hijri calendar for Ramadan and the Hajj blackout. If your dates land in summer, lean harder on the sun protection and hydration items in the packing checklist below, plan Tawaf and Sa'i for early morning or after Isha when it's cooler, and rest indoors during peak afternoon heat.
     </div>
   </div>
 </section>
@@ -1165,7 +1229,16 @@
     });
   });
 
-  // ---- Speech (Arabic only) — attempt playback first, only warn on a genuine failure ----
+  // ---- Speech (Arabic only) — pick the most natural-sounding voice available,
+  // then attempt playback first and only warn on a genuine failure ----
+  function pickBestArabicVoice(voices) {
+    const arabic = voices.filter(v => (v.lang || '').toLowerCase().startsWith('ar'));
+    if (!arabic.length) return null;
+    // Network ("remote") voices are generally far smoother than a device's built-in
+    // compact voice, and a Google-branded voice is usually the better-sounding of those.
+    const score = v => (v.lang === 'ar-SA' ? 2 : 0) + (v.localService ? 0 : 3) + (/google/i.test(v.name) ? 1 : 0);
+    return arabic.sort((a, b) => score(b) - score(a))[0];
+  }
   document.querySelectorAll('.play-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const targetId = btn.getAttribute('data-target');
@@ -1178,10 +1251,7 @@
 
       // Re-read the voice list fresh at click time — some browsers only populate
       // it lazily, so a value cached at page-load can be wrong by the time you click.
-      const voices = window.speechSynthesis.getVoices();
-      const voice = voices.find(v => v.lang === 'ar-SA')
-        || voices.find(v => (v.lang || '').toLowerCase().startsWith('ar'))
-        || null;
+      const voice = pickBestArabicVoice(window.speechSynthesis.getVoices());
 
       document.querySelectorAll('.play-btn.playing').forEach(b => b.classList.remove('playing'));
       window.speechSynthesis.cancel();
@@ -1189,8 +1259,8 @@
       const utter = new SpeechSynthesisUtterance(el.textContent.trim());
       if (voice) utter.voice = voice;
       utter.lang = 'ar-SA';
-      utter.rate = 0.78;
-      utter.pitch = 1;
+      utter.rate = 0.72;
+      utter.pitch = 0.96;
 
       let started = false;
       utter.onstart = () => { started = true; btn.classList.add('playing'); };
