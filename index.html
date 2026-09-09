@@ -20,7 +20,7 @@
     --line:rgba(183,134,44,0.35);
     --radius:2px;
     --max:1120px;
-    --max-header:1360px;
+    --max-header:1480px;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -63,8 +63,8 @@
   .brand{display:flex;align-items:center;gap:12px;color:var(--ivory);text-decoration:none;flex-shrink:0;}
   .brand svg{width:30px;height:30px;}
   .brand-text{font-family:'Amiri',serif;font-size:1.5rem;color:var(--ivory);line-height:1.2;}
-  .brand-text small{display:block;font-family:'Work Sans',sans-serif;font-size:0.68rem;letter-spacing:0.07em;color:var(--gold-soft);font-weight:500;margin-top:2px;}
-  nav.links{display:none;gap:15px;flex-wrap:nowrap;flex-shrink:0;}
+  .brand-text small{display:block;font-family:'Work Sans',sans-serif;font-size:0.78rem;letter-spacing:0.07em;color:var(--gold-soft);font-weight:500;margin-top:2px;}
+  nav.links{display:none;gap:14px;flex-wrap:nowrap;flex-shrink:0;}
   nav.links a{
     color:var(--ivory);text-decoration:none;font-size:0.95rem;font-weight:500;
     padding:8px 0;border-bottom:1px solid transparent;transition:border-color .2s, color .2s;
@@ -92,7 +92,7 @@
     color:var(--ivory);text-decoration:none;padding:16px 24px;
     border-bottom:1px solid rgba(255,255,255,0.06);font-size:1.05rem;
   }
-  @media(min-width:1340px){
+  @media(min-width:1460px){
     nav.links{display:flex;}
     .burger{display:none;}
   }
@@ -131,7 +131,7 @@
     opacity:0;animation:fadeIn 1s ease-out .95s forwards;}
   .btn{
     display:inline-block;padding:13px 26px;border-radius:var(--radius);
-    text-decoration:none;font-weight:600;font-size:0.94rem;border:1px solid transparent;
+    text-decoration:none;font-weight:600;font-size:1rem;border:1px solid transparent;
     transition:transform .18s, background .2s, border-color .2s;
   }
   .btn:hover{transform:translateY(-2px);}
@@ -193,7 +193,7 @@
     border:1px solid var(--line);border-radius:50%;width:34px;height:34px;
     display:flex;align-items:center;justify-content:center;flex-shrink:0;
   }
-  .step-toggle h3{font-size:1.08rem;}
+  .step-toggle h3{font-size:1.15rem;}
   .step-toggle .plus{font-size:1.4rem;color:var(--gold);transition:transform .25s;line-height:1;}
   .step-card.open .plus{transform:rotate(45deg);}
   .step-body{max-height:0;overflow:hidden;transition:max-height .4s ease;}
@@ -204,11 +204,11 @@
   .dua-block{border-top:1px dashed var(--line);padding:18px 0;}
   .dua-block:first-of-type{border-top:none;padding-top:0;}
   .dua-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:10px;}
-  .dua-head h4{font-size:1rem;color:var(--night);}
+  .dua-head h4{font-size:1.05rem;color:var(--night);}
   .dua-actions{display:flex;gap:8px;flex-wrap:wrap;}
   .play-btn{
     background:var(--ivory-dim);border:1px solid var(--line);color:var(--teal);
-    font-size:0.78rem;padding:6px 12px;border-radius:20px;font-weight:600;
+    font-size:0.9rem;padding:7px 14px;border-radius:20px;font-weight:600;
     display:inline-flex;align-items:center;gap:6px;transition:background .2s;
   }
   .play-btn:hover{background:var(--gold-soft);}
@@ -217,9 +217,9 @@
     font-family:'Amiri',serif;font-size:1.5rem;line-height:2.1;color:var(--night);
     direction:rtl;text-align:right;margin-bottom:10px;
   }
-  .translit{font-style:italic;color:#6b6b62;font-size:0.92rem;margin-bottom:8px;}
-  .translation{color:#333;font-size:0.96rem;margin-bottom:0;}
-  .ref{font-size:0.78rem;color:#8a8578;margin-top:4px;}
+  .translit{font-style:italic;color:#6b6b62;font-size:0.96rem;margin-bottom:8px;}
+  .translation{color:#333;font-size:1rem;margin-bottom:0;}
+  .ref{font-size:0.85rem;color:#8a8578;margin-top:4px;}
 
   /* ---------- REGS / GRID CARDS ---------- */
   .grid-3{display:grid;grid-template-columns:1fr;gap:22px;}
@@ -228,12 +228,12 @@
   .panel{
     border:1px solid var(--line);padding:26px;background:#fff;border-radius:var(--radius);
   }
-  .panel h3{font-size:1.1rem;margin-bottom:10px;}
-  .panel ul{margin:0;padding-left:18px;color:#3f3f38;font-size:0.94rem;}
+  .panel h3{font-size:1.15rem;margin-bottom:10px;}
+  .panel ul{margin:0;padding-left:18px;color:#3f3f38;font-size:1rem;}
   .panel ul li{margin-bottom:6px;}
   .check-list{list-style:none;padding:0;margin:0;}
   .check-list li{margin-bottom:10px;}
-  .check-list label{display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:0.94rem;color:#3f3f38;}
+  .check-list label{display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:1rem;color:#3f3f38;}
   .check-list input[type="checkbox"]{
     appearance:none;-webkit-appearance:none;width:18px;height:18px;flex-shrink:0;margin-top:2px;
     border:1.5px solid var(--gold);border-radius:3px;position:relative;background:#fff;
@@ -247,16 +247,16 @@
   .checklist-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
   .download-btn{
     background:var(--night);color:var(--ivory);border:1px solid var(--night);
-    font-size:0.86rem;padding:10px 18px;border-radius:var(--radius);font-weight:600;
+    font-size:0.95rem;padding:10px 18px;border-radius:var(--radius);font-weight:600;
   }
   .download-btn:hover{background:var(--teal);border-color:var(--teal);}
   .tag{
-    display:inline-block;font-size:0.72rem;font-weight:600;color:var(--teal);
+    display:inline-block;font-size:0.85rem;font-weight:600;color:var(--teal);
     background:rgba(63,167,154,0.12);padding:4px 10px;border-radius:20px;margin-bottom:12px;
   }
   .note-box{
     border-left:3px solid var(--gold);background:var(--ivory-dim);
-    padding:16px 20px;font-size:0.9rem;color:#4a4a3f;margin-top:28px;
+    padding:16px 20px;font-size:1rem;color:#4a4a3f;margin-top:28px;
   }
   .note-box strong{color:var(--night);}
 
@@ -265,15 +265,15 @@
   .flow-step{display:flex;gap:18px;padding:20px 0;border-bottom:1px solid var(--line);}
   .flow-step:last-child{border-bottom:none;}
   .flow-num{font-family:'Amiri',serif;font-size:1.4rem;color:var(--gold);width:34px;flex-shrink:0;}
-  .flow-step h4{font-size:1.02rem;margin-bottom:4px;color:var(--night);}
-  .flow-step p{color:#4a4a44;font-size:0.94rem;margin:0;}
+  .flow-step h4{font-size:1.1rem;margin-bottom:4px;color:var(--night);}
+  .flow-step p{color:#4a4a44;font-size:1rem;margin:0;}
 
   .feature-grid{display:grid;grid-template-columns:1fr;gap:2px;background:var(--line);border:1px solid var(--line);margin-top:10px;}
   @media(min-width:640px){.feature-grid{grid-template-columns:1fr 1fr;}}
   @media(min-width:960px){.feature-grid{grid-template-columns:1fr 1fr 1fr;}}
   .feature-cell{background:var(--night);color:var(--ivory);padding:22px;}
-  .feature-cell h4{color:var(--gold-soft);font-size:0.98rem;margin-bottom:6px;font-family:'Work Sans',sans-serif;font-weight:600;}
-  .feature-cell p{color:#CFE3DF;font-size:0.86rem;margin:0;}
+  .feature-cell h4{color:var(--gold-soft);font-size:1.05rem;margin-bottom:6px;font-family:'Work Sans',sans-serif;font-weight:600;}
+  .feature-cell p{color:#CFE3DF;font-size:0.96rem;margin:0;}
 
   .download-grid{display:grid;grid-template-columns:1fr;gap:18px;margin-top:28px;}
   @media(min-width:640px){.download-grid{grid-template-columns:1fr 1fr;}}
@@ -282,11 +282,11 @@
     background:#fff;padding:20px;border-radius:var(--radius);
   }
   .download-card .qr{width:96px;height:96px;flex-shrink:0;border:1px solid var(--line);padding:4px;background:#fff;}
-  .download-card h4{font-size:1rem;margin-bottom:4px;color:var(--night);}
-  .download-card p{font-size:0.85rem;color:#4a4a44;margin-bottom:10px;}
+  .download-card h4{font-size:1.05rem;margin-bottom:4px;color:var(--night);}
+  .download-card p{font-size:0.96rem;color:#4a4a44;margin-bottom:10px;}
   .store-btn{
     display:inline-flex;align-items:center;gap:8px;background:var(--night);color:var(--ivory);
-    text-decoration:none;padding:9px 14px;border-radius:var(--radius);font-size:0.82rem;font-weight:600;
+    text-decoration:none;padding:9px 14px;border-radius:var(--radius);font-size:0.92rem;font-weight:600;
   }
   .store-btn svg{width:16px;height:16px;}
   .store-btn:hover{background:var(--teal);}
@@ -314,38 +314,53 @@
     font-family:'Amiri',serif;font-weight:700;font-size:0.92rem;color:#fff;
     border:1px solid rgba(255,255,255,0.25);letter-spacing:0.02em;
   }
-  .place-card h4{font-size:1.02rem;margin-bottom:6px;color:var(--night);}
-  .place-card p{font-size:0.9rem;color:#4a4a44;margin:0;}
+  .place-card h4{font-size:1.1rem;margin-bottom:6px;color:var(--night);}
+  .place-card p{font-size:1rem;color:#4a4a44;margin:0;}
 
   /* ---------- MAP ---------- */
   #leafletMap{height:460px;width:100%;border:1px solid var(--line);}
   .map-toggle{display:flex;gap:10px;margin-bottom:18px;}
   .map-toggle button{
     padding:9px 20px;border:1px solid var(--line);background:#fff;color:var(--night);
-    font-weight:600;font-size:0.88rem;border-radius:20px;
+    font-weight:600;font-size:0.95rem;border-radius:20px;
   }
   .map-toggle button.active{background:var(--night);color:var(--gold-soft);border-color:var(--night);}
-  .map-legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:14px;font-size:0.82rem;color:#5a5a50;}
+  .map-legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:14px;font-size:0.9rem;color:#5a5a50;}
   .map-legend span{display:inline-flex;align-items:center;gap:6px;}
   .dot{width:9px;height:9px;border-radius:50%;background:var(--gold);display:inline-block;}
   .map-label{
     background:rgba(14,42,40,0.92);color:var(--ivory);border:1px solid var(--gold-soft);
-    font-family:'Work Sans',sans-serif;font-size:0.74rem;font-weight:600;padding:3px 8px;
+    font-family:'Work Sans',sans-serif;font-size:0.82rem;font-weight:600;padding:3px 8px;
     border-radius:3px;box-shadow:none;
   }
   .map-label::before{border-top-color:rgba(14,42,40,0.92) !important;}
   .distance-list{display:grid;grid-template-columns:1fr;gap:2px;background:var(--line);border:1px solid var(--line);margin-top:24px;}
   @media(min-width:700px){.distance-list{grid-template-columns:1fr 1fr;}}
-  .distance-row{background:#fff;padding:14px 18px;display:flex;justify-content:space-between;gap:12px;font-size:0.9rem;}
+  .distance-row{background:#fff;padding:14px 18px;display:flex;justify-content:space-between;gap:12px;font-size:1rem;}
   .distance-row .d-name{color:var(--night);font-weight:600;}
   .distance-row .d-km{color:var(--gold);font-weight:600;white-space:nowrap;}
+
+  /* ---------- FEEDBACK FORM ---------- */
+  .feedback-form{max-width:640px;}
+  .feedback-row{display:grid;grid-template-columns:1fr;gap:18px;}
+  @media(min-width:600px){.feedback-row{grid-template-columns:1fr 1fr;}}
+  .feedback-field{margin-bottom:18px;}
+  .feedback-field label{display:block;font-size:0.9rem;font-weight:600;color:var(--night);margin-bottom:6px;}
+  .feedback-field input, .feedback-field textarea{
+    width:100%;border:1px solid var(--line);background:#fff;border-radius:var(--radius);
+    padding:12px 14px;font-family:'Work Sans',sans-serif;font-size:1rem;color:var(--ink);
+    resize:vertical;
+  }
+  .feedback-field input:focus, .feedback-field textarea:focus{outline:2px solid var(--gold-soft);outline-offset:1px;}
+  .feedback-status{margin-top:14px;font-size:0.95rem;color:var(--teal);min-height:1.2em;}
+  .feedback-status.error{color:#8a2f1f;}
 
   /* ---------- FOOTER ---------- */
   footer{background:var(--night);color:#B9C9C5;padding:72px 0 0;}
   footer h4{color:var(--ivory);font-size:1.15rem;margin-bottom:14px;}
   footer .foot-grid{display:grid;grid-template-columns:1fr;gap:38px;}
   @media(min-width:760px){footer .foot-grid{grid-template-columns:1.4fr 1fr 1fr;gap:48px;}}
-  footer p{font-size:0.96rem;color:#9DB2AD;line-height:1.7;}
+  footer p{font-size:1rem;color:#9DB2AD;line-height:1.7;}
   .foot-signoff{
     border-top:1px solid rgba(231,199,126,0.25);margin-top:52px;
     padding:38px 24px 34px;text-align:center;
@@ -353,7 +368,7 @@
   .foot-signoff .arabic-line{
     font-family:'Amiri',serif;font-size:1.7rem;color:var(--gold-soft);margin-bottom:6px;
   }
-  .foot-signoff .en-line{font-size:0.92rem;color:#9DB2AD;margin-bottom:22px;}
+  .foot-signoff .en-line{font-size:1rem;color:#9DB2AD;margin-bottom:22px;}
   .foot-signoff .credit{
     display:inline-flex;align-items:center;gap:10px;
     font-family:'Amiri',serif;font-size:1.1rem;color:var(--ivory);
@@ -388,6 +403,7 @@
       <a href="#places">Places</a>
       <a href="#shopping">Shop &amp; Eat</a>
       <a href="#map">Map</a>
+      <a href="#feedback">Feedback</a>
     </nav>
     <div style="display:flex;align-items:center;gap:6px;">
       <button class="share-btn" id="shareBtn" aria-label="Share this site" title="Share">
@@ -410,6 +426,7 @@
     <a href="#places">Famous Places</a>
     <a href="#shopping">Shopping &amp; Eateries</a>
     <a href="#map">Map</a>
+    <a href="#feedback">Feedback</a>
   </div>
 </header>
 
@@ -486,8 +503,7 @@
     <div class="section-head reveal">
       <div class="kicker-ar">الأدعية</div>
       <h2>Every step, with its wording</h2>
-      <p class="desc">Arabic text, transliteration and an English rendering for each stage, drawn from the Qur'an and authentic hadith. Tap a stage to open it, and tap "Listen" to hear the Arabic spoken aloud.</p>
-      <p class="desc" style="font-size:0.85rem;margin-top:-6px;">Playback quality depends on your device's voice, not on this page — on Android/Chrome, go to Settings → System → Languages → Text-to-speech, pick the Google engine, and download the network Arabic voice for a noticeably smoother sound than the default offline one.</p>
+      <p class="desc">Each stage below has its Arabic text, transliteration and English meaning — tap to open it, then press Listen to hear it spoken aloud.</p>
     </div>
 
     <!-- STEP 1: IHRAM -->
@@ -906,12 +922,12 @@
       <div class="panel">
         <span class="tag">Lunar, not seasonal</span>
         <h3>Ramadan</h3>
-        <p style="color:#3f3f38;font-size:0.94rem;">The busiest single stretch on the calendar, regardless of what the weather is doing outside. Hotel prices climb, flights fill up months ahead, and — as noted earlier — Nusuk permit and Rawdah slots tighten to just 3–5 days out. If Ramadan is your goal, book earlier than you think you need to.</p>
+        <p style="color:#3f3f38;">The busiest single stretch on the calendar, regardless of what the weather is doing outside. Hotel prices climb, flights fill up months ahead, and — as noted earlier — Nusuk permit and Rawdah slots tighten to just 3–5 days out. If Ramadan is your goal, book earlier than you think you need to.</p>
       </div>
       <div class="panel">
         <span class="tag">1 Dhul Qa'dah – 13 Dhul Hijjah</span>
         <h3>The pre-Hajj &amp; Hajj window</h3>
-        <p style="color:#3f3f38;font-size:0.94rem;">Umrah visas and permits pause during this stretch so the Kingdom can focus on Hajj. Hajj itself is expected around late May 2026, and will keep drifting earlier through the Gregorian calendar in the years after — check the current Hijri dates before you plan around it.</p>
+        <p style="color:#3f3f38;">Umrah visas and permits pause during this stretch so the Kingdom can focus on Hajj. Hajj itself is expected around late May 2026, and will keep drifting earlier through the Gregorian calendar in the years after — check the current Hijri dates before you plan around it.</p>
       </div>
     </div>
 
@@ -1165,6 +1181,40 @@
   </div>
 </section>
 
+<!-- ================= FEEDBACK ================= -->
+<section id="feedback" class="band-ivory-dim">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="kicker-ar">ملاحظاتكم</div>
+      <h2>Help us make this guide better</h2>
+      <p class="desc">Missing a du'a, found an outdated rule, or wish there was a section on something else? Tell us what would make your Umrah journey smoother — this goes straight to the person building the site.</p>
+    </div>
+
+    <form id="feedbackForm" class="feedback-form">
+      <div class="feedback-row">
+        <div class="feedback-field">
+          <label for="fbName">Name (optional)</label>
+          <input type="text" id="fbName" name="name" placeholder="Your name">
+        </div>
+        <div class="feedback-field">
+          <label for="fbEmail">Email (optional, if you'd like a reply)</label>
+          <input type="email" id="fbEmail" name="email" placeholder="you@example.com">
+        </div>
+      </div>
+      <div class="feedback-field">
+        <label for="fbMessage">What would you add or improve?</label>
+        <textarea id="fbMessage" name="message" rows="5" placeholder="Share an idea, a correction, or something you wish this guide covered…" required></textarea>
+      </div>
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+      <input type="hidden" name="_subject" value="New feedback on UmrahOne">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <button type="submit" class="btn btn-gold" id="fbSubmit">Send feedback</button>
+      <p id="fbStatus" class="feedback-status" role="status"></p>
+    </form>
+  </div>
+</section>
+
 <footer>
   <div class="container foot-grid">
     <div>
@@ -1239,6 +1289,11 @@
     const score = v => (v.lang === 'ar-SA' ? 2 : 0) + (v.localService ? 0 : 3) + (/google/i.test(v.name) ? 1 : 0);
     return arabic.sort((a, b) => score(b) - score(a))[0];
   }
+  // Chrome (desktop especially) will silently garbage-collect a SpeechSynthesisUtterance
+  // that nothing outside this handler still references, which quietly kills playback
+  // partway through. Keeping one reference alive here prevents that.
+  let activeUtterance = null;
+  let resumeTimer = null;
   document.querySelectorAll('.play-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const targetId = btn.getAttribute('data-target');
@@ -1255,19 +1310,31 @@
 
       document.querySelectorAll('.play-btn.playing').forEach(b => b.classList.remove('playing'));
       window.speechSynthesis.cancel();
+      if (resumeTimer) clearInterval(resumeTimer);
 
       const utter = new SpeechSynthesisUtterance(el.textContent.trim());
       if (voice) utter.voice = voice;
       utter.lang = 'ar-SA';
       utter.rate = 0.72;
       utter.pitch = 0.96;
+      activeUtterance = utter;
 
       let started = false;
-      utter.onstart = () => { started = true; btn.classList.add('playing'); };
-      utter.onend = () => btn.classList.remove('playing');
+      utter.onstart = () => {
+        started = true;
+        btn.classList.add('playing');
+        // Chrome desktop has a long-standing bug that mutes speech after ~15s unless
+        // nudged; this keeps longer du'as playing all the way through.
+        resumeTimer = setInterval(() => {
+          window.speechSynthesis.pause();
+          window.speechSynthesis.resume();
+        }, 10000);
+      };
+      utter.onend = () => { btn.classList.remove('playing'); clearInterval(resumeTimer); };
       utter.onerror = () => {
         btn.classList.remove('playing');
-        alert("This browser couldn't play Arabic audio. On Android/Chrome, Arabic voices are usually built in; on iPhone, add one under Settings → Accessibility → Spoken Content → Voices → Arabic. The text above is still accurate to read from.");
+        clearInterval(resumeTimer);
+        alert("This browser couldn't play Arabic audio. Windows: Settings → Time & Language → Speech → Add voices → Arabic. Mac: System Settings → Accessibility → Spoken Content → System voice → Manage Voices → Arabic. Android/Chrome usually has it built in; on iPhone, add one under Settings → Accessibility → Spoken Content → Voices → Arabic. The text above is still accurate to read from.");
       };
 
       window.speechSynthesis.speak(utter);
@@ -1277,7 +1344,7 @@
       setTimeout(() => {
         if (!started && !window.speechSynthesis.speaking) {
           btn.classList.remove('playing');
-          alert("This browser doesn't seem to have an Arabic voice available, so audio can't play here. On Android/Chrome, Arabic voices are usually built in; on iPhone, add one under Settings → Accessibility → Spoken Content → Voices → Arabic. The text above is still accurate to read from.");
+          alert("This browser doesn't seem to have an Arabic voice available, so audio can't play here. Windows: Settings → Time & Language → Speech → Add voices → Arabic. Mac: System Settings → Accessibility → Spoken Content → System voice → Manage Voices → Arabic. Android/Chrome usually has it built in; on iPhone, add one under Settings → Accessibility → Spoken Content → Voices → Arabic. The text above is still accurate to read from.");
         }
       }, 700);
     });
@@ -1441,6 +1508,37 @@
     link.href = URL.createObjectURL(blob);
     link.download = 'UmrahOne-Checklist.doc';
     link.click();
+  });
+
+  // ---- Feedback form (sent via FormSubmit, no email address shown on the page) ----
+  document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const submitBtn = document.getElementById('fbSubmit');
+    const status = document.getElementById('fbStatus');
+    status.classList.remove('error');
+    status.textContent = 'Sending…';
+    submitBtn.disabled = true;
+
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/rashrockz93@gmail.com', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      });
+      if (res.ok) {
+        status.textContent = 'Thank you — your feedback has been sent.';
+        form.reset();
+      } else {
+        status.classList.add('error');
+        status.textContent = "Something went wrong sending that. Please try again in a moment.";
+      }
+    } catch (err) {
+      status.classList.add('error');
+      status.textContent = "Something went wrong sending that. Please try again in a moment.";
+    } finally {
+      submitBtn.disabled = false;
+    }
   });
 </script>
 </body>
