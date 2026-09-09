@@ -20,7 +20,7 @@
     --line:rgba(183,134,44,0.35);
     --radius:2px;
     --max:1120px;
-    --max-header:1480px;
+    --max-header:1160px;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -64,9 +64,9 @@
   .brand svg{width:30px;height:30px;}
   .brand-text{font-family:'Amiri',serif;font-size:1.5rem;color:var(--ivory);line-height:1.2;}
   .brand-text small{display:block;font-family:'Work Sans',sans-serif;font-size:0.78rem;letter-spacing:0.07em;color:var(--gold-soft);font-weight:500;margin-top:2px;}
-  nav.links{display:none;gap:14px;flex-wrap:nowrap;flex-shrink:0;}
+  nav.links{display:none;gap:26px;flex-wrap:nowrap;flex-shrink:0;}
   nav.links a{
-    color:var(--ivory);text-decoration:none;font-size:0.95rem;font-weight:500;
+    color:var(--ivory);text-decoration:none;font-size:1rem;font-weight:500;
     padding:8px 0;border-bottom:1px solid transparent;transition:border-color .2s, color .2s;
     white-space:nowrap;
   }
@@ -92,7 +92,7 @@
     color:var(--ivory);text-decoration:none;padding:16px 24px;
     border-bottom:1px solid rgba(255,255,255,0.06);font-size:1.05rem;
   }
-  @media(min-width:1460px){
+  @media(min-width:920px){
     nav.links{display:flex;}
     .burger{display:none;}
   }
@@ -355,6 +355,16 @@
   .feedback-status{margin-top:14px;font-size:0.95rem;color:var(--teal);min-height:1.2em;}
   .feedback-status.error{color:#8a2f1f;}
 
+  .audio-toast{
+    position:fixed;left:50%;bottom:26px;transform:translate(-50%,16px);
+    max-width:90%;width:420px;background:var(--night);color:var(--ivory);
+    border:1px solid var(--gold-soft);border-radius:6px;padding:14px 18px;
+    font-size:0.92rem;line-height:1.5;box-shadow:0 10px 28px rgba(0,0,0,0.28);
+    opacity:0;pointer-events:none;transition:opacity .25s ease, transform .25s ease;
+    z-index:999;
+  }
+  .audio-toast.show{opacity:1;transform:translate(-50%,0);pointer-events:auto;}
+
   /* ---------- FOOTER ---------- */
   footer{background:var(--night);color:#B9C9C5;padding:72px 0 0;}
   footer h4{color:var(--ivory);font-size:1.15rem;margin-bottom:14px;}
@@ -392,16 +402,10 @@
       <span class="brand-text">UmrahOne<small>A companion for the journey</small></span>
     </a>
     <nav class="links">
-      <a href="#journey">Journey</a>
-      <a href="#duas">Du'as</a>
-      <a href="#regulations">Regulations</a>
-      <a href="#nusuk">Nusuk</a>
-      <a href="#rawdah">Rawdah</a>
-      <a href="#connect">Connect</a>
-      <a href="#seasons">Seasons</a>
-      <a href="#essentials">Essentials</a>
-      <a href="#places">Places</a>
-      <a href="#shopping">Shop &amp; Eat</a>
+      <a href="#journey">Journey &amp; Du'as</a>
+      <a href="#regulations">Rules &amp; Permits</a>
+      <a href="#connect">Plan Your Trip</a>
+      <a href="#places">Places &amp; Shopping</a>
       <a href="#map">Map</a>
       <a href="#feedback">Feedback</a>
     </nav>
@@ -441,7 +445,7 @@
   </svg>
   <div class="hero-inner">
     <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
-    <h1>A quiet companion for your Umrah — from niyyah to Tawaf al-Wada'</h1>
+    <h1>A quiet companion for your Umrah</h1>
     <p class="lede">Every step, every du'a in Arabic and English with audio, the rules that govern travel today, and the ground you'll walk in Makkah and Madinah.</p>
     <div class="hero-ctas">
       <a href="#journey" class="btn btn-gold">Begin the journey</a>
@@ -674,6 +678,7 @@
       <div class="step-body" id="s5">
         <div class="step-body-inner">
           <p class="intro">Men shave the head completely (halq) or trim evenly all over (taqsir); the Prophet ﷺ prayed for those who shave three times and for those who trim once — shaving is the more complete option for men. Women cut roughly a fingertip's length from a gathered lock of hair. Once done, ihram restrictions end and your Umrah is complete — no fixed du'a is prescribed for this step itself.</p>
+          <div class="note-box"><strong>What about Tawaf al-Wada' (the farewell tawaf)?</strong> It's obligatory before leaving Makkah after Hajj, but for Umrah alone most scholars consider it recommended rather than required — Umrah's own rites end at halq or taqsir. Many people still perform it as a graceful way to say goodbye to the Ka'bah before travelling home; skipping it after Umrah isn't missing a pillar.</div>
           <div class="note-box"><strong>A note on authenticity.</strong> Every Arabic text above comes from the Qur'an or from hadith in Sahih al-Bukhari, Sahih Muslim, Sunan Abu Dawud or Sunan Ibn Majah, referenced beside each one. Where scholars differ on wording or where no fixed text exists, that's noted rather than papered over. This page is a study companion, not a fatwa — for rulings on your specific situation, ask a qualified local scholar.</div>
         </div>
       </div>
@@ -1280,7 +1285,22 @@
   });
 
   // ---- Speech (Arabic only) — pick the most natural-sounding voice available,
-  // then attempt playback first and only warn on a genuine failure ----
+  // then attempt playback first and only flag a genuine failure, quietly, on the page
+  // itself. (alert() is intentionally avoided here — many embedded/preview browser
+  // contexts silently block it, which made real failures look like nothing happened.)
+  function showAudioNotice(msg) {
+    let toast = document.getElementById('audioToast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'audioToast';
+      toast.className = 'audio-toast';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toast._hideTimer);
+    toast._hideTimer = setTimeout(() => toast.classList.remove('show'), 7000);
+  }
   function pickBestArabicVoice(voices) {
     const arabic = voices.filter(v => (v.lang || '').toLowerCase().startsWith('ar'));
     if (!arabic.length) return null;
@@ -1300,7 +1320,7 @@
       const el = document.getElementById(targetId);
       if (!el) return;
       if (!('speechSynthesis' in window)) {
-        alert('Audio playback is not supported in this browser. The text is still shown above.');
+        showAudioNotice("This browser can't play audio aloud — the text above is still accurate to read.");
         return;
       }
 
@@ -1334,7 +1354,7 @@
       utter.onerror = () => {
         btn.classList.remove('playing');
         clearInterval(resumeTimer);
-        alert("This browser couldn't play Arabic audio. Windows: Settings → Time & Language → Speech → Add voices → Arabic. Mac: System Settings → Accessibility → Spoken Content → System voice → Manage Voices → Arabic. Android/Chrome usually has it built in; on iPhone, add one under Settings → Accessibility → Spoken Content → Voices → Arabic. The text above is still accurate to read from.");
+        showAudioNotice("Couldn't play Arabic audio here — this device may not have an Arabic voice installed. The text above is still accurate to read.");
       };
 
       window.speechSynthesis.speak(utter);
@@ -1344,7 +1364,7 @@
       setTimeout(() => {
         if (!started && !window.speechSynthesis.speaking) {
           btn.classList.remove('playing');
-          alert("This browser doesn't seem to have an Arabic voice available, so audio can't play here. Windows: Settings → Time & Language → Speech → Add voices → Arabic. Mac: System Settings → Accessibility → Spoken Content → System voice → Manage Voices → Arabic. Android/Chrome usually has it built in; on iPhone, add one under Settings → Accessibility → Spoken Content → Voices → Arabic. The text above is still accurate to read from.");
+          showAudioNotice("No Arabic voice found on this device — the text above is still accurate to read.");
         }
       }, 700);
     });
