@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UmrahOne — A Guided Companion for the Journey</title>
+<title>UmrahNow — A Guided Companion for the Journey</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
@@ -411,7 +411,7 @@
   <div class="nav-row">
     <a href="#home" class="brand">
       <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M50 4 L61 34 L94 34 L67 53 L78 84 L50 65 L22 84 L33 53 L6 34 L39 34 Z" stroke="#E7C77E" stroke-width="4" stroke-linejoin="round"/></svg>
-      <span class="brand-text">UmrahOne<small>A companion for the journey</small></span>
+      <span class="brand-text">UmrahNow<small>A companion for the journey</small></span>
     </a>
     <nav class="links">
       <a href="#regulations">Plan Your Trip</a>
@@ -1508,7 +1508,7 @@
         <textarea id="fbMessage" name="message" rows="5" placeholder="Share an idea, a correction, or something you wish this guide covered…" required></textarea>
       </div>
       <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
-      <input type="hidden" name="_subject" value="New feedback on UmrahOne">
+      <input type="hidden" name="_subject" value="New feedback on UmrahNow">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_captcha" value="false">
       <button type="submit" class="btn btn-gold" id="fbSubmit">Send feedback</button>
@@ -1520,7 +1520,7 @@
 <footer>
   <div class="container foot-grid">
     <div>
-      <h4>UmrahOne</h4>
+      <h4>UmrahNow</h4>
       <p>A study companion for Umrah — the rites, their wording in Arabic and English, current Saudi entry rules, what to pack, and the geography of both holy cities. Built for orientation and reflection, not as a substitute for a qualified teacher.</p>
     </div>
     <div>
@@ -1556,7 +1556,7 @@
   async function shareSite() {
     const shareData = {
       title: document.title,
-      text: "UmrahOne — rites, du'as in Arabic and English with audio, current regulations, Nusuk, Rawdah booking, and the geography of Makkah and Madinah.",
+      text: "UmrahNow — rites, du'as in Arabic and English with audio, current regulations, Nusuk, Rawdah booking, and the geography of Makkah and Madinah.",
       url: window.location.href
     };
     if (navigator.share) {
@@ -1794,11 +1794,11 @@
       <div style="width:720px;padding:44px;background:#F6F1E4;font-family:Arial,'Work Sans',sans-serif;">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
           <span style="color:#B7862C;font-size:24px;">&#9733;</span>
-          <span style="font-family:Georgia,'Amiri',serif;font-size:28px;color:#0E2A28;">UmrahOne</span>
+          <span style="font-family:Georgia,'Amiri',serif;font-size:28px;color:#0E2A28;">UmrahNow</span>
         </div>
         <div style="font-size:12px;letter-spacing:0.06em;color:#B7862C;margin-bottom:28px;text-transform:uppercase;">Travel Essentials Checklist</div>
         ${sections}
-        <div style="margin-top:30px;font-size:11px;color:#8a8578;border-top:1px solid #DED4B8;padding-top:12px;">Generated from UmrahOne — a companion for the Umrah journey.</div>
+        <div style="margin-top:30px;font-size:11px;color:#8a8578;border-top:1px solid #DED4B8;padding-top:12px;">Generated from UmrahNow — a companion for the Umrah journey.</div>
       </div>`;
   }
 
@@ -1812,7 +1812,7 @@
     document.body.appendChild(wrapper);
     html2canvas(wrapper.firstElementChild, { backgroundColor: '#F6F1E4', scale: 2 }).then(canvas => {
       const link = document.createElement('a');
-      link.download = 'UmrahOne-Checklist.png';
+      link.download = 'UmrahNow-Checklist.png';
       link.href = canvas.toDataURL('image/png');
       link.click();
       document.body.removeChild(wrapper);
@@ -1828,7 +1828,7 @@
     const blob = new Blob(['\ufeff', html], { type: 'application/msword' });
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
-    link.download = 'UmrahOne-Checklist.doc';
+    link.download = 'UmrahNow-Checklist.doc';
     link.click();
   });
 
