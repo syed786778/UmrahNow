@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UmrahNow — A Guided Companion for the Journey</title>
+<title>UmrahNow - Everything for a Comfortable Umrah</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
@@ -20,7 +20,7 @@
     --line:rgba(183,134,44,0.35);
     --radius:2px;
     --max:1120px;
-    --max-header:1160px;
+    --max-header:1680px;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -58,7 +58,7 @@
   }
   .nav-row{
     display:flex;align-items:center;justify-content:space-between;
-    padding:18px 24px;max-width:var(--max-header);margin:0 auto;gap:20px;flex-wrap:nowrap;
+    padding:18px 40px;max-width:var(--max-header);margin:0 auto;gap:20px;flex-wrap:nowrap;
   }
   .brand{display:flex;align-items:center;gap:12px;color:var(--ivory);text-decoration:none;flex-shrink:0;}
   .brand svg{width:30px;height:30px;}
@@ -102,7 +102,7 @@
     position:relative;overflow:hidden;
     background:radial-gradient(ellipse at 30% -10%, #1c5f57 0%, var(--night) 60%);
     color:var(--ivory);
-    padding:88px 24px 96px;
+    padding:64px 24px 72px;
   }
   .hero-pattern{
     position:absolute;inset:0;opacity:0.16;
@@ -123,12 +123,21 @@
     opacity:0;animation:fadeIn 1s ease-out .45s forwards;
   }
   .hero p.lede{
-    max-width:540px;margin:0 auto 34px;color:#CFE3DF;font-size:1.05rem;
+    max-width:620px;margin:0 auto 28px;color:#CFE3DF;font-size:1.05rem;
     opacity:0;animation:fadeIn 1s ease-out .7s forwards;
   }
   @keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+  .hero-chips{
+    display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:640px;margin:0 auto 30px;
+    opacity:0;animation:fadeIn 1s ease-out .85s forwards;
+  }
+  .hero-chips span{
+    font-size:0.82rem;font-weight:600;color:var(--gold-soft);
+    border:1px solid rgba(231,199,126,0.4);border-radius:20px;padding:6px 14px;
+    background:rgba(255,255,255,0.03);
+  }
   .hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;
-    opacity:0;animation:fadeIn 1s ease-out .95s forwards;}
+    opacity:0;animation:fadeIn 1s ease-out 1.05s forwards;}
   .btn{
     display:inline-block;padding:13px 26px;border-radius:var(--radius);
     text-decoration:none;font-weight:600;font-size:1rem;border:1px solid transparent;
@@ -141,8 +150,8 @@
   .btn-outline:hover{border-color:var(--gold-soft);color:var(--gold-soft);}
 
   /* ---------- SECTION HEADERS ---------- */
-  section{padding:76px 0;scroll-margin-top:96px;}
-  .section-head{margin-bottom:44px;}
+  section{padding:56px 0;scroll-margin-top:88px;}
+  .section-head{margin-bottom:32px;}
   .kicker-ar{font-family:'Amiri',serif;color:var(--gold);font-size:1.5rem;margin-bottom:6px;}
   .section-head h2{font-size:clamp(1.6rem,3.4vw,2.3rem);max-width:640px;}
   .section-head .desc{max-width:600px;color:#4a4a44;margin-top:10px;}
@@ -364,6 +373,28 @@
   .feedback-status{margin-top:14px;font-size:0.95rem;color:var(--teal);min-height:1.2em;}
   .feedback-status.error{color:#8a2f1f;}
 
+  /* ---------- COMING SOON ---------- */
+  .coming-soon-section{padding:40px 0;}
+  .coming-soon-panel{
+    border:1px dashed var(--gold);border-radius:4px;
+    background:linear-gradient(135deg, rgba(183,134,44,0.07), rgba(20,76,70,0.05));
+    padding:40px 36px;text-align:center;max-width:760px;margin:0 auto;
+  }
+  .coming-soon-badge{
+    display:inline-block;background:var(--night);color:var(--gold-soft);
+    font-size:0.8rem;font-weight:600;letter-spacing:0.04em;padding:5px 14px;
+    border-radius:20px;margin-bottom:16px;
+  }
+  .coming-soon-panel h2{font-size:clamp(1.3rem,2.6vw,1.7rem);margin-bottom:12px;}
+  .coming-soon-panel p{color:#4a4a44;max-width:560px;margin:0 auto 24px;}
+  .notify-form{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;max-width:440px;margin:0 auto;}
+  .notify-form input[type="email"]{
+    flex:1;min-width:220px;border:1px solid var(--line);background:#fff;border-radius:var(--radius);
+    padding:12px 14px;font-family:'Work Sans',sans-serif;font-size:1rem;color:var(--ink);
+  }
+  .notify-form input[type="email"]:focus{outline:2px solid var(--gold-soft);outline-offset:1px;}
+  .notify-form .btn{padding:12px 22px;}
+
   .audio-toast{
     position:fixed;left:50%;bottom:26px;transform:translate(-50%,16px);
     max-width:90%;width:420px;background:var(--night);color:var(--ivory);
@@ -381,7 +412,7 @@
   @media(min-width:760px){footer .foot-grid{grid-template-columns:1.4fr 1fr 1fr;gap:48px;}}
   footer p{font-size:1rem;color:#9DB2AD;line-height:1.7;}
   .foot-signoff{
-    border-top:1px solid rgba(231,199,126,0.25);margin-top:52px;
+    border-top:1px solid rgba(231,199,126,0.25);margin-top:36px;
     padding:38px 24px 34px;text-align:center;
   }
   .foot-signoff .arabic-line{
@@ -431,12 +462,14 @@
     </div>
   </div>
   <div class="mobile-panel" id="mobilePanel">
+    <a href="#packages">Umrah Packages (Coming Soon)</a>
     <a href="#regulations">Visa &amp; Regulations</a>
     <a href="#nusuk">Nusuk App</a>
     <a href="#rawdah">Rawdah Booking</a>
     <a href="#connect">Staying Connected</a>
     <a href="#seasons">Seasons &amp; Weather</a>
     <a href="#essentials">Travel Essentials</a>
+    <a href="#forex">Money &amp; Foreign Exchange</a>
     <a href="#transport">Getting Around</a>
     <a href="#journey">The Journey</a>
     <a href="#duas">Du'as</a>
@@ -460,11 +493,38 @@
   </svg>
   <div class="hero-inner">
     <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
-    <h1>A quiet companion for your Umrah</h1>
-    <p class="lede">Every step, every du'a in Arabic and English with audio, the rules that govern travel today, and the ground you'll walk in Makkah and Madinah.</p>
+    <h1>Everything you need for a comfortable Umrah, in one place</h1>
+    <p class="lede">UmrahNow brings the whole journey together - rites and du'as with audio, live Saudi regulations, Nusuk and Rawdah bookings, transport, packing, medical help, and the geography of Makkah and Madinah - so you can focus on your ibadah, not the logistics.</p>
+    <div class="hero-chips">
+      <span>Rites &amp; Du'as</span>
+      <span>Live Regulations</span>
+      <span>Nusuk &amp; Rawdah</span>
+      <span>Transport &amp; Medical</span>
+      <span>Interactive Maps</span>
+    </div>
     <div class="hero-ctas">
-      <a href="#journey" class="btn btn-gold">Begin the journey</a>
-      <a href="#duas" class="btn btn-outline">Go straight to the du'as</a>
+      <a href="#regulations" class="btn btn-gold">Start planning</a>
+      <a href="#journey" class="btn btn-outline">Explore the rites &amp; du'as</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMING SOON: PACKAGES ================= -->
+<section id="packages" class="coming-soon-section">
+  <div class="container">
+    <div class="coming-soon-panel reveal">
+      <span class="coming-soon-badge">Coming soon</span>
+      <h2>Enquire about Umrah packages from verified, vetted service providers</h2>
+      <p>We're building a way to connect you directly with trusted operators for flights, stays, and full Umrah packages - every one of them checked before they reach you, so you're not left comparing strangers on your own.</p>
+      <form id="notifyForm" class="notify-form">
+        <input type="email" name="email" placeholder="you@example.com" required aria-label="Email address">
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+        <input type="hidden" name="_subject" value="UmrahNow - notify me about packages">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <button type="submit" class="btn btn-gold">Notify me</button>
+      </form>
+      <p id="notifyStatus" class="feedback-status" role="status"></p>
     </div>
   </div>
 </section>
@@ -475,7 +535,7 @@
     <div class="section-head reveal">
       <div class="kicker-ar">الأنظمة</div>
       <h2>Saudi regulations for Umrah travellers</h2>
-      <p class="desc">A summary of how entry and pilgrimage permits currently work. Rules are set and updated by Saudi Arabia's Ministry of Hajj and Umrah — treat this as an orientation and always re-check the Nusuk platform before you book or travel.</p>
+      <p class="desc">A summary of how entry and pilgrimage permits currently work. Rules are set and updated by Saudi Arabia's Ministry of Hajj and Umrah - treat this as an orientation and always re-check the Nusuk platform before you book or travel.</p>
     </div>
 
     <div class="grid-3">
@@ -511,7 +571,7 @@
     </div>
 
     <div class="note-box" style="background:rgba(247,241,228,0.08);border-color:var(--gold-soft);color:#DCE9E5;">
-      <strong>The rule that applies to everyone:</strong> whichever visa gets you into the country, you still need a separate, timed Umrah permit issued through the Nusuk app before you can enter Masjid al-Haram — and a further permit if you want to visit Al-Rawdah in Madinah. Entry windows, stay durations and health requirements (such as vaccination rules) are amended periodically by the Ministry, so confirm the current terms on Nusuk shortly before you travel rather than relying on any single source, including this one.
+      <strong>The rule that applies to everyone:</strong> whichever visa gets you into the country, you still need a separate, timed Umrah permit issued through the Nusuk app before you can enter Masjid al-Haram - and a further permit if you want to visit Al-Rawdah in Madinah. Entry windows, stay durations and health requirements (such as vaccination rules) are amended periodically by the Ministry, so confirm the current terms on Nusuk shortly before you travel rather than relying on any single source, including this one.
     </div>
   </div>
 </section>
@@ -525,10 +585,10 @@
         <div class="brand-badge" style="width:44px;height:44px;font-size:0.85rem;background:linear-gradient(135deg,#B7862C,#144C46);flex-shrink:0;">ن</div>
         <h2>The Nusuk App</h2>
       </div>
-      <p class="desc">Nusuk is Saudi Arabia's official platform for pilgrims — the Ministry of Hajj and Umrah's single point for permits, bookings and on-the-ground support. Registration takes your passport or visa details, a verification code sent to your phone, and a password; once your account is active, everything below sits inside it.</p>
+      <p class="desc">Nusuk is Saudi Arabia's official platform for pilgrims - the Ministry of Hajj and Umrah's single point for permits, bookings and on-the-ground support. Registration takes your passport or visa details, a verification code sent to your phone, and a password; once your account is active, everything below sits inside it.</p>
     </div>
     <div class="feature-grid">
-      <div class="feature-cell"><h4>Umrah permit</h4><p>A timed entry slot to Masjid al-Haram — mandatory for every pilgrim before entering, regardless of visa type.</p></div>
+      <div class="feature-cell"><h4>Umrah permit</h4><p>A timed entry slot to Masjid al-Haram - mandatory for every pilgrim before entering, regardless of visa type.</p></div>
       <div class="feature-cell"><h4>Rawdah appointment</h4><p>A separate booking for the small, high-demand area inside Masjid an-Nabawi known as Al-Rawdah Al-Sharifah.</p></div>
       <div class="feature-cell"><h4>Companion management</h4><p>Add family members or children to your account so their permits move together with yours.</p></div>
       <div class="feature-cell"><h4>Ziyarat reservations</h4><p>Optional visits to historic sites around Makkah and Madinah, booked the same way as your main permits.</p></div>
@@ -536,7 +596,7 @@
       <div class="feature-cell"><h4>In the moment</h4><p>Live crowd-density readings, maps and guided tours, the Qur'an, collected du'as, prayer times and Qiblah direction.</p></div>
     </div>
     <div class="note-box">
-      <strong>Getting registered.</strong> Download Nusuk (iOS or Android) or use the web platform, choose your pilgrim type (tourist e-visa holder or Umrah-visa holder), and enter your passport or visa number, date of birth and nationality. A one-time code arrives by SMS and email — enter both to activate the account, then set your password. Keep your registered phone number reachable while abroad; that's where Nusuk sends permit confirmations and codes.
+      <strong>Getting registered.</strong> Download Nusuk (iOS or Android) or use the web platform, choose your pilgrim type (tourist e-visa holder or Umrah-visa holder), and enter your passport or visa number, date of birth and nationality. A one-time code arrives by SMS and email - enter both to activate the account, then set your password. Keep your registered phone number reachable while abroad; that's where Nusuk sends permit confirmations and codes.
     </div>
 
     <div class="download-grid">
@@ -572,16 +632,16 @@
     <div class="section-head reveal">
       <div class="kicker-ar">الروضة الشريفة</div>
       <h2>Booking a visit to Al-Rawdah</h2>
-      <p class="desc">The area between the Prophet's ﷺ pulpit and his house — described in hadith as one of the gardens of Paradise — admits visitors only by timed permit. Booking is free; the whole process runs through Nusuk, and any paid third-party "booking service" should be treated with suspicion.</p>
+      <p class="desc">The area between the Prophet's ﷺ pulpit and his house - described in hadith as one of the gardens of Paradise - admits visitors only by timed permit. Booking is free; the whole process runs through Nusuk, and any paid third-party "booking service" should be treated with suspicion.</p>
     </div>
     <div class="flow">
       <div class="flow-step">
         <span class="flow-num">1</span>
-        <div><h4>Confirm your account is complete</h4><p>Your Nusuk profile and passport details need to be fully verified before Rawdah booking becomes available — an incomplete profile is the most common reason the option won't open.</p></div>
+        <div><h4>Confirm your account is complete</h4><p>Your Nusuk profile and passport details need to be fully verified before Rawdah booking becomes available - an incomplete profile is the most common reason the option won't open.</p></div>
       </div>
       <div class="flow-step">
         <span class="flow-num">2</span>
-        <div><h4>Go to Services → Book Rawdah Visit</h4><p>It sits apart from the Umrah permit screen — a frequent first-time mix-up is booking one and assuming it covers both.</p></div>
+        <div><h4>Go to Services → Book Rawdah Visit</h4><p>It sits apart from the Umrah permit screen - a frequent first-time mix-up is booking one and assuming it covers both.</p></div>
       </div>
       <div class="flow-step">
         <span class="flow-num">3</span>
@@ -608,7 +668,7 @@
     <div class="section-head reveal">
       <div class="kicker-ar">الاتصال</div>
       <h2>Staying connected</h2>
-      <p class="desc">You'll want data for Nusuk, maps and calling home — here's how pilgrims usually get online in Saudi Arabia.</p>
+      <p class="desc">You'll want data for Nusuk, maps and calling home - here's how pilgrims usually get online in Saudi Arabia.</p>
     </div>
 
     <div class="grid-3">
@@ -618,7 +678,7 @@
         <ul>
           <li>Visitor packages start around SAR 35</li>
           <li>Can be reserved online in advance on the STC website</li>
-          <li>Activation on arrival requires a fingerprint at an STC sales point — this is a Saudi-wide rule, not an STC quirk</li>
+          <li>Activation on arrival requires a fingerprint at an STC sales point - this is a Saudi-wide rule, not an STC quirk</li>
         </ul>
       </div>
       <div class="panel">
@@ -641,27 +701,27 @@
       </div>
     </div>
 
-    <div class="flow" style="margin-top:40px;">
+    <div class="flow" style="margin-top:26px;">
       <div class="flow-step">
         <span class="flow-num">1</span>
         <div><h4>Decide physical SIM or eSIM before you fly</h4><p>A physical SIM means a short stop at the airport; an eSIM (from a Saudi carrier or an international eSIM marketplace) can be bought online, installed via QR code before departure, and left ready to switch on.</p></div>
       </div>
       <div class="flow-step">
         <span class="flow-num">2</span>
-        <div><h4>Physical SIM: buy it at the arrival hall</h4><p>STC, Mobily and Zain all run kiosks at Jeddah's King Abdulaziz International and Madinah's Prince Mohammad bin Abdulaziz International — have your passport ready and expect a short fingerprint or biometric step to activate the line, which Saudi telecom rules require of every provider.</p></div>
+        <div><h4>Physical SIM: buy it at the arrival hall</h4><p>STC, Mobily and Zain all run kiosks at Jeddah's King Abdulaziz International and Madinah's Prince Mohammad bin Abdulaziz International - have your passport ready and expect a short fingerprint or biometric step to activate the line, which Saudi telecom rules require of every provider.</p></div>
       </div>
       <div class="flow-step">
         <span class="flow-num">3</span>
-        <div><h4>eSIM: activate remotely if you'd rather skip the queue</h4><p>Saudi Arabia now lets international pilgrims activate an eSIM straight through a carrier's app using biometric verification via the Absher platform — no store visit needed, which is useful when airport counters are busy during peak Umrah season.</p></div>
+        <div><h4>eSIM: activate remotely if you'd rather skip the queue</h4><p>Saudi Arabia now lets international pilgrims activate an eSIM straight through a carrier's app using biometric verification via the Absher platform - no store visit needed, which is useful when airport counters are busy during peak Umrah season.</p></div>
       </div>
       <div class="flow-step">
         <span class="flow-num">4</span>
-        <div><h4>Top up as you go</h4><p>All three carriers let you recharge through their apps, at convenience stores, or by USSD code — keep a little local cash for the first top-up in case a card payment doesn't go through.</p></div>
+        <div><h4>Top up as you go</h4><p>All three carriers let you recharge through their apps, at convenience stores, or by USSD code - keep a little local cash for the first top-up in case a card payment doesn't go through.</p></div>
       </div>
     </div>
 
     <div class="note-box">
-      <strong>Good to know:</strong> queues at airport SIM counters can run long during Ramadan and peak Umrah weeks, so an eSIM installed before departure is worth considering if you want to be reachable the moment you land. Whichever route you take, register the SIM to your own passport — Saudi law ties every active line to a verified identity.
+      <strong>Good to know:</strong> queues at airport SIM counters can run long during Ramadan and peak Umrah weeks, so an eSIM installed before departure is worth considering if you want to be reachable the moment you land. Whichever route you take, register the SIM to your own passport - Saudi law ties every active line to a verified identity.
     </div>
   </div>
 </section>
@@ -672,7 +732,7 @@
     <div class="section-head reveal">
       <div class="kicker-ar">المواسم والطقس</div>
       <h2>Seasons, weather, and why timing matters</h2>
-      <p class="desc">Umrah has no fixed date on the solar calendar — the Islamic year is lunar, so your trip's Gregorian date shifts by about 10–11 days earlier each year. That means weather and crowd size are two separate things to plan around, and they don't always move together.</p>
+      <p class="desc">Umrah has no fixed date on the solar calendar - the Islamic year is lunar, so your trip's Gregorian date shifts by about 10–11 days earlier each year. That means weather and crowd size are two separate things to plan around, and they don't always move together.</p>
     </div>
 
     <div class="grid-3">
@@ -682,7 +742,7 @@
         <ul>
           <li>Daytime highs regularly pass 42–45°C in both Makkah and Madinah, with record spikes above 50°C</li>
           <li>Dry heat, but the mataf courtyard and outdoor queues offer little shade at midday</li>
-          <li>Fewer visitors than winter — if you can handle the heat, permits and hotels are easier to get</li>
+          <li>Fewer visitors than winter - if you can handle the heat, permits and hotels are easier to get</li>
         </ul>
       </div>
       <div class="panel">
@@ -691,7 +751,7 @@
         <ul>
           <li>Daytime temperatures around 25–30°C, dropping to a cool 15–18°C at night</li>
           <li>The most comfortable stretch of the year for standing and walking outdoors</li>
-          <li>Also the most crowded — comfortable weather draws the largest volume of visitors</li>
+          <li>Also the most crowded - comfortable weather draws the largest volume of visitors</li>
         </ul>
       </div>
       <div class="panel">
@@ -699,7 +759,7 @@
         <h3>Spring &amp; autumn</h3>
         <ul>
           <li>A middle ground: warm days (30–38°C) without winter's peak crowding</li>
-          <li>Occasional short, heavy rain in the shoulder months, mainly near Jeddah's coast — rare, but can cause local flash flooding</li>
+          <li>Occasional short, heavy rain in the shoulder months, mainly near Jeddah's coast - rare, but can cause local flash flooding</li>
           <li>Often the best balance of manageable weather and manageable queues</li>
         </ul>
       </div>
@@ -709,12 +769,12 @@
       <div class="panel">
         <span class="tag">Lunar, not seasonal</span>
         <h3>Ramadan</h3>
-        <p style="color:#3f3f38;">The busiest single stretch on the calendar, regardless of what the weather is doing outside. Hotel prices climb, flights fill up months ahead, and — as noted earlier — Nusuk permit and Rawdah slots tighten to just 3–5 days out. If Ramadan is your goal, book earlier than you think you need to.</p>
+        <p style="color:#3f3f38;">The busiest single stretch on the calendar, regardless of what the weather is doing outside. Hotel prices climb, flights fill up months ahead, and - as noted earlier - Nusuk permit and Rawdah slots tighten to just 3–5 days out. If Ramadan is your goal, book earlier than you think you need to.</p>
       </div>
       <div class="panel">
         <span class="tag">1 Dhul Qa'dah – 13 Dhul Hijjah</span>
         <h3>The pre-Hajj &amp; Hajj window</h3>
-        <p style="color:#3f3f38;">Umrah visas and permits pause during this stretch so the Kingdom can focus on Hajj. Hajj itself is expected around late May 2026, and will keep drifting earlier through the Gregorian calendar in the years after — check the current Hijri dates before you plan around it.</p>
+        <p style="color:#3f3f38;">Umrah visas and permits pause during this stretch so the Kingdom can focus on Hajj. Hajj itself is expected around late May 2026, and will keep drifting earlier through the Gregorian calendar in the years after - check the current Hijri dates before you plan around it.</p>
       </div>
     </div>
 
@@ -730,7 +790,7 @@
     <div class="section-head reveal">
       <div class="kicker-ar">قائمة السفر</div>
       <h2>What to pack</h2>
-      <p class="desc">A reference checklist, not a rulebook — tick off items as you pack. Nothing here is saved once you close the page, so download a copy before you go.</p>
+      <p class="desc">A reference checklist, not a rulebook - tick off items as you pack. Nothing here is saved once you close the page, so download a copy before you go.</p>
       <div class="checklist-actions">
         <button class="download-btn" id="downloadPng">⬇ Download as image</button>
         <button class="download-btn" id="downloadDoc">⬇ Download as Word doc</button>
@@ -758,7 +818,7 @@
           <li><label><input type="checkbox"><span>A copy of your prescription, especially for any controlled or injectable medicine</span></label></li>
           <li><label><input type="checkbox"><span>Basic first-aid: blister plasters, pain relief, rehydration salts</span></label></li>
           <li><label><input type="checkbox"><span>Motion-sickness tablets for the journey</span></label></li>
-          <li><label><input type="checkbox"><span>Unscented sunscreen and lip balm — fragrance is restricted in ihram</span></label></li>
+          <li><label><input type="checkbox"><span>Unscented sunscreen and lip balm - fragrance is restricted in ihram</span></label></li>
           <li><label><input type="checkbox"><span>Hand sanitiser and a small pack of tissues</span></label></li>
         </ul>
       </div>
@@ -792,7 +852,7 @@
           <li><label><input type="checkbox"><span>Phone charger and cable</span></label></li>
           <li><label><input type="checkbox"><span>Universal travel adapter (Saudi Arabia uses type G sockets)</span></label></li>
           <li><label><input type="checkbox"><span>Portable power bank, charged before departure</span></label></li>
-          <li><label><input type="checkbox"><span>Earphones — useful for listening to the du'a audio in this guide</span></label></li>
+          <li><label><input type="checkbox"><span>Earphones - useful for listening to the du'a audio in this guide</span></label></li>
         </ul>
       </div>
       <div class="panel checklist">
@@ -809,13 +869,58 @@
   </div>
 </section>
 
+<!-- ================= FOREIGN EXCHANGE ================= -->
+<section id="forex" class="band-teal">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="kicker-ar">صرف العملات</div>
+      <h2>Money and foreign exchange</h2>
+      <p class="desc">The Saudi Riyal (SAR) has been pegged to the US Dollar at 3.75 since the mid-1980s and hasn't moved since - so any rate you're offered that looks better or worse than that is really just the exchanger's spread or fee, not a real market shift. Knowing that changes how you should think about where to change money.</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="panel">
+        <span class="tag">Convenient, costly</span>
+        <h3>Airport exchange counters</h3>
+        <ul>
+          <li>Available at Jeddah and Madinah's airports, useful for your very first taxi or meal</li>
+          <li>Consistently carry the widest spread of any option - treat it as an emergency top-up, not your main exchange</li>
+          <li>Change a small amount here and do the rest elsewhere</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <span class="tag">Usually the best rate</span>
+        <h3>Licensed city exchange houses</h3>
+        <ul>
+          <li>Clustered near King Abdulaziz Road and Ajyad in Makkah, and around the central area near Masjid an-Nabawi in Madinah</li>
+          <li>Look for official licensing signage - the Saudi Central Bank (SAMA) regulates these directly and steps up inspections during Ramadan and Hajj season</li>
+          <li>Bank branches (open 9:30am–4:30pm, Sunday to Thursday) also exchange currency at comparable rates</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <span class="tag">Cards &amp; ATMs</span>
+        <h3>Using international cards</h3>
+        <ul>
+          <li>Visa and Mastercard are widely accepted at hotels, most restaurants and larger shops - smaller vendors and taxis are often cash-only</li>
+          <li>ATMs are everywhere and often beat a walk-up counter's rate once you account for the spread, even after a flat ATM fee</li>
+          <li>A pre-loaded multi-currency forex card can work like a local debit card at both ATMs and payment terminals</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note-box" style="background:rgba(247,241,228,0.08);border-color:var(--gold-soft);color:#DCE9E5;">
+      <strong>Two habits that save real money.</strong> At any ATM or card machine, always choose to be charged in <strong>local currency (SAR)</strong> rather than "your home currency" - that second option is Dynamic Currency Conversion, and it quietly applies a worse exchange rate than your own bank would. And keep exchanges to licensed banks and exchange houses only; unlicensed street changers near crowded pilgrim areas have a documented history of counterfeit notes.
+    </div>
+  </div>
+</section>
+
 <!-- ================= TRANSPORT ================= -->
 <section id="transport">
   <div class="container">
     <div class="section-head reveal">
       <div class="kicker-ar">التنقل</div>
       <h2>Getting around</h2>
-      <p class="desc">Between cities, from the airport, and around the Haram itself — here's how pilgrims usually move.</p>
+      <p class="desc">Between cities, from the airport, and around the Haram itself - here's how pilgrims usually move.</p>
     </div>
 
     <div class="grid-3">
@@ -825,7 +930,7 @@
         <ul>
           <li>The most widely used ride-hailing app in Saudi Arabia, with strong coverage in both Makkah and Madinah</li>
           <li>Works well for airport pickups, city rides, and trips out to ziyarat sites</li>
-          <li>Account verification by SMS or WhatsApp — set it up before you land if you can</li>
+          <li>Account verification by SMS or WhatsApp - set it up before you land if you can</li>
         </ul>
       </div>
       <div class="panel">
@@ -833,7 +938,7 @@
         <h3>Uber</h3>
         <ul>
           <li>A solid alternative to Careem, with an account that usually carries over from home</li>
-          <li>Good for airport transfers — use the marked pickup zone and match the plate before getting in</li>
+          <li>Good for airport transfers - use the marked pickup zone and match the plate before getting in</li>
           <li>Coverage and wait times can vary more than Careem during peak pilgrimage weeks</li>
         </ul>
       </div>
@@ -842,28 +947,28 @@
         <h3>Jeeny</h3>
         <ul>
           <li>A local Saudi ride app that can undercut Careem or Uber on price in Makkah and Madinah</li>
-          <li>Some foreign phone numbers can't register — worth trying only once you have a Saudi SIM</li>
+          <li>Some foreign phone numbers can't register - worth trying only once you have a Saudi SIM</li>
           <li>Useful as a backup when the other two are short on drivers</li>
         </ul>
       </div>
     </div>
 
-    <div class="flow" style="margin-top:40px;">
+    <div class="flow" style="margin-top:26px;">
       <div class="flow-step">
         <span class="flow-num">1</span>
-        <div><h4>Between Jeddah, Makkah and Madinah — the Haramain High-Speed Rail</h4><p>The fastest and most comfortable way to cover ground: roughly two and a half hours between Makkah and Madinah, with a stop at Jeddah's King Abdulaziz International Airport along the way. Book through the official <strong>HHR Train</strong> app or website — enter your passport name exactly as it appears on your passport, and keep a copy of the ticket offline.</p></div>
+        <div><h4>Between Jeddah, Makkah and Madinah - the Haramain High-Speed Rail</h4><p>The fastest and most comfortable way to cover ground: roughly two and a half hours between Makkah and Madinah, with a stop at Jeddah's King Abdulaziz International Airport along the way. Book through the official <strong>HHR Train</strong> app or website - enter your passport name exactly as it appears on your passport, and keep a copy of the ticket offline.</p></div>
       </div>
       <div class="flow-step">
         <span class="flow-num">2</span>
-        <div><h4>From the airport to your hotel</h4><p>Jeddah's King Abdulaziz International is the main gateway for most pilgrims; Madinah's Prince Mohammad bin Abdulaziz International handles many direct Umrah flights too. Careem, Uber and metered taxis all operate from both — use the airport's marked pickup area rather than accepting an offer from someone walking the arrivals hall. Many Umrah packages also include a pre-arranged private transfer; check with your travel agent before booking your own.</p></div>
+        <div><h4>From the airport to your hotel</h4><p>Jeddah's King Abdulaziz International is the main gateway for most pilgrims; Madinah's Prince Mohammad bin Abdulaziz International handles many direct Umrah flights too. Careem, Uber and metered taxis all operate from both - use the airport's marked pickup area rather than accepting an offer from someone walking the arrivals hall. Many Umrah packages also include a pre-arranged private transfer; check with your travel agent before booking your own.</p></div>
       </div>
       <div class="flow-step">
         <span class="flow-num">3</span>
-        <div><h4>Around the city and out to ziyarat sites</h4><p>Official white taxis are metered and available near hotels and the Haram; agree on the fare or insist on the meter before you set off. For a half-day trip to sites like Jabal al-Nour or Uhud, your hotel or a licensed local tour operator can usually arrange a car and driver for a fixed price — often more relaxed than juggling an app for several stops.</p></div>
+        <div><h4>Around the city and out to ziyarat sites</h4><p>Official white taxis are metered and available near hotels and the Haram; agree on the fare or insist on the meter before you set off. For a half-day trip to sites like Jabal al-Nour or Uhud, your hotel or a licensed local tour operator can usually arrange a car and driver for a fixed price - often more relaxed than juggling an app for several stops.</p></div>
       </div>
       <div class="flow-step">
         <span class="flow-num">4</span>
-        <div><h4>Moving through the mosque itself</h4><p>Both Masjid al-Haram and Masjid an-Nabawi are largely a walk once you're there — most hotels within the central zone are five to fifteen minutes on foot. For anyone who needs extra support, the mosque authorities provide free wheelchairs at designated points near the gates, and paid electric-cart services operate along the outer courtyards for longer distances.</p></div>
+        <div><h4>Moving through the mosque itself</h4><p>Both Masjid al-Haram and Masjid an-Nabawi are largely a walk once you're there - most hotels within the central zone are five to fifteen minutes on foot. For anyone who needs extra support, the mosque authorities provide free wheelchairs at designated points near the gates, and paid electric-cart services operate along the outer courtyards for longer distances.</p></div>
       </div>
     </div>
 
@@ -879,9 +984,9 @@
     <div class="section-head reveal">
       <div class="kicker-ar">رحلة العمرة</div>
       <h2>What Umrah is, and the journey it follows</h2>
-      <p class="desc">Umrah means "to visit a populated place" — the lesser pilgrimage to the Ka'bah, performed any time of year rather than on Hajj's fixed dates. Its rites trace back to Ibrahim and Isma'il, peace be upon them, who raised the Ka'bah and whose family's search for water became the walk between Safa and Marwah; the Prophet ﷺ himself performed it four times.</p>
-      <p class="desc">Its reward is described plainly in hadith: <em>"Umrah after Umrah is an expiation for what came between them"</em> (Sahih al-Bukhari &amp; Sahih Muslim), and <em>"Follow up Hajj and Umrah, for they remove poverty and sin as the bellows removes impurity from iron"</em> (Sunan al-Tirmidhi). Scholars differ on whether it's obligatory once in a lifetime — the Shafi'i and Hanbali view, reading Qur'an 2:196 — or a strongly emphasised sunnah, as the Hanafi and Maliki view holds. Either way, it's one of the most rewarded acts of worship a Muslim can undertake.</p>
-      <p class="desc">Whatever the ruling on obligation, the rites themselves are fixed — four pillars, in sequence. This overview gives you the shape of the whole trip; the next section opens each stage with its exact wording.</p>
+      <p class="desc">Umrah means "to visit a populated place" - the lesser pilgrimage to the Ka'bah, performed any time of year rather than on Hajj's fixed dates. Its rites trace back to Ibrahim and Isma'il, peace be upon them, who raised the Ka'bah and whose family's search for water became the walk between Safa and Marwah; the Prophet ﷺ himself performed it four times.</p>
+      <p class="desc">Its reward is described plainly in hadith: <em>"Umrah after Umrah is an expiation for what came between them"</em> (Sahih al-Bukhari &amp; Sahih Muslim), and <em>"Follow up Hajj and Umrah, for they remove poverty and sin as the bellows removes impurity from iron"</em> (Sunan al-Tirmidhi). Scholars differ on whether it's obligatory once in a lifetime - the Shafi'i and Hanbali view, reading Qur'an 2:196 - or a strongly emphasised sunnah, as the Hanafi and Maliki view holds. Either way, it's one of the most rewarded acts of worship a Muslim can undertake.</p>
+      <p class="desc">Whatever the ruling on obligation, the rites themselves are fixed - four pillars, in sequence. This overview gives you the shape of the whole trip; the next section opens each stage with its exact wording.</p>
     </div>
     <div class="timeline">
       <div class="timeline-track">
@@ -897,7 +1002,7 @@
             </div>
             <h3>Ihram</h3>
             <div class="ar">الإحرام</div>
-            <p>At or before the miqat: ghusl, the ihram garments, the intention, and the Talbiyah — the state you enter and stay in until the final trim.</p>
+            <p>At or before the miqat: ghusl, the ihram garments, the intention, and the Talbiyah - the state you enter and stay in until the final trim.</p>
           </div>
         </div>
         <div class="tl-item reveal">
@@ -929,7 +1034,7 @@
             </div>
             <h3>Sa'i</h3>
             <div class="ar">السعي</div>
-            <p>Seven passes between Safa and Marwah, retracing Hajar's search for water — the walk that gave Zamzam its name.</p>
+            <p>Seven passes between Safa and Marwah, retracing Hajar's search for water - the walk that gave Zamzam its name.</p>
           </div>
         </div>
         <div class="tl-item reveal">
@@ -943,7 +1048,7 @@
             </div>
             <h3>Halq or Taqsir</h3>
             <div class="ar">الحلق أو التقصير</div>
-            <p>Shaving or trimming the hair closes Umrah and releases you from ihram — the visit is complete.</p>
+            <p>Shaving or trimming the hair closes Umrah and releases you from ihram - the visit is complete.</p>
           </div>
         </div>
       </div>
@@ -957,18 +1062,18 @@
     <div class="section-head reveal">
       <div class="kicker-ar">الأدعية</div>
       <h2>Every step, with its wording</h2>
-      <p class="desc">Each stage below has its Arabic text, transliteration and English meaning — tap to open it, then press Listen to hear it spoken aloud.</p>
+      <p class="desc">Each stage below has its Arabic text, transliteration and English meaning - tap to open it, then press Listen to hear it spoken aloud.</p>
     </div>
 
     <!-- STEP 1: IHRAM -->
     <div class="step-card open">
       <button class="step-toggle" data-target="s1">
-        <span class="step-toggle-left"><span class="step-num">1</span><h3>Ihram — intention and Talbiyah</h3></span>
+        <span class="step-toggle-left"><span class="step-num">1</span><h3>Ihram - intention and Talbiyah</h3></span>
         <span class="plus">+</span>
       </button>
       <div class="step-body" id="s1">
         <div class="step-body-inner">
-          <p class="intro">Perform ghusl — a full purifying bath, the Prophet's ﷺ own practice before entering ihram — then wear the ihram garments (unstitched white cloths for men; plain, modest clothing for women — the face and hands remain uncovered), make your intention, and begin reciting the Talbiyah, which you repeat often until you start Tawaf.</p>
+          <p class="intro">Perform ghusl - a full purifying bath, the Prophet's ﷺ own practice before entering ihram - then wear the ihram garments (unstitched white cloths for men; plain, modest clothing for women - the face and hands remain uncovered), make your intention, and begin reciting the Talbiyah, which you repeat often until you start Tawaf.</p>
 
           <div class="dua-block">
             <div class="dua-head">
@@ -978,7 +1083,7 @@
             </div>
             <p class="arabic" id="niyyah-ar" dir="rtl" lang="ar">اللَّهُمَّ إِنِّي أُرِيدُ الْعُمْرَةَ فَيَسِّرْهَا لِي وَتَقَبَّلْهَا مِنِّي</p>
             <p class="translit">Allāhumma innī urīdul-'umrata fa yassirhā lī wa taqabbalhā minnī</p>
-            <p class="translation" id="niyyah-en">O Allah, I intend to perform Umrah — make it easy for me, and accept it from me.</p>
+            <p class="translation" id="niyyah-en">O Allah, I intend to perform Umrah - make it easy for me, and accept it from me.</p>
             <p class="ref">Intention is an act of the heart; this wording is a commonly taught form, not a fixed recitation.</p>
           </div>
 
@@ -1005,7 +1110,7 @@
       </button>
       <div class="step-body" id="s2">
         <div class="step-body-inner">
-          <p class="intro">Enter with the right foot, as with any mosque, and lower your gaze in humility as the Ka'bah comes into view. Many raise their hands and make personal du'a at first sight — there's no single wording required for that moment; speak to Allah in your own words.</p>
+          <p class="intro">Enter with the right foot, as with any mosque, and lower your gaze in humility as the Ka'bah comes into view. Many raise their hands and make personal du'a at first sight - there's no single wording required for that moment; speak to Allah in your own words.</p>
           <div class="dua-block">
             <div class="dua-head">
               <h4>Entering the mosque</h4>
@@ -1015,7 +1120,7 @@
             <p class="arabic" id="enter-ar" dir="rtl" lang="ar">اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ</p>
             <p class="translit">Allāhumma-ftaḥ lī abwāba raḥmatik</p>
             <p class="translation" id="enter-en">O Allah, open the gates of Your mercy for me.</p>
-            <p class="ref">Sahih Muslim — the general dua for entering any mosque.</p>
+            <p class="ref">Sahih Muslim - the general dua for entering any mosque.</p>
           </div>
         </div>
       </div>
@@ -1024,12 +1129,12 @@
     <!-- STEP 3: TAWAF -->
     <div class="step-card">
       <button class="step-toggle" data-target="s3">
-        <span class="step-toggle-left"><span class="step-num">3</span><h3>Tawaf — circling the Ka'bah</h3></span>
+        <span class="step-toggle-left"><span class="step-num">3</span><h3>Tawaf - circling the Ka'bah</h3></span>
         <span class="plus">+</span>
       </button>
       <div class="step-body" id="s3">
         <div class="step-body-inner">
-          <p class="intro">Begin level with the Black Stone (Hajar al-Aswad), Ka'bah on your left. Say the takbir at the start of each of the seven circuits — kissing or touching the stone if possible, otherwise gesturing toward it without pushing. Between the Yemeni Corner and the Black Stone, recite the verse below; elsewhere, any dhikr or personal du'a is fine. Close with two rak'ahs near Maqam Ibrahim (Surah al-Kafirun, then al-Ikhlas) and a drink of Zamzam.</p>
+          <p class="intro">Begin level with the Black Stone (Hajar al-Aswad), Ka'bah on your left. Say the takbir at the start of each of the seven circuits - kissing or touching the stone if possible, otherwise gesturing toward it without pushing. Between the Yemeni Corner and the Black Stone, recite the verse below; elsewhere, any dhikr or personal du'a is fine. Close with two rak'ahs near Maqam Ibrahim (Surah al-Kafirun, then al-Ikhlas) and a drink of Zamzam.</p>
 
           <div class="dua-block">
             <div class="dua-head">
@@ -1064,7 +1169,7 @@
             <p class="arabic" id="maqam-ar" dir="rtl" lang="ar">وَاتَّخِذُوا مِنْ مَقَامِ إِبْرَاهِيمَ مُصَلًّى</p>
             <p class="translit">Wattakhidhū min maqāmi Ibrāhīma muṣallā</p>
             <p class="translation" id="maqam-en">And take the station of Ibrahim as a place of prayer.</p>
-            <p class="ref">Qur'an 2:125 — recited before the two rak'ahs. Pray them anywhere in the mosque if the area is crowded.</p>
+            <p class="ref">Qur'an 2:125 - recited before the two rak'ahs. Pray them anywhere in the mosque if the area is crowded.</p>
           </div>
         </div>
       </div>
@@ -1073,12 +1178,12 @@
     <!-- STEP 4: SAI -->
     <div class="step-card">
       <button class="step-toggle" data-target="s4">
-        <span class="step-toggle-left"><span class="step-num">4</span><h3>Sa'i — between Safa and Marwah</h3></span>
+        <span class="step-toggle-left"><span class="step-num">4</span><h3>Sa'i - between Safa and Marwah</h3></span>
         <span class="plus">+</span>
       </button>
       <div class="step-body" id="s4">
         <div class="step-body-inner">
-          <p class="intro">Approach Safa reciting the verse below, then climb it, face the Ka'bah, and say the takbir three times followed by the dhikr — repeating the whole sequence three times with your own du'a in between. Walk to Marwah (this is one circuit), repeat the same dhikr there, and continue for seven one-way trips in total, ending at Marwah.</p>
+          <p class="intro">Approach Safa reciting the verse below, then climb it, face the Ka'bah, and say the takbir three times followed by the dhikr - repeating the whole sequence three times with your own du'a in between. Walk to Marwah (this is one circuit), repeat the same dhikr there, and continue for seven one-way trips in total, ending at Marwah.</p>
 
           <div class="dua-block">
             <div class="dua-head">
@@ -1087,7 +1192,7 @@
                 <button class="play-btn" data-target="safa-ar">🔊 Listen</button>              </div>
             </div>
             <p class="arabic" id="safa-ar" dir="rtl" lang="ar">إِنَّ الصَّفَا وَالْمَرْوَةَ مِنْ شَعَائِرِ اللَّهِ ﴿١٥٨﴾ أَبْدَأُ بِمَا بَدَأَ اللَّهُ بِهِ</p>
-            <p class="translit">Innaṣ-ṣafā wal-marwata min sha'ā'irillāh — abda'u bimā bada'a Allāhu bih</p>
+            <p class="translit">Innaṣ-ṣafā wal-marwata min sha'ā'irillāh - abda'u bimā bada'a Allāhu bih</p>
             <p class="translation" id="safa-en">Indeed, Safa and Marwah are among the symbols of Allah. I begin with what Allah began with.</p>
             <p class="ref">Qur'an 2:158, with the Prophet's ﷺ own opening words (Sahih Muslim).</p>
           </div>
@@ -1101,7 +1206,7 @@
             <p class="arabic" id="saimarwah-ar" dir="rtl" lang="ar">لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ يُحْيِي وَيُمِيتُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ، أَنْجَزَ وَعْدَهُ وَنَصَرَ عَبْدَهُ وَهَزَمَ الْأَحْزَابَ وَحْدَهُ</p>
             <p class="translit">Lā ilāha illallāhu waḥdahu lā sharīka lah, lahul-mulku wa lahul-ḥamdu yuḥyī wa yumītu wa huwa 'alā kulli shay'in qadīr. Lā ilāha illallāhu waḥdah, anjaza wa'dahu wa naṣara 'abdahu wa hazamal-aḥzāba waḥdah</p>
             <p class="translation" id="saimarwah-en">There is no god but Allah alone, with no partner. His is the dominion and His is all praise; He gives life and causes death, and He has power over all things. There is no god but Allah alone, who fulfilled His promise, granted victory to His servant, and defeated the enemy alliance alone.</p>
-            <p class="ref">Sahih Muslim — said three times, facing the Qiblah, with personal du'a after each repetition.</p>
+            <p class="ref">Sahih Muslim - said three times, facing the Qiblah, with personal du'a after each repetition.</p>
           </div>
 
           <div class="dua-block">
@@ -1113,7 +1218,7 @@
             <p class="arabic" id="zamzam-ar" dir="rtl" lang="ar">اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا، وَرِزْقًا وَاسِعًا، وَشِفَاءً مِنْ كُلِّ دَاءٍ</p>
             <p class="translit">Allāhumma innī as'aluka 'ilman nāfi'an, wa rizqan wāsi'an, wa shifā'an min kulli dā'</p>
             <p class="translation" id="zamzam-en">O Allah, I ask You for beneficial knowledge, ample provision, and healing from every illness.</p>
-            <p class="ref">A widely used form drawn on the hadith "Zamzam water is for whatever it is drunk for" (Ibn Majah) — make it your own du'a, this need not be recited verbatim.</p>
+            <p class="ref">A widely used form drawn on the hadith "Zamzam water is for whatever it is drunk for" (Ibn Majah) - make it your own du'a, this need not be recited verbatim.</p>
           </div>
         </div>
       </div>
@@ -1122,14 +1227,14 @@
     <!-- STEP 5: HALQ -->
     <div class="step-card">
       <button class="step-toggle" data-target="s5">
-        <span class="step-toggle-left"><span class="step-num">5</span><h3>Halq or Taqsir — closing ihram</h3></span>
+        <span class="step-toggle-left"><span class="step-num">5</span><h3>Halq or Taqsir - closing ihram</h3></span>
         <span class="plus">+</span>
       </button>
       <div class="step-body" id="s5">
         <div class="step-body-inner">
-          <p class="intro">Men shave the head completely (halq) or trim evenly all over (taqsir); the Prophet ﷺ prayed for those who shave three times and for those who trim once — shaving is the more complete option for men. Women cut roughly a fingertip's length from a gathered lock of hair. Once done, ihram restrictions end and your Umrah is complete — no fixed du'a is prescribed for this step itself.</p>
-          <div class="note-box"><strong>What about Tawaf al-Wada' (the farewell tawaf)?</strong> It's obligatory before leaving Makkah after Hajj, but for Umrah alone most scholars consider it recommended rather than required — Umrah's own rites end at halq or taqsir. Many people still perform it as a graceful way to say goodbye to the Ka'bah before travelling home; skipping it after Umrah isn't missing a pillar.</div>
-          <div class="note-box"><strong>A note on authenticity.</strong> Every Arabic text above comes from the Qur'an or from hadith in Sahih al-Bukhari, Sahih Muslim, Sunan Abu Dawud or Sunan Ibn Majah, referenced beside each one. Where scholars differ on wording or where no fixed text exists, that's noted rather than papered over. This page is a study companion, not a fatwa — for rulings on your specific situation, ask a qualified local scholar.</div>
+          <p class="intro">Men shave the head completely (halq) or trim evenly all over (taqsir); the Prophet ﷺ prayed for those who shave three times and for those who trim once - shaving is the more complete option for men. Women cut roughly a fingertip's length from a gathered lock of hair. Once done, ihram restrictions end and your Umrah is complete - no fixed du'a is prescribed for this step itself.</p>
+          <div class="note-box"><strong>What about Tawaf al-Wada' (the farewell tawaf)?</strong> It's obligatory before leaving Makkah after Hajj, but for Umrah alone most scholars consider it recommended rather than required - Umrah's own rites end at halq or taqsir. Many people still perform it as a graceful way to say goodbye to the Ka'bah before travelling home; skipping it after Umrah isn't missing a pillar.</div>
+          <div class="note-box"><strong>A note on authenticity.</strong> Every Arabic text above comes from the Qur'an or from hadith in Sahih al-Bukhari, Sahih Muslim, Sunan Abu Dawud or Sunan Ibn Majah, referenced beside each one. Where scholars differ on wording or where no fixed text exists, that's noted rather than papered over. This page is a study companion, not a fatwa - for rulings on your specific situation, ask a qualified local scholar.</div>
         </div>
       </div>
     </div>
@@ -1142,7 +1247,7 @@
       </button>
       <div class="step-body" id="s6">
         <div class="step-body-inner">
-          <p class="intro">These aren't part of the four pillars above, but they're some of the most-read du'as around an Umrah trip — when you set out, when you first reach Madinah, and when you stand before the Prophet's ﷺ grave.</p>
+          <p class="intro">These aren't part of the four pillars above, but they're some of the most-read du'as around an Umrah trip - when you set out, when you first reach Madinah, and when you stand before the Prophet's ﷺ grave.</p>
 
           <div class="dua-block">
             <div class="dua-head">
@@ -1153,8 +1258,8 @@
             </div>
             <p class="arabic" id="safar-ar" dir="rtl" lang="ar">اللَّهُ أَكْبَرُ اللَّهُ أَكْبَرُ اللَّهُ أَكْبَرُ، سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ، اللَّهُمَّ إِنَّا نَسْأَلُكَ فِي سَفَرِنَا هَذَا الْبِرَّ وَالتَّقْوَى وَمِنَ الْعَمَلِ مَا تَرْضَى</p>
             <p class="translit">Allāhu akbar, Allāhu akbar, Allāhu akbar. Subḥānal-ladhī sakhkhara lanā hādhā wa mā kunnā lahu muqrinīn, wa innā ilā rabbinā lamunqalibūn. Allāhumma innā nas'aluka fī safarinā hādhal-birra wat-taqwā, wa minal-'amali mā tarḍā</p>
-            <p class="translation" id="safar-en">Allah is the Greatest, three times. Glory to the One who made this possible for us — we could not have done it ourselves — and to our Lord we shall return. O Allah, we ask You for righteousness and piety on this journey, and for deeds that please You.</p>
-            <p class="ref">Sahih Muslim, narrated by Ibn Umar — said whenever mounting transport to travel, including on the way to the airport.</p>
+            <p class="translation" id="safar-en">Allah is the Greatest, three times. Glory to the One who made this possible for us - we could not have done it ourselves - and to our Lord we shall return. O Allah, we ask You for righteousness and piety on this journey, and for deeds that please You.</p>
+            <p class="ref">Sahih Muslim, narrated by Ibn Umar - said whenever mounting transport to travel, including on the way to the airport.</p>
           </div>
 
           <div class="dua-block">
@@ -1166,8 +1271,8 @@
             </div>
             <p class="arabic" id="town-ar" dir="rtl" lang="ar">اللَّهُمَّ رَبَّ السَّمَاوَاتِ السَّبْعِ وَمَا أَظْلَلْنَ، وَرَبَّ الْأَرَضِينَ السَّبْعِ وَمَا أَقْلَلْنَ، أَسْأَلُكَ خَيْرَ هَذِهِ الْقَرْيَةِ وَخَيْرَ أَهْلِهَا، وَأَعُوذُ بِكَ مِنْ شَرِّهَا وَشَرِّ أَهْلِهَا</p>
             <p class="translit">Allāhumma rabbas-samāwātis-sab'i wa mā aẓlalna, wa rabbal-araḍīnas-sab'i wa mā aqlalna, as'aluka khayra hādhihil-qaryati wa khayra ahlihā, wa a'ūdhu bika min sharrihā wa sharri ahlihā</p>
-            <p class="translation" id="town-en">O Allah, Lord of the seven heavens and what they shade, and Lord of the seven earths and what they carry — I ask You for the good of this town and the good of its people, and I seek refuge in You from its evil and the evil of its people.</p>
-            <p class="ref">Sunan al-Nasa'i, graded hasan by several scholars — recited entering any town, and often said arriving in Madinah specifically.</p>
+            <p class="translation" id="town-en">O Allah, Lord of the seven heavens and what they shade, and Lord of the seven earths and what they carry - I ask You for the good of this town and the good of its people, and I seek refuge in You from its evil and the evil of its people.</p>
+            <p class="ref">Sunan al-Nasa'i, graded hasan by several scholars - recited entering any town, and often said arriving in Madinah specifically.</p>
           </div>
 
           <div class="dua-block">
@@ -1180,7 +1285,7 @@
             <p class="arabic" id="salam-ar" dir="rtl" lang="ar">السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ</p>
             <p class="translit">As-salāmu 'alayka ayyuhan-nabiyyu wa raḥmatullāhi wa barakātuh</p>
             <p class="translation" id="salam-en">Peace be upon you, O Prophet, and the mercy of Allah and His blessings.</p>
-            <p class="ref">The same greeting said in every prayer's tashahhud (Sahih al-Bukhari &amp; Sahih Muslim) — customarily repeated quietly, facing the grave, without touching or pressing against the grille.</p>
+            <p class="ref">The same greeting said in every prayer's tashahhud (Sahih al-Bukhari &amp; Sahih Muslim) - customarily repeated quietly, facing the grave, without touching or pressing against the grille.</p>
           </div>
 
           <div class="dua-block">
@@ -1193,7 +1298,7 @@
             <p class="arabic" id="multazam-ar" dir="rtl" lang="ar">اللَّهُمَّ يَا رَبَّ الْبَيْتِ الْعَتِيقِ أَعْتِقْ رِقَابَنَا وَرِقَابَ آبَائِنَا وَأُمَّهَاتِنَا وَإِخْوَانِنَا وَأَوْلَادِنَا مِنَ النَّارِ</p>
             <p class="translit">Allāhumma yā rabbal-baytil-'atīq, a'tiq riqābanā wa riqāba ābā'inā wa ummahātinā wa ikhwāninā wa awlādinā minan-nār</p>
             <p class="translation" id="multazam-en">O Allah, Lord of the Ancient House, free our necks and the necks of our parents, siblings and children from the Fire.</p>
-            <p class="ref">Widely recited at the Multazam, though its chain is considered weak by several hadith scholars — treat it as a heartfelt personal supplication rather than a verified prophetic text, and feel free to make du'a here in your own words instead.</p>
+            <p class="ref">Widely recited at the Multazam, though its chain is considered weak by several hadith scholars - treat it as a heartfelt personal supplication rather than a verified prophetic text, and feel free to make du'a here in your own words instead.</p>
           </div>
         </div>
       </div>
@@ -1208,7 +1313,7 @@
     <div class="section-head reveal">
       <div class="kicker-ar">الصدقة</div>
       <h2>Making the most of sadaqah on this trip</h2>
-      <p class="desc">Charity is rewarded everywhere, but many scholars hold that good deeds carry extra weight in the two Harams — reason enough for sadaqah to be a deliberate part of the trip, not an afterthought. The Prophet ﷺ said, <em>"Charity does not decrease wealth"</em> (Sahih Muslim), and <em>"Save yourself from the Fire even with half a date given in charity"</em> (Sahih al-Bukhari &amp; Sahih Muslim).</p>
+      <p class="desc">Charity is rewarded everywhere, but many scholars hold that good deeds carry extra weight in the two Harams - reason enough for sadaqah to be a deliberate part of the trip, not an afterthought. The Prophet ﷺ said, <em>"Charity does not decrease wealth"</em> (Sahih Muslim), and <em>"Save yourself from the Fire even with half a date given in charity"</em> (Sahih al-Bukhari &amp; Sahih Muslim).</p>
     </div>
 
     <div class="grid-3">
@@ -1217,8 +1322,8 @@
         <h3>Set a sadaqah budget</h3>
         <ul>
           <li>Decide a fixed amount before you travel, so giving stays deliberate rather than reactive to whoever you meet</li>
-          <li>Settle any outstanding debts and your zakat first — sadaqah is separate from, not a substitute for, an obligation already due</li>
-          <li>Consider giving on behalf of parents or family who've passed — a common and moving practice among pilgrims</li>
+          <li>Settle any outstanding debts and your zakat first - sadaqah is separate from, not a substitute for, an obligation already due</li>
+          <li>Consider giving on behalf of parents or family who've passed - a common and moving practice among pilgrims</li>
         </ul>
       </div>
       <div class="panel">
@@ -1226,7 +1331,7 @@
         <h3>Feed someone nearby</h3>
         <ul>
           <li>Buying dates, Zamzam, or a meal for those around you at iftar or after prayer is one of the most loved local customs</li>
-          <li>Even a small, sincere gift counts — the "half a date" hadith above is often read as reassurance that the amount matters less than the sincerity</li>
+          <li>Even a small, sincere gift counts - the "half a date" hadith above is often read as reassurance that the amount matters less than the sincerity</li>
           <li>Give at organized points (mosque courtyards, distribution tables) rather than pressing through crowds at the gates or mataf</li>
         </ul>
       </div>
@@ -1234,7 +1339,7 @@
         <span class="tag">Lasting reward</span>
         <h3>Make it ongoing (sadaqah jariyah)</h3>
         <ul>
-          <li>Sponsoring something that keeps benefiting people — a Zamzam cooler, copies of the Qur'an, a water point — keeps earning reward after you've gone home</li>
+          <li>Sponsoring something that keeps benefiting people - a Zamzam cooler, copies of the Qur'an, a water point - keeps earning reward after you've gone home</li>
           <li><em>"When a person dies, his deeds end except three: ongoing charity, beneficial knowledge, or a righteous child who prays for him"</em> (Sahih Muslim)</li>
           <li>Many mosque-affiliated waqf offices accept exactly this kind of dedicated giving</li>
         </ul>
@@ -1242,7 +1347,7 @@
     </div>
 
     <div class="note-box">
-      <strong>Give through channels you can trust.</strong> Around any major place of worship, some of the people asking for money are in genuine need and some are part of organised begging operations that don't reach the people they claim to. Donation boxes inside and around both mosques, the mosque's own waqf offices, and Saudi Arabia's national giving platform, Ehsan, are reliable ways to make sure sadaqah actually reaches its cause. Trust your own judgment on individual cases — this isn't a reason to withhold kindness, just a reason to also give deliberately through verified channels.
+      <strong>Give through channels you can trust.</strong> Around any major place of worship, some of the people asking for money are in genuine need and some are part of organised begging operations that don't reach the people they claim to. Donation boxes inside and around both mosques, the mosque's own waqf offices, and Saudi Arabia's national giving platform, Ehsan, are reliable ways to make sure sadaqah actually reaches its cause. Trust your own judgment on individual cases - this isn't a reason to withhold kindness, just a reason to also give deliberately through verified channels.
     </div>
   </div>
 </section>
@@ -1263,7 +1368,7 @@
     <div class="place-grid active" id="grid-makkah">
       <div class="place-card">
         <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="6" y="6" width="12" height="12"/><path d="M6 6l6 6 6-6"/></svg></div>
-        <div><h4>Masjid al-Haram</h4><p>The Grand Mosque surrounding the Ka'bah — the direction every Muslim faces in prayer, and the heart of both Umrah and Hajj.</p></div>
+        <div><h4>Masjid al-Haram</h4><p>The Grand Mosque surrounding the Ka'bah - the direction every Muslim faces in prayer, and the heart of both Umrah and Hajj.</p></div>
       </div>
       <div class="place-card">
         <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M3 19l6-12 4 7 3-5 5 10z"/></svg></div>
@@ -1275,7 +1380,7 @@
       </div>
       <div class="place-card">
         <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 20h16M8 20V10l4-4 4 4v10"/></svg></div>
-        <div><h4>Mina</h4><p>The tented valley where Hajj pilgrims stay for several days — a short distance from the Haram, quiet outside the Hajj season.</p></div>
+        <div><h4>Mina</h4><p>The tented valley where Hajj pilgrims stay for several days - a short distance from the Haram, quiet outside the Hajj season.</p></div>
       </div>
       <div class="place-card">
         <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><path d="M12 4v2M12 18v2M4 12h2M18 12h2"/></svg></div>
@@ -1294,11 +1399,11 @@
       </div>
       <div class="place-card">
         <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 3l2 5h5l-4 3.5L16.5 17 12 13.8 7.5 17 9 11.5 5 8h5z"/></svg></div>
-        <div><h4>Al-Rawdah Al-Sharifah</h4><p>The garden of Paradise on earth, described in hadith — the space between the Prophet's ﷺ pulpit and his house, now permit-only.</p></div>
+        <div><h4>Al-Rawdah Al-Sharifah</h4><p>The garden of Paradise on earth, described in hadith - the space between the Prophet's ﷺ pulpit and his house, now permit-only.</p></div>
       </div>
       <div class="place-card">
         <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 5v14M15 5v14"/></svg></div>
-        <div><h4>Quba Mosque</h4><p>The first mosque in Islamic history, founded by the Prophet ﷺ on arrival in Madinah — praying two rak'ahs here carries the reward of an Umrah, per hadith.</p></div>
+        <div><h4>Quba Mosque</h4><p>The first mosque in Islamic history, founded by the Prophet ﷺ on arrival in Madinah - praying two rak'ahs here carries the reward of an Umrah, per hadith.</p></div>
       </div>
       <div class="place-card">
         <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 20h16M6 20V8l3 2 3-4 3 4 3-2v12"/></svg></div>
@@ -1332,7 +1437,7 @@
     <div class="place-grid active" id="grid-shop-makkah">
       <div class="place-card">
         <div class="brand-badge" style="background:linear-gradient(135deg,#144C46,#0E2A28);">ABM</div>
-        <div><h4>Abraj Al Bait (Clock Tower) Mall</h4><p>A vast mall directly beside Masjid al-Haram — prayer wear, abayas, perfumes, dates and souvenirs across several floors, with mosque views from the upper levels.</p></div>
+        <div><h4>Abraj Al Bait (Clock Tower) Mall</h4><p>A vast mall directly beside Masjid al-Haram - prayer wear, abayas, perfumes, dates and souvenirs across several floors, with mosque views from the upper levels.</p></div>
       </div>
       <div class="place-card">
         <div class="brand-badge" style="background:linear-gradient(135deg,#B7862C,#8a611c);">SZ</div>
@@ -1344,26 +1449,26 @@
       </div>
       <div class="place-card">
         <div class="brand-badge" style="background:linear-gradient(135deg,#8a2f1f,#5c1f14);">ALB</div>
-        <div><h4>Al Baik</h4><p>The fried-chicken chain pilgrims from around the world talk about — queues are part of the experience, especially near Haram branches after Isha.</p></div>
+        <div><h4>Al Baik</h4><p>The fried-chicken chain pilgrims from around the world talk about - queues are part of the experience, especially near Haram branches after Isha.</p></div>
       </div>
       <div class="place-card">
         <div class="brand-badge" style="background:linear-gradient(135deg,#6b4a1e,#3d2a10);">M&amp;K</div>
-        <div><h4>Mandi &amp; Kabsa houses</h4><p>Family-style rice-and-meat restaurants around Ajyad and Ibrahim al-Khalil streets — generous plates meant for sharing.</p></div>
+        <div><h4>Mandi &amp; Kabsa houses</h4><p>Family-style rice-and-meat restaurants around Ajyad and Ibrahim al-Khalil streets - generous plates meant for sharing.</p></div>
       </div>
       <div class="place-card">
         <div class="brand-badge" style="background:linear-gradient(135deg,#0E2A28,#3FA79A);">CT</div>
-        <div><h4>Clock Tower rooftop cafés</h4><p>Coffee and light meals with a direct view down onto the Haram and the Ka'bah — worth the elevator queue at least once.</p></div>
+        <div><h4>Clock Tower rooftop cafés</h4><p>Coffee and light meals with a direct view down onto the Haram and the Ka'bah - worth the elevator queue at least once.</p></div>
       </div>
     </div>
 
     <div class="place-grid" id="grid-shop-madinah">
       <div class="place-card">
         <div class="brand-badge" style="background:linear-gradient(135deg,#144C46,#0E2A28);">ANM</div>
-        <div><h4>Al Noor Mall</h4><p>Directly facing Masjid an-Nabawi's King Fahd Gate — a straightforward stop for clothing, perfume and gifts between prayers.</p></div>
+        <div><h4>Al Noor Mall</h4><p>Directly facing Masjid an-Nabawi's King Fahd Gate - a straightforward stop for clothing, perfume and gifts between prayers.</p></div>
       </div>
       <div class="place-card">
         <div class="brand-badge" style="background:linear-gradient(135deg,#B7862C,#8a611c);">DTS</div>
-        <div><h4>Madinah date markets</h4><p>Stalls and shops around the mosque and near Quba selling Ajwa and other Madinah dates by the box — a favourite gift to carry home.</p></div>
+        <div><h4>Madinah date markets</h4><p>Stalls and shops around the mosque and near Quba selling Ajwa and other Madinah dates by the box - a favourite gift to carry home.</p></div>
       </div>
       <div class="place-card">
         <div class="brand-badge" style="background:linear-gradient(135deg,#3FA79A,#144C46);">T&amp;B</div>
@@ -1375,11 +1480,11 @@
       </div>
       <div class="place-card">
         <div class="brand-badge" style="background:linear-gradient(135deg,#6b4a1e,#3d2a10);">MM</div>
-        <div><h4>Madani Mandi restaurants</h4><p>Local mandi and mutabbaq maqluba spots around the mosque's southern side — hearty, affordable, and popular after Fajr and Isha.</p></div>
+        <div><h4>Madani Mandi restaurants</h4><p>Local mandi and mutabbaq maqluba spots around the mosque's southern side - hearty, affordable, and popular after Fajr and Isha.</p></div>
       </div>
       <div class="place-card">
         <div class="brand-badge" style="background:linear-gradient(135deg,#0E2A28,#3FA79A);">CH</div>
-        <div><h4>Cafés along Al Haram Street</h4><p>Quiet cafés facing the mosque's courtyards — a good place to sit with tea between the five daily prayers.</p></div>
+        <div><h4>Cafés along Al Haram Street</h4><p>Quiet cafés facing the mosque's courtyards - a good place to sit with tea between the five daily prayers.</p></div>
       </div>
     </div>
   </div>
@@ -1412,7 +1517,7 @@
     <div class="section-head reveal">
       <div class="kicker-ar">الرعاية الصحية</div>
       <h2>Medical care and emergencies</h2>
-      <p class="desc">Every Umrah visa issued from outside Saudi Arabia comes with mandatory health insurance already built into the visa fee — here's what it covers, where to get treated, and who to call.</p>
+      <p class="desc">Every Umrah visa issued from outside Saudi Arabia comes with mandatory health insurance already built into the visa fee - here's what it covers, where to get treated, and who to call.</p>
     </div>
 
     <div class="grid-2">
@@ -1434,10 +1539,10 @@
         <span class="tag">Using it</span>
         <h3>How to access care</h3>
         <ul>
-          <li>Government hospitals and affiliated private facilities both accept it — bring your passport and visa/Nusuk details</li>
+          <li>Government hospitals and affiliated private facilities both accept it - bring your passport and visa/Nusuk details</li>
           <li>Verify your policy anytime at <strong>riaya-ksa.com</strong>, the Comprehensive Insurance Programme for the Guests of the Merciful</li>
           <li>Policy helpline: <strong>800 440 0008</strong> (within Saudi Arabia) or <strong>+966 13 812 9700</strong> (international)</li>
-          <li>For anything the policy doesn't cover — routine consultations, non-emergency specialist visits — private hospitals are an option at your own cost</li>
+          <li>For anything the policy doesn't cover - routine consultations, non-emergency specialist visits - private hospitals are an option at your own cost</li>
         </ul>
       </div>
     </div>
@@ -1447,19 +1552,19 @@
         <span class="tag">Near Masjid al-Haram</span>
         <h3>Makkah</h3>
         <ul>
-          <li><strong>Ajyad Emergency Hospital</strong> — 24-hour emergency care, closest to the Haram itself</li>
-          <li><strong>Al-Haram Emergency Hospital</strong> — just north of the mosque, opposite King Abdullah Gate</li>
-          <li><strong>Al-Noor Specialist Hospital</strong> — around 3.5 km out, for specialist and non-emergency care</li>
-          <li><strong>King Abdullah Medical City</strong> — the region's larger tertiary hospital</li>
+          <li><strong>Ajyad Emergency Hospital</strong> - 24-hour emergency care, closest to the Haram itself</li>
+          <li><strong>Al-Haram Emergency Hospital</strong> - just north of the mosque, opposite King Abdullah Gate</li>
+          <li><strong>Al-Noor Specialist Hospital</strong> - around 3.5 km out, for specialist and non-emergency care</li>
+          <li><strong>King Abdullah Medical City</strong> - the region's larger tertiary hospital</li>
         </ul>
       </div>
       <div class="panel">
         <span class="tag">Near Masjid an-Nabawi</span>
         <h3>Madinah</h3>
         <ul>
-          <li>First-aid points sit right in the mosque's own courtyards, near the Bab Jibril, Al-Safiyyah, Bab As-Salam and Al-Majidi gates — the fastest option for anything minor</li>
-          <li><strong>King Fahad Hospital</strong> — the region's largest and most comprehensive facility</li>
-          <li><strong>Al-Ansar Hospital</strong> — a further major government hospital serving the city</li>
+          <li>First-aid points sit right in the mosque's own courtyards, near the Bab Jibril, Al-Safiyyah, Bab As-Salam and Al-Majidi gates - the fastest option for anything minor</li>
+          <li><strong>King Fahad Hospital</strong> - the region's largest and most comprehensive facility</li>
+          <li><strong>Al-Ansar Hospital</strong> - a further major government hospital serving the city</li>
         </ul>
       </div>
     </div>
@@ -1478,7 +1583,7 @@
     </div>
 
     <div class="note-box">
-      <strong>A practical habit:</strong> save a screenshot of your Nusuk permit and insurance details, keep your passport on you, and have your hotel's address written in Arabic — exactly as suggested for transport, this is the detail that speeds up help the most if something goes wrong.
+      <strong>A practical habit:</strong> save a screenshot of your Nusuk permit and insurance details, keep your passport on you, and have your hotel's address written in Arabic - exactly as suggested for transport, this is the detail that speeds up help the most if something goes wrong.
     </div>
   </div>
 </section>
@@ -1488,8 +1593,8 @@
   <div class="container">
     <div class="section-head reveal">
       <div class="kicker-ar">ملاحظاتكم</div>
-      <h2>Help us make this site better</h2>
-      <p class="desc">Missing a du'a, found an outdated rule, or wish there was a section on something else? Tell us what would make your Umrah journey smoother — this goes straight to the person building the site.</p>
+      <h2>Help us make this guide better</h2>
+      <p class="desc">Missing a du'a, found an outdated rule, or wish there was a section on something else? Tell us what would make your Umrah journey smoother - this goes straight to the person building the site.</p>
     </div>
 
     <form id="feedbackForm" class="feedback-form">
@@ -1521,7 +1626,7 @@
   <div class="container foot-grid">
     <div>
       <h4>UmrahNow</h4>
-      <p>A study companion for Umrah — the rites, their wording in Arabic and English, current Saudi entry rules, what to pack, and the geography of both holy cities. Built for orientation and reflection, not as a substitute for a qualified teacher.</p>
+      <p>A study companion for Umrah - the rites, their wording in Arabic and English, current Saudi entry rules, what to pack, and the geography of both holy cities. Built for orientation and reflection, not as a substitute for a qualified teacher.</p>
     </div>
     <div>
       <h4>Sources</h4>
@@ -1556,7 +1661,7 @@
   async function shareSite() {
     const shareData = {
       title: document.title,
-      text: "UmrahNow — rites, du'as in Arabic and English with audio, current regulations, Nusuk, Rawdah booking, and the geography of Makkah and Madinah.",
+      text: "UmrahNow - rites, du'as in Arabic and English with audio, current regulations, Nusuk, Rawdah booking, and the geography of Makkah and Madinah.",
       url: window.location.href
     };
     if (navigator.share) {
@@ -1564,7 +1669,7 @@
     } else if (navigator.clipboard) {
       try {
         await navigator.clipboard.writeText(window.location.href);
-        alert('Link copied — share it with anyone.');
+        alert('Link copied - share it with anyone.');
       } catch (e) {
         window.prompt('Copy this link to share:', window.location.href);
       }
@@ -1582,9 +1687,9 @@
     });
   });
 
-  // ---- Speech (Arabic only) — pick the most natural-sounding voice available,
+  // ---- Speech (Arabic only) - pick the most natural-sounding voice available,
   // then attempt playback first and only flag a genuine failure, quietly, on the page
-  // itself. (alert() is intentionally avoided here — many embedded/preview browser
+  // itself. (alert() is intentionally avoided here - many embedded/preview browser
   // contexts silently block it, which made real failures look like nothing happened.)
   function showAudioNotice(msg) {
     let toast = document.getElementById('audioToast');
@@ -1618,11 +1723,11 @@
       const el = document.getElementById(targetId);
       if (!el) return;
       if (!('speechSynthesis' in window)) {
-        showAudioNotice("This browser can't play audio aloud — the text above is still accurate to read.");
+        showAudioNotice("This browser can't play audio aloud - the text above is still accurate to read.");
         return;
       }
 
-      // Re-read the voice list fresh at click time — some browsers only populate
+      // Re-read the voice list fresh at click time - some browsers only populate
       // it lazily, so a value cached at page-load can be wrong by the time you click.
       const voice = pickBestArabicVoice(window.speechSynthesis.getVoices());
 
@@ -1652,23 +1757,23 @@
       utter.onerror = () => {
         btn.classList.remove('playing');
         clearInterval(resumeTimer);
-        showAudioNotice("Couldn't play Arabic audio here — this device may not have an Arabic voice installed. The text above is still accurate to read.");
+        showAudioNotice("Couldn't play Arabic audio here - this device may not have an Arabic voice installed. The text above is still accurate to read.");
       };
 
       window.speechSynthesis.speak(utter);
 
-      // A handful of browsers fail silently — no error, no start — when a language
+      // A handful of browsers fail silently - no error, no start - when a language
       // truly isn't supported. Catch that case without blocking the ones that work.
       setTimeout(() => {
         if (!started && !window.speechSynthesis.speaking) {
           btn.classList.remove('playing');
-          showAudioNotice("No Arabic voice found on this device — the text above is still accurate to read.");
+          showAudioNotice("No Arabic voice found on this device - the text above is still accurate to read.");
         }
       }, 700);
     });
   });
 
-  // ---- City tabs (places, shopping) — scoped per section so they don't cross-affect ----
+  // ---- City tabs (places, shopping) - scoped per section so they don't cross-affect ----
   document.querySelectorAll('.tabbed-block').forEach(block => {
     const tabs = block.querySelectorAll('.city-tab');
     tabs.forEach(tab => {
@@ -1798,7 +1903,7 @@
         </div>
         <div style="font-size:12px;letter-spacing:0.06em;color:#B7862C;margin-bottom:28px;text-transform:uppercase;">Travel Essentials Checklist</div>
         ${sections}
-        <div style="margin-top:30px;font-size:11px;color:#8a8578;border-top:1px solid #DED4B8;padding-top:12px;">Generated from UmrahNow — a companion for the Umrah journey.</div>
+        <div style="margin-top:30px;font-size:11px;color:#8a8578;border-top:1px solid #DED4B8;padding-top:12px;">Generated from UmrahNow - a companion for the Umrah journey.</div>
       </div>`;
   }
 
@@ -1817,7 +1922,7 @@
       link.click();
       document.body.removeChild(wrapper);
     }).catch(() => {
-      alert("Couldn't generate the image in this browser — try the Word download instead.");
+      alert("Couldn't generate the image in this browser - try the Word download instead.");
       document.body.removeChild(wrapper);
     });
   });
@@ -1832,16 +1937,13 @@
     link.click();
   });
 
-  // ---- Feedback form (sent via FormSubmit, no email address shown on the page) ----
-  document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const submitBtn = document.getElementById('fbSubmit');
-    const status = document.getElementById('fbStatus');
-    status.classList.remove('error');
-    status.textContent = 'Sending…';
-    submitBtn.disabled = true;
-
+  // ---- Shared sender for both the feedback form and the packages "notify me"
+  // form - both go via FormSubmit, no email address shown on the page ----
+  async function sendFormViaEmail(form, statusEl, successMsg) {
+    statusEl.classList.remove('error');
+    statusEl.textContent = 'Sending…';
+    const btn = form.querySelector('button[type="submit"]');
+    if (btn) btn.disabled = true;
     try {
       const res = await fetch('https://formsubmit.co/ajax/rashrockz93@gmail.com', {
         method: 'POST',
@@ -1849,18 +1951,28 @@
         body: new FormData(form)
       });
       if (res.ok) {
-        status.textContent = 'Thank you — your feedback has been sent.';
+        statusEl.textContent = successMsg;
         form.reset();
       } else {
-        status.classList.add('error');
-        status.textContent = "Something went wrong sending that. Please try again in a moment.";
+        statusEl.classList.add('error');
+        statusEl.textContent = "Something went wrong sending that. Please try again in a moment.";
       }
     } catch (err) {
-      status.classList.add('error');
-      status.textContent = "Something went wrong sending that. Please try again in a moment.";
+      statusEl.classList.add('error');
+      statusEl.textContent = "Something went wrong sending that. Please try again in a moment.";
     } finally {
-      submitBtn.disabled = false;
+      if (btn) btn.disabled = false;
     }
+  }
+
+  document.getElementById('feedbackForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    sendFormViaEmail(e.target, document.getElementById('fbStatus'), 'Thank you - your feedback has been sent.');
+  });
+
+  document.getElementById('notifyForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    sendFormViaEmail(e.target, document.getElementById('notifyStatus'), "You're on the list - we'll let you know when this launches.");
   });
 </script>
 </body>
