@@ -85,6 +85,15 @@
     display:flex;flex-direction:column;justify-content:center;gap:5px;
     background:none;border:none;padding:8px;
   }
+  .ihram-header-badge{
+    display:flex;align-items:center;gap:6px;background:rgba(183,134,44,0.15);
+    border:1px solid var(--gold);color:var(--gold-soft);text-decoration:none;
+    font-size:0.82rem;font-weight:600;padding:7px 12px;border-radius:20px;
+    white-space:nowrap;animation:ihramBadgePulse 2.4s ease-in-out infinite;
+  }
+  .ihram-header-badge:hover{background:rgba(183,134,44,0.28);}
+  @keyframes ihramBadgePulse{0%,100%{box-shadow:0 0 0 0 rgba(183,134,44,0.35);}50%{box-shadow:0 0 0 6px rgba(183,134,44,0);}}
+  @media(max-width:520px){.ihram-header-badge span.badge-label-full{display:none;}}
   .share-btn{
     background:none;border:1px solid rgba(231,199,126,0.4);border-radius:50%;
     width:40px;height:40px;display:flex;align-items:center;justify-content:center;
@@ -102,7 +111,7 @@
     color:var(--ivory);text-decoration:none;padding:16px 24px;
     border-bottom:1px solid rgba(255,255,255,0.06);font-size:1.05rem;
   }
-  @media(min-width:1320px){
+  @media(min-width:1420px){
     nav.links{display:flex;}
     .burger{display:none;}
   }
@@ -483,7 +492,21 @@
   .ihram-modal h3{font-size:1.25rem;margin-bottom:14px;padding-right:20px;}
   .ihram-modal p{color:#3f3f38;margin-bottom:14px;line-height:1.6;}
   .ihram-modal ul.ihram-feature-list{list-style:none;margin:0 0 16px;padding:0;}
-  .ihram-modal ul.ihram-feature-list li{margin-bottom:8px;color:#3f3f38;}
+  .ihram-modal ul.ihram-restriction-panel{display:none;}
+  .ihram-modal ul.ihram-restriction-panel.active{display:block;}
+  .ihram-modal ul.ihram-feature-list li{
+    margin-bottom:10px;color:#3f3f38;padding-left:22px;position:relative;line-height:1.5;
+  }
+  .ihram-modal ul.ihram-feature-list li::before{
+    content:"";position:absolute;left:0;top:7px;width:8px;height:8px;
+    border-radius:50%;background:var(--gold);
+  }
+  .ihram-restriction-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+  .ihram-restriction-tab{
+    background:var(--ivory-dim);border:1px solid var(--line);color:#4a4a44;
+    padding:8px 14px;border-radius:20px;font-size:0.88rem;font-weight:600;
+  }
+  .ihram-restriction-tab.active{background:var(--night);color:var(--gold-soft);border-color:var(--night);}
   .ihram-modal .modal-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;}
   .ihram-modal .modal-actions .btn{flex:1;min-width:150px;text-align:center;}
   .ihram-modal .modal-actions .btn-text{
@@ -536,6 +559,16 @@
     text-decoration:underline;padding:0;cursor:pointer;
   }
   .ihram-disclaimer{font-size:0.82rem;color:#8a8578;border-top:1px dashed var(--line);padding-top:14px;margin-top:14px;}
+
+  .ihram-reminder-visual{display:flex;justify-content:center;margin-bottom:10px;}
+  .ihram-reminder-icon{
+    width:72px;height:72px;border-radius:50%;
+    background:radial-gradient(circle, rgba(183,134,44,0.18), transparent 70%);
+    display:flex;align-items:center;justify-content:center;
+    animation:ihramReminderPulse 2.2s ease-in-out infinite;
+  }
+  .ihram-reminder-icon svg{width:46px;height:46px;}
+  @keyframes ihramReminderPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.08);}}
 
   .audio-toast{
     position:fixed;left:50%;bottom:26px;transform:translate(-50%,16px);
@@ -606,12 +639,17 @@
     <nav class="links">
       <a href="#regulations">Plan Your Trip</a>
       <a href="#journey">Journey &amp; Du'as</a>
+      <a href="#ihram-mode">🕋 Ihram Mode</a>
       <a href="#places">Places &amp; Shopping</a>
       <a href="#map">Map</a>
       <a href="#medical">Medical &amp; Safety</a>
       <a href="#feedback">Feedback</a>
     </nav>
     <div style="display:flex;align-items:center;gap:6px;">
+      <!-- Shown only while Ihram Mode is active (see ihramSyncHeaderBadge in
+           the script) — a way to notice/return to it without hunting for the
+           Journey section again. -->
+      <a href="#ihram-mode" id="ihramHeaderBadge" class="ihram-header-badge" style="display:none;">🕋 <span class="badge-label-full">Ihram Mode </span>Active</a>
       <button class="share-btn" id="shareBtn" aria-label="Share this site" title="Share">
         <svg viewBox="0 0 24 24" fill="none" stroke="#E7C77E" stroke-width="1.8"><circle cx="18" cy="5" r="2.4"/><circle cx="6" cy="12" r="2.4"/><circle cx="18" cy="19" r="2.4"/><path d="M8.1 10.7l7.8-4.4M8.1 13.3l7.8 4.4"/></svg>
       </button>
@@ -631,6 +669,7 @@
     <a href="#forex">Money &amp; Foreign Exchange</a>
     <a href="#transport">Getting Around</a>
     <a href="#journey">The Journey</a>
+    <a href="#ihram-mode">🕋 Ihram Mode</a>
     <a href="#duas">Du'as</a>
     <a href="#sadaqah">Sadaqah</a>
     <a href="#places">Famous Places</a>
@@ -821,7 +860,9 @@
           <p class="intro">Perform ghusl — a full purifying bath, the Prophet's ﷺ own practice before entering ihram — then wear the ihram garments (unstitched white cloths for men; plain, modest clothing for women — the face and hands remain uncovered), make your intention, and begin reciting the Talbiyah, which you repeat often until you start Tawaf.</p>
 
           <!-- Ihram Mode widget: JS swaps this between the activation button
-               and the active dashboard. See renderIhramWidget() in the script. -->
+               and the active dashboard. See renderIhramWidget() in the script.
+               The id="ihram-mode" anchor lets the nav jump straight here. -->
+          <div id="ihram-mode" style="scroll-margin-top:96px;"></div>
           <div id="ihramModeWidget" class="ihram-widget"></div>
 
           <div class="dua-block">
@@ -1827,7 +1868,7 @@
   <div class="container">
     <div class="section-head reveal">
       <div class="section-icon-row"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v10H8l-4 4z"/></svg></span><div class="kicker-ar">ملاحظاتكم</div></div>
-      <h2>Help us make this site better</h2>
+      <h2>Help us make this guide better</h2>
       <p class="desc">Missing a du'a, found an outdated rule, or wish there was a section on something else? Tell us what would make your Umrah journey smoother — this goes straight to the person building the site.</p>
     </div>
 
@@ -1924,15 +1965,39 @@
   const burger = document.getElementById('burgerBtn');
   const panel = document.getElementById('mobilePanel');
   const packagesTabEl = document.getElementById('packagesTabBtn');
+
+  // The floating "Umrah Packages" button is fixed to the viewport, so it can
+  // visually collide with two things unless we account for them: the open
+  // mobile menu (covering its last links) and the hero's own CTA buttons
+  // (which sit in roughly the same bottom-right area on a phone screen).
+  let packagesTabHiddenByMenu = false;
+  let packagesTabHiddenByHero = true; // hero is what's on screen at page load
+  function updatePackagesTabVisibility() {
+    packagesTabEl.style.display = (packagesTabHiddenByMenu || packagesTabHiddenByHero) ? 'none' : '';
+  }
+
+  const heroEl = document.querySelector('.hero');
+  if (heroEl && 'IntersectionObserver' in window) {
+    new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        packagesTabHiddenByHero = entry.isIntersecting;
+        updatePackagesTabVisibility();
+      });
+    }, { threshold: 0.2 }).observe(heroEl);
+  } else {
+    packagesTabHiddenByHero = false; // no IntersectionObserver support — err on the side of showing it
+    updatePackagesTabVisibility();
+  }
+
   burger.addEventListener('click', () => {
     panel.classList.toggle('open');
-    // The floating packages button is fixed to the viewport, so it would otherwise
-    // sit on top of the mobile menu and cover its last few links.
-    packagesTabEl.style.display = panel.classList.contains('open') ? 'none' : '';
+    packagesTabHiddenByMenu = panel.classList.contains('open');
+    updatePackagesTabVisibility();
   });
   panel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
     panel.classList.remove('open');
-    packagesTabEl.style.display = '';
+    packagesTabHiddenByMenu = false;
+    updatePackagesTabVisibility();
   }));
 
   // ---- Share ----
@@ -2096,82 +2161,96 @@
   document.querySelectorAll('.reveal, .tl-item').forEach(el => { el.classList.add('reveal'); io.observe(el); });
 
   // ---- Leaflet map ----
-  // Each city's first entry is the "base" (the mosque) that distances are measured from.
-  const makkahSites = [
-    { name: "Masjid al-Haram", lat: 21.4225, lng: 39.8262, type: "mosque" },
-    { name: "Masjid Aisha (Miqat at-Tan'eem)", lat: 21.4694, lng: 39.7472, type: "mosque" },
-    { name: "Masjid al-Jinn", lat: 21.4257, lng: 39.8577, type: "mosque" },
-    { name: "Jabal al-Nour (Cave of Hira)", lat: 21.4578, lng: 39.8592, type: "site" },
-    { name: "Jabal Thawr", lat: 21.3833, lng: 39.8333, type: "site" },
-    { name: "Mina", lat: 21.4133, lng: 39.8933, type: "site" },
-    { name: "Mount Arafat", lat: 21.3549, lng: 39.9840, type: "site" },
-    { name: "Muzdalifah", lat: 21.3839, lng: 39.9364, type: "site" }
-  ];
-  const madinahSites = [
-    { name: "Masjid an-Nabawi", lat: 24.4672, lng: 39.6112, type: "mosque" },
-    { name: "Quba Mosque", lat: 24.4392, lng: 39.6172, type: "mosque" },
-    { name: "Masjid al-Qiblatain", lat: 24.4795, lng: 39.5928, type: "mosque" },
-    { name: "Masjid Abu Bakr", lat: 24.4675, lng: 39.6127, type: "mosque" },
-    { name: "Sab'a Masajid (Seven Mosques)", lat: 24.4770, lng: 39.5892, type: "mosque" },
-    { name: "Mount Uhud", lat: 24.5017, lng: 39.6114, type: "site" },
-    { name: "Jannat al-Baqi", lat: 24.4680, lng: 39.6135, type: "site" }
-  ];
+  // Everything below is guarded against Leaflet failing to load (slow network,
+  // blocked CDN, ad-blocker, etc.) — a single third-party map library must
+  // never be able to take down the rest of the page's JavaScript, which is
+  // what an unguarded `L.map(...)` call would do if `L` were undefined.
+  try {
+    if (typeof L === 'undefined') {
+      throw new Error('Leaflet failed to load from the CDN — the map section will show as empty, but the rest of the page still works.');
+    }
 
-  function haversineKm(lat1, lon1, lat2, lon2) {
-    const R = 6371;
-    const dLat = (lat2 - lat1) * Math.PI / 180;
-    const dLon = (lon2 - lon1) * Math.PI / 180;
-    const a = Math.sin(dLat / 2) ** 2 +
-      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) ** 2;
-    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  }
+    // Each city's first entry is the "base" (the mosque) that distances are measured from.
+    const makkahSites = [
+      { name: "Masjid al-Haram", lat: 21.4225, lng: 39.8262, type: "mosque" },
+      { name: "Masjid Aisha (Miqat at-Tan'eem)", lat: 21.4694, lng: 39.7472, type: "mosque" },
+      { name: "Masjid al-Jinn", lat: 21.4257, lng: 39.8577, type: "mosque" },
+      { name: "Jabal al-Nour (Cave of Hira)", lat: 21.4578, lng: 39.8592, type: "site" },
+      { name: "Jabal Thawr", lat: 21.3833, lng: 39.8333, type: "site" },
+      { name: "Mina", lat: 21.4133, lng: 39.8933, type: "site" },
+      { name: "Mount Arafat", lat: 21.3549, lng: 39.9840, type: "site" },
+      { name: "Muzdalifah", lat: 21.3839, lng: 39.9364, type: "site" }
+    ];
+    const madinahSites = [
+      { name: "Masjid an-Nabawi", lat: 24.4672, lng: 39.6112, type: "mosque" },
+      { name: "Quba Mosque", lat: 24.4392, lng: 39.6172, type: "mosque" },
+      { name: "Masjid al-Qiblatain", lat: 24.4795, lng: 39.5928, type: "mosque" },
+      { name: "Masjid Abu Bakr", lat: 24.4675, lng: 39.6127, type: "mosque" },
+      { name: "Sab'a Masajid (Seven Mosques)", lat: 24.4770, lng: 39.5892, type: "mosque" },
+      { name: "Mount Uhud", lat: 24.5017, lng: 39.6114, type: "site" },
+      { name: "Jannat al-Baqi", lat: 24.4680, lng: 39.6135, type: "site" }
+    ];
 
-  const map = L.map('leafletMap', { scrollWheelZoom: false }).setView([21.4225, 39.8262], 12);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; OpenStreetMap contributors',
-    maxZoom: 18
-  }).addTo(map);
+    const haversineKm = (lat1, lon1, lat2, lon2) => {
+      const R = 6371;
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLon = (lon2 - lon1) * Math.PI / 180;
+      const a = Math.sin(dLat / 2) ** 2 +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) ** 2;
+      return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    };
 
-  let markers = [];
-  function loadCity(sites, center, zoom) {
-    markers.forEach(m => map.removeLayer(m));
-    markers = [];
-    const base = sites[0];
-    const distanceList = document.getElementById('distanceList');
-    distanceList.innerHTML = '';
+    const map = L.map('leafletMap', { scrollWheelZoom: false }).setView([21.4225, 39.8262], 12);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors',
+      maxZoom: 18
+    }).addTo(map);
 
-    sites.forEach(s => {
-      const color = s.type === 'mosque' ? '#B7862C' : '#3FA79A';
-      const marker = L.circleMarker([s.lat, s.lng], {
-        radius: 9, color: '#0E2A28', weight: 2, fillColor: color, fillOpacity: 0.9
-      }).addTo(map);
-      marker.bindTooltip(s.name, { permanent: true, direction: 'top', offset: [0, -8], className: 'map-label' });
+    let markers = [];
+    const loadCity = (sites, center, zoom) => {
+      markers.forEach(m => map.removeLayer(m));
+      markers = [];
+      const base = sites[0];
+      const distanceList = document.getElementById('distanceList');
+      distanceList.innerHTML = '';
 
-      const dist = haversineKm(base.lat, base.lng, s.lat, s.lng);
-      const distText = s === base ? 'The Grand Mosque itself' : dist.toFixed(1) + ' km from ' + base.name;
-      marker.bindPopup('<strong>' + s.name + '</strong><br>' + distText);
-      markers.push(marker);
+      sites.forEach(s => {
+        const color = s.type === 'mosque' ? '#B7862C' : '#3FA79A';
+        const marker = L.circleMarker([s.lat, s.lng], {
+          radius: 9, color: '#0E2A28', weight: 2, fillColor: color, fillOpacity: 0.9
+        }).addTo(map);
+        marker.bindTooltip(s.name, { permanent: true, direction: 'top', offset: [0, -8], className: 'map-label' });
 
-      const row = document.createElement('div');
-      row.className = 'distance-row';
-      row.innerHTML = '<span class="d-name">' + s.name + '</span><span class="d-km">' +
-        (s === base ? 'City centre' : dist.toFixed(1) + ' km') + '</span>';
-      distanceList.appendChild(row);
-    });
-    map.setView(center, zoom);
-  }
-  loadCity(makkahSites, [21.42, 39.87], 11);
+        const dist = haversineKm(base.lat, base.lng, s.lat, s.lng);
+        const distText = s === base ? 'The Grand Mosque itself' : dist.toFixed(1) + ' km from ' + base.name;
+        marker.bindPopup('<strong>' + s.name + '</strong><br>' + distText);
+        markers.push(marker);
 
-  document.getElementById('btn-makkah').addEventListener('click', function () {
-    this.classList.add('active');
-    document.getElementById('btn-madinah').classList.remove('active');
+        const row = document.createElement('div');
+        row.className = 'distance-row';
+        row.innerHTML = '<span class="d-name">' + s.name + '</span><span class="d-km">' +
+          (s === base ? 'City centre' : dist.toFixed(1) + ' km') + '</span>';
+        distanceList.appendChild(row);
+      });
+      map.setView(center, zoom);
+    };
     loadCity(makkahSites, [21.42, 39.87], 11);
-  });
-  document.getElementById('btn-madinah').addEventListener('click', function () {
-    this.classList.add('active');
-    document.getElementById('btn-makkah').classList.remove('active');
-    loadCity(madinahSites, [24.465, 39.61], 12);
-  });
+
+    document.getElementById('btn-makkah').addEventListener('click', function () {
+      this.classList.add('active');
+      document.getElementById('btn-madinah').classList.remove('active');
+      loadCity(makkahSites, [21.42, 39.87], 11);
+    });
+    document.getElementById('btn-madinah').addEventListener('click', function () {
+      this.classList.add('active');
+      document.getElementById('btn-makkah').classList.remove('active');
+      loadCity(madinahSites, [24.465, 39.61], 12);
+    });
+  } catch (mapError) {
+    console.warn('Map section skipped:', mapError.message);
+    const mapEl = document.getElementById('leafletMap');
+    if (mapEl) mapEl.innerHTML = '<p style="padding:20px;color:#8a8578;font-size:0.9rem;">The map couldn\'t load — please check your connection and reload the page. The rest of the site is unaffected.</p>';
+  }
 
   // ---- Checklist download (branded PNG / Word) ----
   function collectChecklistData() {
@@ -2390,8 +2469,51 @@
     if (e.key === 'Escape' && ihramModalEl.classList.contains('open')) ihramCloseModal();
   });
 
+  // ---- Reminder sound (Step 6 aesthetics) ----
+  // Browsers only allow audio to start after a real user gesture, so we
+  // create/resume the AudioContext the moment someone starts the activation
+  // flow (a genuine click) and keep it alive for the rest of the page's life —
+  // that lets a later, programmatically-fired reminder still make sound.
+  // There's no bundled audio file here (avoids licensing a sound we don't own);
+  // the chime is synthesised on the fly with the Web Audio API.
+  let ihramAudioCtx = null;
+  function ihramUnlockAudio() {
+    try {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!ihramAudioCtx && AC) ihramAudioCtx = new AC();
+      if (ihramAudioCtx && ihramAudioCtx.state === 'suspended') ihramAudioCtx.resume();
+    } catch (e) { /* Web Audio unsupported — reminders still show, just silently */ }
+  }
+  function ihramPlayChime() {
+    if (!ihramAudioCtx) return;
+    try {
+      const now = ihramAudioCtx.currentTime;
+      // A gentle two-note rising chime — meant to be noticeable, not jarring.
+      [660, 880].forEach((freq, i) => {
+        const osc = ihramAudioCtx.createOscillator();
+        const gain = ihramAudioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = freq;
+        const start = now + i * 0.22;
+        gain.gain.setValueAtTime(0, start);
+        gain.gain.linearRampToValueAtTime(0.2, start + 0.03);
+        gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.55);
+        osc.connect(gain).connect(ihramAudioCtx.destination);
+        osc.start(start);
+        osc.stop(start + 0.6);
+      });
+    } catch (e) { /* ignore playback errors — the modal/vibration still happen */ }
+  }
+  function ihramVibrateDevice() {
+    // Android Chrome supports this; iOS Safari has never implemented the
+    // Vibration API (an Apple platform limitation, not something fixable here),
+    // and desktops have no vibration hardware — it just silently no-ops there.
+    try { if ('vibrate' in navigator) navigator.vibrate([250, 120, 250, 120, 400]); } catch (e) { /* ignore */ }
+  }
+
   // ---- Screens (Steps 1–4, 7–10) ----
   function ihramScreenExplain() {
+    ihramUnlockAudio(); // first real click in the flow — safe place to unlock sound
     ihramOpenModal(`
       <h3 id="ihramModalTitle">🕋 Entering Ihram?</h3>
       <p>Once you enter the state of Ihram, certain restrictions apply until you complete your Umrah and exit Ihram.</p>
@@ -2486,6 +2608,7 @@
     ihramOpenModal(`
       <h3 id="ihramModalTitle">How often would you like an Ihram reminder?</h3>
       <div class="ihram-freq-options">
+        ${optionHtml(15, '15 minutes', 'Very frequent')}
         ${optionHtml(30, '30 minutes', 'Frequent reminders')}
         ${optionHtml(60, '1 hour', 'Recommended')}
         ${optionHtml(120, '2 hours', 'Gentle reminders')}
@@ -2524,9 +2647,19 @@
 
   function ihramScreenReminder() {
     ihramOpenModal(`
-      <h3 id="ihramModalTitle">🕋 Ihram Reminder</h3>
-      <p>You are currently in Ihram. Please take a moment to remain mindful of the restrictions applicable to you.</p>
-      <div class="modal-actions"><button type="button" class="btn btn-gold" id="ihramBtnUnderstand">I understand</button></div>
+      <div class="ihram-reminder-visual">
+        <div class="ihram-reminder-icon">
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 4 L54 14 L64 18 L54 22 L50 32 L46 22 L36 18 L46 14 Z" fill="#B7862C"/>
+            <line x1="50" y1="32" x2="50" y2="40" stroke="#B7862C" stroke-width="3"/>
+            <path d="M22 92 L22 55 Q22 38 50 38 Q78 38 78 55 L78 92" stroke="#B7862C" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="14" y1="92" x2="86" y2="92" stroke="#B7862C" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+      <h3 id="ihramModalTitle" style="text-align:center;">Ihram Reminder</h3>
+      <p style="text-align:center;">You are currently in Ihram. Please take a moment to remain mindful of the restrictions applicable to you.</p>
+      <div class="modal-actions"><button type="button" class="btn btn-gold" style="width:100%;" id="ihramBtnUnderstand">I understand</button></div>
       <p style="text-align:center;margin-top:14px;margin-bottom:0;">
         <button type="button" class="ihram-view-restrictions-link" id="ihramBtnViewFromReminder">View Ihram restrictions</button>
       </p>
@@ -2536,18 +2669,37 @@
   }
 
   function ihramScreenRestrictions() {
-    const list = (items) => items.map((i) => `<li>${i}</li>`).join('');
+    const renderItems = (items) => items.map((i) => `<li>${i}</li>`).join('');
+    const categories = [
+      { id: 'general', label: 'General', icon: '🌙', items: ihramRestrictions.general },
+      { id: 'men', label: 'Men', icon: '♂', items: ihramRestrictions.men },
+      { id: 'women', label: 'Women', icon: '♀', items: ihramRestrictions.women }
+    ];
+    const tabsHtml = categories.map((c, i) =>
+      `<button type="button" class="ihram-restriction-tab${i === 0 ? ' active' : ''}" data-cat="${c.id}">${c.icon} ${c.label}</button>`
+    ).join('');
+    const panelsHtml = categories.map((c, i) =>
+      `<ul class="ihram-feature-list ihram-restriction-panel${i === 0 ? ' active' : ''}" data-panel="${c.id}">${renderItems(c.items)}</ul>`
+    ).join('');
+
     ihramOpenModal(`
       <h3 id="ihramModalTitle">Ihram restrictions</h3>
-      <p><strong>General — applies to everyone</strong></p>
-      <ul class="ihram-feature-list">${list(ihramRestrictions.general)}</ul>
-      <p><strong>For men</strong></p>
-      <ul class="ihram-feature-list">${list(ihramRestrictions.men)}</ul>
-      <p><strong>For women</strong></p>
-      <ul class="ihram-feature-list">${list(ihramRestrictions.women)}</ul>
+      <div class="ihram-restriction-tabs">${tabsHtml}</div>
+      ${panelsHtml}
       <div class="ihram-disclaimer">General educational guidance only. Details of Ihram rulings can vary depending on circumstances and scholarly interpretation. If you are unsure about a ruling or believe you may have violated a restriction, consult a qualified scholar.</div>
       <div class="modal-actions"><button type="button" class="btn btn-gold" id="ihramBtnCloseRestrictions">Close</button></div>
     `);
+
+    const tabButtons = ihramModalBody.querySelectorAll('.ihram-restriction-tab');
+    const panels = ihramModalBody.querySelectorAll('.ihram-restriction-panel');
+    tabButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const cat = btn.getAttribute('data-cat');
+        tabButtons.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        panels.forEach((p) => p.classList.toggle('active', p.getAttribute('data-panel') === cat));
+      });
+    });
     document.getElementById('ihramBtnCloseRestrictions').addEventListener('click', ihramCloseModal);
   }
 
@@ -2687,10 +2839,16 @@
     `;
   }
 
+  function ihramSyncHeaderBadge(state) {
+    const badge = document.getElementById('ihramHeaderBadge');
+    if (badge) badge.style.display = (state && state.active) ? 'flex' : 'none';
+  }
+
   function ihramRenderWidget() {
     const widget = document.getElementById('ihramModeWidget');
     if (!widget) return;
     const state = ihramLoadState();
+    ihramSyncHeaderBadge(state);
 
     if (!state || !state.active) {
       widget.innerHTML = `<button type="button" class="btn btn-gold ihram-activate-btn" id="ihramActivateBtn">🕋 Activate Ihram Mode</button>`;
@@ -2719,20 +2877,30 @@
   // ---- Reminder firing + the check loop (Steps 6, 13) ----
   function ihramFireReminder(state) {
     ihramScreenReminder(); // on-page modal — always shown if the tab is open
+    ihramPlayChime();
+    ihramVibrateDevice();
 
     if (state.notificationsEnabled && ihramNotificationsSupported() && Notification.permission === 'granted') {
       const title = '🕋 Ihram Reminder';
       const body = "You're currently in Ihram. Take a moment to remember the applicable Ihram restrictions and continue your Umrah with patience and focus.";
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.ready.then((reg) => {
-          reg.showNotification(title, {
-            body, icon: 'icon-192.png', badge: 'icon-192.png', tag: 'ihram-reminder',
-            actions: [{ action: 'remind-later', title: 'Remind me later' }, { action: 'open', title: 'Open UmrahNow' }]
-          }).catch(() => { /* unsupported option somewhere — on-page modal above still covers it */ });
-        }).catch(() => { /* service worker not ready — on-page modal still shown */ });
-      } else {
-        try { new Notification(title, { body, icon: 'icon-192.png' }); } catch (e) { /* on-page modal still shown */ }
-      }
+      // A vibrate pattern on the notification itself matters more than the two
+      // calls above when the tab isn't focused — this is what lets Android
+      // buzz the phone even if UmrahNow is in the background. iOS/desktop
+      // ignore this option; that's a platform limit, not a bug here.
+      const vibrate = [250, 120, 250, 120, 400];
+      try {
+        if ('serviceWorker' in navigator && navigator.serviceWorker) {
+          navigator.serviceWorker.ready.then((reg) => {
+            reg.showNotification(title, {
+              body, icon: 'icon-192.png', badge: 'icon-192.png', tag: 'ihram-reminder',
+              vibrate, silent: false,
+              actions: [{ action: 'remind-later', title: 'Remind me later' }, { action: 'open', title: 'Open UmrahNow' }]
+            }).catch(() => { /* unsupported option somewhere — on-page modal above still covers it */ });
+          }).catch(() => { /* service worker not ready — on-page modal still shown */ });
+        } else {
+          new Notification(title, { body, icon: 'icon-192.png', vibrate, silent: false });
+        }
+      } catch (e) { /* on-page modal above still shown either way */ }
     }
   }
 
@@ -2755,24 +2923,30 @@
   }
 
   // ---- Service worker registration (Step 14) ----
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('service-worker.js').catch((err) => {
-      // Expected to fail if this file is opened directly (file://) instead of
-      // served over http(s) — that's fine, Ihram Mode still works on-page.
-      console.warn('UmrahNow service worker registration failed (expected if not served over http/https):', err);
-    });
-    navigator.serviceWorker.addEventListener('message', (event) => {
-      if (!event.data) return;
-      if (event.data.type === 'ihram-remind-later') {
-        const s = ihramLoadState();
-        if (!s) return;
-        s.nextReminderAt = Date.now() + 15 * 60000; // snooze 15 minutes
-        ihramSaveState(s);
-        ihramRenderWidget();
-      } else if (event.data.type === 'ihram-open-journey') {
-        document.getElementById('journey')?.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
+  // Wrapped defensively: this must never be able to block ihramRenderWidget()
+  // and the init below it from running, regardless of the browser/environment.
+  try {
+    if ('serviceWorker' in navigator && navigator.serviceWorker) {
+      navigator.serviceWorker.register('service-worker.js').catch((err) => {
+        // Expected to fail if this file is opened directly (file://) instead of
+        // served over http(s) — that's fine, Ihram Mode still works on-page.
+        console.warn('UmrahNow service worker registration failed (expected if not served over http/https):', err);
+      });
+      navigator.serviceWorker.addEventListener('message', (event) => {
+        if (!event.data) return;
+        if (event.data.type === 'ihram-remind-later') {
+          const s = ihramLoadState();
+          if (!s) return;
+          s.nextReminderAt = Date.now() + 15 * 60000; // snooze 15 minutes
+          ihramSaveState(s);
+          ihramRenderWidget();
+        } else if (event.data.type === 'ihram-open-journey') {
+          document.getElementById('journey')?.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+  } catch (swError) {
+    console.warn('Service worker setup skipped:', swError.message);
   }
 
   // ---- Init (Step 13: recompute from timestamps — never assume the tab stayed open) ----
