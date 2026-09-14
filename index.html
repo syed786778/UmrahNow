@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UmrahNow — Everything for a Comfortable Umrah</title>
+<title>UmrahNow - Everything for a Comfortable Umrah</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
@@ -297,6 +297,11 @@
     border:solid var(--night);border-width:0 2px 2px 0;transform:rotate(45deg);
   }
   .check-list label:has(input:checked) span{color:#8a8578;text-decoration:line-through;}
+  .checklist-icon{
+    width:42px;height:42px;border-radius:50%;border:1px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;color:var(--gold);margin-bottom:12px;
+  }
+  .checklist-icon svg{width:22px;height:22px;}
   .checklist-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
   .download-btn{
     background:var(--night);color:var(--ivory);border:1px solid var(--night);
@@ -537,6 +542,10 @@
   .ihram-dashboard-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px;}
   .ihram-dashboard-grid .ihram-label{display:block;font-size:0.78rem;color:#8a8578;text-transform:uppercase;letter-spacing:0.03em;margin-bottom:4px;}
   .ihram-dashboard-grid strong{font-family:'Amiri',serif;font-size:1.15rem;color:var(--night);}
+  .ihram-reliability-note{
+    font-size:0.85rem;color:#8a8578;background:var(--ivory-dim);border-radius:4px;
+    padding:10px 12px;margin:0 0 16px;line-height:1.5;
+  }
   .ihram-dashboard-controls{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px;}
   .ihram-ctrl-btn{
     background:var(--ivory-dim);border:1px solid var(--line);color:var(--night);
@@ -637,9 +646,9 @@
       <span class="brand-text">UmrahNow<small>A companion for the journey</small></span>
     </a>
     <nav class="links">
+      <a href="#ihram-mode">🕋 Ihram Mode</a>
       <a href="#regulations">Plan Your Trip</a>
       <a href="#journey">Journey &amp; Du'as</a>
-      <a href="#ihram-mode">🕋 Ihram Mode</a>
       <a href="#places">Places &amp; Shopping</a>
       <a href="#map">Map</a>
       <a href="#medical">Medical &amp; Safety</a>
@@ -659,6 +668,7 @@
     </div>
   </div>
   <div class="mobile-panel" id="mobilePanel">
+    <a href="#ihram-mode">🕋 Ihram Mode</a>
     <a href="javascript:void(0)" id="mobilePackagesLink">Umrah Packages (Coming Soon)</a>
     <a href="#regulations">Visa &amp; Regulations</a>
     <a href="#nusuk">Nusuk App</a>
@@ -669,7 +679,6 @@
     <a href="#forex">Money &amp; Foreign Exchange</a>
     <a href="#transport">Getting Around</a>
     <a href="#journey">The Journey</a>
-    <a href="#ihram-mode">🕋 Ihram Mode</a>
     <a href="#duas">Du'as</a>
     <a href="#sadaqah">Sadaqah</a>
     <a href="#places">Famous Places</a>
@@ -682,13 +691,23 @@
 </header>
 
 <section class="hero" id="home">
-  <svg class="hero-pattern" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+  <svg class="hero-pattern" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
     <defs>
-      <pattern id="starPattern" width="80" height="80" patternUnits="userSpaceOnUse">
-        <path d="M40 4 L48 30 L74 30 L52 46 L60 72 L40 56 L20 72 L28 46 L6 30 L32 30 Z" fill="none" stroke="#E7C77E" stroke-width="1"/>
+      <!-- A mix of motifs instead of one repeated star: a star, a crescent
+           moon, a Kaaba-style arch (Makkah), and a dome with minaret
+           (Madinah) — a quiet nod to the journey rather than plain decoration. -->
+      <pattern id="umrahPattern" width="200" height="200" patternUnits="userSpaceOnUse">
+        <path d="M40 14 L48 34 L68 34 L52 46 L58 66 L40 54 L22 66 L28 46 L12 34 L32 34 Z" fill="none" stroke="#E7C77E" stroke-width="1"/>
+        <path d="M150 16 a18 18 0 1 0 0 36 a13 13 0 1 1 0 -36 Z" fill="none" stroke="#E7C77E" stroke-width="1"/>
+        <path d="M18 180 L18 155 Q18 140 40 140 Q62 140 62 155 L62 180" fill="none" stroke="#E7C77E" stroke-width="1"/>
+        <line x1="10" y1="180" x2="70" y2="180" stroke="#E7C77E" stroke-width="1"/>
+        <path d="M130 178 L130 160 a20 20 0 0 1 40 0 L170 178" fill="none" stroke="#E7C77E" stroke-width="1"/>
+        <line x1="122" y1="178" x2="178" y2="178" stroke="#E7C77E" stroke-width="1"/>
+        <line x1="182" y1="178" x2="182" y2="150" stroke="#E7C77E" stroke-width="1"/>
+        <circle cx="182" cy="146" r="3" fill="none" stroke="#E7C77E" stroke-width="1"/>
       </pattern>
     </defs>
-    <rect width="400" height="400" fill="url(#starPattern)"/>
+    <rect width="400" height="400" fill="url(#umrahPattern)"/>
   </svg>
   <div class="hero-inner">
     <h1>Everything you need for a comfortable Umrah, in one place</h1>
@@ -1411,6 +1430,7 @@
     </div>
     <div class="grid-3">
       <div class="panel checklist">
+        <div class="checklist-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></div>
         <span class="tag">Documents</span>
         <h3>Travel documents</h3>
         <ul class="check-list">
@@ -1424,6 +1444,7 @@
         </ul>
       </div>
       <div class="panel checklist">
+        <div class="checklist-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="9" width="16" height="6" rx="1"/><rect x="9" y="4" width="6" height="16" rx="1"/></svg></div>
         <span class="tag">Health</span>
         <h3>Medicines &amp; prescriptions</h3>
         <ul class="check-list">
@@ -1436,6 +1457,7 @@
         </ul>
       </div>
       <div class="panel checklist">
+        <div class="checklist-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4l4 3 4-3 3 4-3 2v11H8V10L5 8z"/></svg></div>
         <span class="tag">Ihram &amp; clothing</span>
         <h3>Clothing &amp; ihram</h3>
         <ul class="check-list">
@@ -1448,6 +1470,7 @@
         </ul>
       </div>
       <div class="panel checklist">
+        <div class="checklist-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="8" width="12" height="12" rx="2"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></div>
         <span class="tag">Accessories</span>
         <h3>Everyday accessories</h3>
         <ul class="check-list">
@@ -1459,6 +1482,7 @@
         </ul>
       </div>
       <div class="panel checklist">
+        <div class="checklist-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="9" width="10" height="10" rx="1"/><path d="M9 9V6h6v3M12 12v4"/></svg></div>
         <span class="tag">Electronics</span>
         <h3>Chargers &amp; electronics</h3>
         <ul class="check-list">
@@ -1469,6 +1493,7 @@
         </ul>
       </div>
       <div class="panel checklist">
+        <div class="checklist-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="9" width="14" height="11"/><path d="M5 9h14M12 9v11M8 9c0-2.2 1.8-4 4-4s4 1.8 4 4"/></svg></div>
         <span class="tag">Good to have</span>
         <h3>Extras worth packing</h3>
         <ul class="check-list">
@@ -1868,7 +1893,7 @@
   <div class="container">
     <div class="section-head reveal">
       <div class="section-icon-row"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v10H8l-4 4z"/></svg></span><div class="kicker-ar">ملاحظاتكم</div></div>
-      <h2>Help us make this guide better</h2>
+      <h2>Help us make this site better</h2>
       <p class="desc">Missing a du'a, found an outdated rule, or wish there was a section on something else? Tell us what would make your Umrah journey smoother — this goes straight to the person building the site.</p>
     </div>
 
@@ -2817,6 +2842,21 @@
       ? `Paused until ${new Date(state.pausedUntil).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`
       : ihramFormatMinutesRemaining(state.nextReminderAt);
     const freqText = state.intervalMinutes >= 60 ? (state.intervalMinutes / 60) + ' hr' : state.intervalMinutes + ' min';
+
+    // Set the right expectation rather than a silent failure later: reminders
+    // fire reliably whenever UmrahNow is open (foreground or background tab).
+    // Neither iOS nor Android can guarantee a reminder after the app has been
+    // fully closed for a long stretch without a real backend push service —
+    // iOS is the stricter of the two about this.
+    let reliabilityNote = '';
+    if (ihramIsIOS() && ihramIsStandalone() && state.notificationsEnabled) {
+      reliabilityNote = `<p class="ihram-reliability-note">📱 For the most reliable reminders on iPhone/iPad, reopen UmrahNow from your Home Screen every so often — iOS can pause reminders if the app hasn't been opened in a while.</p>`;
+    } else if (ihramIsIOS() && !state.notificationsEnabled) {
+      reliabilityNote = `<p class="ihram-reliability-note">📱 Reminders are currently on-page only. For notifications on iPhone/iPad, add UmrahNow to your Home Screen and enable notifications from there.</p>`;
+    } else if (!state.notificationsEnabled) {
+      reliabilityNote = `<p class="ihram-reliability-note">🔔 Reminders are currently on-page only — they'll show while this tab is open. Enable notifications for reminders that reach you elsewhere too.</p>`;
+    }
+
     return `
       <div class="ihram-dashboard">
         <span class="ihram-status-badge">🕋 Ihram Mode — ACTIVE</span>
@@ -2825,6 +2865,7 @@
           <div><span class="ihram-label">Reminder frequency</span><strong>Every ${freqText}</strong></div>
           <div><span class="ihram-label">Next reminder</span><strong id="ihramNextDisplay">${nextText}</strong></div>
         </div>
+        ${reliabilityNote}
         <div class="ihram-dashboard-controls">
           <button type="button" class="ihram-ctrl-btn" id="ihramPauseBtn">⏸ ${isPaused ? 'Manage pause' : 'Pause'}</button>
           <button type="button" class="ihram-ctrl-btn" id="ihramChangeFreqBtn">🔄 Change frequency</button>
