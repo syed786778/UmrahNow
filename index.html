@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UmrahNow — Everything for a Comfortable Umrah</title>
+<title>UmrahNow - Everything for a Comfortable Umrah</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
@@ -362,6 +362,27 @@
   @media(min-width:700px){.place-grid{grid-template-columns:1fr 1fr;}}
   .place-card{border:1px solid var(--line);background:#fff;display:flex;gap:16px;padding:20px;border-radius:var(--radius);transition:box-shadow .2s ease, transform .2s ease;}
   .place-card:hover{box-shadow:0 8px 20px rgba(20,76,70,0.12);transform:translateY(-2px);}
+
+  /* Hotel tiers reuse the city-tab machinery above but need block layout
+     (heading, grid, heading, grid) rather than the place-card grid layout. */
+  .place-grid.hotel-tiers.active{display:block;}
+  .hotel-tier-heading{font-size:1.05rem;color:var(--night);margin:28px 0 14px;}
+  .hotel-tier-heading:first-child{margin-top:0;}
+  .hotel-grid{display:grid;grid-template-columns:1fr;gap:16px;}
+  @media(min-width:700px){.hotel-grid{grid-template-columns:1fr 1fr;}}
+  @media(min-width:1000px){.hotel-grid{grid-template-columns:1fr 1fr 1fr;}}
+  .hotel-card{
+    border:1px solid var(--line);background:#fff;display:flex;gap:14px;padding:18px;
+    border-radius:var(--radius);transition:box-shadow .2s ease, transform .2s ease;
+  }
+  .hotel-card:hover{box-shadow:0 8px 20px rgba(20,76,70,0.12);transform:translateY(-2px);}
+  .hotel-card-body{display:flex;flex-direction:column;}
+  .hotel-card h4{font-size:0.98rem;margin-bottom:6px;color:var(--night);}
+  .hotel-meta{font-size:0.85rem;color:#4a4a44;margin-bottom:8px;}
+  .hotel-value-tag{
+    display:inline-block;background:rgba(63,167,154,0.15);color:var(--teal);
+    font-size:0.72rem;font-weight:700;padding:2px 8px;border-radius:10px;margin-left:4px;
+  }
   .place-card > div:last-child{display:flex;flex-direction:column;}
   .map-link{
     display:inline-flex;align-items:center;gap:4px;margin-top:10px;
@@ -677,6 +698,7 @@
     <a href="#essentials">Travel Essentials</a>
     <a href="#forex">Money &amp; Foreign Exchange</a>
     <a href="#transport">Getting Around</a>
+    <a href="#hotels">Where to Stay</a>
     <a href="#journey">The Journey</a>
     <a href="#duas">Du'as</a>
     <a href="#sadaqah">Sadaqah</a>
@@ -696,14 +718,14 @@
            moon, a Kaaba-style arch (Makkah), and a dome with minaret
            (Madinah) — a quiet nod to the journey rather than plain decoration. -->
       <pattern id="umrahPattern" width="200" height="200" patternUnits="userSpaceOnUse">
-        <path d="M40 14 L48 34 L68 34 L52 46 L58 66 L40 54 L22 66 L28 46 L12 34 L32 34 Z" fill="none" stroke="#E7C77E" stroke-width="1"/>
-        <path d="M150 16 a18 18 0 1 0 0 36 a13 13 0 1 1 0 -36 Z" fill="none" stroke="#E7C77E" stroke-width="1"/>
-        <path d="M18 180 L18 155 Q18 140 40 140 Q62 140 62 155 L62 180" fill="none" stroke="#E7C77E" stroke-width="1"/>
-        <line x1="10" y1="180" x2="70" y2="180" stroke="#E7C77E" stroke-width="1"/>
-        <path d="M130 178 L130 160 a20 20 0 0 1 40 0 L170 178" fill="none" stroke="#E7C77E" stroke-width="1"/>
-        <line x1="122" y1="178" x2="178" y2="178" stroke="#E7C77E" stroke-width="1"/>
-        <line x1="182" y1="178" x2="182" y2="150" stroke="#E7C77E" stroke-width="1"/>
-        <circle cx="182" cy="146" r="3" fill="none" stroke="#E7C77E" stroke-width="1"/>
+        <path d="M40 14 L48 34 L68 34 L52 46 L58 66 L40 54 L22 66 L28 46 L12 34 L32 34 Z" fill="none" stroke="#E7C77E" stroke-width="1.2"/>
+        <path d="M150 16 a18 18 0 1 0 0 36 a13 13 0 1 1 0 -36 Z" fill="none" stroke="#E7C77E" stroke-width="1.2"/>
+        <path d="M15 180 L15 152 A25 25 0 0 1 65 152 L65 180" fill="none" stroke="#E7C77E" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="8" y1="180" x2="72" y2="180" stroke="#E7C77E" stroke-width="1.2" stroke-linecap="round"/>
+        <g transform="translate(150,165)">
+          <rect x="-15" y="-15" width="30" height="30" fill="none" stroke="#E7C77E" stroke-width="1.2"/>
+          <rect x="-15" y="-15" width="30" height="30" fill="none" stroke="#E7C77E" stroke-width="1.2" transform="rotate(45)"/>
+        </g>
       </pattern>
     </defs>
     <rect width="1000" height="1000" fill="url(#umrahPattern)"/>
@@ -1178,7 +1200,9 @@
           <li>Open to citizens of dozens of eligible countries; fully online, usually issued within a few days</li>
           <li>Lets you perform Umrah and travel elsewhere in the Kingdom on the same trip</li>
           <li>Still requires a separate Umrah permit through Nusuk before entering Masjid al-Haram</li>
+          <li><strong>Approximate cost:</strong> around $125–165 (roughly £100–130), including the mandatory health insurance built into the fee</li>
         </ul>
+        <a class="map-link" href="https://visa.visitsaudi.com" target="_blank" rel="noopener">Apply at visa.visitsaudi.com ↗</a>
       </div>
       <div class="panel">
         <span class="tag">Route 2</span>
@@ -1187,7 +1211,9 @@
           <li>Issued through licensed travel agents, dedicated to religious pilgrimage</li>
           <li>Bundled with an approved service package (accommodation, transport) purchased via Nusuk</li>
           <li>Traditional route for travellers who prefer a packaged trip</li>
+          <li><strong>Approximate cost:</strong> around $115–165 (roughly £90–130) plus your agent's service package — this is the main variable, so compare a couple of agents</li>
         </ul>
+        <a class="map-link" href="https://www.nusuk.sa" target="_blank" rel="noopener">Service packages at nusuk.sa ↗</a>
       </div>
       <div class="panel">
         <span class="tag">Newer option</span>
@@ -1197,12 +1223,14 @@
           <li>A new service package must be bought via Nusuk before each entry, and matched by a fresh Umrah permit</li>
           <li>Visa pauses when you leave the Kingdom and resumes on your next entry; unused days carry forward</li>
           <li>Not valid during the Hajj season (1 Dhul Qa'dah – 13 Dhul Hijjah)</li>
+          <li><strong>Approximate cost:</strong> varies by nationality and agent — priced per visit through the Nusuk service package rather than a single flat fee</li>
         </ul>
+        <a class="map-link" href="https://www.nusuk.sa" target="_blank" rel="noopener">Details at nusuk.sa ↗</a>
       </div>
     </div>
 
     <div class="note-box" style="background:rgba(247,241,228,0.08);border-color:var(--gold-soft);color:#DCE9E5;">
-      <strong>The rule that applies to everyone:</strong> whichever visa gets you into the country, you still need a separate, timed Umrah permit issued through the Nusuk app before you can enter Masjid al-Haram — and a further permit if you want to visit Al-Rawdah in Madinah. Entry windows, stay durations and health requirements (such as vaccination rules) are amended periodically by the Ministry, so confirm the current terms on Nusuk shortly before you travel rather than relying on any single source, including this one.
+      <strong>The rule that applies to everyone:</strong> whichever visa gets you into the country, you still need a separate, timed Umrah permit issued through the Nusuk app before you can enter Masjid al-Haram — and a further permit if you want to visit Al-Rawdah in Madinah. Entry windows, stay durations, fees and health requirements (such as vaccination rules) are amended periodically by the Ministry, so confirm the current terms and cost on the official sites above shortly before you travel rather than relying on any single source, including this one.
     </div>
   </div>
 </section>
@@ -1617,6 +1645,165 @@
 
     <div class="note-box">
       <strong>A practical habit:</strong> keep your hotel's name and address written down in Arabic (ask reception to write it for you), since not every driver reads English signage well, and a language gap is the most common cause of a longer-than-expected ride.
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOTELS ================= -->
+<section id="hotels" class="band-ivory-dim">
+  <div class="container tabbed-block">
+    <div class="section-head reveal">
+      <div class="section-icon-row"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V10l8-6 8 6v11"/><path d="M10 21v-6h4v6"/></svg></span><div class="kicker-ar">أماكن الإقامة</div></div>
+      <h2>Where to stay, at every budget</h2>
+      <p class="desc">Three tiers near each Haram, with typical nightly rates and guest ratings pulled from major travel-booking sites at the time of writing. Rates swing hard with season and how far ahead you book — treat these as a starting point, and check the live price and rating on the map link before you commit.</p>
+    </div>
+    <div class="city-tabs">
+      <button class="city-tab active" data-city="makkah" data-target="grid-hotels-makkah">Makkah</button>
+      <button class="city-tab" data-city="madinah" data-target="grid-hotels-madinah">Madinah</button>
+    </div>
+
+    <div class="place-grid hotel-tiers active" id="grid-hotels-makkah">
+      <h3 class="hotel-tier-heading">4–5 star · Premium</h3>
+      <div class="hotel-grid">
+        <div class="hotel-card">
+          <div class="brand-badge" style="background:linear-gradient(135deg,#B7862C,#8a611c);">FMC</div>
+          <div class="hotel-card-body">
+            <h4>Fairmont Makkah Clock Royal Tower</h4>
+            <p class="hotel-meta">~$210–340/night · ~4.3/5 guest rating</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Fairmont+Makkah+Clock+Royal+Tower" target="_blank" rel="noopener">View on map ↗</a>
+          </div>
+        </div>
+        <div class="hotel-card">
+          <div class="brand-badge" style="background:linear-gradient(135deg,#144C46,#0E2A28);">SW</div>
+          <div class="hotel-card-body">
+            <h4>Swissôtel Makkah</h4>
+            <p class="hotel-meta">~$160–245/night · ~4.4/5 guest rating</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Swissotel+Makkah" target="_blank" rel="noopener">View on map ↗</a>
+          </div>
+        </div>
+        <div class="hotel-card">
+          <div class="brand-badge" style="background:linear-gradient(135deg,#3FA79A,#144C46);">CJ</div>
+          <div class="hotel-card-body">
+            <h4>Conrad Jabal Omar Makkah</h4>
+            <p class="hotel-meta">~$115–195/night · ~4.6/5 guest rating</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Conrad+Jabal+Omar+Makkah" target="_blank" rel="noopener">View on map ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="hotel-tier-heading">2–3 star · Comfortable</h3>
+      <div class="hotel-grid">
+        <div class="hotel-card">
+          <div class="brand-badge" style="background:linear-gradient(135deg,#6b4a1e,#3d2a10);">EK</div>
+          <div class="hotel-card-body">
+            <h4>Elaf Kinda Hotel</h4>
+            <p class="hotel-meta">~$125–150/night · ~3.9/5 guest rating</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Elaf+Kinda+Hotel+Makkah" target="_blank" rel="noopener">View on map ↗</a>
+          </div>
+        </div>
+        <div class="hotel-card">
+          <div class="brand-badge" style="background:linear-gradient(135deg,#8a2f1f,#5c1f14);">MA</div>
+          <div class="hotel-card-body">
+            <h4>Makarem Ajyad Makkah Hotel</h4>
+            <p class="hotel-meta">~$120–186/night · ~4.3/5 guest rating</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Makarem+Ajyad+Makkah+Hotel" target="_blank" rel="noopener">View on map ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="hotel-tier-heading">Affordable</h3>
+      <div class="hotel-grid">
+        <div class="hotel-card">
+          <div class="brand-badge" style="background:linear-gradient(135deg,#0E2A28,#3FA79A);">PR</div>
+          <div class="hotel-card-body">
+            <h4>Park Inn by Radisson, Makkah Al Naseem</h4>
+            <p class="hotel-meta">~$43–52/night · ~4.0/5 guest rating</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Park+Inn+by+Radisson+Makkah+Al+Naseem" target="_blank" rel="noopener">View on map ↗</a>
+          </div>
+        </div>
+        <div class="hotel-card">
+          <div class="brand-badge" style="background:linear-gradient(135deg,#B7862C,#8a611c);">MQ</div>
+          <div class="hotel-card-body">
+            <h4>Makarem Umm Al Qura Hotel</h4>
+            <p class="hotel-meta">~$46–55/night · ~3.9/5 guest rating</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Makarem+Umm+Al+Qura+Hotel+Makkah" target="_blank" rel="noopener">View on map ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="place-grid hotel-tiers" id="grid-hotels-madinah">
+      <h3 class="hotel-tier-heading">4–5 star · Premium</h3>
+      <div class="hotel-grid">
+        <div class="hotel-card">
+          <div class="brand-badge" style="background:linear-gradient(135deg,#B7862C,#8a611c);">OB</div>
+          <div class="hotel-card-body">
+            <h4>The Oberoi, Madina</h4>
+            <p class="hotel-meta">~$260–450/night · ~4.7/5 guest rating</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=The+Oberoi+Madina" target="_blank" rel="noopener">View on map ↗</a>
+          </div>
+        </div>
+        <div class="hotel-card">
+          <div class="brand-badge" style="background:linear-gradient(135deg,#144C46,#0E2A28);">IC</div>
+          <div class="hotel-card-body">
+            <h4>InterContinental Madinah – Dar Al Iman</h4>
+            <p class="hotel-meta">~$170–241/night · ~4.4/5 guest rating</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=InterContinental+Dar+Al+Iman+Madinah" target="_blank" rel="noopener">View on map ↗</a>
+          </div>
+        </div>
+        <div class="hotel-card">
+          <div class="brand-badge" style="background:linear-gradient(135deg,#3FA79A,#144C46);">SS</div>
+          <div class="hotel-card-body">
+            <h4>Sofitel Shahd Al Madinah</h4>
+            <p class="hotel-meta">~$142–192/night · ~4.2/5 guest rating</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Sofitel+Shahd+Al+Madinah" target="_blank" rel="noopener">View on map ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="hotel-tier-heading">2–3 star · Comfortable</h3>
+      <div class="hotel-grid">
+        <div class="hotel-card">
+          <div class="brand-badge" style="background:linear-gradient(135deg,#6b4a1e,#3d2a10);">DT</div>
+          <div class="hotel-card-body">
+            <h4>Dallah Taibah Hotel</h4>
+            <p class="hotel-meta">~$121–209/night · ~4.3/5 guest rating</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Dallah+Taibah+Hotel+Madinah" target="_blank" rel="noopener">View on map ↗</a>
+          </div>
+        </div>
+        <div class="hotel-card">
+          <div class="brand-badge" style="background:linear-gradient(135deg,#8a2f1f,#5c1f14);">AM</div>
+          <div class="hotel-card-body">
+            <h4>Al Manakha Rotana Madinah</h4>
+            <p class="hotel-meta">~$108–187/night · ~4.6/5 guest rating</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Al+Manakha+Rotana+Madinah" target="_blank" rel="noopener">View on map ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="hotel-tier-heading">Affordable</h3>
+      <div class="hotel-grid">
+        <div class="hotel-card">
+          <div class="brand-badge" style="background:linear-gradient(135deg,#0E2A28,#3FA79A);">PZ</div>
+          <div class="hotel-card-body">
+            <h4>Pullman Zamzam Madina</h4>
+            <p class="hotel-meta">~$83–143/night · ~4.3/5 guest rating <span class="hotel-value-tag">5★ value pick</span></p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Pullman+Zamzam+Madina" target="_blank" rel="noopener">View on map ↗</a>
+          </div>
+        </div>
+        <div class="hotel-card">
+          <div class="brand-badge" style="background:linear-gradient(135deg,#B7862C,#8a611c);">NM</div>
+          <div class="hotel-card-body">
+            <h4>New Madinah Hotel</h4>
+            <p class="hotel-meta">~$77–116/night · ~4.2/5 guest rating</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=New+Madinah+Hotel" target="_blank" rel="noopener">View on map ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-box">
+      <strong>On the numbers here.</strong> Prices and ratings above come from major travel-booking aggregators around the time this page was written, not a live feed — Saudi hotel rates swing sharply with season, Ramadan, and Hajj proximity, sometimes tripling during peak weeks. We can't display real hotel photos or a live Google rating here, so the badges are custom marks rather than official branding — tap "View on map" for the current price, photos and rating before you book.
     </div>
   </div>
 </section>
