@@ -27,7 +27,7 @@ from pathlib import Path
 import feedparser
 import requests
 
-HTML_FILE = Path(__file__).resolve().parent.parent / "umrah-portal.html"
+HTML_FILE = Path(__file__).resolve().parent.parent / "index.html"
 START_MARKER = "<!-- NEWS_LIST_START -->"
 END_MARKER = "<!-- NEWS_LIST_END -->"
 
@@ -215,7 +215,7 @@ def main():
         return
 
     update_html(items)
-    print("umrah-portal.html news section updated.")
+    print("index.html news section updated.")
 
 
 if __name__ == "__main__":
