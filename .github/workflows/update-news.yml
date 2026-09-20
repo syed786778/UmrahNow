@@ -1,0 +1,53 @@
+name: Update Umrah/Hajj news
+
+# Refreshes the "Latest Umrah & Saudi travel news" section on the homepage.
+# The script writes real headlines/summaries directly into umrah-portal.html
+# (see scripts/update_news.py) so the content is present in the page a search
+# crawler receives, not assembled client-side after load.
+#
+# One-time setup this repo needs for the auto-commit step to work:
+#   Settings → Actions → General → Workflow permissions →
+#   "Read and write permissions" (instead of the default read-only).
+#
+# If GitHub Pages here deploys from something other than pushes to this
+# branch's root (e.g. a /docs folder, or a separate Pages-deploy workflow),
+# adjust the checkout/commit step below to match, or add a step that
+# triggers your existing deploy workflow after the commit.
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'   # every 6 hours, UTC — adjust if you want it more/less frequent
+  workflow_dispatch: {}      # lets you trigger a run manually from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  update-news:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Run news updater
+        run: python scripts/update_news.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "umrahnow-news-bot"
+          git config user.email "actions@users.noreply.github.com"
+          if git diff --quiet -- umrah-portal.html; then
+            echo "No changes to commit."
+          else
+            git add umrah-portal.html
+            git commit -m "chore: refresh Umrah/Hajj news [automated]"
+            git push
+          fi
