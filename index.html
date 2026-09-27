@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UmrahNow — Everything for a Comfortable Umrah</title>
+<title>UmrahNow - Everything for a Comfortable Umrah</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
@@ -33,7 +33,13 @@
     --max-header:1680px;
   }
   *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth;background:var(--night);}
+  /* The line above matters more than it looks: on mobile Safari/Chrome, pulling
+     past the top of the page (rubber-band overscroll) or a translucent status
+     bar/notch briefly exposes the <html> background rather than the header's.
+     Without this, that strip renders white against the header's dark teal —
+     the "half green, half white" mobile header glitch. Matching it to the
+     header/hero color makes the bounce invisible instead of jarring. */
   body{
     margin:0;
     background:var(--ivory);
@@ -42,6 +48,7 @@
     font-weight:400;
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
+    overscroll-behavior-y:none;
   }
   h1,h2,h3,h4,.serif{
     font-family:'Amiri',serif;
@@ -65,10 +72,16 @@
     background:rgba(14,42,40,0.96);
     backdrop-filter:blur(6px);
     border-bottom:1px solid rgba(183,134,44,0.4);
+    padding-top:env(safe-area-inset-top,0px);
   }
   .nav-row{
     display:flex;align-items:center;justify-content:space-between;
     padding:22px 40px;max-width:var(--max-header);margin:0 auto;gap:24px;flex-wrap:nowrap;
+  }
+  @media(max-width:640px){
+    .nav-row{padding:14px 16px;gap:12px;}
+    .brand-text{font-size:1.4rem;}
+    .brand-text small{font-size:0.72rem;}
   }
   .brand{display:flex;align-items:center;gap:12px;color:var(--ivory);text-decoration:none;flex-shrink:0;}
   .brand svg{width:42px;height:42px;}
@@ -94,13 +107,25 @@
   .ihram-header-badge:hover{background:rgba(183,134,44,0.28);}
   @keyframes ihramBadgePulse{0%,100%{box-shadow:0 0 0 0 rgba(183,134,44,0.35);}50%{box-shadow:0 0 0 6px rgba(183,134,44,0);}}
   @media(max-width:520px){.ihram-header-badge span.badge-label-full{display:none;}}
+  /* Share now lives inside nav.links on desktop (plenty of room there) and as
+     a full-width row inside the mobile panel — freeing the cramped header
+     icon cluster (badge + burger) from also hosting a share button. */
   .share-btn{
-    background:none;border:1px solid rgba(231,199,126,0.4);border-radius:50%;
-    width:40px;height:40px;display:flex;align-items:center;justify-content:center;
-    padding:0;transition:border-color .2s, background .2s;flex-shrink:0;
+    background:none;border:none;color:var(--ivory);
+    display:flex;align-items:center;gap:8px;padding:0;
+    font:inherit;cursor:pointer;
   }
-  .share-btn:hover{background:rgba(231,199,126,0.12);border-color:var(--gold-soft);}
-  .share-btn svg{width:20px;height:20px;}
+  nav.links .share-btn{
+    font-size:1.15rem;font-weight:500;padding:8px 0;
+    border-bottom:1px solid transparent;transition:border-color .2s, color .2s;
+  }
+  nav.links .share-btn:hover{border-color:var(--gold);color:var(--gold-soft);}
+  .mobile-panel .share-btn{
+    display:flex;width:100%;text-align:left;
+    padding:16px 24px;border-bottom:1px solid rgba(255,255,255,0.06);
+    font-size:1.05rem;justify-content:flex-start;
+  }
+  .share-btn svg{width:18px;height:18px;flex-shrink:0;}
   .burger span{width:26px;height:2.5px;background:var(--ivory);display:block;transition:transform .25s, opacity .25s;}
   .mobile-panel{
     display:none;flex-direction:column;background:var(--night);
@@ -423,10 +448,17 @@
     display:flex;flex-direction:column;transition:box-shadow .2s ease, transform .2s ease;
   }
   .news-card:hover{box-shadow:0 8px 20px rgba(20,76,70,0.12);transform:translateY(-2px);}
+  .news-card-icon{
+    width:34px;height:34px;border-radius:50%;background:var(--ivory-dim);
+    display:flex;align-items:center;justify-content:center;color:var(--teal);margin-bottom:12px;flex-shrink:0;
+  }
+  .news-card-icon svg{width:18px;height:18px;}
   .news-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
   .news-source{
     font-size:0.76rem;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:0.03em;
+    display:inline-flex;align-items:center;gap:6px;
   }
+  .news-source img{width:14px;height:14px;border-radius:2px;flex-shrink:0;}
   .news-date{font-size:0.78rem;color:#8a8578;}
   .news-card h3{font-size:1rem;margin-bottom:8px;line-height:1.4;}
   .news-card h3 a{color:var(--night);text-decoration:none;}
@@ -735,15 +767,16 @@
       <a href="#map">Map</a>
       <a href="#medical">Medical &amp; Safety</a>
       <a href="#feedback">Feedback</a>
+      <button class="share-btn" id="shareBtnDesktop" aria-label="Share this site" title="Share">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#E7C77E" stroke-width="1.8"><circle cx="18" cy="5" r="2.4"/><circle cx="6" cy="12" r="2.4"/><circle cx="18" cy="19" r="2.4"/><path d="M8.1 10.7l7.8-4.4M8.1 13.3l7.8 4.4"/></svg>
+        <span>Share</span>
+      </button>
     </nav>
     <div style="display:flex;align-items:center;gap:6px;">
       <!-- Shown only while Ihram Mode is active (see ihramSyncHeaderBadge in
            the script) — a way to notice/return to it without hunting for the
            Journey section again. -->
       <a href="#ihram-mode" id="ihramHeaderBadge" class="ihram-header-badge" style="display:none;">🕋 <span class="badge-label-full">Ihram Mode </span>Active</a>
-      <button class="share-btn" id="shareBtn" aria-label="Share this site" title="Share">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#E7C77E" stroke-width="1.8"><circle cx="18" cy="5" r="2.4"/><circle cx="6" cy="12" r="2.4"/><circle cx="18" cy="19" r="2.4"/><path d="M8.1 10.7l7.8-4.4M8.1 13.3l7.8 4.4"/></svg>
-      </button>
       <button class="burger" id="burgerBtn" aria-label="Open menu">
         <span></span><span></span><span></span>
       </button>
@@ -759,6 +792,10 @@
     <a href="#map">Map</a>
     <a href="#medical">Medical &amp; Safety</a>
     <a href="#feedback">Feedback</a>
+    <button class="share-btn" id="shareBtnMobile" aria-label="Share this site">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#E7C77E" stroke-width="1.8"><circle cx="18" cy="5" r="2.4"/><circle cx="6" cy="12" r="2.4"/><circle cx="18" cy="19" r="2.4"/><path d="M8.1 10.7l7.8-4.4M8.1 13.3l7.8 4.4"/></svg>
+      <span>Share this site</span>
+    </button>
   </div>
 </header>
 
@@ -902,6 +939,135 @@
   <button type="button" class="ihram-modal-close" id="ihramModalCloseBtn" aria-label="Close">&times;</button>
   <div id="ihramModalBody"></div>
 </div>
+
+<!-- ================= LATEST NEWS =================
+     This block is regenerated automatically by scripts/update_news.py, run on
+     a schedule by .github/workflows/update-news.yml. Do not hand-edit the
+     content between NEWS_LIST_START and NEWS_LIST_END — it will be
+     overwritten on the next run. Everything else in this section (heading,
+     wrapper, styling) is safe to edit normally.
+
+     SCOPE RULE for update_news.py: only pull stories that are (a) about
+     Saudi Arabia's own visas, hotels/hospitality, Umrah/Hajj services
+     (Nusuk, permits, registration), shopping/retail development, or travel
+     advisories (weather, health, safety) for pilgrims — and (b) not tied to
+     a specific pilgrim-sending country's bilateral arrangements (e.g. a
+     country's pilgrim quota, resumed flights with one country, a single
+     nationality's registration numbers). A story about Pakistan, Iran,
+     Indonesia, etc. arranging their own pilgrims' travel does not belong
+     here even if Hajj/Umrah-related — only Saudi Arabia's own rules and
+     services do. -->
+<section id="news" class="band-ivory-dim">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-icon-row"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h4"/></svg></span><div class="kicker-ar">آخر الأخبار</div></div>
+      <h2>Latest Umrah &amp; Saudi travel news</h2>
+      <p class="desc">Saudi Arabia's own visa, hotel, Nusuk/Umrah, shopping and travel-advisory news only — refreshed automatically a few times a day. No other country's bilateral pilgrim arrangements. Headlines and summaries belong to the outlets linked below; tap through to read the full story.</p>
+    </div>
+
+    <div class="news-grid" id="newsGrid">
+      <!-- NEWS_LIST_START -->
+      <article class="news-card">
+        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div>
+        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=gulfnews.com" alt="" loading="lazy">Gulf News</span><span class="news-date">31 Oct 2025</span></div>
+        <h3><a href="https://gulfnews.com/world/gulf/saudi/saudi-arabia-announces-new-amendments-to-umrah-visa-rules-1.500328262" target="_blank" rel="noopener nofollow">Saudi Arabia announces new amendments to Umrah visa rules</a></h3>
+        <p>The Ministry of Hajj and Umrah has cut the Umrah entry visa's validity from three months to one month from issuance, automatically cancelling it if a pilgrim hasn't entered the Kingdom within 30 days. The stay period after arrival remains three months.</p>
+        <a class="map-link" href="https://gulfnews.com/world/gulf/saudi/saudi-arabia-announces-new-amendments-to-umrah-visa-rules-1.500328262" target="_blank" rel="noopener nofollow">Read more ↗</a>
+      </article>
+      <article class="news-card">
+        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div>
+        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=gulfnews.com" alt="" loading="lazy">Gulf News</span><span class="news-date">2026</span></div>
+        <h3><a href="https://gulfnews.com/world/gulf/saudi/saudi-umrah-visa-valid-for-365-days-but-bookings-required-for-every-visit-1.500642585" target="_blank" rel="noopener nofollow">Saudi Umrah visa: 365 days validity, 90 days total stay</a></h3>
+        <p>Holders of the newer one-year multiple-entry Umrah visa, launched by the Ministry of Hajj and Umrah, must purchase services through a licensed provider on Nusuk and obtain a fresh Umrah permit before each visit, with cumulative stay across all entries capped at 90 days.</p>
+        <a class="map-link" href="https://gulfnews.com/world/gulf/saudi/saudi-umrah-visa-valid-for-365-days-but-bookings-required-for-every-visit-1.500642585" target="_blank" rel="noopener nofollow">Read more ↗</a>
+      </article>
+      <article class="news-card">
+        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V10l8-6 8 6v11"/><path d="M10 21v-6h4v6"/></svg></div>
+        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=connectingtravel.com" alt="" loading="lazy">Connecting Travel</span><span class="news-date">19 Jan 2026</span></div>
+        <h3><a href="https://connectingtravel.com/news/marriott-al-qimmah-to-add-2700-hotel-rooms-in-saudi-arabia" target="_blank" rel="noopener nofollow">Marriott and Al Qimmah to add five new hotels in Jeddah, Makkah and Madinah</a></h3>
+        <p>The agreement brings roughly 2,700 new rooms across four Marriott brands, including a Makkah and a Madinah property from the Four Points by Sheraton line, adding to the Kingdom's fast-growing pilgrim accommodation supply.</p>
+        <a class="map-link" href="https://connectingtravel.com/news/marriott-al-qimmah-to-add-2700-hotel-rooms-in-saudi-arabia" target="_blank" rel="noopener nofollow">Read more ↗</a>
+      </article>
+      <article class="news-card">
+        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 12H7z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></div>
+        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=retail-insight-network.com" alt="" loading="lazy">Retail Insight Network</span><span class="news-date">2026</span></div>
+        <h3><a href="https://www.retail-insight-network.com/?p=119293" target="_blank" rel="noopener nofollow">Masar Mall set to open as Makkah's largest shopping destination</a></h3>
+        <p>The 130,000 sq m mall, part of the Masar Destination opposite the Haramain train station and roughly 3km from the Grand Mosque, is expected to draw over 20 million visitors a year once it opens.</p>
+        <a class="map-link" href="https://www.retail-insight-network.com/?p=119293" target="_blank" rel="noopener nofollow">Read more ↗</a>
+      </article>
+      <article class="news-card">
+        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2m20 0h-2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/></svg></div>
+        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=gulfnews.com" alt="" loading="lazy">Gulf News</span><span class="news-date">26 May 2026</span></div>
+        <h3><a href="https://gulfnews.com/amp/story/world%2Fgulf%2Fsaudi%2Fsaudi-arabia-urges-pilgrims-to-use-umbrellas-as-hajj-temperatures-near-47c-1.500552890" target="_blank" rel="noopener nofollow">Saudi Arabia urges pilgrims to use umbrellas as heat nears 47°C</a></h3>
+        <p>With Mecca temperatures forecast to hit extreme highs, the Ministry of Health is advising pilgrims to carry sun umbrellas — said to lower the surrounding temperature by around 10°C — and to keep up preventive measures against heat exhaustion and dehydration.</p>
+        <a class="map-link" href="https://gulfnews.com/amp/story/world%2Fgulf%2Fsaudi%2Fsaudi-arabia-urges-pilgrims-to-use-umbrellas-as-hajj-temperatures-near-47c-1.500552890" target="_blank" rel="noopener nofollow">Read more ↗</a>
+      </article>
+      <article class="news-card">
+        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=arabianbusiness.com" alt="" loading="lazy">Arabian Business</span><span class="news-date">17 Jan 2026</span></div>
+        <h3><a href="https://www.arabianbusiness.com/culture-society/saudi-arabia-opens-hajj-2026-package-selection-on-nusuk-platform" target="_blank" rel="noopener nofollow">Saudi Arabia opens Hajj 2026 package selection on Nusuk platform</a></h3>
+        <p>Pilgrims in Direct Hajj Program countries can now compare and shortlist up to five preferred service packages on Nusuk Hajj ahead of the official booking phase, using new comparison and popularity-trend tools.</p>
+        <a class="map-link" href="https://www.arabianbusiness.com/culture-society/saudi-arabia-opens-hajj-2026-package-selection-on-nusuk-platform" target="_blank" rel="noopener nofollow">Read more ↗</a>
+      </article>
+      <!-- NEWS_LIST_END -->
+    </div>
+
+    <p class="news-updated-note" id="newsUpdatedNote">Headlines refresh automatically — last updated 27 Sep 2026.</p>
+  </div>
+</section>
+
+<!-- ================= REGULATIONS ================= -->
+<section id="regulations" class="band-teal">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-icon-row"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></span><div class="kicker-ar">الأنظمة</div></div>
+      <h2>Saudi regulations for Umrah travellers</h2>
+      <p class="desc">A summary of how entry and pilgrimage permits currently work. Rules are set and updated by Saudi Arabia's Ministry of Hajj and Umrah — treat this as an orientation and always re-check the Nusuk platform before you book or travel.</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="panel">
+        <span class="tag">Route 1</span>
+        <h3>Saudi Tourist e-Visa</h3>
+        <ul>
+          <li>Multiple entries, valid one year, up to 90 days per entry</li>
+          <li>Open to citizens of dozens of eligible countries; fully online, usually issued within a few days</li>
+          <li>Lets you perform Umrah and travel elsewhere in the Kingdom on the same trip</li>
+          <li>Still requires a separate Umrah permit through Nusuk before entering Masjid al-Haram</li>
+          <li><strong>Approximate cost:</strong> around SAR 470–620, including the mandatory health insurance built into the fee</li>
+        </ul>
+        <a class="map-link" href="https://visa.visitsaudi.com" target="_blank" rel="noopener">Apply at visa.visitsaudi.com ↗</a>
+      </div>
+      <div class="panel">
+        <span class="tag">Route 2</span>
+        <h3>Official Umrah Visa</h3>
+        <ul>
+          <li>Issued through licensed travel agents, dedicated to religious pilgrimage</li>
+          <li>Bundled with an approved service package (accommodation, transport) purchased via Nusuk</li>
+          <li>Traditional route for travellers who prefer a packaged trip</li>
+          <li><strong>Approximate cost:</strong> around SAR 430–620 plus your agent's service package — this is the main variable, so compare a couple of agents</li>
+        </ul>
+        <a class="map-link" href="https://www.nusuk.sa" target="_blank" rel="noopener">Service packages at nusuk.sa ↗</a>
+      </div>
+      <div class="panel">
+        <span class="tag">Newer option</span>
+        <h3>One-year multiple-entry Umrah visa</h3>
+        <ul>
+          <li>Valid 365 days from issue; cumulative stay across all visits capped at 90 days</li>
+          <li>A new service package must be bought via Nusuk before each entry, and matched by a fresh Umrah permit</li>
+          <li>Visa pauses when you leave the Kingdom and resumes on your next entry; unused days carry forward</li>
+          <li>Not valid during the Hajj season (1 Dhul Qa'dah – 13 Dhul Hijjah)</li>
+          <li><strong>Approximate cost:</strong> varies by nationality and agent — priced per visit through the Nusuk service package rather than a single flat fee</li>
+        </ul>
+        <a class="map-link" href="https://www.nusuk.sa" target="_blank" rel="noopener">Details at nusuk.sa ↗</a>
+      </div>
+    </div>
+
+    <div class="note-box" style="background:rgba(247,241,228,0.08);border-color:var(--gold-soft);color:#DCE9E5;">
+      <strong>The rule that applies to everyone:</strong> whichever visa gets you into the country, you still need a separate, timed Umrah permit issued through the Nusuk app before you can enter Masjid al-Haram — and a further permit if you want to visit Al-Rawdah in Madinah. Entry windows, stay durations, fees and health requirements (such as vaccination rules) are amended periodically by the Ministry, so confirm the current terms and cost on the official sites above shortly before you travel rather than relying on any single source, including this one.
+    </div>
+  </div>
+</section>
 
 <!-- ================= JOURNEY ================= -->
 <section id="journey">
@@ -1284,130 +1450,6 @@
 
     <div class="note-box">
       <strong>Give through channels you can trust.</strong> Around any major place of worship, some of the people asking for money are in genuine need and some are part of organised begging operations that don't reach the people they claim to. Donation boxes inside and around both mosques, the mosque's own waqf offices, and Saudi Arabia's national giving platform, Ehsan, are reliable ways to make sure sadaqah actually reaches its cause. Trust your own judgment on individual cases — this isn't a reason to withhold kindness, just a reason to also give deliberately through verified channels.
-    </div>
-  </div>
-</section>
-
-<!-- ================= LATEST NEWS =================
-     This block is regenerated automatically by scripts/update_news.py, run on
-     a schedule by .github/workflows/update-news.yml. Do not hand-edit the
-     content between NEWS_LIST_START and NEWS_LIST_END — it will be
-     overwritten on the next run. Everything else in this section (heading,
-     wrapper, styling) is safe to edit normally. -->
-<section id="news" class="band-ivory-dim">
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="section-icon-row"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h4"/></svg></span><div class="kicker-ar">آخر الأخبار</div></div>
-      <h2>Latest Umrah &amp; Saudi travel news</h2>
-      <p class="desc">Visa changes, Nusuk updates and pilgrimage news as they're reported — refreshed automatically a few times a day. Headlines and summaries belong to the outlets linked below; tap through to read the full story.</p>
-    </div>
-
-    <div class="news-grid" id="newsGrid">
-      <!-- NEWS_LIST_START -->
-      <article class="news-card">
-        <div class="news-meta"><span class="news-source">LEADERSHIP Newspapers</span><span class="news-date">25 Sep 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxPWHV1RnJWcERkYkJSNXlpSElzczR1RkNHX1kwZnJxTnBnbEViNy1mOW5rNWloaGVWejdZRjBKRUhMenRtZVpXa0R6MXRIT0lqSXhHWWxZS2ZjQkVQTmFGS1VvelhvcUVjZGpIZm9UVFNqT3BmaFdrRTlPTWJfdG5Gd09wNXZYMG0waktiUU1PTFFUa1M4OTdCS0N3?oc=5&amp;hl=en-US&amp;gl=US&amp;ceid=US:en" target="_blank" rel="noopener nofollow">Minister Backs Saudi Arabia’s New Business Policy For Nigeria’s 2027 Hajj</a></h3>
-        <p>Read the full story at LEADERSHIP Newspapers.</p>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMimgFBVV95cUxPWHV1RnJWcERkYkJSNXlpSElzczR1RkNHX1kwZnJxTnBnbEViNy1mOW5rNWloaGVWejdZRjBKRUhMenRtZVpXa0R6MXRIT0lqSXhHWWxZS2ZjQkVQTmFGS1VvelhvcUVjZGpIZm9UVFNqT3BmaFdrRTlPTWJfdG5Gd09wNXZYMG0waktiUU1PTFFUa1M4OTdCS0N3?oc=5&amp;hl=en-US&amp;gl=US&amp;ceid=US:en" target="_blank" rel="noopener nofollow">Read more ↗</a>
-      </article>
-      <article class="news-card">
-        <div class="news-meta"><span class="news-source">Construction Week Online</span><span class="news-date">25 Sep 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMiiwFBVV95cUxQUmVtZjJZbG5mSVVOckZqY1RhRlZLZDFTWTBKUmM4cjl2WjlubzZxZFFmY1pTVzBnWC1Yc1VibElwTk9uSjEtMDhFbjdjNFo5SkxKY0JXd01ZYTV6UHhlLVFqaGs3TDZxZjNpNVlVYVJGTVdHS2gwYTFCX3h5cWNnZzJrdkNyQU5CRFBN?oc=5&amp;hl=en-US&amp;gl=US&amp;ceid=US:en" target="_blank" rel="noopener nofollow">Hitachi Rail wins contract to revamp Saudi metro serving Hajj pilgrims</a></h3>
-        <p>Read the full story at Construction Week Online.</p>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMiiwFBVV95cUxQUmVtZjJZbG5mSVVOckZqY1RhRlZLZDFTWTBKUmM4cjl2WjlubzZxZFFmY1pTVzBnWC1Yc1VibElwTk9uSjEtMDhFbjdjNFo5SkxKY0JXd01ZYTV6UHhlLVFqaGs3TDZxZjNpNVlVYVJGTVdHS2gwYTFCX3h5cWNnZzJrdkNyQU5CRFBN?oc=5&amp;hl=en-US&amp;gl=US&amp;ceid=US:en" target="_blank" rel="noopener nofollow">Read more ↗</a>
-      </article>
-      <article class="news-card">
-        <div class="news-meta"><span class="news-source">Arab News</span><span class="news-date">24 Sep 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMiowFBVV95cUxNRTJhUWdGRUFVV05meVBXa0drUnd5eTNpWDlGcVJuQ1JOcFVvQ3c2ZGFGR2FDUGlXVWV2cnowU0N6VGI1QXJ6V1ZzQnh5MlIxRlVyc0ZCOWpOWGhiLWFtNXdMNmNwdk5XLTJVb20zS2JtNlkyX2dmRS04c2lEZU5nLV96SzFwMjhxOVdaRXZPbUI1YVMwVWZORnNTMnFDWG0tcW93?oc=5&amp;hl=en-US&amp;gl=US&amp;ceid=US:en" target="_blank" rel="noopener nofollow">This year’s first Indian Hajj pilgrims arrive in Madinah</a></h3>
-        <p>Read the full story at Arab News.</p>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMiowFBVV95cUxNRTJhUWdGRUFVV05meVBXa0drUnd5eTNpWDlGcVJuQ1JOcFVvQ3c2ZGFGR2FDUGlXVWV2cnowU0N6VGI1QXJ6V1ZzQnh5MlIxRlVyc0ZCOWpOWGhiLWFtNXdMNmNwdk5XLTJVb20zS2JtNlkyX2dmRS04c2lEZU5nLV96SzFwMjhxOVdaRXZPbUI1YVMwVWZORnNTMnFDWG0tcW93?oc=5&amp;hl=en-US&amp;gl=US&amp;ceid=US:en" target="_blank" rel="noopener nofollow">Read more ↗</a>
-      </article>
-      <article class="news-card">
-        <div class="news-meta"><span class="news-source">Channels Television</span><span class="news-date">22 Sep 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMiqAFBVV95cUxNaUtRdjBZeFRWaHFaa0s5SWpYUjdHV1RrV201MGt3NTRyYkhldWtMc2lURG1mZENwWmYtRVRlcjlLVjU3UFZzTm1wa2tuVjIzdFV0VVNtRXhORFNNRDBGcXF5dmIySFZuX3FOUXN5QnRHMGRKVHNBdFBxZFFHNXkyTWdxLTBmSlZqUGhiWXliQWVUaFktakxBVGRzWmZudzBtdWZoaHBleks?oc=5&amp;hl=en-US&amp;gl=US&amp;ceid=US:en" target="_blank" rel="noopener nofollow">NAHCON Mulls Fare Hike As Saudi Arabia Introduces New Hajj Reforms</a></h3>
-        <p>Read the full story at Channels Television.</p>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMiqAFBVV95cUxNaUtRdjBZeFRWaHFaa0s5SWpYUjdHV1RrV201MGt3NTRyYkhldWtMc2lURG1mZENwWmYtRVRlcjlLVjU3UFZzTm1wa2tuVjIzdFV0VVNtRXhORFNNRDBGcXF5dmIySFZuX3FOUXN5QnRHMGRKVHNBdFBxZFFHNXkyTWdxLTBmSlZqUGhiWXliQWVUaFktakxBVGRzWmZudzBtdWZoaHBleks?oc=5&amp;hl=en-US&amp;gl=US&amp;ceid=US:en" target="_blank" rel="noopener nofollow">Read more ↗</a>
-      </article>
-      <article class="news-card">
-        <div class="news-meta"><span class="news-source">News18</span><span class="news-date">22 Sep 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxNeU43eFdWWV9CeVYzTnQ3bC1WMmxFdTd6SjVFQ0ZHV2UzdHNZZU1qZ3pVR3FwRWd3Rm1CTnpDbXp3RGxjRERIRTI2cHBIQ3dDQTJuQzlsbUdCWVJhTmE2NzVLVGxBUTVBNFUxM1VFTDByM1JHV3NTUGRrSzhXOVY4VFJvQTlzRGlMWnJlNHpQLUtrWURv0gGaAUFVX3lxTFA0OUJUMzNSWWlKQUhWSk02eXJWbjVCclJQVUw0X2taSmZtcTl0VVE3M0NIOEtWdDhLNnFTUkluQUJTWER2T2JpZ3pub2RlU3RjdVdjSU85aFVTSHhiZUhEVllORnJFUEZPVlNTREVUNklsT1JVcVc2a3RJNml1UjdBcHFLY3JLQUVpQWpKZVptRW5QUHVQZExSU2c?oc=5&amp;hl=en-US&amp;gl=US&amp;ceid=US:en" target="_blank" rel="noopener nofollow">Opinion | Pakistan&#x27;s Hajj Heist: Mecca Pact</a></h3>
-        <p>Read the full story at News18.</p>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMilAFBVV95cUxNeU43eFdWWV9CeVYzTnQ3bC1WMmxFdTd6SjVFQ0ZHV2UzdHNZZU1qZ3pVR3FwRWd3Rm1CTnpDbXp3RGxjRERIRTI2cHBIQ3dDQTJuQzlsbUdCWVJhTmE2NzVLVGxBUTVBNFUxM1VFTDByM1JHV3NTUGRrSzhXOVY4VFJvQTlzRGlMWnJlNHpQLUtrWURv0gGaAUFVX3lxTFA0OUJUMzNSWWlKQUhWSk02eXJWbjVCclJQVUw0X2taSmZtcTl0VVE3M0NIOEtWdDhLNnFTUkluQUJTWER2T2JpZ3pub2RlU3RjdVdjSU85aFVTSHhiZUhEVllORnJFUEZPVlNTREVUNklsT1JVcVc2a3RJNml1UjdBcHFLY3JLQUVpQWpKZVptRW5QUHVQZExSU2c?oc=5&amp;hl=en-US&amp;gl=US&amp;ceid=US:en" target="_blank" rel="noopener nofollow">Read more ↗</a>
-      </article>
-      <article class="news-card">
-        <div class="news-meta"><span class="news-source">Arab News</span><span class="news-date">19 Sep 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMiugFBVV95cUxQRUtIazJfUHQ1cXJ4MUpmdndVVkFEQXljbzRodWpvR3ZBYXJ1ZlVScHBfWFFpMkpmWkRzTTRXZ1QwdjJLa1phdlpYTktKdHRiYmg4czJWWloyQWpmQ3JhLWd0dXdyN3FoQzhES3JBenhzVmM5dnBPX3A1TXBaWWhVVTdpNmhxT2tPN1VkZy1yRnNPUEFJUGhveURtR0U3ZjQtSlJwTmM5TmUwYjlYamRSQUE1ZlhrOVJyZXc?oc=5&amp;hl=en-US&amp;gl=US&amp;ceid=US:en" target="_blank" rel="noopener nofollow">Saudi Arabia issues royal decrees, appoints new health and Hajj ministers</a></h3>
-        <p>Read the full story at Arab News.</p>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMiugFBVV95cUxQRUtIazJfUHQ1cXJ4MUpmdndVVkFEQXljbzRodWpvR3ZBYXJ1ZlVScHBfWFFpMkpmWkRzTTRXZ1QwdjJLa1phdlpYTktKdHRiYmg4czJWWloyQWpmQ3JhLWd0dXdyN3FoQzhES3JBenhzVmM5dnBPX3A1TXBaWWhVVTdpNmhxT2tPN1VkZy1yRnNPUEFJUGhveURtR0U3ZjQtSlJwTmM5TmUwYjlYamRSQUE1ZlhrOVJyZXc?oc=5&amp;hl=en-US&amp;gl=US&amp;ceid=US:en" target="_blank" rel="noopener nofollow">Read more ↗</a>
-      </article>
-      <article class="news-card">
-        <div class="news-meta"><span class="news-source">Britannica</span><span class="news-date">16 Sep 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMiekFVX3lxTE42VmRtUjd6VUNRMzN3bGIyamNxRGVwZFZjYV95ZFQ1ejE1SFZOSWdfR3NOUm5SNVkxN0txd3RRa29zRnY5bW12OUcxcWVXXzQ4Q2g3RHBQM2tPLUlRUlJwZ3JSQ0lTVVZsUHh0M1BlZUZvbldVZTd3U0NB?oc=5&amp;hl=en-US&amp;gl=US&amp;ceid=US:en" target="_blank" rel="noopener nofollow">Witness the annual hajj (pilgrimage) to Mecca, Saudi Arabi</a></h3>
-        <p>Read the full story at Britannica.</p>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMiekFVX3lxTE42VmRtUjd6VUNRMzN3bGIyamNxRGVwZFZjYV95ZFQ1ejE1SFZOSWdfR3NOUm5SNVkxN0txd3RRa29zRnY5bW12OUcxcWVXXzQ4Q2g3RHBQM2tPLUlRUlJwZ3JSQ0lTVVZsUHh0M1BlZUZvbldVZTd3U0NB?oc=5&amp;hl=en-US&amp;gl=US&amp;ceid=US:en" target="_blank" rel="noopener nofollow">Read more ↗</a>
-      </article>
-      <article class="news-card">
-        <div class="news-meta"><span class="news-source">Arab News</span><span class="news-date">10 Sep 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMiuAFBVV95cUxOU3ZFbjIwMUowRlVFM2RqZUFWNEZTNmtZY1dZbmdfWFJTdEpRRFdGaktjNEhCT0U4ZWtzeTU3QkU5ZUVZaW1TcjVabkRpX213RDRXWHJSbmdaV0Naanp1T29xNUFNVVpsNHhDSHNQeXhsQnpiSVQtaWtBdnpudWVQMjhnYnN4dm1icnNSTm1HSnZuYlV0c3dHZW42bUdHLVdRREJQcTZDYWg0Q2xlSDFaSFp0MGtQVXAt?oc=5&amp;hl=en-US&amp;gl=US&amp;ceid=US:en" target="_blank" rel="noopener nofollow">Saudi crown prince cancels G7 Summit attendance due to Hajj commitments</a></h3>
-        <p>Read the full story at Arab News.</p>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMiuAFBVV95cUxOU3ZFbjIwMUowRlVFM2RqZUFWNEZTNmtZY1dZbmdfWFJTdEpRRFdGaktjNEhCT0U4ZWtzeTU3QkU5ZUVZaW1TcjVabkRpX213RDRXWHJSbmdaV0Naanp1T29xNUFNVVpsNHhDSHNQeXhsQnpiSVQtaWtBdnpudWVQMjhnYnN4dm1icnNSTm1HSnZuYlV0c3dHZW42bUdHLVdRREJQcTZDYWg0Q2xlSDFaSFp0MGtQVXAt?oc=5&amp;hl=en-US&amp;gl=US&amp;ceid=US:en" target="_blank" rel="noopener nofollow">Read more ↗</a>
-      </article>
-      <!-- NEWS_LIST_END -->
-    </div>
-
-    <p class="news-updated-note" id="newsUpdatedNote">Headlines refresh automatically — last updated 27 Sep 2026.</p>
-  </div>
-</section>
-
-<!-- ================= REGULATIONS ================= -->
-<section id="regulations" class="band-teal">
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="section-icon-row"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></span><div class="kicker-ar">الأنظمة</div></div>
-      <h2>Saudi regulations for Umrah travellers</h2>
-      <p class="desc">A summary of how entry and pilgrimage permits currently work. Rules are set and updated by Saudi Arabia's Ministry of Hajj and Umrah — treat this as an orientation and always re-check the Nusuk platform before you book or travel.</p>
-    </div>
-
-    <div class="grid-3">
-      <div class="panel">
-        <span class="tag">Route 1</span>
-        <h3>Saudi Tourist e-Visa</h3>
-        <ul>
-          <li>Multiple entries, valid one year, up to 90 days per entry</li>
-          <li>Open to citizens of dozens of eligible countries; fully online, usually issued within a few days</li>
-          <li>Lets you perform Umrah and travel elsewhere in the Kingdom on the same trip</li>
-          <li>Still requires a separate Umrah permit through Nusuk before entering Masjid al-Haram</li>
-          <li><strong>Approximate cost:</strong> around SAR 470–620, including the mandatory health insurance built into the fee</li>
-        </ul>
-        <a class="map-link" href="https://visa.visitsaudi.com" target="_blank" rel="noopener">Apply at visa.visitsaudi.com ↗</a>
-      </div>
-      <div class="panel">
-        <span class="tag">Route 2</span>
-        <h3>Official Umrah Visa</h3>
-        <ul>
-          <li>Issued through licensed travel agents, dedicated to religious pilgrimage</li>
-          <li>Bundled with an approved service package (accommodation, transport) purchased via Nusuk</li>
-          <li>Traditional route for travellers who prefer a packaged trip</li>
-          <li><strong>Approximate cost:</strong> around SAR 430–620 plus your agent's service package — this is the main variable, so compare a couple of agents</li>
-        </ul>
-        <a class="map-link" href="https://www.nusuk.sa" target="_blank" rel="noopener">Service packages at nusuk.sa ↗</a>
-      </div>
-      <div class="panel">
-        <span class="tag">Newer option</span>
-        <h3>One-year multiple-entry Umrah visa</h3>
-        <ul>
-          <li>Valid 365 days from issue; cumulative stay across all visits capped at 90 days</li>
-          <li>A new service package must be bought via Nusuk before each entry, and matched by a fresh Umrah permit</li>
-          <li>Visa pauses when you leave the Kingdom and resumes on your next entry; unused days carry forward</li>
-          <li>Not valid during the Hajj season (1 Dhul Qa'dah – 13 Dhul Hijjah)</li>
-          <li><strong>Approximate cost:</strong> varies by nationality and agent — priced per visit through the Nusuk service package rather than a single flat fee</li>
-        </ul>
-        <a class="map-link" href="https://www.nusuk.sa" target="_blank" rel="noopener">Details at nusuk.sa ↗</a>
-      </div>
-    </div>
-
-    <div class="note-box" style="background:rgba(247,241,228,0.08);border-color:var(--gold-soft);color:#DCE9E5;">
-      <strong>The rule that applies to everyone:</strong> whichever visa gets you into the country, you still need a separate, timed Umrah permit issued through the Nusuk app before you can enter Masjid al-Haram — and a further permit if you want to visit Al-Rawdah in Madinah. Entry windows, stay durations, fees and health requirements (such as vaccination rules) are amended periodically by the Ministry, so confirm the current terms and cost on the official sites above shortly before you travel rather than relying on any single source, including this one.
     </div>
   </div>
 </section>
@@ -2355,7 +2397,7 @@
   <div class="container">
     <div class="section-head reveal">
       <div class="section-icon-row"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v10H8l-4 4z"/></svg></span><div class="kicker-ar">ملاحظاتكم</div></div>
-      <h2>Help us make this guide better</h2>
+      <h2>Help us make this site better</h2>
       <p class="desc">Missing a du'a, found an outdated rule, or wish there was a section on something else? Tell us what would make your Umrah journey smoother — this goes straight to the person building the site.</p>
     </div>
 
@@ -2507,7 +2549,7 @@
       window.prompt('Copy this link to share:', window.location.href);
     }
   }
-  document.getElementById('shareBtn').addEventListener('click', shareSite);
+  document.querySelectorAll('.share-btn').forEach((btn) => btn.addEventListener('click', shareSite));
 
   // ---- Packages drawer ----
   const packagesTabBtn = document.getElementById('packagesTabBtn');
