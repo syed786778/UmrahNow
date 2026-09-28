@@ -956,12 +956,13 @@
      nationality's registration numbers). A story about Pakistan, Iran,
      Indonesia, etc. arranging their own pilgrims' travel does not belong
      here even if Hajj/Umrah-related — only Saudi Arabia's own rules and
-     services do.
+     services do. EXCEPTION: India-specific Umrah news (Indian pilgrims,
+     visas, fares, packages) is wanted and allowed.
 
      DISPLAY RULE: every <article class="news-card"> below MUST carry a
      data-date="YYYY-MM-DD" attribute set to its real publish date. The
      script at the bottom of this page sorts the cards newest-first and shows
-     only the 4 most recent; older cards stay in the HTML but are hidden.
+     only the 6 most recent; older cards stay in the HTML but are hidden.
      update_news.py should run daily, add any new in-scope stories, and keep
      roughly the latest 8-10 so there is always a pool to pick from. -->
 <section id="news" class="band-ivory-dim">
@@ -969,7 +970,7 @@
     <div class="section-head reveal">
       <div class="section-icon-row"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h4"/></svg></span><div class="kicker-ar">آخر الأخبار</div></div>
       <h2>Latest Umrah &amp; Saudi travel news</h2>
-      <p class="desc">Saudi Arabia's own visa, hotel, Nusuk/Umrah, shopping and travel-advisory news, newest first. No other country's bilateral pilgrim arrangements. Headlines and summaries belong to the outlets linked below; tap through to read the full story.</p>
+      <p class="desc">Saudi Arabia's own visa, hotel, Nusuk/Umrah, shopping and travel-advisory news, plus Umrah news for pilgrims travelling from India, newest first. Headlines and summaries belong to the outlets linked below; tap through to read the full story.</p>
     </div>
 
     <div class="news-grid" id="newsGrid">
@@ -2417,7 +2418,7 @@
   <div class="container">
     <div class="section-head reveal">
       <div class="section-icon-row"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v10H8l-4 4z"/></svg></span><div class="kicker-ar">ملاحظاتكم</div></div>
-      <h2>Help us make this guide better</h2>
+      <h2>Help us make this site better</h2>
       <p class="desc">Missing a du'a, found an outdated rule, or wish there was a section on something else? Tell us what would make your Umrah journey smoother — this goes straight to the person building the site.</p>
     </div>
 
@@ -2689,13 +2690,13 @@
     });
   });
 
-  // ---- Latest news: newest 4 ----
+  // ---- Latest news: newest 6 ----
   // Sorts every .news-card by its data-date (newest first) and shows only the
-  // top 4. There is no age cutoff, so the section is never empty as long as
+  // top 6. There is no age cutoff, so the section is never empty as long as
   // the list contains stories; whatever generates the list only needs to keep
   // adding fresh entries with a real data-date.
   (function showLatestNews() {
-    const MAX_STORIES = 4;
+    const MAX_STORIES = 6;
     const grid = document.getElementById('newsGrid');
     if (!grid) return;
     const cards = Array.from(grid.querySelectorAll('.news-card'));
