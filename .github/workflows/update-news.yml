@@ -1,53 +1,35 @@
-name: Update Umrah/Hajj news
-
-# Refreshes the "Latest Umrah & Saudi travel news" section on the homepage.
-# The script writes real headlines/summaries directly into umrah-portal.html
-# (see scripts/update_news.py) so the content is present in the page a search
-# crawler receives, not assembled client-side after load.
-#
-# One-time setup this repo needs for the auto-commit step to work:
-#   Settings → Actions → General → Workflow permissions →
-#   "Read and write permissions" (instead of the default read-only).
-#
-# If GitHub Pages here deploys from something other than pushes to this
-# branch's root (e.g. a /docs folder, or a separate Pages-deploy workflow),
-# adjust the checkout/commit step below to match, or add a step that
-# triggers your existing deploy workflow after the commit.
+name: Update news
 
 on:
   schedule:
-    - cron: '0 */6 * * *'   # every 6 hours, UTC — adjust if you want it more/less frequent
-  workflow_dispatch: {}      # lets you trigger a run manually from the Actions tab
+    - cron: "0 3 * * *"      # every day at 03:00 UTC (06:00 Makkah time)
+  workflow_dispatch:          # also lets you run it manually from the Actions tab
 
 permissions:
-  contents: write
+  contents: write             # needed so the job can commit the refreshed page
 
 jobs:
-  update-news:
+  refresh:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.12"
 
-      - name: Install dependencies
-        run: pip install -r scripts/requirements.txt
+      # If your page isn't called index.html, change the filename below.
+      - name: Refresh the news cards
+        run: python scripts/update_news.py index.html
 
-      - name: Run news updater
-        run: python scripts/update_news.py
-
-      - name: Commit and push if changed
+      - name: Commit if anything changed
         run: |
-          git config user.name "umrahnow-news-bot"
-          git config user.email "actions@users.noreply.github.com"
-          if git diff --quiet -- index.html; then
+          if git diff --quiet; then
             echo "No changes to commit."
           else
-            git add index.html
-            git commit -m "chore: refresh Umrah/Hajj news [automated]"
+            git config user.name  "news-bot"
+            git config user.email "news-bot@users.noreply.github.com"
+            git add -A
+            git commit -m "Refresh news"
             git push
           fi
