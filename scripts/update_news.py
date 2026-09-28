@@ -39,18 +39,18 @@ START, END = "<!-- NEWS_LIST_START -->", "<!-- NEWS_LIST_END -->"
 
 # Google News RSS searches. "when:Nd" limits to the last N days.
 QUERIES = [
-    "Saudi Arabia Umrah visa when:60d",
-    "Saudi Arabia tourist visa when:60d",
-    "Nusuk Umrah when:60d",
-    "Makkah hotel when:60d",
-    "Madinah hotel when:60d",
-    "Makkah OR Madinah mall OR shopping when:60d",
-    "Saudi Arabia pilgrims advisory OR heat OR health when:60d",
-    "Ministry of Hajj and Umrah when:60d",
+    "Saudi Arabia Umrah visa",
+    "Saudi Arabia tourist visa",
+    "Nusuk Umrah",
+    "Makkah hotel",
+    "Madinah hotel",
+    "Makkah OR Madinah mall OR shopping",
+    "Saudi Arabia pilgrims advisory OR heat OR health",
+    "Ministry of Hajj and Umrah",
     # India-specific Umrah news (Indian pilgrims, visas, fares, packages)
-    "Umrah India when:60d",
-    "Indian pilgrims Umrah Saudi visa when:60d",
-    "India Umrah package OR fare OR flights Jeddah OR Madinah when:60d",
+    "Umrah India",
+    "Indian pilgrims Umrah Saudi visa",
+    "India Umrah package OR fare OR flights Jeddah OR Madinah",
 ]
 
 # A headline must mention Saudi Arabia (or one of its holy cities)...
@@ -198,17 +198,26 @@ def main():
         sys.exit("All feeds failed -- page left unchanged.")
 
     fetched.sort(key=lambda s: s["date"], reverse=True)
-    new_cards = []
+    print(f"Fetched {len(fetched)} headlines in total.")
+    new_cards, rejected = [], {"duplicate": [], "too old / future": [], "not relevant": []}
     for s in fetched:
         key = norm_title(s["title"])
-        if key in seen or s["date"] > today or s["date"] < oldest:
-            continue
+        if key in seen:
+            rejected["duplicate"].append(s["title"]); continue
+        if s["date"] > today or s["date"] < oldest:
+            rejected["too old / future"].append(s["title"]); continue
         if not is_relevant(s["title"]):
-            continue
+            rejected["not relevant"].append(s["title"]); continue
         seen.add(key)
         new_cards.append((s["date"], key, build_card(s)))
         if len(new_cards) >= MAX_NEW_PER_RUN:
             break
+    for reason, titles in rejected.items():
+        print(f"  rejected ({reason}): {len(titles)}")
+        for t in titles[:5]:
+            print(f"     - {t}")
+    for c in new_cards:
+        print(f"  + added: {c[0]}  {c[1][:70]}")
 
     fresh_existing = [c for c in existing if c[0] >= oldest]      # drop stale cards
     pool = sorted(new_cards + fresh_existing, key=lambda c: c[0], reverse=True)[:MAX_POOL]
