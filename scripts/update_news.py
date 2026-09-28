@@ -9,8 +9,9 @@ What it does, in order:
      drops anything tied to other countries' pilgrims (Pakistan, Iran, ...)
      or to war/violence.
   3. Merges the new stories with the cards already in the page (so
-     hand-written summaries are kept), removes duplicates, sorts newest-first
-     and keeps the latest MAX_POOL.
+     hand-written summaries are kept), removes duplicates, DELETES anything
+     older than MAX_AGE_DAYS (60), sorts newest-first and keeps the latest
+     MAX_POOL.
   4. Rewrites only the block between <!-- NEWS_LIST_START --> and
      <!-- NEWS_LIST_END -->. The page's own script then shows the 4 newest.
 
@@ -32,24 +33,24 @@ from pathlib import Path
 
 # ----------------------------------------------------------------- settings
 MAX_POOL = 12          # cards kept in the HTML (page displays the newest 6)
-MAX_AGE_DAYS = 45      # ignore feed items older than this when adding new ones
+MAX_AGE_DAYS = 60      # nothing older than this is added OR kept on the page
 MAX_NEW_PER_RUN = 6    # cap on brand-new cards added in one run
 START, END = "<!-- NEWS_LIST_START -->", "<!-- NEWS_LIST_END -->"
 
 # Google News RSS searches. "when:Nd" limits to the last N days.
 QUERIES = [
-    "Saudi Arabia Umrah visa when:30d",
-    "Saudi Arabia tourist visa when:30d",
-    "Nusuk Umrah when:30d",
-    "Makkah hotel when:45d",
-    "Madinah hotel when:45d",
-    "Makkah OR Madinah mall OR shopping when:45d",
-    "Saudi Arabia pilgrims advisory OR heat OR health when:30d",
-    "Ministry of Hajj and Umrah when:30d",
+    "Saudi Arabia Umrah visa when:60d",
+    "Saudi Arabia tourist visa when:60d",
+    "Nusuk Umrah when:60d",
+    "Makkah hotel when:60d",
+    "Madinah hotel when:60d",
+    "Makkah OR Madinah mall OR shopping when:60d",
+    "Saudi Arabia pilgrims advisory OR heat OR health when:60d",
+    "Ministry of Hajj and Umrah when:60d",
     # India-specific Umrah news (Indian pilgrims, visas, fares, packages)
-    "Umrah India when:30d",
-    "Indian pilgrims Umrah Saudi visa when:30d",
-    "India Umrah package OR fare OR flights Jeddah OR Madinah when:30d",
+    "Umrah India when:60d",
+    "Indian pilgrims Umrah Saudi visa when:60d",
+    "India Umrah package OR fare OR flights Jeddah OR Madinah when:60d",
 ]
 
 # A headline must mention Saudi Arabia (or one of its holy cities)...
@@ -209,10 +210,13 @@ def main():
         if len(new_cards) >= MAX_NEW_PER_RUN:
             break
 
-    pool = sorted(new_cards + existing, key=lambda c: c[0], reverse=True)[:MAX_POOL]
-    print(f"{ok_feeds}/{len(QUERIES)} feeds ok, {len(new_cards)} new stories, {len(pool)} kept.")
-    if not new_cards:
-        print("Nothing new -- page left unchanged.")
+    fresh_existing = [c for c in existing if c[0] >= oldest]      # drop stale cards
+    pool = sorted(new_cards + fresh_existing, key=lambda c: c[0], reverse=True)[:MAX_POOL]
+    dropped = len(existing) - len(fresh_existing)
+    print(f"{ok_feeds}/{len(QUERIES)} feeds ok, {len(new_cards)} new stories, "
+          f"{dropped} stale removed, {len(pool)} kept.")
+    if not new_cards and not dropped:
+        print("Nothing to change -- page left unchanged.")
         return
 
     new_block = "\n" + "\n".join(c[2] for c in pool) + "\n      "
