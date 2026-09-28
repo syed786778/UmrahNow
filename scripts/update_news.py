@@ -3,7 +3,7 @@
 Refreshes the "Latest news" cards in the UmrahNow HTML page.
 
 What it does, in order:
-  1. Pulls headlines from several Google News RSS searches (no API key needed).
+  1. Pulls headlines from Google News and Bing News RSS searches (no API key).
   2. Keeps only stories about Saudi Arabia's own visas, hotels, Umrah/Nusuk,
      shopping and travel advisories, plus India-specific Umrah news -- and
      drops anything tied to other countries' pilgrims (Pakistan, Iran, ...)
@@ -89,6 +89,31 @@ def fetch(url, timeout=20):
 def feed_url(query):
     q = urllib.parse.quote(query)
     return f"https://news.google.com/rss/search?q={q}&hl=en-SA&gl=SA&ceid=SA:en"
+
+
+def bing_url(query):
+    return "https://www.bing.com/news/search?q=" + urllib.parse.quote(query) + "&format=rss&setmkt=en-SA"
+
+
+def parse_bing(xml_bytes):
+    """Same output as parse_feed, for Bing News RSS (gives the real article URL)."""
+    root = ET.fromstring(xml_bytes)
+    for item in root.iter("item"):
+        title = (item.findtext("title") or "").strip()
+        link = (item.findtext("link") or "").strip()
+        pub = item.findtext("pubDate")
+        source = ""
+        for child in item:
+            if child.tag.split("}")[-1] == "Source":
+                source = (child.text or "").strip()
+        real = urllib.parse.parse_qs(urllib.parse.urlparse(link).query).get("url", [link])[0]
+        domain = urllib.parse.urlparse(real).netloc.replace("www.", "")
+        try:
+            date = parsedate_to_datetime(pub).astimezone(timezone.utc).date()
+        except Exception:
+            continue
+        if title and real:
+            yield {"title": title, "link": real, "date": date, "source": source or domain or "News", "domain": domain}
 
 
 def has_word(text, words):
@@ -188,12 +213,14 @@ def main():
     oldest = today - timedelta(days=MAX_AGE_DAYS)
 
     fetched, ok_feeds = [], 0
+    sources = (("google", feed_url, parse_feed), ("bing", bing_url, parse_bing))
     for q in QUERIES:
-        try:
-            fetched.extend(parse_feed(fetch(feed_url(q))))
-            ok_feeds += 1
-        except Exception as e:  # network/parse problem: skip this feed
-            print(f"  ! feed failed ({q}): {e}")
+        for name, url_fn, parser in sources:
+            try:
+                fetched.extend(parser(fetch(url_fn(q))))
+                ok_feeds += 1
+            except Exception as e:  # network/parse problem: skip this feed
+                print(f"  ! {name} feed failed ({q}): {e}")
     if ok_feeds == 0:
         sys.exit("All feeds failed -- page left unchanged.")
 
@@ -222,7 +249,7 @@ def main():
     fresh_existing = [c for c in existing if c[0] >= oldest]      # drop stale cards
     pool = sorted(new_cards + fresh_existing, key=lambda c: c[0], reverse=True)[:MAX_POOL]
     dropped = len(existing) - len(fresh_existing)
-    print(f"{ok_feeds}/{len(QUERIES)} feeds ok, {len(new_cards)} new stories, "
+    print(f"{ok_feeds}/{len(QUERIES) * 2} feeds ok, {len(new_cards)} new stories, "
           f"{dropped} stale removed, {len(pool)} kept.")
     if not new_cards and not dropped:
         print("Nothing to change -- page left unchanged.")
