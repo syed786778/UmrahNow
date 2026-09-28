@@ -8,6 +8,11 @@ on:
 permissions:
   contents: write             # needed so the job can commit the refreshed page
 
+# Only one run at a time, so two runs can't push over each other.
+concurrency:
+  group: update-news
+  cancel-in-progress: false
+
 jobs:
   refresh:
     runs-on: ubuntu-latest
@@ -22,14 +27,16 @@ jobs:
       - name: Refresh the news cards
         run: python scripts/update_news.py index.html
 
-      - name: Commit if anything changed
+      - name: Commit and push if changed
         run: |
           if git diff --quiet; then
             echo "No changes to commit."
-          else
-            git config user.name  "news-bot"
-            git config user.email "news-bot@users.noreply.github.com"
-            git add -A
-            git commit -m "Refresh news"
-            git push
+            exit 0
           fi
+          git config user.name  "umrahnow-news-bot"
+          git config user.email "umrahnow-news-bot@users.noreply.github.com"
+          git add -A
+          git commit -m "chore: refresh Umrah/Hajj news [automated]"
+          # Pull anything pushed since this job started, then push.
+          git pull --rebase origin main
+          git push origin HEAD:main
