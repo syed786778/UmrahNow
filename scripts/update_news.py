@@ -5,8 +5,9 @@ Refreshes the "Latest news" cards in the UmrahNow HTML page.
 What it does, in order:
   1. Pulls headlines from several Google News RSS searches (no API key needed).
   2. Keeps only stories about Saudi Arabia's own visas, hotels, Umrah/Nusuk,
-     shopping and travel advisories -- and drops anything tied to another
-     country's pilgrims (Pakistan, Iran, ...) or to war/violence.
+     shopping and travel advisories, plus India-specific Umrah news -- and
+     drops anything tied to other countries' pilgrims (Pakistan, Iran, ...)
+     or to war/violence.
   3. Merges the new stories with the cards already in the page (so
      hand-written summaries are kept), removes duplicates, sorts newest-first
      and keeps the latest MAX_POOL.
@@ -30,7 +31,7 @@ from email.utils import parsedate_to_datetime
 from pathlib import Path
 
 # ----------------------------------------------------------------- settings
-MAX_POOL = 10          # cards kept in the HTML (page displays the newest 4)
+MAX_POOL = 12          # cards kept in the HTML (page displays the newest 6)
 MAX_AGE_DAYS = 45      # ignore feed items older than this when adding new ones
 MAX_NEW_PER_RUN = 6    # cap on brand-new cards added in one run
 START, END = "<!-- NEWS_LIST_START -->", "<!-- NEWS_LIST_END -->"
@@ -45,6 +46,10 @@ QUERIES = [
     "Makkah OR Madinah mall OR shopping when:45d",
     "Saudi Arabia pilgrims advisory OR heat OR health when:30d",
     "Ministry of Hajj and Umrah when:30d",
+    # India-specific Umrah news (Indian pilgrims, visas, fares, packages)
+    "Umrah India when:30d",
+    "Indian pilgrims Umrah Saudi visa when:30d",
+    "India Umrah package OR fare OR flights Jeddah OR Madinah when:30d",
 ]
 
 # A headline must mention Saudi Arabia (or one of its holy cities)...
@@ -57,7 +62,8 @@ TOPIC_WORDS = ["visa", "umrah", "nusuk", "hotel", "hotels", "hospitality",
                "rawdah", "tourism", "tourist", "haramain", "flight", "airport",
                "booking", "package"]
 # Anything tied to other countries' pilgrims, or to conflict, is dropped.
-BLOCK_WORDS = ["pakistan", "pakistani", "iran", "iranian", "india", "indian",
+# (India is deliberately NOT blocked: India-specific Umrah news is wanted.)
+BLOCK_WORDS = ["pakistan", "pakistani", "iran", "iranian",
                "indonesia", "malaysia", "bangladesh", "nigeria", "nigerian",
                "turkey", "egypt", "yemen", "iraq", "syria", "israel", "gaza",
                "afghanistan", "quota", "war", "missile", "strike", "attack",
