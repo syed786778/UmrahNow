@@ -631,9 +631,11 @@
   .calc-result{background:var(--ivory-dim);border-radius:6px;padding:20px 22px;margin-bottom:18px;}
   .calc-result-row{display:flex;justify-content:space-between;gap:12px;padding:6px 0;font-size:0.95rem;color:#4a4a44;}
   .calc-result-row .amount{font-family:'Amiri',serif;font-weight:600;color:var(--night);}
+  .calc-result-row .amount .amount-sar, .calc-per-person .amount-sar{font-family:'Work Sans',sans-serif;font-weight:400;color:#8a8578;font-size:0.85em;}
   .calc-result-row.total{border-top:1px solid var(--line);margin-top:8px;padding-top:12px;font-weight:700;color:var(--night);font-size:1.15rem;}
   .calc-result-row.total .amount{color:var(--gold);font-size:1.3rem;}
   .calc-per-person{text-align:center;font-size:0.9rem;color:var(--teal);font-weight:600;margin-top:12px;}
+  .calc-fx-note{text-align:center;font-size:0.78rem;color:#8a8578;margin:0 0 14px;}
 
 
   /* ---------- PACKAGES: FLOATING BUTTON + SLIDE-IN DRAWER ---------- */
@@ -950,16 +952,24 @@
             <label for="calcNightsMadinah">Nights in Madinah</label>
             <input type="number" id="calcNightsMadinah" min="0" value="5">
           </div>
-          <div class="calc-field" style="grid-column:1/-1;">
+          <div class="calc-field">
             <label for="calcFlight">Flight cost per person, round trip (SAR)</label>
             <input type="number" id="calcFlight" min="0" value="2500">
+          </div>
+          <div class="calc-field">
+            <label for="calcVisa">Visa route</label>
+            <select id="calcVisa">
+              <option value="545" selected>Saudi Tourist e-Visa (~SAR 545 median)</option>
+              <option value="525">Official Umrah Visa (~SAR 525 median, excl. agent package)</option>
+            </select>
           </div>
         </div>
 
         <div class="calc-result" id="calcResult"></div>
+        <p class="calc-fx-note">Shown in INR with SAR alongside — ₹1 ≈ SAR 0.039 (≈ SAR 1 → ₹25.6), a rough rate that moves daily. Check a live rate before budgeting precisely.</p>
 
         <div class="ihram-disclaimer" style="margin-top:4px;text-align:left;">
-          <strong>For information only.</strong> This is a planning estimate, not a quote — built from approximate hotel-tier averages and whatever you enter above. It doesn't cover your visa, local transport, food, shopping or ziyarat costs, and no hotel, airline or agent has confirmed these numbers. Use it to get a feel for your budget, then check real prices before you book.
+          <strong>For information only.</strong> This covers stay, flights and the visa fee only — not local transport, food, shopping or ziyarat costs — using approximate hotel-tier medians and the visa's government-set fee range. No hotel, airline or agent has confirmed these numbers. <strong>Booking through a travel agent or in a group usually changes the per-person math</strong>, since most packages bundle local transport, meals and ziyarat trips into one price — compare the whole package against these three line items rather than against the total alone.
         </div>
       </div>
     </div>
@@ -1062,77 +1072,19 @@
 
     <div class="news-grid" id="newsGrid">
       <!-- NEWS_LIST_START -->
-      <article class="news-card" data-date="2026-09-30">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=en.banglanews24.com" alt="" loading="lazy">Banglanews24</span><span class="news-date">30 Sep 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMickFVX3lxTE01aHZadTMxeFpndXFYWmZMVWF2VGJaNUhsdzJXUFR4bG9IbXRaTEthb3lxRjJ1YXpQWFhjQzRkZThOSUVNZXh6SmxhV01TeVB1UXBzNS13U0N0UVY5X2xRZy1FeUNNM2k1X204bk5GNHgzUQ?oc=5" target="_blank" rel="noopener nofollow">Saudi launches all-inclusive Hajj package for 2027</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMickFVX3lxTE01aHZadTMxeFpndXFYWmZMVWF2VGJaNUhsdzJXUFR4bG9IbXRaTEthb3lxRjJ1YXpQWFhjQzRkZThOSUVNZXh6SmxhV01TeVB1UXBzNS13U0N0UVY5X2xRZy1FeUNNM2k1X204bk5GNHgzUQ?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-09-29">
+      <article class="news-card" data-date="2026-09-25">
         <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=spa.gov.sa" alt="" loading="lazy">Saudi Press Agency</span><span class="news-date">29 Sep 2026</span></div>
-        <h3><a href="https://www.spa.gov.sa/en/N2403190" target="_blank" rel="noopener nofollow">Hajj and Umrah Ministry: Nusuk App Downloads Reach 30 Million with 150% Yearly Rise</a></h3>
-        <a class="map-link" href="https://www.spa.gov.sa/en/N2403190" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
+        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=gulfnews.com" alt="" loading="lazy">Gulf News</span><span class="news-date">25 Sep 2026</span></div>
+        <h3><a href="https://gulfnews.com/world/gulf/saudi/saudi-arabia-launches-365-day-umrah-visa-with-90-day-stay-1.500613885" target="_blank" rel="noopener nofollow">Saudi Arabia's multiple-entry Umrah visa: what pilgrims need to know</a></h3>
+        <p>The one-year, multiple-entry Umrah visa lets eligible pilgrims return to the Kingdom several times over 365 days without reapplying each trip, with a cumulative stay capped at 90 days and a fresh Nusuk service package required before every visit.</p>
+        <a class="map-link" href="https://gulfnews.com/world/gulf/saudi/saudi-arabia-launches-365-day-umrah-visa-with-90-day-stay-1.500613885" target="_blank" rel="noopener nofollow">Read more ↗</a>
       </article>
-      <article class="news-card" data-date="2026-09-29">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=arabnews.com" alt="" loading="lazy">Arab News</span><span class="news-date">29 Sep 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMiogFBVV95cUxNbklkVzZ2R1dhZWdMcHhGUktYT2N3bTBIcUVsUXUyXzh3R1hCQTM2bnRubWNqbnVLTEIyX1JFRXpvcklMTXhrWE1EWlQ3RmtCbzFpN09XWXpmRFBSd0RENEhWWnQ5eGtzVnUzbUpjRG5jNUNVUDZDMlBqck1YNzMwTnhIcFYyQmpyckcxRUE5Zm9yNVJVLWx2aVVYZmt2UnpNaUE?oc=5" target="_blank" rel="noopener nofollow">Kingdom introduces all-inclusive Hajj package for 2027</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMiogFBVV95cUxNbklkVzZ2R1dhZWdMcHhGUktYT2N3bTBIcUVsUXUyXzh3R1hCQTM2bnRubWNqbnVLTEIyX1JFRXpvcklMTXhrWE1EWlQ3RmtCbzFpN09XWXpmRFBSd0RENEhWWnQ5eGtzVnUzbUpjRG5jNUNVUDZDMlBqck1YNzMwTnhIcFYyQmpyckcxRUE5Zm9yNVJVLWx2aVVYZmt2UnpNaUE?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-09-29">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=go.kompas.com" alt="" loading="lazy">go.kompas.com</span><span class="news-date">29 Sep 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMixgFBVV95cUxOcWpNMlBvTnhrV01EeUp3TC13c19zeFczd3QzZTliam5DYXE4V3c4cHREQkVVSUdGZ3JDYmh3M205R2x5VjZ3cExRRFpoN2VsdkFSRk1WbG5TT252ZGRoYjVNcG1Cd01xZ3FlR2Rjc01QQ0F6V2RodHJYWjJMNjlxNEtuekRfcFdrSHdvVTBJN1FLX1FRcXJKNU9xREFXT2M2eG04Z250TjBZR21PVEFkNkJlVzNEb3pVbTNRRERYVUNaZDdFTmc?oc=5" target="_blank" rel="noopener nofollow">Kemenhaj Proposes Establishment of Technical Umrah Staff for Supervision in the Holy Land</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMixgFBVV95cUxOcWpNMlBvTnhrV01EeUp3TC13c19zeFczd3QzZTliam5DYXE4V3c4cHREQkVVSUdGZ3JDYmh3M205R2x5VjZ3cExRRFpoN2VsdkFSRk1WbG5TT252ZGRoYjVNcG1Cd01xZ3FlR2Rjc01QQ0F6V2RodHJYWjJMNjlxNEtuekRfcFdrSHdvVTBJN1FLX1FRcXJKNU9xREFXT2M2eG04Z250TjBZR21PVEFkNkJlVzNEb3pVbTNRRERYVUNaZDdFTmc?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-09-29">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=curlytales.com" alt="" loading="lazy">curlytales.com</span><span class="news-date">29 Sep 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMitAFBVV95cUxPcEVBYk9wUUJ2MzYxVmNELUFNT2pxaGxhSjZNLXhxcHNlM1JSYkVtM1VOOXVwZXNoTXJaSDBFX2pvWExfV19IejYwVXg2bW1RdEFUZW5UUUVwcnhFYUdJalZ6Y3BIaElhUXdVTmhkRVRwM0ZJckJJWTBTbUw3NC1KSkVpRzBLUWhsVlRINHZPRGZlZFIzbFpkSm9YR2luc0NpS1IwdVVSeGtoZGk5aDVMX1BXUUvSAboBQVVfeXFMUGJLcXVZek9URlIyVkRQbHpNV1g3TFVtZ0NSVFVva25FRG9TTHd2NkxHSEc3RU1KbXI0RFJsS0gwWnZyWkVyUVIwM01yVG5zSC1fT3V2YWJCQ1hpTlVpQXNySHVZNFlyeFlxWmtGLVJhaE5EWW93UWtCZEdmWTVZZ29kUk9mRkFoVDlrdGI4X0FRYmpJdGtjR2ZkN1VRSUpBcy1HNF9NckNYQ3JnbEJKSVpTZ1VzamN5NFp3?oc=5" target="_blank" rel="noopener nofollow">Hajj 2027: Saudi Arabia Combines Accommodation, Transport &amp; Meals In One Package</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMitAFBVV95cUxPcEVBYk9wUUJ2MzYxVmNELUFNT2pxaGxhSjZNLXhxcHNlM1JSYkVtM1VOOXVwZXNoTXJaSDBFX2pvWExfV19IejYwVXg2bW1RdEFUZW5UUUVwcnhFYUdJalZ6Y3BIaElhUXdVTmhkRVRwM0ZJckJJWTBTbUw3NC1KSkVpRzBLUWhsVlRINHZPRGZlZFIzbFpkSm9YR2luc0NpS1IwdVVSeGtoZGk5aDVMX1BXUUvSAboBQVVfeXFMUGJLcXVZek9URlIyVkRQbHpNV1g3TFVtZ0NSVFVva25FRG9TTHd2NkxHSEc3RU1KbXI0RFJsS0gwWnZyWkVyUVIwM01yVG5zSC1fT3V2YWJCQ1hpTlVpQXNySHVZNFlyeFlxWmtGLVJhaE5EWW93UWtCZEdmWTVZZ29kUk9mRkFoVDlrdGI4X0FRYmpJdGtjR2ZkN1VRSUpBcy1HNF9NckNYQ3JnbEJKSVpTZ1VzamN5NFp3?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-09-28">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=spa.gov.sa" alt="" loading="lazy">Saudi Press Agency</span><span class="news-date">28 Sep 2026</span></div>
-        <h3><a href="https://www.spa.gov.sa/en/N2381933" target="_blank" rel="noopener nofollow">New &#x27;Nusuk Umrah&#x27; Service for International Umrah Performers to Simplify Visa and Travel Bookings</a></h3>
-        <a class="map-link" href="https://www.spa.gov.sa/en/N2381933" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-09-28">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=spa.gov.sa" alt="" loading="lazy">Saudi Press Agency</span><span class="news-date">28 Sep 2026</span></div>
-        <h3><a href="https://www.spa.gov.sa/en/N2351386" target="_blank" rel="noopener nofollow">Hajj Ministry: Suspensions, Fines Imposed on Several Companies for Shortcomings in Services Provided to Umrah Performers</a></h3>
-        <a class="map-link" href="https://www.spa.gov.sa/en/N2351386" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-09-28">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=spa.gov.sa" alt="" loading="lazy">spa.gov.sa</span><span class="news-date">28 Sep 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMiRkFVX3lxTE82LXBMd2ZMdjJzQm1xMV9sZFROa0lIbVJSR28zeU9ISXdyQlNDSTZaVWRZdWFTZG03MUdUT2pRTHZCU0lDV3c?oc=5" target="_blank" rel="noopener nofollow">Ministry of Hajj and Umrah Finalizes Preparations for Pilgrims&#x27; Dispatching Plans at Holy Sites</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMiRkFVX3lxTE82LXBMd2ZMdjJzQm1xMV9sZFROa0lIbVJSR28zeU9ISXdyQlNDSTZaVWRZdWFTZG03MUdUT2pRTHZCU0lDV3c?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-09-28">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=cairoscene.com" alt="" loading="lazy">CairoScene</span><span class="news-date">28 Sep 2026</span></div>
-        <h3><a href="https://cairoscene.com/News/Hajj-Ministry-Launches-Integrated-Package-for-Foreign-Pilgrims" target="_blank" rel="noopener nofollow">Hajj Ministry Launches Integrated Package for Foreign Pilgrims</a></h3>
-        <a class="map-link" href="https://cairoscene.com/News/Hajj-Ministry-Launches-Integrated-Package-for-Foreign-Pilgrims" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-09-28">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=gulfnews.com" alt="" loading="lazy">Gulf News</span><span class="news-date">28 Sep 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxPaExLUktXTTFqU2l6WHhXLXZLRXBjeVFqcTFvYmh1aVVpUU9ScmQ1Rk1GdUZJT3JZM181ZGV4dDNwelROc1BlbjhhZzNzcXRxZTJZVWNncGhXSUVJLU5Pdl9nX2RmR0U1T1BQdU5ma0VWeWh0OGZWUGZGNW5fUloyaHdlRm45dGdBZzc4S3NIeVh4dC1BbTFMUjluYnlRRlczZC1xUld0Y2lfZndQOTNlN1cxVEdmYTTSAcwBQVVfeXFMTjRFOWZhbFk0Wkwxb2YzVU9zcDFKN05pNkQtN3J1S18wMjlsWldLQlloWmdKWWt6T3ZBR0NzNS1SODlab0cwY2hKRmQ1MFBFdHpFTlJ1ejhzZGFBRUdVeFhwb0hrb3Z3eUl2SFRCY3ZyNXZEZ1piUTk3c1h5RW03Z29KUVNGRXZfakJGWWktZllUYXlHY0dxOFoyVEhISGtfLW9uMkZmYy1ySko0dTQ5RC1Wb3prTWFYbHhxZUgweTUzYkU4NjZYY3BjQ19U?oc=5" target="_blank" rel="noopener nofollow">Saudi Arabia launches all-in-one Hajj package for foreign pilgrims</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMitwFBVV95cUxPaExLUktXTTFqU2l6WHhXLXZLRXBjeVFqcTFvYmh1aVVpUU9ScmQ1Rk1GdUZJT3JZM181ZGV4dDNwelROc1BlbjhhZzNzcXRxZTJZVWNncGhXSUVJLU5Pdl9nX2RmR0U1T1BQdU5ma0VWeWh0OGZWUGZGNW5fUloyaHdlRm45dGdBZzc4S3NIeVh4dC1BbTFMUjluYnlRRlczZC1xUld0Y2lfZndQOTNlN1cxVEdmYTTSAcwBQVVfeXFMTjRFOWZhbFk0Wkwxb2YzVU9zcDFKN05pNkQtN3J1S18wMjlsWldLQlloWmdKWWt6T3ZBR0NzNS1SODlab0cwY2hKRmQ1MFBFdHpFTlJ1ejhzZGFBRUdVeFhwb0hrb3Z3eUl2SFRCY3ZyNXZEZ1piUTk3c1h5RW03Z29KUVNGRXZfakJGWWktZllUYXlHY0dxOFoyVEhISGtfLW9uMkZmYy1ySko0dTQ5RC1Wb3prTWFYbHhxZUgweTUzYkU4NjZYY3BjQ19U?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-09-28">
+      <article class="news-card" data-date="2026-08-26">
         <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V10l8-6 8 6v11"/><path d="M10 21v-6h4v6"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=argaam.com" alt="" loading="lazy">ارقام : اخبار ومعلومات سوق الأسهم السعودي - تاسي</span><span class="news-date">28 Sep 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE5OWUhuQVlHZ3FhUzFWVEVCNzdzVlZyMmN4dUJ3Vjh5bVA5Vk9RTWp5VHJIcWhlRm1fVTh1OVFRb0JPLVpOTm9hUm5xendBS05yVlR2czZ6dE5KNC1vWnFYdmhzRUk4MGRSWUE?oc=5" target="_blank" rel="noopener nofollow">Inmar signs SAR 39.1M, 2-year lease for Madinah hotel</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMiakFVX3lxTE5OWUhuQVlHZ3FhUzFWVEVCNzdzVlZyMmN4dUJ3Vjh5bVA5Vk9RTWp5VHJIcWhlRm1fVTh1OVFRb0JPLVpOTm9hUm5xendBS05yVlR2czZ6dE5KNC1vWnFYdmhzRUk4MGRSWUE?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-09-28">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=saudigazette.com.sa" alt="" loading="lazy">Saudi Gazette</span><span class="news-date">28 Sep 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMiVEFVX3lxTE5uZzdpWGlia1B5QVdLajV4eWRHU3J4Ni1PbXlnX0tod2hCTmhVU3RCUjVoOXVlcVlmQ3ZnQXFlYWk5ZU1vWEYzdUkwTUJ1S0FNZlhaQg?oc=5" target="_blank" rel="noopener nofollow">Hajj Ministry launches integrated electronic package for foreign pilgrims</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMiVEFVX3lxTE5uZzdpWGlia1B5QVdLajV4eWRHU3J4Ni1PbXlnX0tod2hCTmhVU3RCUjVoOXVlcVlmQ3ZnQXFlYWk5ZU1vWEYzdUkwTUJ1S0FNZlhaQg?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
+        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=ttnworldwide.com" alt="" loading="lazy">TTN Worldwide</span><span class="news-date">26 Aug 2026</span></div>
+        <h3><a href="https://www.ttnworldwide.com/ArticleTA/466955/saudi-hotel-sector-defies-travel-disruptions-as-makkah-revpar-rises-87pc_colon-jll" target="_blank" rel="noopener nofollow">Makkah hotel revenue climbs as Saudi hospitality sector holds steady</a></h3>
+        <p>A JLL market report for Q2 2026 shows Makkah occupancy up 4 points year-on-year with room revenue rising 8.7%, while Madinah posted the Kingdom's highest occupancy at over 75% — both cities also added new hotel supply during the quarter.</p>
+        <a class="map-link" href="https://www.ttnworldwide.com/ArticleTA/466955/saudi-hotel-sector-defies-travel-disruptions-as-makkah-revpar-rises-87pc_colon-jll" target="_blank" rel="noopener nofollow">Read more ↗</a>
       </article>
       <!-- NEWS_LIST_END -->
     </div>
@@ -1239,7 +1191,7 @@
             </div>
             <h3>Tawaf</h3>
             <div class="ar">الطواف</div>
-            <p>Seven circuits of the Ka'bah beginning at the Black Stone (Hajar al-Aswad), then two rak'ahs near Maqam Ibrahim and a drink of Zamzam.</p>
+            <p>Seven circuits of the Ka'bah beginning at the Black Stone, then two rak'ahs near Maqam Ibrahim and a drink of Zamzam.</p>
           </div>
         </div>
         <div class="tl-item reveal">
@@ -1360,7 +1312,7 @@
       </button>
       <div class="step-body" id="s3">
         <div class="step-body-inner">
-          <p class="intro">Begin level with the Black Stone (Hajar al-Aswad), Ka'bah on your left. Say the takbir at the start of each of the seven circuits — kissing or touching the stone if possible, otherwise gesturing toward it without pushing. Between the Yemeni Corner and the Black Stone (Hajar al-Aswad), recite the verse below; elsewhere, any dhikr or personal du'a is fine. Close with two rak'ahs near Maqam Ibrahim (Surah al-Kafirun, then al-Ikhlas) and a drink of Zamzam.</p>
+          <p class="intro">Begin level with the Black Stone (Hajar al-Aswad), Ka'bah on your left. Say the takbir at the start of each of the seven circuits — kissing or touching the stone if possible, otherwise gesturing toward it without pushing. Between the Yemeni Corner and the Black Stone, recite the verse below; elsewhere, any dhikr or personal du'a is fine. Close with two rak'ahs near Maqam Ibrahim (Surah al-Kafirun, then al-Ikhlas) and a drink of Zamzam.</p>
 
           <div class="dua-block">
             <div class="dua-head">
@@ -1376,7 +1328,7 @@
 
           <div class="dua-block">
             <div class="dua-head">
-              <h4>Between the Yemeni Corner and the Black Stone (Hajar al-Aswad)</h4>
+              <h4>Between the Yemeni Corner and the Black Stone</h4>
               <div class="dua-actions">
                 <button class="play-btn" data-target="rabbana-ar">🔊 Listen</button>              </div>
             </div>
@@ -1516,7 +1468,7 @@
 
           <div class="dua-block">
             <div class="dua-head">
-              <h4>At the Multazam (between the Black Stone (Hajar al-Aswad) and the door)</h4>
+              <h4>At the Multazam (between the Black Stone and the door)</h4>
               <div class="dua-actions">
                 <button class="play-btn" data-target="multazam-ar">🔊 Listen</button>
               </div>
@@ -2319,6 +2271,62 @@
   </div>
 </section>
 
+<!-- ================= MUSEUMS & IMPORTANT PLACES ================= -->
+<section id="museums" class="band-ivory-dim">
+  <div class="container tabbed-block">
+    <div class="section-head reveal">
+      <div class="section-icon-row"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-6 9 6"/><path d="M5 10v9h14v-9"/><path d="M10 19v-6h4v6"/></svg></span><div class="kicker-ar">المتاحف</div></div>
+      <h2>Museums &amp; heritage sites worth a visit</h2>
+      <p class="desc">Beyond the two mosques, both cities have museums covering Islamic history, the Prophet's ﷺ biography, and the region's heritage — a good option for a free half-day, especially with family. Prices and hours are what's publicly listed at the time of writing; both change, so treat them as a starting point and check on arrival or via Siyaha (the official ticketing platform for Makkah's attractions).</p>
+    </div>
+    <div class="city-tabs">
+      <button class="city-tab active" data-city="makkah" data-target="grid-museums-makkah">Makkah</button>
+      <button class="city-tab" data-city="madinah" data-target="grid-museums-madinah">Madinah</button>
+    </div>
+
+    <div class="place-grid active" id="grid-museums-makkah">
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <div><h4>Makkah Clock Tower Museum</h4><p>Spread over several floors of the Clock Royal Tower itself, ending in a 360° viewing terrace directly over the Haram and Ka'bah. <strong>Entry:</strong> ~SAR 150 (terrace only) to SAR 200 (museum + terrace), SAR 400 for VIP fast-track; children roughly half price. <strong>Hours:</strong> 2pm–11pm daily. <strong>Near:</strong> directly above Abraj Al Bait mall, a short walk from King Abdulaziz Gate.</p><a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=Makkah+Clock+Tower+Museum" target="_blank" rel="noopener">View on map ↗</a></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 19h16M6 19V9l6-5 6 5v10"/></svg></div>
+        <div><h4>The Makkah Museum (Qasr Khuzam)</h4><p>A former royal guesthouse turned museum of Makkah's history, Arabic calligraphy and historical artefacts, with separate prayer halls for men and women. <strong>Entry:</strong> a modest fee, typically a few riyals — confirm locally. <strong>Hours:</strong> 8am–12:30pm &amp; 4pm–9pm daily. <strong>Near:</strong> Makkah–Madinah Road, Al Zahir district, a short taxi ride from the Haram.</p><a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=Makkah+Museum+Qasr+Khuzam" target="_blank" rel="noopener">View on map ↗</a></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 6c2-1 5-1 8 1 3-2 6-2 8-1v13c-2-1-5-1-8 1-3-2-6-2-8-1z"/></svg></div>
+        <div><h4>International Exhibition of the Prophet's Biography</h4><p>A large, modern exhibition on the Prophet's ﷺ life and the spread of Islam, popular with families and school groups. <strong>Entry:</strong> ~SAR 70–105 per adult. <strong>Hours:</strong> vary by season, typically mid-morning to late evening. <strong>Near:</strong> Hira Cultural District, a short drive from the Haram.</p><a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=International+Exhibition+of+the+Prophet%27s+Biography+Makkah" target="_blank" rel="noopener">View on map ↗</a></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 19V9l8-6 8 6v10"/><path d="M9 19v-6h6v6"/></svg></div>
+        <div><h4>Holy Qur'an &amp; Revelation Exhibition</h4><p>A focused exhibition on the history of Qur'anic manuscripts and the revelation, part of the wider Hira Cultural District. <strong>Entry:</strong> ~SAR 30–35. <strong>Hours:</strong> typically 2 hours visit, check same-day timing on arrival. <strong>Near:</strong> Hira Cultural District, near Jabal al-Nour.</p><a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=Hira+Cultural+District+Makkah" target="_blank" rel="noopener">View on map ↗</a></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M5 10h14M10 5v14"/></svg></div>
+        <div><h4>Bait Al-Aseel Heritage Museum &amp; Museum of Ancient Crafts</h4><p>Two small, inexpensive heritage stops showing old Hijazi household life and traditional crafts — a quick, budget-friendly add-on rather than a half-day trip. <strong>Entry:</strong> ~SAR 10–20 each. <strong>Near:</strong> central Makkah, within easy reach of the Haram.</p><a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=Bait+Al+Aseel+Heritage+Museum+Makkah" target="_blank" rel="noopener">View on map ↗</a></div>
+      </div>
+    </div>
+
+    <div class="place-grid" id="grid-museums-madinah">
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="4" y="9" width="16" height="11"/><path d="M4 9l8-5 8 5"/></svg></div>
+        <div><h4>Dar Al-Madinah Museum</h4><p>Madinah's main heritage museum — miniature models recreating the Prophet's ﷺ time and the mosque's historical expansions, inside the old Hijaz Railway station grounds. <strong>Entry:</strong> ~SAR 25 adult, SAR 15 child. <strong>Hours:</strong> roughly 9am–5pm, varies by day. <strong>Near:</strong> Knowledge Economic City, close to Madinah's airport and the Haramain railway station — a taxi ride from the mosque, not walking distance.</p><a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=Dar+Al+Madinah+Museum" target="_blank" rel="noopener">View on map ↗</a></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M3 17h18M5 17V9l7-4 7 4v8"/><circle cx="9" cy="13" r="1"/><circle cx="15" cy="13" r="1"/></svg></div>
+        <div><h4>Hejaz Railway Museum</h4><p>The restored Ottoman-era railway station that once linked Damascus to Madinah — 19 galleries plus original train carriages, some turned into cafés. <strong>Entry:</strong> free. <strong>Hours:</strong> 9am–9pm (9am–4pm &amp; 5pm–9pm on Fridays). <strong>Near:</strong> about 1km from Masjid an-Nabawi — walkable for most visitors.</p><a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=Hejaz+Railway+Museum+Madinah" target="_blank" rel="noopener">View on map ↗</a></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 6c2-1 5-1 8 1 3-2 6-2 8-1v13c-2-1-5-1-8 1-3-2-6-2-8-1z"/></svg></div>
+        <div><h4>International Exhibition of the Prophet's Biography — Madinah</h4><p>Madinah's branch of the same Seerah exhibition found in Makkah, telling the story of the migration (Hijrah) and the early Muslim community in the city. <strong>Entry:</strong> ~SAR 40–90 depending on ticket type. <strong>Near:</strong> within the Haramain expansion zone, a short walk or short ride from the mosque.</p><a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=International+Exhibition+of+the+Prophet%27s+Biography+Madinah" target="_blank" rel="noopener">View on map ↗</a></div>
+      </div>
+    </div>
+    <div class="note-box">
+      <strong>A practical note.</strong> None of these are rites of Umrah — they're optional, and well suited to an afternoon when the mosque is quiet between prayers. Ticket prices above are approximate and bundled tour prices (with transport or a guide) will cost more than walking up and buying a ticket directly; book direct where possible if you're on a budget.
+    </div>
+  </div>
+</section>
+
 <!-- ================= SHOPPING & EATERIES ================= -->
 <section id="shopping" class="band-ivory-dim">
   <div class="container tabbed-block">
@@ -2406,6 +2414,78 @@
       <span><span class="dot" style="background:#3FA79A;"></span> Historic &amp; Hajj sites</span>
     </div>
     <div class="distance-list" id="distanceList"></div>
+  </div>
+</section>
+
+<!-- ================= MOSQUE GATES ================= -->
+<section id="gates">
+  <div class="container tabbed-block">
+    <div class="section-head reveal">
+      <div class="section-icon-row"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="12" height="18" rx="1"/><circle cx="14" cy="12" r="0.8" fill="currentColor" stroke="none"/></svg></span><div class="kicker-ar">أبواب الحرمين</div></div>
+      <h2>Key gates of the two mosques, and what's near each</h2>
+      <p class="desc">Both mosques have well over a hundred numbered gates, but pilgrims mostly orient themselves by a handful of named ones. Knowing which gate is near your hotel — or near Safa, the Rawdah, or Jannat al-Baqi — saves a lot of walking around the outside wall. Gate numbers shift slightly as the mosques keep expanding, so treat names as the reliable part and numbers as a rough guide.</p>
+    </div>
+    <div class="city-tabs">
+      <button class="city-tab active" data-city="makkah" data-target="grid-gates-makkah">Masjid al-Haram</button>
+      <button class="city-tab" data-city="madinah" data-target="grid-gates-madinah">Masjid an-Nabawi</button>
+    </div>
+
+    <div class="place-grid active" id="grid-gates-makkah">
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="6" y="3" width="12" height="18" rx="1"/><path d="M12 3v18"/></svg></div>
+        <div><h4>King Abdulaziz Gate (Bab al-Malik) — Gate 1</h4><p>The busiest gate, opening directly onto the Mataf. <strong>Near:</strong> the Clock Tower (Abraj Al Bait) and Safwa Towers — the default gate for most Clock Tower-area hotels, so expect queues at peak times.</p></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="6" y="3" width="12" height="18" rx="1"/><path d="M12 3v18"/></svg></div>
+        <div><h4>King Fahd Gate — Gate 79</h4><p>A wide southern-side entrance, generally calmer than King Abdulaziz Gate. <strong>Near:</strong> the Ajyad district — a good alternative if your hotel is a short walk from either side.</p></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="6" y="3" width="12" height="18" rx="1"/><path d="M12 3v18"/></svg></div>
+        <div><h4>King Abdullah Gate — Gate 100</h4><p>One of the newest and largest gates, on the mosque's northeastern side. <strong>Near:</strong> the Al-Shamiyyah expansion and its newer hotel towers.</p></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="6" y="3" width="12" height="18" rx="1"/><path d="M12 3v18"/></svg></div>
+        <div><h4>Umrah Gate (Bab Umrah) — Gate 63</h4><p>An easy-to-remember name on the Shami (Syrian) corner side, commonly used by Umrah pilgrims specifically. <strong>Near:</strong> the Shamiyyah side, opposite King Abdullah Gate's general area.</p></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="6" y="3" width="12" height="18" rx="1"/><path d="M12 3v18"/></svg></div>
+        <div><h4>As-Salam Gate (Bab as-Salam)</h4><p>Historically the gate first-time visitors are encouraged to enter through, sitting between Safa and Marwah (closer to Marwah) and opening straight onto the mas'aa. <strong>Near:</strong> the Safa–Marwah gallery, so useful both for your first entry and for starting Sa'i.</p></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="6" y="3" width="12" height="18" rx="1"/><path d="M12 3v18"/></svg></div>
+        <div><h4>Safa Gate (Bab as-Safa) — Gate 11</h4><p>Opens right at the base of Safa hill. <strong>Near:</strong> the start of the Sa'i walk — the gate to look for once you're ready to begin Sa'i after Tawaf.</p></div>
+      </div>
+    </div>
+
+    <div class="place-grid" id="grid-gates-madinah">
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="6" y="3" width="12" height="18" rx="1"/><path d="M12 3v18"/></svg></div>
+        <div><h4>Bab as-Salam (Gate of Peace) — Gate 1</h4><p>The most historic gate, traditionally used to enter and greet the Prophet ﷺ, leading toward the Rawdah. <strong>Near:</strong> the western side — close to Anwar Al Madinah Mövenpick and Dar Al Taqwa; a common choice for men heading to the Rawdah.</p></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="6" y="3" width="12" height="18" rx="1"/><path d="M12 3v18"/></svg></div>
+        <div><h4>Bab Jibril (Gate of Gabriel)</h4><p>On the eastern side, near the Prophet's ﷺ chamber and mihrab. <strong>Near:</strong> Dallah Taibah and Al Aqeeq hotels — also commonly used for Rawdah access.</p></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="6" y="3" width="12" height="18" rx="1"/><path d="M12 3v18"/></svg></div>
+        <div><h4>King Fahd Gate (Bab Malik Fahd)</h4><p>The largest gate at Masjid an-Nabawi — seven doors and two minarets — forming the main northern entrance. <strong>Near:</strong> the northern hotel zone and the main plaza where crowds gather before Fajr.</p></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="6" y="3" width="12" height="18" rx="1"/><path d="M12 3v18"/></svg></div>
+        <div><h4>Bab Al-Majeedi</h4><p>A large northern gate near King Abdul Majeed Road. <strong>Near:</strong> Madinah Hilton, InterContinental Dar Al Iman and Millennium Taiba — the gate most of that hotel cluster uses.</p></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="6" y="3" width="12" height="18" rx="1"/><path d="M12 3v18"/></svg></div>
+        <div><h4>Bab Al-Baqi</h4><p>Faces Jannat al-Baqi directly. <strong>Near:</strong> the most convenient gate if you're stepping out to Baqi after a prayer rather than planning a separate trip.</p></div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="6" y="3" width="12" height="18" rx="1"/><path d="M12 3v18"/></svg></div>
+        <div><h4>Bab An-Nisa (Women's Gate)</h4><p>A dedicated women's entrance, with several more added across the mosque's expansions. <strong>Near:</strong> look for "النساء" (women) signage — staff can point to the nearest one from any side of the mosque.</p></div>
+      </div>
+    </div>
+    <div class="note-box">
+      <strong>A practical habit:</strong> note your gate's name (and a nearby landmark) when you arrive each time, not just "the big one near my hotel" — several gates can look similar from inside, and this is the detail that gets you back out to the right street fastest.
+    </div>
   </div>
 </section>
 
@@ -2526,8 +2606,8 @@
     <div class="panel about-card reveal">
       <div class="brand-badge" aria-hidden="true">SR</div>
       <div>
-        <p>I'm <strong>Syed Rashad</strong>, and UmrahNow came out of my own first Umrah. Every bit of information I needed was scattered somewhere different — the rites and their exact wording on one forum, visa rules buried in a government PDF, Nusuk instructions passed around in a WhatsApp group, hotel advice in year-old blog comments. As a first-timer, piecing it all together took far longer than it should have.</p>
-        <p>UmrahNow is my attempt to put everything in one place — the way I wish it had existed when I was planning my own trip — so the next pilgrim doesn't have to go through the same scramble. It isn't a travel agency and it doesn't sell packages; it's just a guide, kept honest. Every du'a is referenced to its source, and anywhere scholars differ or the wording isn't fixed, that's flagged rather than glossed over. Think of it as a study companion, not a fatwa — for rulings on your own situation, please ask a qualified scholar.</p>
+        <p>I'm <strong>Syed Rashad</strong>, and I'm preparing for my own first Umrah. Building UmrahNow came out of that preparation — every bit of information I needed was scattered somewhere different: the rites and their exact wording on one forum, visa rules buried in a government PDF, Nusuk instructions passed around in a WhatsApp group, hotel advice in year-old blog comments. Piecing it all together, before I've even travelled, has taken far longer than it should.</p>
+        <p>UmrahNow is my attempt to put everything in one place — the way I wish it existed when I started planning — so the next pilgrim doesn't have to go through the same scramble. It's a free guide, not a travel agency, though I am working on connecting pilgrims with vetted Umrah providers so you don't have to guess who to trust (see Umrah Packages, coming soon). Every du'a here is referenced to its source, and anywhere scholars differ or the wording isn't fixed, that's flagged rather than glossed over. Think of it as a study companion, not a fatwa — for rulings on your own situation, please ask a qualified scholar.</p>
         <p>You can see more of my work at <a href="https://syedrashad.in/" target="_blank" rel="noopener" class="map-link" style="margin-top:0;">syedrashad.in ↗</a>, or use the feedback form below to tell me what's missing or wrong — that's the only way this guide gets better.</p>
       </div>
     </div>
@@ -2595,7 +2675,7 @@
       </div>
       <div>
         <h4>Your data, in plain terms</h4>
-        <p>Anything submitted via the Feedback or Umrah Packages forms is delivered to the site owner's inbox through FormSubmit and used only to respond to you — never sold or shared. The site sets no cookies and runs no analytics. The packing checklist and du'a audio run entirely in your browser and are never sent anywhere.</p>
+        <p>Anything submitted via the Feedback or Umrah Packages forms is delivered to the site owner's inbox through FormSubmit and used only to respond to you — never sold or shared. UmrahNow uses Cloudflare Web Analytics to see how many people visit and which pages are useful; it sets no cookies and doesn't track you individually or across other sites. The packing checklist and du'a audio run entirely in your browser and are never sent anywhere.</p>
       </div>
       <div>
         <h4>Accuracy changes; so should your assumptions</h4>
@@ -2751,10 +2831,17 @@
     });
   });
 
-  // ---- Speech (Arabic only) — pick the most natural-sounding voice available,
-  // then attempt playback first and only flag a genuine failure, quietly, on the page
-  // itself. (alert() is intentionally avoided here — many embedded/preview browser
-  // contexts silently block it, which made real failures look like nothing happened.)
+  // ---- Du'a audio ----
+  // Real, professionally-recorded recitation for each du'a lives in /audio/
+  // (one mp3 per Arabic <p id="..."> above, named by stripping the "-ar"
+  // suffix — e.g. #niyyah-ar -> audio/niyyah.mp3). See scripts/README-audio.md
+  // for how those files are produced.
+  //
+  // The device's own built-in text-to-speech (whatever voice happens to be
+  // installed on that phone or browser) is used ONLY as a fallback, for any
+  // du'a whose mp3 hasn't been recorded/generated yet. That fallback is what
+  // sounded robotic and occasionally mispronounced things before — real
+  // audio removes that problem entirely, wherever a file exists.
   function showAudioNotice(msg) {
     let toast = document.getElementById('audioToast');
     if (!toast) {
@@ -2768,72 +2855,91 @@
     clearTimeout(toast._hideTimer);
     toast._hideTimer = setTimeout(() => toast.classList.remove('show'), 7000);
   }
+
+  let currentAudioEl = null;
+  function stopAnyPlayingAudio() {
+    document.querySelectorAll('.play-btn.playing').forEach(b => b.classList.remove('playing'));
+    if (currentAudioEl) { currentAudioEl.pause(); currentAudioEl = null; }
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    if (resumeTimer) { clearInterval(resumeTimer); resumeTimer = null; }
+  }
+
+  function playRecordedAudio(btn, name) {
+    const audio = new Audio(`audio/${name}.mp3`);
+    currentAudioEl = audio;
+    audio.addEventListener('canplay', () => { btn.classList.add('playing'); audio.play().catch(() => {}); }, { once: true });
+    audio.addEventListener('ended', () => { btn.classList.remove('playing'); if (currentAudioEl === audio) currentAudioEl = null; });
+    audio.addEventListener('error', () => {
+      // No recording yet (or it failed to load) for this du'a — fall back to
+      // the device's own text-to-speech rather than leaving the button dead.
+      if (currentAudioEl === audio) currentAudioEl = null;
+      speakWithDeviceVoice(btn, document.getElementById(btn.getAttribute('data-target')));
+    }, { once: true });
+    audio.load();
+  }
+
+  // ---- Fallback: the browser/device's own text-to-speech ----
+  // Kept only for du'as without a recorded file yet. Picks the most
+  // natural-sounding installed voice it can find, but quality still depends
+  // entirely on what's on that particular device.
   function pickBestArabicVoice(voices) {
     const arabic = voices.filter(v => (v.lang || '').toLowerCase().startsWith('ar'));
     if (!arabic.length) return null;
-    // Network ("remote") voices are generally far smoother than a device's built-in
-    // compact voice, and a Google-branded voice is usually the better-sounding of those.
     const score = v => (v.lang === 'ar-SA' ? 2 : 0) + (v.localService ? 0 : 3) + (/google/i.test(v.name) ? 1 : 0);
     return arabic.sort((a, b) => score(b) - score(a))[0];
   }
-  // Chrome (desktop especially) will silently garbage-collect a SpeechSynthesisUtterance
-  // that nothing outside this handler still references, which quietly kills playback
-  // partway through. Keeping one reference alive here prevents that.
+  // Strip Qur'anic ayah-marker ornaments (e.g. ﴿١٥٨﴾) before speaking — a
+  // device voice will otherwise try to read the bracket and digits aloud,
+  // which is one of the concrete causes of nonsense/"misspoken" playback.
+  // The visible text on the page is untouched; only what gets spoken changes.
+  function textForSpeech(el) {
+    return el.textContent.replace(/[﴾﴿]/g, '').replace(/[\u0660-\u0669]+/g, '').trim();
+  }
   let activeUtterance = null;
   let resumeTimer = null;
+  function speakWithDeviceVoice(btn, el) {
+    if (!el) return;
+    if (!('speechSynthesis' in window)) {
+      showAudioNotice("This device can't play audio aloud, and no recording exists for this du'a yet — the text above is still accurate to read.");
+      return;
+    }
+    const voice = pickBestArabicVoice(window.speechSynthesis.getVoices());
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(textForSpeech(el));
+    if (voice) utter.voice = voice;
+    utter.lang = 'ar-SA';
+    utter.rate = 0.72;
+    utter.pitch = 0.96;
+    activeUtterance = utter;
+    let started = false;
+    utter.onstart = () => {
+      started = true;
+      btn.classList.add('playing');
+      resumeTimer = setInterval(() => { window.speechSynthesis.pause(); window.speechSynthesis.resume(); }, 10000);
+    };
+    utter.onend = () => { btn.classList.remove('playing'); clearInterval(resumeTimer); };
+    utter.onerror = () => {
+      btn.classList.remove('playing');
+      clearInterval(resumeTimer);
+      showAudioNotice("Couldn't play audio here — this device may not have an Arabic voice installed. The text above is still accurate to read.");
+    };
+    window.speechSynthesis.speak(utter);
+    setTimeout(() => {
+      if (!started && !window.speechSynthesis.speaking) {
+        btn.classList.remove('playing');
+        showAudioNotice("No Arabic voice found on this device, and no recording exists for this du'a yet — the text above is still accurate to read.");
+      }
+    }, 700);
+  }
+
   document.querySelectorAll('.play-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const targetId = btn.getAttribute('data-target');
-      const el = document.getElementById(targetId);
-      if (!el) return;
-      if (!('speechSynthesis' in window)) {
-        showAudioNotice("This browser can't play audio aloud — the text above is still accurate to read.");
-        return;
-      }
-
-      // Re-read the voice list fresh at click time — some browsers only populate
-      // it lazily, so a value cached at page-load can be wrong by the time you click.
-      const voice = pickBestArabicVoice(window.speechSynthesis.getVoices());
-
-      document.querySelectorAll('.play-btn.playing').forEach(b => b.classList.remove('playing'));
-      window.speechSynthesis.cancel();
-      if (resumeTimer) clearInterval(resumeTimer);
-
-      const utter = new SpeechSynthesisUtterance(el.textContent.trim());
-      if (voice) utter.voice = voice;
-      utter.lang = 'ar-SA';
-      utter.rate = 0.72;
-      utter.pitch = 0.96;
-      activeUtterance = utter;
-
-      let started = false;
-      utter.onstart = () => {
-        started = true;
-        btn.classList.add('playing');
-        // Chrome desktop has a long-standing bug that mutes speech after ~15s unless
-        // nudged; this keeps longer du'as playing all the way through.
-        resumeTimer = setInterval(() => {
-          window.speechSynthesis.pause();
-          window.speechSynthesis.resume();
-        }, 10000);
-      };
-      utter.onend = () => { btn.classList.remove('playing'); clearInterval(resumeTimer); };
-      utter.onerror = () => {
-        btn.classList.remove('playing');
-        clearInterval(resumeTimer);
-        showAudioNotice("Couldn't play Arabic audio here — this device may not have an Arabic voice installed. The text above is still accurate to read.");
-      };
-
-      window.speechSynthesis.speak(utter);
-
-      // A handful of browsers fail silently — no error, no start — when a language
-      // truly isn't supported. Catch that case without blocking the ones that work.
-      setTimeout(() => {
-        if (!started && !window.speechSynthesis.speaking) {
-          btn.classList.remove('playing');
-          showAudioNotice("No Arabic voice found on this device — the text above is still accurate to read.");
-        }
-      }, 700);
+      const wasPlaying = btn.classList.contains('playing');
+      stopAnyPlayingAudio();
+      if (wasPlaying) return; // clicking an already-playing button just stops it
+      const audioName = targetId.replace(/-ar$/, '');
+      playRecordedAudio(btn, audioName);
     });
   });
 
@@ -3093,13 +3199,18 @@
   // hotel-tier rates are the approximate midpoints of the ranges shown in the
   // Hotels section above, not a live price feed.
   (function calculatorInit() {
-    const calcIds = ['calcPax', 'calcSharing', 'calcTier', 'calcSeason', 'calcNightsMakkah', 'calcNightsMadinah', 'calcFlight'];
+    const calcIds = ['calcPax', 'calcSharing', 'calcTier', 'calcSeason', 'calcNightsMakkah', 'calcNightsMadinah', 'calcFlight', 'calcVisa'];
     const calcEls = {};
     calcIds.forEach((id) => { calcEls[id] = document.getElementById(id); });
     if (!calcEls.calcPax) return; // calculator not on this page load for some reason — fail quietly
 
-    function formatSAR(n) {
-      return 'SAR ' + Math.round(n).toLocaleString('en-US');
+    // Approximate mid-market rate, set at the time this page was written.
+    // Real rates move daily — see the note under the calculator.
+    const SAR_TO_INR = 25.6;
+
+    function formatAmount(sar) {
+      const inr = sar * SAR_TO_INR;
+      return `₹${Math.round(inr).toLocaleString('en-IN')} <span class="amount-sar">(SAR ${Math.round(sar).toLocaleString('en-US')})</span>`;
     }
 
     function runCalculator() {
@@ -3110,19 +3221,22 @@
       const nightsMakkah = Math.max(0, parseInt(calcEls.calcNightsMakkah.value, 10) || 0);
       const nightsMadinah = Math.max(0, parseInt(calcEls.calcNightsMadinah.value, 10) || 0);
       const flightPerPerson = Math.max(0, parseFloat(calcEls.calcFlight.value) || 0);
+      const visaPerPerson = Math.max(0, parseFloat(calcEls.calcVisa.value) || 0);
       const totalNights = nightsMakkah + nightsMadinah;
 
       const rooms = Math.ceil(pax / perRoom);
       const hotelCost = rooms * tierRate * seasonMult * totalNights;
       const flightCost = flightPerPerson * pax;
-      const total = hotelCost + flightCost;
+      const visaCost = visaPerPerson * pax;
+      const total = hotelCost + flightCost + visaCost;
       const perPerson = total / pax;
 
       document.getElementById('calcResult').innerHTML = `
-        <div class="calc-result-row"><span>Hotels — ${rooms} room${rooms > 1 ? 's' : ''} × ${totalNights} night${totalNights !== 1 ? 's' : ''}</span><span class="amount">${formatSAR(hotelCost)}</span></div>
-        <div class="calc-result-row"><span>Flights — ${pax} × ${formatSAR(flightPerPerson)}</span><span class="amount">${formatSAR(flightCost)}</span></div>
-        <div class="calc-result-row total"><span>Estimated total</span><span class="amount">${formatSAR(total)}</span></div>
-        <div class="calc-per-person">≈ ${formatSAR(perPerson)} per person</div>
+        <div class="calc-result-row"><span>Stay — ${rooms} room${rooms > 1 ? 's' : ''} × ${totalNights} night${totalNights !== 1 ? 's' : ''}</span><span class="amount">${formatAmount(hotelCost)}</span></div>
+        <div class="calc-result-row"><span>Flights — ${pax} × round trip</span><span class="amount">${formatAmount(flightCost)}</span></div>
+        <div class="calc-result-row"><span>Visa — ${pax} × permit fee</span><span class="amount">${formatAmount(visaCost)}</span></div>
+        <div class="calc-result-row total"><span>Estimated total</span><span class="amount">${formatAmount(total)}</span></div>
+        <div class="calc-per-person">≈ ${formatAmount(perPerson)} per person</div>
       `;
     }
 
