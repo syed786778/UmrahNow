@@ -386,6 +386,11 @@
     transition:box-shadow .2s ease, transform .2s ease;
   }
   .panel:hover{box-shadow:0 10px 24px rgba(20,76,70,0.1);transform:translateY(-2px);}
+  .panel.compact{padding:20px;}
+  .panel.compact h3{font-size:1.05rem;margin-bottom:8px;}
+  .panel.compact p{font-size:0.92rem;color:#3f3f38;margin-bottom:10px;}
+  .panel.compact .reg-cost{font-weight:700;color:var(--teal);margin:0;font-size:0.9rem;}
+  .note-box.tight{padding:14px 18px;font-size:0.92rem;margin-top:20px;}
   .panel h3{font-size:1.15rem;margin-bottom:10px;}
   .panel ul{margin:0;padding-left:18px;color:#3f3f38;font-size:1rem;}
   .panel ul li{margin-bottom:6px;}
@@ -848,7 +853,7 @@
         <rect x="18" y="52" width="64" height="10" fill="#E7C77E"/>
         <rect x="42" y="72" width="16" height="20" rx="1.5" fill="none" stroke="#E7C77E" stroke-width="3"/>
       </svg>
-      <span class="brand-text">UmrahNow<small>Your Umrah Companion</small></span>
+      <span class="brand-text">UmrahNow<small>A companion for the journey</small></span>
     </a>
     <nav class="links">
       <a href="#ihram-mode">🕋 Ihram Mode</a>
@@ -891,14 +896,15 @@
     </button>
   </div>
 </header>
+
 <section class="hero" id="home">
   <div class="hero-inner">
     <div class="hero-copy">
-    <h1>Everything you need for your Umrah, in one place.</h1>
+    <h1>Everything you need for a comfortable Umrah, in one place</h1>
     <p class="lede">Learn the rites. Plan the logistics. Prepare with confidence. Focus on your Ibadah.</p>
     <div class="hero-ctas">
-      <a href="#journey" class="btn btn-gold">Explore Umrah &amp; Du'as</a>
-      <a href="#regulations" class="btn btn-outline">Start planning your trip</a>
+      <a href="#journey" class="btn btn-gold">What is Umrah?</a>
+      <a href="#regulations" class="btn btn-outline">Start planning your Umrah</a>
     </div>
     <div class="hero-chips">
       <a href="#news">Latest Updates</a>
@@ -1066,82 +1072,24 @@
     <div class="section-head reveal">
       <div class="section-icon-row"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h4"/></svg></span><div class="kicker-ar">آخر الأخبار</div></div>
       <h2>Latest Umrah &amp; Saudi travel Updates</h2>
-      <p class="desc">Saudi visa, hotel, Umrah and travel news — including updates for pilgrims from India.</p>
+      <p class="desc">Saudi visa, hotel, Umrah and travel updates - including updates for pilgrims from India.</p>
     </div>
 
     <div class="news-grid" id="newsGrid">
       <!-- NEWS_LIST_START -->
-      <article class="news-card" data-date="2026-10-01">
+      <article class="news-card" data-date="2026-09-25">
+        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div>
+        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=gulfnews.com" alt="" loading="lazy">Gulf News</span><span class="news-date">25 Sep 2026</span></div>
+        <h3><a href="https://gulfnews.com/world/gulf/saudi/saudi-arabia-launches-365-day-umrah-visa-with-90-day-stay-1.500613885" target="_blank" rel="noopener nofollow">Saudi Arabia's multiple-entry Umrah visa: what pilgrims need to know</a></h3>
+        <p>The one-year, multiple-entry Umrah visa lets eligible pilgrims return to the Kingdom several times over 365 days without reapplying each trip, with a cumulative stay capped at 90 days and a fresh Nusuk service package required before every visit.</p>
+        <a class="map-link" href="https://gulfnews.com/world/gulf/saudi/saudi-arabia-launches-365-day-umrah-visa-with-90-day-stay-1.500613885" target="_blank" rel="noopener nofollow">Read more ↗</a>
+      </article>
+      <article class="news-card" data-date="2026-08-26">
         <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V10l8-6 8 6v11"/><path d="M10 21v-6h4v6"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=propnewstime.com" alt="" loading="lazy">Prop News Time</span><span class="news-date">1 Oct 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMitgFBVV95cUxNN240OF9GV3o5RmEyelBIb0FFcEQ4enB2QXIyeGlRTXJLdVBjektKa3RyM01LQkZWeXN1RHIzZ2tCOWlUUk9lSEh0VnNEMDBwNWxwaTg3UVA2VW1xVmdycnlLaDFVNnlraFdGODBNODNUM05xRnQzQUNyeWJhNUVIdWJldV9taEFyd2ZOcXJGXzJpZlIzQ3dZbTgzbWR1c0tQNHIzU2xUQVdRQkpVQVRVdUlEX1M2QQ?oc=5" target="_blank" rel="noopener nofollow">Inmar signs two-year lease for Rawabi Al Zahra Hotel in Madinah</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMitgFBVV95cUxNN240OF9GV3o5RmEyelBIb0FFcEQ4enB2QXIyeGlRTXJLdVBjektKa3RyM01LQkZWeXN1RHIzZ2tCOWlUUk9lSEh0VnNEMDBwNWxwaTg3UVA2VW1xVmdycnlLaDFVNnlraFdGODBNODNUM05xRnQzQUNyeWJhNUVIdWJldV9taEFyd2ZOcXJGXzJpZlIzQ3dZbTgzbWR1c0tQNHIzU2xUQVdRQkpVQVRVdUlEX1M2QQ?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-09-30">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=en.banglanews24.com" alt="" loading="lazy">Banglanews24</span><span class="news-date">30 Sep 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMickFVX3lxTE01aHZadTMxeFpndXFYWmZMVWF2VGJaNUhsdzJXUFR4bG9IbXRaTEthb3lxRjJ1YXpQWFhjQzRkZThOSUVNZXh6SmxhV01TeVB1UXBzNS13U0N0UVY5X2xRZy1FeUNNM2k1X204bk5GNHgzUQ?oc=5" target="_blank" rel="noopener nofollow">Saudi launches all-inclusive Hajj package for 2027</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMickFVX3lxTE01aHZadTMxeFpndXFYWmZMVWF2VGJaNUhsdzJXUFR4bG9IbXRaTEthb3lxRjJ1YXpQWFhjQzRkZThOSUVNZXh6SmxhV01TeVB1UXBzNS13U0N0UVY5X2xRZy1FeUNNM2k1X204bk5GNHgzUQ?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-09-29">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=spa.gov.sa" alt="" loading="lazy">Saudi Press Agency</span><span class="news-date">29 Sep 2026</span></div>
-        <h3><a href="https://www.spa.gov.sa/en/N2628490" target="_blank" rel="noopener nofollow">Saudi Arabia Introduces Package Visa to Simplify Tourist Travel to the Kingdom</a></h3>
-        <a class="map-link" href="https://www.spa.gov.sa/en/N2628490" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-09-29">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=arabnews.com" alt="" loading="lazy">Arab News</span><span class="news-date">29 Sep 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMiogFBVV95cUxNbklkVzZ2R1dhZWdMcHhGUktYT2N3bTBIcUVsUXUyXzh3R1hCQTM2bnRubWNqbnVLTEIyX1JFRXpvcklMTXhrWE1EWlQ3RmtCbzFpN09XWXpmRFBSd0RENEhWWnQ5eGtzVnUzbUpjRG5jNUNVUDZDMlBqck1YNzMwTnhIcFYyQmpyckcxRUE5Zm9yNVJVLWx2aVVYZmt2UnpNaUE?oc=5" target="_blank" rel="noopener nofollow">Kingdom introduces all-inclusive Hajj package for 2027</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMiogFBVV95cUxNbklkVzZ2R1dhZWdMcHhGUktYT2N3bTBIcUVsUXUyXzh3R1hCQTM2bnRubWNqbnVLTEIyX1JFRXpvcklMTXhrWE1EWlQ3RmtCbzFpN09XWXpmRFBSd0RENEhWWnQ5eGtzVnUzbUpjRG5jNUNVUDZDMlBqck1YNzMwTnhIcFYyQmpyckcxRUE5Zm9yNVJVLWx2aVVYZmt2UnpNaUE?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-09-29">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=spa.gov.sa" alt="" loading="lazy">Saudi Press Agency</span><span class="news-date">29 Sep 2026</span></div>
-        <h3><a href="https://www.spa.gov.sa/en/N2403190" target="_blank" rel="noopener nofollow">Hajj and Umrah Ministry: Nusuk App Downloads Reach 30 Million with 150% Yearly Rise</a></h3>
-        <a class="map-link" href="https://www.spa.gov.sa/en/N2403190" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-09-29">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=curlytales.com" alt="" loading="lazy">curlytales.com</span><span class="news-date">29 Sep 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMitAFBVV95cUxPcEVBYk9wUUJ2MzYxVmNELUFNT2pxaGxhSjZNLXhxcHNlM1JSYkVtM1VOOXVwZXNoTXJaSDBFX2pvWExfV19IejYwVXg2bW1RdEFUZW5UUUVwcnhFYUdJalZ6Y3BIaElhUXdVTmhkRVRwM0ZJckJJWTBTbUw3NC1KSkVpRzBLUWhsVlRINHZPRGZlZFIzbFpkSm9YR2luc0NpS1IwdVVSeGtoZGk5aDVMX1BXUUvSAboBQVVfeXFMUGJLcXVZek9URlIyVkRQbHpNV1g3TFVtZ0NSVFVva25FRG9TTHd2NkxHSEc3RU1KbXI0RFJsS0gwWnZyWkVyUVIwM01yVG5zSC1fT3V2YWJCQ1hpTlVpQXNySHVZNFlyeFlxWmtGLVJhaE5EWW93UWtCZEdmWTVZZ29kUk9mRkFoVDlrdGI4X0FRYmpJdGtjR2ZkN1VRSUpBcy1HNF9NckNYQ3JnbEJKSVpTZ1VzamN5NFp3?oc=5" target="_blank" rel="noopener nofollow">Hajj 2027: Saudi Arabia Combines Accommodation, Transport &amp; Meals In One Package</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMitAFBVV95cUxPcEVBYk9wUUJ2MzYxVmNELUFNT2pxaGxhSjZNLXhxcHNlM1JSYkVtM1VOOXVwZXNoTXJaSDBFX2pvWExfV19IejYwVXg2bW1RdEFUZW5UUUVwcnhFYUdJalZ6Y3BIaElhUXdVTmhkRVRwM0ZJckJJWTBTbUw3NC1KSkVpRzBLUWhsVlRINHZPRGZlZFIzbFpkSm9YR2luc0NpS1IwdVVSeGtoZGk5aDVMX1BXUUvSAboBQVVfeXFMUGJLcXVZek9URlIyVkRQbHpNV1g3TFVtZ0NSVFVva25FRG9TTHd2NkxHSEc3RU1KbXI0RFJsS0gwWnZyWkVyUVIwM01yVG5zSC1fT3V2YWJCQ1hpTlVpQXNySHVZNFlyeFlxWmtGLVJhaE5EWW93UWtCZEdmWTVZZ29kUk9mRkFoVDlrdGI4X0FRYmpJdGtjR2ZkN1VRSUpBcy1HNF9NckNYQ3JnbEJKSVpTZ1VzamN5NFp3?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-09-29">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=spa.gov.sa" alt="" loading="lazy">Saudi Press Agency</span><span class="news-date">29 Sep 2026</span></div>
-        <h3><a href="https://www.spa.gov.sa/en/N2520272" target="_blank" rel="noopener nofollow">Ministry of Hajj and Umrah Issues&#x27; Umrah and Visit Guide&#x27; in 16 Languages</a></h3>
-        <a class="map-link" href="https://www.spa.gov.sa/en/N2520272" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-09-28">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=gulfnews.com" alt="" loading="lazy">Gulf News</span><span class="news-date">28 Sep 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxPaExLUktXTTFqU2l6WHhXLXZLRXBjeVFqcTFvYmh1aVVpUU9ScmQ1Rk1GdUZJT3JZM181ZGV4dDNwelROc1BlbjhhZzNzcXRxZTJZVWNncGhXSUVJLU5Pdl9nX2RmR0U1T1BQdU5ma0VWeWh0OGZWUGZGNW5fUloyaHdlRm45dGdBZzc4S3NIeVh4dC1BbTFMUjluYnlRRlczZC1xUld0Y2lfZndQOTNlN1cxVEdmYTTSAcwBQVVfeXFMTjRFOWZhbFk0Wkwxb2YzVU9zcDFKN05pNkQtN3J1S18wMjlsWldLQlloWmdKWWt6T3ZBR0NzNS1SODlab0cwY2hKRmQ1MFBFdHpFTlJ1ejhzZGFBRUdVeFhwb0hrb3Z3eUl2SFRCY3ZyNXZEZ1piUTk3c1h5RW03Z29KUVNGRXZfakJGWWktZllUYXlHY0dxOFoyVEhISGtfLW9uMkZmYy1ySko0dTQ5RC1Wb3prTWFYbHhxZUgweTUzYkU4NjZYY3BjQ19U?oc=5" target="_blank" rel="noopener nofollow">Saudi Arabia launches all-in-one Hajj package for foreign pilgrims</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMitwFBVV95cUxPaExLUktXTTFqU2l6WHhXLXZLRXBjeVFqcTFvYmh1aVVpUU9ScmQ1Rk1GdUZJT3JZM181ZGV4dDNwelROc1BlbjhhZzNzcXRxZTJZVWNncGhXSUVJLU5Pdl9nX2RmR0U1T1BQdU5ma0VWeWh0OGZWUGZGNW5fUloyaHdlRm45dGdBZzc4S3NIeVh4dC1BbTFMUjluYnlRRlczZC1xUld0Y2lfZndQOTNlN1cxVEdmYTTSAcwBQVVfeXFMTjRFOWZhbFk0Wkwxb2YzVU9zcDFKN05pNkQtN3J1S18wMjlsWldLQlloWmdKWWt6T3ZBR0NzNS1SODlab0cwY2hKRmQ1MFBFdHpFTlJ1ejhzZGFBRUdVeFhwb0hrb3Z3eUl2SFRCY3ZyNXZEZ1piUTk3c1h5RW03Z29KUVNGRXZfakJGWWktZllUYXlHY0dxOFoyVEhISGtfLW9uMkZmYy1ySko0dTQ5RC1Wb3prTWFYbHhxZUgweTUzYkU4NjZYY3BjQ19U?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-09-28">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=spa.gov.sa" alt="" loading="lazy">Saudi Press Agency</span><span class="news-date">28 Sep 2026</span></div>
-        <h3><a href="https://www.spa.gov.sa/en/N2381933" target="_blank" rel="noopener nofollow">New &#x27;Nusuk Umrah&#x27; Service for International Umrah Performers to Simplify Visa and Travel Bookings</a></h3>
-        <a class="map-link" href="https://www.spa.gov.sa/en/N2381933" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-09-28">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V10l8-6 8 6v11"/><path d="M10 21v-6h4v6"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=argaam.com" alt="" loading="lazy">ارقام : اخبار ومعلومات سوق الأسهم السعودي - تاسي</span><span class="news-date">28 Sep 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE5OWUhuQVlHZ3FhUzFWVEVCNzdzVlZyMmN4dUJ3Vjh5bVA5Vk9RTWp5VHJIcWhlRm1fVTh1OVFRb0JPLVpOTm9hUm5xendBS05yVlR2czZ6dE5KNC1vWnFYdmhzRUk4MGRSWUE?oc=5" target="_blank" rel="noopener nofollow">Inmar signs SAR 39.1M, 2-year lease for Madinah hotel</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMiakFVX3lxTE5OWUhuQVlHZ3FhUzFWVEVCNzdzVlZyMmN4dUJ3Vjh5bVA5Vk9RTWp5VHJIcWhlRm1fVTh1OVFRb0JPLVpOTm9hUm5xendBS05yVlR2czZ6dE5KNC1vWnFYdmhzRUk4MGRSWUE?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-09-28">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=saudigazette.com.sa" alt="" loading="lazy">Saudi Gazette</span><span class="news-date">28 Sep 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMiVEFVX3lxTE5uZzdpWGlia1B5QVdLajV4eWRHU3J4Ni1PbXlnX0tod2hCTmhVU3RCUjVoOXVlcVlmQ3ZnQXFlYWk5ZU1vWEYzdUkwTUJ1S0FNZlhaQg?oc=5" target="_blank" rel="noopener nofollow">Hajj Ministry launches integrated electronic package for foreign pilgrims</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMiVEFVX3lxTE5uZzdpWGlia1B5QVdLajV4eWRHU3J4Ni1PbXlnX0tod2hCTmhVU3RCUjVoOXVlcVlmQ3ZnQXFlYWk5ZU1vWEYzdUkwTUJ1S0FNZlhaQg?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-09-28">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=english.aawsat.com" alt="" loading="lazy">ASHARQ AL-AWSAT English</span><span class="news-date">28 Sep 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMitgFBVV95cUxNelVNenFsQUxPQ2hfMHRUQVZsdU5ISlNSUXBtb1NOYzAwaVV5VU1KaG1lYjdOOWxqMmFWMnpuTXRUWWRfSTljZm5Ldl8tTVdxaDhVMlU0RFdmbF9RekRYZEV3THltSnUzQ0JieE5XcVlZYTVOeFJBLXRnNTVDTFF1SnhMR1g0N0FXbkNucnRiUTBIUUkzekZwZmVMdFQtVnktb1NaOGVfSExKSnpzRUtEUjV1ay1RUQ?oc=5" target="_blank" rel="noopener nofollow">Saudi Hajj Ministry Launches Integrated Electronic Package for Foreign Pilgrims</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMitgFBVV95cUxNelVNenFsQUxPQ2hfMHRUQVZsdU5ISlNSUXBtb1NOYzAwaVV5VU1KaG1lYjdOOWxqMmFWMnpuTXRUWWRfSTljZm5Ldl8tTVdxaDhVMlU0RFdmbF9RekRYZEV3THltSnUzQ0JieE5XcVlZYTVOeFJBLXRnNTVDTFF1SnhMR1g0N0FXbkNucnRiUTBIUUkzekZwZmVMdFQtVnktb1NaOGVfSExKSnpzRUtEUjV1ay1RUQ?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
+        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=ttnworldwide.com" alt="" loading="lazy">TTN Worldwide</span><span class="news-date">26 Aug 2026</span></div>
+        <h3><a href="https://www.ttnworldwide.com/ArticleTA/466955/saudi-hotel-sector-defies-travel-disruptions-as-makkah-revpar-rises-87pc_colon-jll" target="_blank" rel="noopener nofollow">Makkah hotel revenue climbs as Saudi hospitality sector holds steady</a></h3>
+        <p>A JLL market report for Q2 2026 shows Makkah occupancy up 4 points year-on-year with room revenue rising 8.7%, while Madinah posted the Kingdom's highest occupancy at over 75% — both cities also added new hotel supply during the quarter.</p>
+        <a class="map-link" href="https://www.ttnworldwide.com/ArticleTA/466955/saudi-hotel-sector-defies-travel-disruptions-as-makkah-revpar-rises-87pc_colon-jll" target="_blank" rel="noopener nofollow">Read more ↗</a>
       </article>
       <!-- NEWS_LIST_END -->
     </div>
@@ -1154,51 +1102,34 @@
   <div class="container">
     <div class="section-head reveal">
       <div class="section-icon-row"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></span><div class="kicker-ar">الأنظمة</div></div>
-      <h2>Saudi regulations for Umrah travellers</h2>
-      <p class="desc">A summary of how entry and pilgrimage permits currently work. Rules are set and updated by Saudi Arabia's Ministry of Hajj and Umrah — treat this as an orientation and always re-check the Nusuk platform before you book or travel.</p>
+      <h2>Saudi visa routes, at a glance</h2>
+      <p class="desc">Three ways in — pick one, then get an Umrah permit via Nusuk either way. Always re-check Nusuk before booking; rules change.</p>
     </div>
 
     <div class="grid-3">
-      <div class="panel">
+      <div class="panel compact">
         <span class="tag">Route 1</span>
-        <h3>Saudi Tourist e-Visa</h3>
-        <ul>
-          <li>Multiple entries, valid one year, up to 90 days per entry</li>
-          <li>Open to citizens of dozens of eligible countries; fully online, usually issued within a few days</li>
-          <li>Lets you perform Umrah and travel elsewhere in the Kingdom on the same trip</li>
-          <li>Still requires a separate Umrah permit through Nusuk before entering Masjid al-Haram</li>
-          <li><strong>Approximate cost:</strong> around SAR 470–620, including the mandatory health insurance built into the fee</li>
-        </ul>
-        <a class="map-link" href="https://visa.visitsaudi.com" target="_blank" rel="noopener">Apply at visa.visitsaudi.com ↗</a>
+        <h3>Tourist e-Visa</h3>
+        <p>Multi-entry, 1 year, 90 days/visit. Fully online in a few days. Still needs a Nusuk Umrah permit.</p>
+        <p class="reg-cost">~SAR 470–620</p>
       </div>
-      <div class="panel">
+      <div class="panel compact">
         <span class="tag">Route 2</span>
         <h3>Official Umrah Visa</h3>
-        <ul>
-          <li>Issued through licensed travel agents, dedicated to religious pilgrimage</li>
-          <li>Bundled with an approved service package (accommodation, transport) purchased via Nusuk</li>
-          <li>Traditional route for travellers who prefer a packaged trip</li>
-          <li><strong>Approximate cost:</strong> around SAR 430–620 plus your agent's service package — this is the main variable, so compare a couple of agents</li>
-        </ul>
-        <a class="map-link" href="https://www.nusuk.sa" target="_blank" rel="noopener">Service packages at nusuk.sa ↗</a>
+        <p>Via a licensed agent, bundled with a Nusuk service package (stay + transport). The classic packaged-trip route.</p>
+        <p class="reg-cost">~SAR 430–620 + package</p>
       </div>
-      <div class="panel">
-        <span class="tag">Newer option</span>
-        <h3>One-year multiple-entry Umrah visa</h3>
-        <ul>
-          <li>Valid 365 days from issue; cumulative stay across all visits capped at 90 days</li>
-          <li>A new service package must be bought via Nusuk before each entry, and matched by a fresh Umrah permit</li>
-          <li>Visa pauses when you leave the Kingdom and resumes on your next entry; unused days carry forward</li>
-          <li>Not valid during the Hajj season (1 Dhul Qa'dah – 13 Dhul Hijjah)</li>
-          <li><strong>Approximate cost:</strong> varies by nationality and agent — priced per visit through the Nusuk service package rather than a single flat fee</li>
-        </ul>
-        <a class="map-link" href="https://www.nusuk.sa" target="_blank" rel="noopener">Details at nusuk.sa ↗</a>
+      <div class="panel compact">
+        <span class="tag">Newer</span>
+        <h3>1-year multi-entry Umrah visa</h3>
+        <p>365 days, 90 days total stay. A fresh Nusuk package + permit needed each visit. Paused during Hajj season.</p>
+        <p class="reg-cost">Priced per visit via Nusuk</p>
       </div>
     </div>
 
-    <div class="note-box" style="background:rgba(247,241,228,0.08);border-color:var(--gold-soft);color:#DCE9E5;">
-      <strong>The rule that applies to everyone:</strong> whichever visa gets you into the country, you still need a separate, timed Umrah permit issued through the Nusuk app before you can enter Masjid al-Haram — and a further permit if you want to visit Al-Rawdah in Madinah. Entry windows, stay durations, fees and health requirements (such as vaccination rules) are amended periodically by the Ministry, so confirm the current terms and cost on the official sites above shortly before you travel rather than relying on any single source, including this one.
-    </div>
+    <p class="note-box tight" style="background:rgba(247,241,228,0.08);border-color:var(--gold-soft);color:#DCE9E5;">
+      <strong>Either way:</strong> you need a separate, timed Umrah permit through Nusuk to enter Masjid al-Haram (and another for Al-Rawdah) — apply at <a href="https://www.nusuk.sa" target="_blank" rel="noopener" style="color:var(--gold-soft);">nusuk.sa ↗</a> or <a href="https://visa.visitsaudi.com" target="_blank" rel="noopener" style="color:var(--gold-soft);">visa.visitsaudi.com ↗</a>.
+    </p>
   </div>
 </section>
 
@@ -1552,38 +1483,26 @@
     </div>
 
     <div class="grid-3">
-      <div class="panel">
+      <div class="panel compact">
         <span class="tag">Before you fly</span>
-        <h3>Set a sadaqah budget</h3>
-        <ul>
-          <li>Decide a fixed amount before you travel, so giving stays deliberate rather than reactive to whoever you meet</li>
-          <li>Settle any outstanding debts and your zakat first — sadaqah is separate from, not a substitute for, an obligation already due</li>
-          <li>Consider giving on behalf of parents or family who've passed — a common and moving practice among pilgrims</li>
-        </ul>
+        <h3>Set a budget</h3>
+        <p>Decide a fixed amount in advance, and settle any zakat or debts first — sadaqah doesn't substitute for those.</p>
       </div>
-      <div class="panel">
-        <span class="tag">While you're there</span>
+      <div class="panel compact">
+        <span class="tag">While there</span>
         <h3>Feed someone nearby</h3>
-        <ul>
-          <li>Buying dates, Zamzam, or a meal for those around you at iftar or after prayer is one of the most loved local customs</li>
-          <li>Even a small, sincere gift counts — the "half a date" hadith above is often read as reassurance that the amount matters less than the sincerity</li>
-          <li>Give at organized points (mosque courtyards, distribution tables) rather than pressing through crowds at the gates or mataf</li>
-        </ul>
+        <p>Dates, Zamzam or a meal at iftar is a loved local custom — give at organised points rather than in a crowd.</p>
       </div>
-      <div class="panel">
+      <div class="panel compact">
         <span class="tag">Lasting reward</span>
-        <h3>Make it ongoing (sadaqah jariyah)</h3>
-        <ul>
-          <li>Sponsoring something that keeps benefiting people — a Zamzam cooler, copies of the Qur'an, a water point — keeps earning reward after you've gone home</li>
-          <li><em>"When a person dies, his deeds end except three: ongoing charity, beneficial knowledge, or a righteous child who prays for him"</em> (Sahih Muslim)</li>
-          <li>Many mosque-affiliated waqf offices accept exactly this kind of dedicated giving</li>
-        </ul>
+        <h3>Make it ongoing</h3>
+        <p>A Zamzam cooler or Qur'an copies keep earning reward after you've left — mosque waqf offices accept this.</p>
       </div>
     </div>
 
-    <div class="note-box">
-      <strong>Give through channels you can trust.</strong> Around any major place of worship, some of the people asking for money are in genuine need and some are part of organised begging operations that don't reach the people they claim to. Donation boxes inside and around both mosques, the mosque's own waqf offices, and Saudi Arabia's national giving platform, Ehsan, are reliable ways to make sure sadaqah actually reaches its cause. Trust your own judgment on individual cases — this isn't a reason to withhold kindness, just a reason to also give deliberately through verified channels.
-    </div>
+    <p class="note-box tight">
+      <strong>Give through trusted channels.</strong> Donation boxes inside both mosques, mosque waqf offices, and Saudi Arabia's Ehsan platform are reliable ways to make sure it reaches its cause — some street solicitation around the Haram is organised begging, not need.
+    </p>
   </div>
 </section>
 
@@ -1594,21 +1513,39 @@
       <div class="section-icon-row"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></span><div class="kicker-ar">تطبيق نسك</div></div>
       <div style="display:flex;align-items:center;gap:14px;">
         <div class="brand-badge" style="width:44px;height:44px;font-size:0.85rem;background:linear-gradient(135deg,#B7862C,#144C46);flex-shrink:0;">ن</div>
-        <h2>The Nusuk App</h2>
+        <h2>Nusuk: permits &amp; Rawdah booking</h2>
       </div>
-      <p class="desc">Nusuk is Saudi Arabia's official platform for pilgrims — the Ministry of Hajj and Umrah's single point for permits, bookings and on-the-ground support. Registration takes your passport or visa details, a verification code sent to your phone, and a password; once your account is active, everything below sits inside it.</p>
+      <p class="desc">Nusuk is Saudi Arabia's official pilgrim platform — register with your passport/visa details and a phone verification code, and everything below lives in that one account.</p>
     </div>
     <div class="feature-grid">
-      <div class="feature-cell"><h4>Umrah permit</h4><p>A timed entry slot to Masjid al-Haram — mandatory for every pilgrim before entering, regardless of visa type.</p></div>
-      <div class="feature-cell"><h4>Rawdah appointment</h4><p>A separate booking for the small, high-demand area inside Masjid an-Nabawi known as Al-Rawdah Al-Sharifah.</p></div>
-      <div class="feature-cell"><h4>Companion management</h4><p>Add family members or children to your account so their permits move together with yours.</p></div>
-      <div class="feature-cell"><h4>Ziyarat reservations</h4><p>Optional visits to historic sites around Makkah and Madinah, booked the same way as your main permits.</p></div>
-      <div class="feature-cell"><h4>Transport &amp; stay</h4><p>Haramain High-Speed Rail tickets, hotel accommodation and flight bookings through approved providers.</p></div>
-      <div class="feature-cell"><h4>In the moment</h4><p>Live crowd-density readings, maps and guided tours, the Qur'an, collected du'as, prayer times and Qiblah direction.</p></div>
+      <div class="feature-cell"><h4>Umrah permit</h4><p>Timed entry to Masjid al-Haram — mandatory for every pilgrim, any visa type.</p></div>
+      <div class="feature-cell"><h4>Rawdah appointment</h4><p>Free, timed booking for the small, high-demand area in Masjid an-Nabawi (see below).</p></div>
+      <div class="feature-cell"><h4>Ziyarat reservations</h4><p>Optional historic-site visits around both cities, booked the same way.</p></div>
+      <div class="feature-cell"><h4>Companion management</h4><p>Add family or children so their permits move together with yours.</p></div>
+      <div class="feature-cell"><h4>Transport &amp; stay</h4><p>Haramain Rail, hotels and flights through approved providers.</p></div>
+      <div class="feature-cell"><h4>In the moment</h4><p>Crowd maps, prayer times, Qiblah direction and the Qur'an.</p></div>
     </div>
-    <div class="note-box">
-      <strong>Getting registered.</strong> Download Nusuk (iOS or Android) or use the web platform, choose your pilgrim type (tourist e-visa holder or Umrah-visa holder), and enter your passport or visa number, date of birth and nationality. A one-time code arrives by SMS and email — enter both to activate the account, then set your password. Keep your registered phone number reachable while abroad; that's where Nusuk sends permit confirmations and codes.
+
+    <h3 style="margin-top:34px;margin-bottom:8px;font-size:1.2rem;">Booking Al-Rawdah</h3>
+    <p class="desc" style="margin-top:0;">The space between the Prophet's ﷺ pulpit and his house, described in hadith as a garden of Paradise — free, Nusuk-only, and any paid "booking service" is best avoided.</p>
+    <div class="flow">
+      <div class="flow-step">
+        <span class="flow-num">1</span>
+        <div><p>Complete your Nusuk profile, then go to <strong>Services → Book Rawdah Visit</strong> (a separate screen from your Umrah permit).</p></div>
+      </div>
+      <div class="flow-step">
+        <span class="flow-num">2</span>
+        <div><p>Pick a slot — these release 7–14 days ahead (3–5 days during Ramadan/Hajj), so an empty calendar further out is normal.</p></div>
+      </div>
+      <div class="flow-step">
+        <span class="flow-num">3</span>
+        <div><p>Confirm to get your QR code (under My Bookings and by email), and arrive within your time window to scan in.</p></div>
+      </div>
     </div>
+
+    <p class="note-box tight">
+      <strong>If something's not working:</strong> log out/in to refresh a blank screen, double-check your number has the full country code, and use Nusuk's in-app chat or 24-hour line as a last resort. An instant-booking option and a waitlist exist for pilgrims already near the mosque.
+    </p>
 
     <div class="download-grid">
       <div class="download-card">
@@ -1637,103 +1574,58 @@
   </div>
 </section>
 
-<!-- ================= RAWDAH ================= -->
-<section id="rawdah" class="band-ivory-dim">
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="section-icon-row"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16M6 20v-7a6 6 0 0 1 12 0v7"/><path d="M12 4v3"/><circle cx="12" cy="3" r="1" fill="currentColor" stroke="none"/></svg></span><div class="kicker-ar">الروضة الشريفة</div></div>
-      <h2>Booking a visit to Al-Rawdah</h2>
-      <p class="desc">The area between the Prophet's ﷺ pulpit and his house — described in hadith as one of the gardens of Paradise — admits visitors only by timed permit. Booking is free; the whole process runs through Nusuk, and any paid third-party "booking service" should be treated with suspicion.</p>
-    </div>
-    <div class="flow">
-      <div class="flow-step">
-        <span class="flow-num">1</span>
-        <div><h4>Confirm your account is complete</h4><p>Your Nusuk profile and passport details need to be fully verified before Rawdah booking becomes available — an incomplete profile is the most common reason the option won't open.</p></div>
-      </div>
-      <div class="flow-step">
-        <span class="flow-num">2</span>
-        <div><h4>Go to Services → Book Rawdah Visit</h4><p>It sits apart from the Umrah permit screen — a frequent first-time mix-up is booking one and assuming it covers both.</p></div>
-      </div>
-      <div class="flow-step">
-        <span class="flow-num">3</span>
-        <div><h4>Pick a date and time slot</h4><p>Slots typically release 7–14 days ahead (tightening to 3–5 days during Ramadan and the Hajj season), so an empty calendar further out is normal, not an error.</p></div>
-      </div>
-      <div class="flow-step">
-        <span class="flow-num">4</span>
-        <div><h4>Confirm to receive your QR permit</h4><p>The confirmed appointment and its QR code appear under My Profile → My Bookings, and are also emailed to your registered address as a backup.</p></div>
-      </div>
-      <div class="flow-step">
-        <span class="flow-num">5</span>
-        <div><h4>Arrive within your window with the QR ready</h4><p>Stewards scan the code at the entry point; without a valid permit, entry to the Rawdah itself isn't permitted, though the rest of Masjid an-Nabawi remains open.</p></div>
-      </div>
-    </div>
-    <div class="note-box">
-      <strong>If something isn't working:</strong> log out and back in to refresh a blank bookings screen; enter your mobile number with its full international dialling code if a verification code isn't arriving, wait 10–15 minutes before requesting another, and use Nusuk's in-app live chat or its 24-hour support line as a last resort. Nusuk has also added an instant-booking option for pilgrims already near the mosque with capacity available, plus a waitlist for fully booked slots.
-    </div>
-  </div>
-</section>
-
 <!-- ================= SIM / CONNECTIVITY ================= -->
 <section id="connect">
   <div class="container">
     <div class="section-head reveal">
-      <div class="section-icon-row"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13a11 11 0 0 1 14 0"/><path d="M8.5 16.5a6 6 0 0 1 7 0"/><circle cx="12" cy="20" r="1" fill="currentColor" stroke="none"/></svg></span><div class="kicker-ar">الاتصال</div></div>
-      <h2>Staying connected</h2>
-      <p class="desc">You'll want data for Nusuk, maps and calling home — here's how pilgrims usually get online in Saudi Arabia.</p>
+      <div class="section-icon-row"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13a11 11 0 0 1 14 0"/><path d="M8.5 16.5a6 6 0 0 1 7 0"/><circle cx="12" cy="20" r="1" fill="currentColor" stroke="none"/></svg></span><div class="kicker-ar">الاتصال والمال</div></div>
+      <h2>Staying connected &amp; managing money</h2>
+      <p class="desc">Data for Nusuk and maps, and cash for everything else — the practical basics, in brief.</p>
     </div>
 
+    <h3 style="font-size:1.1rem;margin-bottom:12px;">Getting online</h3>
     <div class="grid-3">
-      <div class="panel">
-        <div class="brand-badge" style="margin-bottom:12px;background:linear-gradient(135deg,#4a1e6b,#2a1040);">STC</div>
-        <h3>Sawa Ziyara (visitor line)</h3>
-        <ul>
-          <li>Visitor packages start around SAR 35</li>
-          <li>Can be reserved online in advance on the STC website</li>
-          <li>Activation on arrival requires a fingerprint at an STC sales point — this is a Saudi-wide rule, not an STC quirk</li>
-        </ul>
+      <div class="panel compact">
+        <div class="brand-badge" style="margin-bottom:10px;background:linear-gradient(135deg,#4a1e6b,#2a1040);">STC</div>
+        <h3>Sawa Ziyara</h3>
+        <p>~SAR 35, reservable online; fingerprint activation on arrival.</p>
       </div>
-      <div class="panel">
-        <div class="brand-badge" style="margin-bottom:12px;background:linear-gradient(135deg,#0e6b4a,#083d2b);">MBL</div>
-        <h3>Visitors package</h3>
-        <ul>
-          <li>Packages start around SAR 30</li>
-          <li>Available at Mobily branches, airport kiosks and authorised shops</li>
-          <li>Straightforward walk-up purchase with your passport</li>
-        </ul>
+      <div class="panel compact">
+        <div class="brand-badge" style="margin-bottom:10px;background:linear-gradient(135deg,#0e6b4a,#083d2b);">MBL</div>
+        <h3>Mobily visitor pack</h3>
+        <p>~SAR 30, walk-up at branches, airport kiosks or shops.</p>
       </div>
-      <div class="panel">
-        <div class="brand-badge" style="margin-bottom:12px;background:linear-gradient(135deg,#144C46,#0E2A28);">ZN</div>
-        <h3>Visitor SIM</h3>
-        <ul>
-          <li>Packages start around SAR 34.5</li>
-          <li>Kiosks at both Jeddah and Madinah airport arrival halls</li>
-          <li>Data-heavy plans aimed at tourists and pilgrims</li>
-        </ul>
+      <div class="panel compact">
+        <div class="brand-badge" style="margin-bottom:10px;background:linear-gradient(135deg,#144C46,#0E2A28);">ZN</div>
+        <h3>Zain visitor SIM</h3>
+        <p>~SAR 34.5, kiosks at both Jeddah and Madinah airports.</p>
       </div>
     </div>
+    <p class="note-box tight">
+      An eSIM (Saudi carrier or an international marketplace) can be bought and installed before you fly, and activated remotely via Absher — handy if airport queues run long in Ramadan/peak weeks. A physical SIM needs a passport and a quick fingerprint step at any carrier's kiosk. Either way, top up via app, store or USSD, and the line is registered to your own passport by law.
+    </p>
 
-    <div class="flow" style="margin-top:26px;">
-      <div class="flow-step">
-        <span class="flow-num">1</span>
-        <div><h4>Decide physical SIM or eSIM before you fly</h4><p>A physical SIM means a short stop at the airport; an eSIM (from a Saudi carrier or an international eSIM marketplace) can be bought online, installed via QR code before departure, and left ready to switch on.</p></div>
+    <h3 style="font-size:1.1rem;margin:30px 0 12px;">Money &amp; exchange</h3>
+    <div class="grid-3">
+      <div class="panel compact">
+        <span class="tag">Convenient, costly</span>
+        <h3>Airport counters</h3>
+        <p>Widest spread of any option — fine for a small top-up, not your main exchange.</p>
       </div>
-      <div class="flow-step">
-        <span class="flow-num">2</span>
-        <div><h4>Physical SIM: buy it at the arrival hall</h4><p>STC, Mobily and Zain all run kiosks at Jeddah's King Abdulaziz International and Madinah's Prince Mohammad bin Abdulaziz International — have your passport ready and expect a short fingerprint or biometric step to activate the line, which Saudi telecom rules require of every provider.</p></div>
+      <div class="panel compact">
+        <span class="tag">Best rate</span>
+        <h3>Licensed city exchangers</h3>
+        <p>Clustered near both Harams; look for official SAMA licensing signage.</p>
       </div>
-      <div class="flow-step">
-        <span class="flow-num">3</span>
-        <div><h4>eSIM: activate remotely if you'd rather skip the queue</h4><p>Saudi Arabia now lets international pilgrims activate an eSIM straight through a carrier's app using biometric verification via the Absher platform — no store visit needed, which is useful when airport counters are busy during peak Umrah season.</p></div>
-      </div>
-      <div class="flow-step">
-        <span class="flow-num">4</span>
-        <div><h4>Top up as you go</h4><p>All three carriers let you recharge through their apps, at convenience stores, or by USSD code — keep a little local cash for the first top-up in case a card payment doesn't go through.</p></div>
+      <div class="panel compact">
+        <span class="tag">Cards &amp; ATMs</span>
+        <h3>International cards</h3>
+        <p>Widely accepted; ATMs often beat counters once spread is factored in.</p>
       </div>
     </div>
-
-    <div class="note-box">
-      <strong>Good to know:</strong> queues at airport SIM counters can run long during Ramadan and peak Umrah weeks, so an eSIM installed before departure is worth considering if you want to be reachable the moment you land. Whichever route you take, register the SIM to your own passport — Saudi law ties every active line to a verified identity.
-    </div>
+    <p class="note-box tight">
+      <strong>SAR is pegged to the USD at 3.75</strong> and has been since the 1980s, so an "off" rate is just the exchanger's fee, not a market move. Travelling from India, <strong>BookMyForex</strong>, <strong>Wise</strong> or <strong>Thomas Cook India</strong> let you lock in Riyal cash or a forex card before you fly — compare a couple, rates vary. At any ATM, always choose to be charged in <strong>local currency (SAR)</strong>, never "your home currency" (Dynamic Currency Conversion quietly costs more) — and stick to licensed exchangers only.
+    </p>
   </div>
 </section>
 
@@ -1747,51 +1639,26 @@
     </div>
 
     <div class="grid-3">
-      <div class="panel">
-        <span class="tag">June – September</span>
+      <div class="panel compact">
+        <span class="tag">Jun–Sep</span>
         <h3>Summer</h3>
-        <ul>
-          <li>Daytime highs regularly pass 42–45°C in both Makkah and Madinah, with record spikes above 50°C</li>
-          <li>Dry heat, but the mataf courtyard and outdoor queues offer little shade at midday</li>
-          <li>Fewer visitors than winter — if you can handle the heat, permits and hotels are easier to get</li>
-        </ul>
+        <p>42–45°C+, dry heat, little midday shade — but fewer visitors, easier permits and hotels.</p>
       </div>
-      <div class="panel">
-        <span class="tag">December – February</span>
+      <div class="panel compact">
+        <span class="tag">Dec–Feb</span>
         <h3>Winter</h3>
-        <ul>
-          <li>Daytime temperatures around 25–30°C, dropping to a cool 15–18°C at night</li>
-          <li>The most comfortable stretch of the year for standing and walking outdoors</li>
-          <li>Also the most crowded — comfortable weather draws the largest volume of visitors</li>
-        </ul>
+        <p>A comfortable 25–30°C — and the most crowded stretch of the year for exactly that reason.</p>
       </div>
-      <div class="panel">
-        <span class="tag">Mar–May &amp; Oct–Nov</span>
+      <div class="panel compact">
+        <span class="tag">Mar–May, Oct–Nov</span>
         <h3>Spring &amp; autumn</h3>
-        <ul>
-          <li>A middle ground: warm days (30–38°C) without winter's peak crowding</li>
-          <li>Occasional short, heavy rain in the shoulder months, mainly near Jeddah's coast — rare, but can cause local flash flooding</li>
-          <li>Often the best balance of manageable weather and manageable queues</li>
-        </ul>
+        <p>30–38°C, occasional shoulder-season rain near Jeddah — often the best weather/crowd balance.</p>
       </div>
     </div>
 
-    <div class="grid-2" style="margin-top:22px;">
-      <div class="panel">
-        <span class="tag">Lunar, not seasonal</span>
-        <h3>Ramadan</h3>
-        <p style="color:#3f3f38;">The busiest single stretch on the calendar, regardless of what the weather is doing outside. Hotel prices climb, flights fill up months ahead, and — as noted earlier — Nusuk permit and Rawdah slots tighten to just 3–5 days out. If Ramadan is your goal, book earlier than you think you need to.</p>
-      </div>
-      <div class="panel">
-        <span class="tag">1 Dhul Qa'dah – 13 Dhul Hijjah</span>
-        <h3>The pre-Hajj &amp; Hajj window</h3>
-        <p style="color:#3f3f38;">Umrah visas and permits pause during this stretch so the Kingdom can focus on Hajj. Hajj itself is expected around late May 2026, and will keep drifting earlier through the Gregorian calendar in the years after — check the current Hijri dates before you plan around it.</p>
-      </div>
-    </div>
-
-    <div class="note-box" style="background:rgba(247,241,228,0.08);border-color:var(--gold-soft);color:#DCE9E5;margin-top:30px;">
-      <strong>Planning around both calendars.</strong> Pick a Gregorian window with weather you can manage, then check where it falls in the Hijri calendar for Ramadan and the Hajj blackout. If your dates land in summer, lean harder on the sun protection and hydration items in the packing checklist below, plan Tawaf and Sa'i for early morning or after Isha when it's cooler, and rest indoors during peak afternoon heat.
-    </div>
+    <p class="note-box tight" style="background:rgba(247,241,228,0.08);border-color:var(--gold-soft);color:#DCE9E5;">
+      <strong>Two calendars to watch:</strong> Ramadan is the busiest stretch regardless of weather — book early, as Nusuk/Rawdah slots tighten to 3–5 days out. Umrah pauses entirely from 1 Dhul Qa'dah–13 Dhul Hijjah for Hajj (expected ~late May 2026, drifting earlier each year) — check current Hijri dates before planning around it. If your trip lands in summer, lean on the packing list's sun/hydration items and do Tawaf/Sa'i in the cooler early morning or post-Isha hours.
+    </p>
   </div>
 </section>
 
@@ -1882,57 +1749,6 @@
           <li><label><input type="checkbox"><span>A printed emergency contact list, kept separate from your phone</span></label></li>
         </ul>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= FOREIGN EXCHANGE ================= -->
-<section id="forex" class="band-teal">
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="section-icon-row"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10l-3-3M17 17H7l3 3"/></svg></span><div class="kicker-ar">صرف العملات</div></div>
-      <h2>Money and foreign exchange</h2>
-      <p class="desc">The Saudi Riyal (SAR) has been pegged to the US Dollar at 3.75 since the mid-1980s and hasn't moved since — so any rate you're offered that looks better or worse than that is really just the exchanger's spread or fee, not a real market shift. Knowing that changes how you should think about where to change money.</p>
-    </div>
-
-    <div class="grid-3">
-      <div class="panel">
-        <span class="tag">Convenient, costly</span>
-        <h3>Airport exchange counters</h3>
-        <ul>
-          <li>Available at Jeddah and Madinah's airports, useful for your very first taxi or meal</li>
-          <li>Consistently carry the widest spread of any option — treat it as an emergency top-up, not your main exchange</li>
-          <li>Change a small amount here and do the rest elsewhere</li>
-        </ul>
-      </div>
-      <div class="panel">
-        <span class="tag">Usually the best rate</span>
-        <h3>Licensed city exchange houses</h3>
-        <ul>
-          <li>Clustered near King Abdulaziz Road and Ajyad in Makkah, and around the central area near Masjid an-Nabawi in Madinah</li>
-          <li>Look for official licensing signage — the Saudi Central Bank (SAMA) regulates these directly and steps up inspections during Ramadan and Hajj season</li>
-          <li>Bank branches (open 9:30am–4:30pm, Sunday to Thursday) also exchange currency at comparable rates</li>
-        </ul>
-      </div>
-      <div class="panel">
-        <span class="tag">Cards &amp; ATMs</span>
-        <h3>Using international cards</h3>
-        <ul>
-          <li>Visa and Mastercard are widely accepted at hotels, most restaurants and larger shops — smaller vendors and taxis are often cash-only</li>
-          <li>ATMs are everywhere and often beat a walk-up counter's rate once you account for the spread, even after a flat ATM fee</li>
-          <li>A pre-loaded multi-currency forex card can work like a local debit card at both ATMs and payment terminals</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="panel" style="margin-top:22px;">
-      <span class="tag">Booking online before you fly</span>
-      <h3>For pilgrims travelling from India</h3>
-      <p style="color:#3f3f38;">Online forex platforms have made it possible to sort this out before you even reach the airport. <strong>BookMyForex</strong> — an RBI-authorised online currency exchange (part of the MakeMyTrip group) — lets you book Saudi Riyal cash, load a multi-currency forex card, or send a wire transfer entirely online, with home delivery in many Indian cities and a pay-on-delivery option for cash orders. It's a reasonable way to lock in a rate and land with forex already in hand, rather than queuing at a counter on day one. It's one of several such services in India — <strong>Wise</strong> and <strong>Thomas Cook India</strong> are two other well-known names — so it's worth comparing rates and delivery fees across a couple before booking, since they do vary between providers and change often.</p>
-    </div>
-
-    <div class="note-box" style="background:rgba(247,241,228,0.08);border-color:var(--gold-soft);color:#DCE9E5;">
-      <strong>Two habits that save real money.</strong> At any ATM or card machine, always choose to be charged in <strong>local currency (SAR)</strong> rather than "your home currency" — that second option is Dynamic Currency Conversion, and it quietly applies a worse exchange rate than your own bank would. And keep exchanges to licensed banks and exchange houses only; unlicensed street changers near crowded pilgrim areas have a documented history of counterfeit notes.
     </div>
   </div>
 </section>
@@ -2680,7 +2496,7 @@
   <div class="container">
     <div class="section-head reveal">
       <div class="section-icon-row"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v10H8l-4 4z"/></svg></span><div class="kicker-ar">ملاحظاتكم</div></div>
-      <h2>Help us make this site better</h2>
+      <h2>Help us make this guide better</h2>
       <p class="desc">Missing a du'a, found an outdated rule, or wish there was a section on something else? Tell us what would make your Umrah journey smoother — this goes straight to the person building the site.</p>
     </div>
 
