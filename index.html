@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UmrahNow - Your Umrah Companion</title>
+<title>UmrahNow — Your Umrah Companion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
@@ -385,8 +385,10 @@
   .wear-steps-col h4{font-size:1.02rem;margin-bottom:10px;color:var(--night);}
   .wear-steps{margin:0;padding-left:20px;color:#3f3f38;font-size:0.96rem;}
   .wear-steps li{margin-bottom:8px;}
-  .wrap-arrow{animation:wrapDash 3.5s linear infinite;}
-  @keyframes wrapDash{to{stroke-dashoffset:-60;}}
+  .miqat-card{display:flex;flex-direction:column;}
+  .miqat-dir{width:34px;height:34px;border-radius:50%;background:var(--ivory-dim);color:var(--gold);display:flex;align-items:center;justify-content:center;margin-bottom:10px;flex-shrink:0;}
+  .miqat-dir svg{width:18px;height:18px;}
+  .miqat-finder h3{font-family:'Amiri',serif;}
   .wear-women{margin-top:4px;}
   .wear-women h4{margin-bottom:8px;color:var(--night);font-size:1.02rem;}
   .wear-women p{margin:0;font-size:0.95rem;color:#3f3f38;}
@@ -1092,77 +1094,19 @@
 
     <div class="news-grid" id="newsGrid">
       <!-- NEWS_LIST_START -->
-      <article class="news-card" data-date="2026-10-04">
+      <article class="news-card" data-date="2026-09-25">
         <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=gulfnews.com" alt="" loading="lazy">Gulf News</span><span class="news-date">4 Oct 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMisAFBVV95cUxNVmlBX1FFV0lLWTJIaS1rZC0wUHcwQTRmOHVmcFpWeVh3NE5mSjZCS21CN3V1Nlo4Vk8tN3l5QXN1OFlQWGJPNW1RU3FvdjgzWk1LYjJYX29PQV9rVWl0eXFndnJDc3lKbFVKN2ZBTk8wX1ZwdGpKUEZsSTU2N0FXVXZ4RHVPVW1TX1Z4Y2R3R045MkhfR05aNXNxWjhIM0Q3QjVqaWdRTkYyamM5YmlXN9IBxgFBVV95cUxOWVJkU3VaaGZJSnpzbEl4RmxaZ0kxb2V0NG1WZllZTkFpR0VwZklXaWdELVBONklLb3hrLXBHMFNCb0k0dHZlNHhUTEpvb0k3LW1MVy1RcmF3YkpVQWEzTjdjUkYyRnlIYTdDNWp6Y1VWdFJCZU9ta2N3VW9WVWNneWlZMTZmNkp3MG1oNkphT0ZmN29TRHhkem1UaHFJYmJZVXFNU3ByQlRiOF93LWlfUTR6TV9BZ2dWckVMcFhpTDZSVVN1Znc?oc=5" target="_blank" rel="noopener nofollow">Saudi Arabia expands tourist visa scheme to Kosovo and Guyana</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMisAFBVV95cUxNVmlBX1FFV0lLWTJIaS1rZC0wUHcwQTRmOHVmcFpWeVh3NE5mSjZCS21CN3V1Nlo4Vk8tN3l5QXN1OFlQWGJPNW1RU3FvdjgzWk1LYjJYX29PQV9rVWl0eXFndnJDc3lKbFVKN2ZBTk8wX1ZwdGpKUEZsSTU2N0FXVXZ4RHVPVW1TX1Z4Y2R3R045MkhfR05aNXNxWjhIM0Q3QjVqaWdRTkYyamM5YmlXN9IBxgFBVV95cUxOWVJkU3VaaGZJSnpzbEl4RmxaZ0kxb2V0NG1WZllZTkFpR0VwZklXaWdELVBONklLb3hrLXBHMFNCb0k0dHZlNHhUTEpvb0k3LW1MVy1RcmF3YkpVQWEzTjdjUkYyRnlIYTdDNWp6Y1VWdFJCZU9ta2N3VW9WVWNneWlZMTZmNkp3MG1oNkphT0ZmN29TRHhkem1UaHFJYmJZVXFNU3ByQlRiOF93LWlfUTR6TV9BZ2dWckVMcFhpTDZSVVN1Znc?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
+        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=gulfnews.com" alt="" loading="lazy">Gulf News</span><span class="news-date">25 Sep 2026</span></div>
+        <h3><a href="https://gulfnews.com/world/gulf/saudi/saudi-arabia-launches-365-day-umrah-visa-with-90-day-stay-1.500613885" target="_blank" rel="noopener nofollow">Saudi Arabia's multiple-entry Umrah visa: what pilgrims need to know</a></h3>
+        <p>The one-year, multiple-entry Umrah visa lets eligible pilgrims return to the Kingdom several times over 365 days without reapplying each trip, with a cumulative stay capped at 90 days and a fresh Nusuk service package required before every visit.</p>
+        <a class="map-link" href="https://gulfnews.com/world/gulf/saudi/saudi-arabia-launches-365-day-umrah-visa-with-90-day-stay-1.500613885" target="_blank" rel="noopener nofollow">Read more ↗</a>
       </article>
-      <article class="news-card" data-date="2026-10-04">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=newsofbahrain.com" alt="" loading="lazy">News of Bahrain</span><span class="news-date">4 Oct 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTE1EYlowMktPd2tGTmxCb3lZOEZmUHpGLVVQWVc0d0JQMW1SUFRmZ2RTWE82S1d6R1Btci1sb1dVMmhhdDhVR2M4RGtEc2JNZG9EelpzSmp6UGFYcGs?oc=5" target="_blank" rel="noopener nofollow">Saudi Arabia expands tourist visa access: Here are the changes</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMiW0FVX3lxTE1EYlowMktPd2tGTmxCb3lZOEZmUHpGLVVQWVc0d0JQMW1SUFRmZ2RTWE82S1d6R1Btci1sb1dVMmhhdDhVR2M4RGtEc2JNZG9EelpzSmp6UGFYcGs?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-10-04">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=riotimesonline.com" alt="" loading="lazy">The Rio Times</span><span class="news-date">4 Oct 2026</span></div>
-        <h3><a href="https://www.riotimesonline.com/guyana-saudi-arabia-visa-on-arrival-2026" target="_blank" rel="noopener nofollow">Guyana Passport Holders Get Saudi Visa on Arrival</a></h3>
-        <a class="map-link" href="https://www.riotimesonline.com/guyana-saudi-arabia-visa-on-arrival-2026" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-10-03">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=spa.gov.sa" alt="" loading="lazy">Saudi Press Agency</span><span class="news-date">3 Oct 2026</span></div>
-        <h3><a href="https://www.spa.gov.sa/en/N2628490" target="_blank" rel="noopener nofollow">Saudi Arabia Introduces Package Visa to Simplify Tourist Travel to the Kingdom</a></h3>
-        <a class="map-link" href="https://www.spa.gov.sa/en/N2628490" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-10-03">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=english.ajel.sa" alt="" loading="lazy">english.ajel</span><span class="news-date">3 Oct 2026</span></div>
-        <h3><a href="https://english.ajel.sa/news/upbv18nrq" target="_blank" rel="noopener nofollow">Hajj and Umrah Ministry outlines steps for meal booking issues</a></h3>
-        <a class="map-link" href="https://english.ajel.sa/news/upbv18nrq" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-10-03">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=shiawaves.com" alt="" loading="lazy">shiawaves.com</span><span class="news-date">3 Oct 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMixgFBVV95cUxNNF9laFAzdWJxNjN5ZU1IVU1wVU1MckY5SGd0czd0Tjk5SmI1a1EzaEZYM0xvZWlaSER4aE5ENjB5QkxTbmJjeTRqX0VfQ2NjRGs1VEs2R191bFlkU0ZLV25xdGl3WUtFREEybmgwOGNIVk9wSGluejRlY0ZJSnZDLWJ1MzgtNnh0ZnQ1SV9fMjdNdDduQ2d4UEFUNm83UVFEd2RGaThCS1dWc1VETkVXNXdoYWkxRGJRQ2FOZWY2NHFMU01EZEE?oc=5" target="_blank" rel="noopener nofollow">Reports Raise Concern Over Indian Shiite Journalist During Umrah in Mecca</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMixgFBVV95cUxNNF9laFAzdWJxNjN5ZU1IVU1wVU1MckY5SGd0czd0Tjk5SmI1a1EzaEZYM0xvZWlaSER4aE5ENjB5QkxTbmJjeTRqX0VfQ2NjRGs1VEs2R191bFlkU0ZLV25xdGl3WUtFREEybmgwOGNIVk9wSGluejRlY0ZJSnZDLWJ1MzgtNnh0ZnQ1SV9fMjdNdDduQ2d4UEFUNm83UVFEd2RGaThCS1dWc1VETkVXNXdoYWkxRGJRQ2FOZWY2NHFMU01EZEE?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-10-02">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=blog.wego.com" alt="" loading="lazy">Wego Travel Blog</span><span class="news-date">2 Oct 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMia0FVX3lxTE1hbUszYnB2UE0xZHozTHVWSmJpcWhNRUxIbVZzVFh0S2pMRnhkNTNtMjJDb2NWVHBiWjZGb3BUX1dQdjVmaXlnSFVVMGZHVmJBdGlNbXVDRE1yVmhmMnFEWG1YWDhkX2tpNEFV?oc=5" target="_blank" rel="noopener nofollow">Saudi Arabia Introduces All-in-One Hajj Package for 2027</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMia0FVX3lxTE1hbUszYnB2UE0xZHozTHVWSmJpcWhNRUxIbVZzVFh0S2pMRnhkNTNtMjJDb2NWVHBiWjZGb3BUX1dQdjVmaXlnSFVVMGZHVmJBdGlNbXVDRE1yVmhmMnFEWG1YWDhkX2tpNEFV?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-10-02">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=english.ajel.sa" alt="" loading="lazy">english.ajel</span><span class="news-date">2 Oct 2026</span></div>
-        <h3><a href="https://english.ajel.sa/saudi-arabia/2f5vsgd3h" target="_blank" rel="noopener nofollow">Umrah companies vital to serving pilgrims, says Hajj ministry spokesman</a></h3>
-        <a class="map-link" href="https://english.ajel.sa/saudi-arabia/2f5vsgd3h" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-10-02">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=tiranatimes.com" alt="" loading="lazy">Tirana Times</span><span class="news-date">2 Oct 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMiiwFBVV95cUxOSGllRGpjMDRUMjRUYkpNYV9BbnNGLXBZUE9RZ2dUTjlSZTJhN0xYcFdDU3ZLTlNxa1hNQ2xfcXoxS1BKbjFjSVFxMGhfOG1ZVG4tTkhKRF83d3dNNHhHWVdNWldlU05JR2JqTUl5WEkyNkNHb0JvVG5hZVpvXzd1djBsU2NaOEhFNy1F?oc=5" target="_blank" rel="noopener nofollow">Saudi Arabia Eases Visa Procedures for Kosovo Citizens</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMiiwFBVV95cUxOSGllRGpjMDRUMjRUYkpNYV9BbnNGLXBZUE9RZ2dUTjlSZTJhN0xYcFdDU3ZLTlNxa1hNQ2xfcXoxS1BKbjFjSVFxMGhfOG1ZVG4tTkhKRF83d3dNNHhHWVdNWldlU05JR2JqTUl5WEkyNkNHb0JvVG5hZVpvXzd1djBsU2NaOEhFNy1F?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-10-02">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=thecable.ng" alt="" loading="lazy">TheCable</span><span class="news-date">2 Oct 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMikgFBVV95cUxPOU9MLThnNXFPQlU0VW9peUJiWVlRbVQtaHY3Nm1tRmY1ZnVRZHZqbGtxOUtHeE9VcWRBcUhMUkhSZHg5Z0lOX0dxTTBZdmxHZDVMai0xQi1BVXRXanNfTGNiUm5FWkFjazFqS1lVRGxJR0t6YXAwU2k2aEhDSjB1NHJzQTA2WTV0emo0cDZqdUlWUQ?oc=5" target="_blank" rel="noopener nofollow">Wakanow earns Saudi ministry of Hajj and Umrah ‘excellence’ award</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMikgFBVV95cUxPOU9MLThnNXFPQlU0VW9peUJiWVlRbVQtaHY3Nm1tRmY1ZnVRZHZqbGtxOUtHeE9VcWRBcUhMUkhSZHg5Z0lOX0dxTTBZdmxHZDVMai0xQi1BVXRXanNfTGNiUm5FWkFjazFqS1lVRGxJR0t6YXAwU2k2aEhDSjB1NHJzQTA2WTV0emo0cDZqdUlWUQ?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-10-02">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=spa.gov.sa" alt="" loading="lazy">Saudi Press Agency</span><span class="news-date">2 Oct 2026</span></div>
-        <h3><a href="https://www.spa.gov.sa/en/N2351386" target="_blank" rel="noopener nofollow">Hajj Ministry: Suspensions, Fines Imposed on Several Companies for Shortcomings in Services Provided to Umrah Performers</a></h3>
-        <a class="map-link" href="https://www.spa.gov.sa/en/N2351386" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-10-01">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=spa.gov.sa" alt="" loading="lazy">Saudi Press Agency</span><span class="news-date">1 Oct 2026</span></div>
-        <h3><a href="https://www.spa.gov.sa/en/N2381933" target="_blank" rel="noopener nofollow">New &#x27;Nusuk Umrah&#x27; Service for International Umrah Performers to Simplify Visa and Travel Bookings</a></h3>
-        <a class="map-link" href="https://www.spa.gov.sa/en/N2381933" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
+      <article class="news-card" data-date="2026-08-26">
+        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V10l8-6 8 6v11"/><path d="M10 21v-6h4v6"/></svg></div>
+        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=ttnworldwide.com" alt="" loading="lazy">TTN Worldwide</span><span class="news-date">26 Aug 2026</span></div>
+        <h3><a href="https://www.ttnworldwide.com/ArticleTA/466955/saudi-hotel-sector-defies-travel-disruptions-as-makkah-revpar-rises-87pc_colon-jll" target="_blank" rel="noopener nofollow">Makkah hotel revenue climbs as Saudi hospitality sector holds steady</a></h3>
+        <p>A JLL market report for Q2 2026 shows Makkah occupancy up 4 points year-on-year with room revenue rising 8.7%, while Madinah posted the Kingdom's highest occupancy at over 75% — both cities also added new hotel supply during the quarter.</p>
+        <a class="map-link" href="https://www.ttnworldwide.com/ArticleTA/466955/saudi-hotel-sector-defies-travel-disruptions-as-makkah-revpar-rises-87pc_colon-jll" target="_blank" rel="noopener nofollow">Read more ↗</a>
       </article>
       <!-- NEWS_LIST_END -->
     </div>
@@ -1289,43 +1233,52 @@
   </div>
 </section>
 
-<!-- ================= MIQAT ================= -->
+<!-- ================= MIQAT & ENTERING IHRAM ================= -->
 <section id="miqat" class="band-ivory-dim">
   <div class="container">
     <div class="section-head reveal">
-      <div class="section-icon-row"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg></span><div class="kicker-ar">المواقيت</div></div>
-      <h2>Miqat: where you must enter Ihram</h2>
-      <p class="desc wide">The miqat is the boundary around Makkah beyond which no one may pass, heading there intending Umrah or Hajj, without first being in Ihram. The Prophet ﷺ fixed five of them, each serving pilgrims arriving from a particular direction — land, sea or air.</p>
+      <div class="section-icon-row"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg></span><div class="kicker-ar">المواقيت والإحرام</div></div>
+      <h2>Miqat &amp; getting ready for Ihram</h2>
+      <p class="desc wide">The miqat is the boundary around Makkah beyond which no one may pass, heading there intending Umrah, without first being in Ihram. Know which one applies to you, then get dressed correctly before you reach it.</p>
     </div>
 
-    <div class="distance-list" id="miqatList">
-      <div class="distance-row" style="flex-direction:column;align-items:flex-start;gap:4px;">
-        <span class="d-name">Dhul Hulayfah <span style="font-weight:400;color:#8a8578;">(Abyar Ali)</span></span>
-        <span style="font-size:0.9rem;color:#4a4a44;">~450 km north — for Madinah and those arriving from the north</span>
+    <h3 style="font-size:1.15rem;margin-bottom:6px;">Where to enter Ihram</h3>
+    <p class="desc" style="margin-top:0;">The Prophet ﷺ fixed five miqats, each serving pilgrims from a particular direction.</p>
+
+    <div class="grid-3" id="miqatList">
+      <div class="panel compact miqat-card">
+        <div class="miqat-dir" style="transform:rotate(0deg);" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 19V5M12 5l-5 5M12 5l5 5"/></svg></div>
+        <h3>Dhul Hulayfah <span style="font-weight:400;color:#8a8578;font-size:0.85em;">(Abyar Ali)</span></h3>
+        <p>~450 km north — for Madinah and those arriving from the north.</p>
       </div>
-      <div class="distance-row" style="flex-direction:column;align-items:flex-start;gap:4px;">
-        <span class="d-name">Al-Juhfah <span style="font-weight:400;color:#8a8578;">(near Rabigh)</span></span>
-        <span style="font-size:0.9rem;color:#4a4a44;">~185 km northwest — Syria, Jordan, Egypt, Turkey, North Africa, Europe &amp; the Americas</span>
+      <div class="panel compact miqat-card">
+        <div class="miqat-dir" style="transform:rotate(-45deg);" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 19V5M12 5l-5 5M12 5l5 5"/></svg></div>
+        <h3>Al-Juhfah <span style="font-weight:400;color:#8a8578;font-size:0.85em;">(near Rabigh)</span></h3>
+        <p>~185 km NW — Syria, Jordan, Egypt, Turkey, North Africa, Europe &amp; the Americas.</p>
       </div>
-      <div class="distance-row" style="flex-direction:column;align-items:flex-start;gap:4px;">
-        <span class="d-name">Qarn al-Manazil <span style="font-weight:400;color:#8a8578;">(As-Sayl al-Kabir)</span></span>
-        <span style="font-size:0.9rem;color:#4a4a44;">~75 km east — Najd, and most Gulf-state flights (UAE, Oman, Qatar, Kuwait, Bahrain)</span>
+      <div class="panel compact miqat-card">
+        <div class="miqat-dir" style="transform:rotate(90deg);" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 19V5M12 5l-5 5M12 5l5 5"/></svg></div>
+        <h3>Qarn al-Manazil <span style="font-weight:400;color:#8a8578;font-size:0.85em;">(As-Sayl al-Kabir)</span></h3>
+        <p>~75 km east — Najd, and most Gulf-state flights (UAE, Oman, Qatar, Kuwait, Bahrain).</p>
       </div>
-      <div class="distance-row" style="flex-direction:column;align-items:flex-start;gap:4px;">
-        <span class="d-name">Yalamlam <span style="font-weight:400;color:#8a8578;">(As-Sa'diyah)</span></span>
-        <span style="font-size:0.9rem;color:#4a4a44;">~92 km south — Yemen, and commonly the miqat for India, Pakistan, Bangladesh &amp; Southeast Asia</span>
+      <div class="panel compact miqat-card">
+        <div class="miqat-dir" style="transform:rotate(180deg);" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 19V5M12 5l-5 5M12 5l5 5"/></svg></div>
+        <h3>Yalamlam <span style="font-weight:400;color:#8a8578;font-size:0.85em;">(As-Sa'diyah)</span></h3>
+        <p>~92 km south — Yemen, and commonly the miqat for India, Pakistan, Bangladesh &amp; Southeast Asia.</p>
       </div>
-      <div class="distance-row" style="flex-direction:column;align-items:flex-start;gap:4px;">
-        <span class="d-name">Dhat Irq</span>
-        <span style="font-size:0.9rem;color:#4a4a44;">~90 km northeast — Iraq, Iran and Central Asia</span>
+      <div class="panel compact miqat-card">
+        <div class="miqat-dir" style="transform:rotate(45deg);" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 19V5M12 5l-5 5M12 5l5 5"/></svg></div>
+        <h3>Dhat Irq</h3>
+        <p>~90 km northeast — Iraq, Iran and Central Asia.</p>
       </div>
-      <div class="distance-row" style="flex-direction:column;align-items:flex-start;gap:4px;">
-        <span class="d-name">Masjid Aisha <span style="font-weight:400;color:#8a8578;">(At-Tan'im)</span></span>
-        <span style="font-size:0.9rem;color:#4a4a44;">~6 km from the Ka'bah — not one of the five; used only by Makkah residents or pilgrims already inside the city starting a fresh Umrah</span>
+      <div class="panel compact miqat-card">
+        <div class="miqat-dir" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5.2-6-10a6 6 0 0 1 12 0c0 4.8-6 10-6 10z"/><circle cx="12" cy="11" r="2"/></svg></div>
+        <h3>Masjid Aisha <span style="font-weight:400;color:#8a8578;font-size:0.85em;">(At-Tan'im)</span></h3>
+        <p>~6 km from the Ka'bah — not one of the five; for Makkah residents or pilgrims starting a fresh Umrah.</p>
       </div>
     </div>
 
-    <div class="panel reveal" style="margin-top:28px;">
+    <div class="panel reveal miqat-finder" style="margin-top:24px;">
       <h3 style="margin-bottom:14px;">Which miqat applies to me?</h3>
       <div class="calc-field" style="max-width:420px;">
         <label for="miqatSelect">I'm arriving from / via:</label>
@@ -1343,8 +1296,43 @@
     </div>
 
     <p class="note-box tight" style="margin-top:22px;">
-      <strong>Flying?</strong> Your miqat is whichever point your flight path actually crosses, not your nationality — airlines usually announce this shortly before you reach it so you can be in Ihram already. If you're unsure of your route, the safe default is to wear your Ihram and make your intention before boarding; entering Ihram early is always valid, only entering it late is not. This is general orientation, not a ruling for your specific flight — ask your airline or group leader if in doubt.
+      <strong>Flying?</strong> Your miqat is whichever point your flight path actually crosses, not your nationality — airlines usually announce this shortly before you reach it. If unsure, the safe default is to wear Ihram and make your intention before boarding; entering early is always valid, only entering late is not. Ask your airline or group leader for your specific route.
     </p>
+
+    <h3 style="font-size:1.15rem;margin:36px 0 16px;">How to wear Ihram</h3>
+    <div class="wear-guide">
+      <div class="wear-diagram-col">
+        <svg class="wear-diagram" viewBox="0 0 180 240" aria-hidden="true">
+          <path d="M82 42 L82 52 M98 42 L98 52" stroke="var(--line)" stroke-width="2.5"/>
+          <circle cx="90" cy="26" r="17" fill="none" stroke="var(--line)" stroke-width="2.5"/>
+          <path d="M54 48 Q90 34 126 48 L133 112 Q90 94 47 112 Z" fill="rgba(20,76,70,0.16)" stroke="var(--teal)" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M70 58 L66 100" stroke="var(--teal)" stroke-width="1.2" opacity="0.5"/>
+          <path d="M108 56 L104 96" stroke="var(--teal)" stroke-width="1.2" opacity="0.5"/>
+          <path d="M50 116 L130 116 L146 228 L34 228 Z" fill="rgba(183,134,44,0.16)" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M68 123 L62 222" stroke="var(--gold)" stroke-width="1.2" opacity="0.45"/>
+          <path d="M90 121 L90 225" stroke="var(--gold)" stroke-width="1.2" opacity="0.45"/>
+          <path d="M112 123 L118 222" stroke="var(--gold)" stroke-width="1.2" opacity="0.45"/>
+          <path d="M56 134 Q90 142 124 134" fill="none" stroke="var(--gold)" stroke-width="1.6" stroke-dasharray="4 4" opacity="0.8"/>
+          <ellipse cx="62" cy="233" rx="15" ry="5" fill="none" stroke="var(--line)" stroke-width="2"/>
+          <ellipse cx="118" cy="233" rx="15" ry="5" fill="none" stroke="var(--line)" stroke-width="2"/>
+        </svg>
+        <p class="wear-diagram-caption">The two unstitched cloths — teal: Rida (upper), gold: Izar (lower)</p>
+      </div>
+      <div class="wear-steps-col">
+        <h4>How men wear Ihram</h4>
+        <ol class="wear-steps">
+          <li><strong>Izar (lower wrap):</strong> around the waist, from the navel to between the ankle and mid-shin — tucked in or held with a simple ihram belt, no stitching or knots needed.</li>
+          <li><strong>Rida (upper wrap):</strong> draped over both shoulders, covering the torso.</li>
+          <li>During Tawaf only, many men do <em>Idtiba</em> — passing the Rida under the right arm and over the left shoulder, baring the right shoulder — then cover both shoulders again afterwards.</li>
+          <li>Sandals should leave the ankle bones exposed — no closed shoes, socks, stitched clothing, or headwear touching the head.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="panel compact wear-women">
+      <h4>Ihram for women</h4>
+      <p>There's no special colour or garment — your own loose, opaque, modest clothing is Ihram for a woman, and ordinary stitched clothing is completely fine. Normal hijab covers the hair; the face and hands stay uncovered, and a niqab or gloves aren't worn while in Ihram — though a cloth can be lowered over the face in front of unrelated men without it touching the skin, per the majority view.</p>
+    </div>
   </div>
 </section>
 
@@ -1365,33 +1353,7 @@
       </button>
       <div class="step-body" id="s1">
         <div class="step-body-inner">
-          <p class="intro">Perform ghusl — a full purifying bath, the Prophet's ﷺ own practice before entering ihram — then wear the ihram garments, make your intention, and begin reciting the Talbiyah, which you repeat often until you start Tawaf.</p>
-
-          <div class="wear-guide">
-            <div class="wear-diagram-col">
-              <svg class="wear-diagram" viewBox="0 0 200 240" aria-hidden="true">
-                <rect x="68" y="14" width="64" height="210" rx="32" fill="none" stroke="var(--line)" stroke-width="2"/>
-                <path d="M58 46 Q100 24 142 52 L132 94 Q100 72 68 90 Z" fill="rgba(20,76,70,0.14)" stroke="var(--teal)" stroke-width="2" stroke-linejoin="round"/>
-                <rect x="56" y="120" width="88" height="82" rx="10" fill="rgba(183,134,44,0.14)" stroke="var(--gold)" stroke-width="2"/>
-                <path class="wrap-arrow" d="M56 161 a44 31 0 1 1 88 0" fill="none" stroke="var(--gold)" stroke-width="2" stroke-dasharray="6 5" stroke-linecap="round"/>
-              </svg>
-              <p class="wear-diagram-caption">The two unstitched cloths — teal: Rida (upper), gold: Izar (lower)</p>
-            </div>
-            <div class="wear-steps-col">
-              <h4>How men wear Ihram</h4>
-              <ol class="wear-steps">
-                <li><strong>Izar (lower wrap):</strong> around the waist, from the navel to between the ankle and mid-shin — tucked in or held with a simple ihram belt, no stitching or knots needed.</li>
-                <li><strong>Rida (upper wrap):</strong> draped over both shoulders, covering the torso.</li>
-                <li>During Tawaf only, many men do <em>Idtiba</em> — passing the Rida under the right arm and over the left shoulder, baring the right shoulder — then cover both shoulders again afterwards.</li>
-                <li>Sandals should leave the ankle bones exposed — no closed shoes, socks, stitched clothing, or headwear touching the head.</li>
-              </ol>
-            </div>
-          </div>
-
-          <div class="panel compact wear-women">
-            <h4>Ihram for women</h4>
-            <p>There's no special colour or garment — your own loose, opaque, modest clothing is Ihram for a woman, and ordinary stitched clothing is completely fine. Normal hijab covers the hair; the face and hands stay uncovered, and a niqab or gloves aren't worn while in Ihram — though a cloth can be lowered over the face in front of unrelated men without it touching the skin, per the majority view.</p>
-          </div>
+          <p class="intro">Perform ghusl — a full purifying bath, the Prophet's ﷺ own practice before entering ihram — then wear the ihram garments, make your intention, and begin reciting the Talbiyah, which you repeat often until you start Tawaf. For where to enter Ihram and exactly how to wear it (men and women), see <a href="#miqat" class="map-link" style="margin:0;display:inline;">Miqat &amp; getting ready for Ihram ↑</a> above.</p>
 
           <!-- Ihram Mode widget: JS swaps this between the activation button
                and the active dashboard. See renderIhramWidget() in the script.
