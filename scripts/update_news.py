@@ -9,7 +9,9 @@ What it does, in order:
      drops anything tied to other countries' pilgrims (Pakistan, Iran, ...)
      or to war/violence.
   3. Merges the new stories with the cards already in the page (so
-     hand-written summaries are kept), removes duplicates, DELETES anything
+     hand-written summaries are kept), removes duplicates -- including the
+     SAME story reworded by different outlets (fuzzy match on shared
+     content words, not just an exact title match) -- DELETES anything
      older than MAX_AGE_DAYS (60), sorts newest-first and keeps the latest
      MAX_POOL.
   4. Rewrites only the block between <!-- NEWS_LIST_START --> and
@@ -142,6 +144,39 @@ def norm_title(title):
     return re.sub(r"[^a-z0-9]+", " ", title.lower()).strip()
 
 
+# Words too common to count as a "this is the same story" signal -- without
+# this, almost every Saudi headline shares "saudi"/"arabia"/"to" and the
+# overlap check below would call unrelated stories duplicates of each other.
+STOPWORDS = {
+    "a", "an", "the", "to", "of", "in", "on", "for", "and", "or", "is", "are",
+    "with", "as", "at", "by", "from", "after", "before", "its", "amid", "over",
+    "new", "says", "say", "said", "set", "will", "now", "more", "than", "into",
+    "amid", "out", "up", "this", "that", "has", "have", "had", "be", "been",
+}
+
+
+def title_tokens(title):
+    """The meaningful words in a headline, for duplicate detection."""
+    words = re.findall(r"[a-z0-9]+", title.lower())
+    return frozenset(w for w in words if w not in STOPWORDS and len(w) > 2)
+
+
+def is_near_duplicate(tokens, seen_token_sets, threshold=0.6):
+    """True if `tokens` shares threshold-or-more of its words with any
+    already-seen headline -- catches the same story reworded by a different
+    outlet ("expands visa eligibility" vs "...visa access" vs "...visa
+    scheme"), which an exact-text match misses entirely."""
+    if not tokens:
+        return False
+    for other in seen_token_sets:
+        if not other:
+            continue
+        smaller = min(len(tokens), len(other))
+        if smaller and len(tokens & other) / smaller >= threshold:
+            return True
+    return False
+
+
 def parse_feed(xml_bytes):
     """Yield dicts: title, link, date (date), source, domain."""
     root = ET.fromstring(xml_bytes)
@@ -182,7 +217,7 @@ def build_card(s):
 
 
 def parse_existing(block):
-    """Return [(date, title_norm, raw_html)] for cards already on the page."""
+    """Return [(date, tokens, raw_html, title)] for cards already on the page."""
     cards = []
     for m in re.finditer(r"<article class=\"news-card\"[^>]*>.*?</article>", block, re.S):
         raw = "      " + m.group(0)
@@ -191,7 +226,7 @@ def parse_existing(block):
         if not d:
             continue
         title = html.unescape(re.sub(r"<[^>]+>", "", t.group(1))) if t else ""
-        cards.append((datetime.strptime(d.group(1), "%Y-%m-%d").date(), norm_title(title), raw))
+        cards.append((datetime.strptime(d.group(1), "%Y-%m-%d").date(), title_tokens(title), raw, title))
     return cards
 
 
@@ -208,7 +243,7 @@ def main():
     block, tail = rest.split(END, 1)
 
     existing = parse_existing(block)
-    seen = {t for _, t, _ in existing}
+    seen_tokens = [tk for _, tk, _, _ in existing]
     today = datetime.now(timezone.utc).date()
     oldest = today - timedelta(days=MAX_AGE_DAYS)
 
@@ -228,15 +263,15 @@ def main():
     print(f"Fetched {len(fetched)} headlines in total.")
     new_cards, rejected = [], {"duplicate": [], "too old / future": [], "not relevant": []}
     for s in fetched:
-        key = norm_title(s["title"])
-        if key in seen:
+        tokens = title_tokens(s["title"])
+        if is_near_duplicate(tokens, seen_tokens):
             rejected["duplicate"].append(s["title"]); continue
         if s["date"] > today or s["date"] < oldest:
             rejected["too old / future"].append(s["title"]); continue
         if not is_relevant(s["title"]):
             rejected["not relevant"].append(s["title"]); continue
-        seen.add(key)
-        new_cards.append((s["date"], key, build_card(s)))
+        seen_tokens.append(tokens)
+        new_cards.append((s["date"], tokens, build_card(s), s["title"]))
         if len(new_cards) >= MAX_NEW_PER_RUN:
             break
     for reason, titles in rejected.items():
@@ -244,14 +279,29 @@ def main():
         for t in titles[:5]:
             print(f"     - {t}")
     for c in new_cards:
-        print(f"  + added: {c[0]}  {c[1][:70]}")
+        print(f"  + added: {c[0]}  {c[3][:70]}")
 
     fresh_existing = [c for c in existing if c[0] >= oldest]      # drop stale cards
-    pool = sorted(new_cards + fresh_existing, key=lambda c: c[0], reverse=True)[:MAX_POOL]
+    combined = sorted(new_cards + fresh_existing, key=lambda c: c[0], reverse=True)
+
+    # Final sweep over the WHOLE pool (new + previously-saved cards), not just
+    # the incoming batch -- cleans up near-duplicate cards that were saved on
+    # different days by earlier runs, before this check existed, same as the
+    # three "Saudi Arabia expands tourist visa..." cards from different
+    # outlets that prompted this fix.
+    pool, kept_tokens, dupe_cleanup = [], [], 0
+    for item in combined:
+        if is_near_duplicate(item[1], kept_tokens):
+            dupe_cleanup += 1
+            continue
+        kept_tokens.append(item[1])
+        pool.append(item)
+    pool = pool[:MAX_POOL]
+
     dropped = len(existing) - len(fresh_existing)
     print(f"{ok_feeds}/{len(QUERIES) * 2} feeds ok, {len(new_cards)} new stories, "
-          f"{dropped} stale removed, {len(pool)} kept.")
-    if not new_cards and not dropped:
+          f"{dropped} stale removed, {dupe_cleanup} duplicate(s) cleaned up, {len(pool)} kept.")
+    if not new_cards and not dropped and not dupe_cleanup:
         print("Nothing to change -- page left unchanged.")
         return
 
