@@ -30,7 +30,7 @@ jobs:
       # Runs even if the news step failed, so one broken source never blocks the other.
       - name: Refresh the travel advisories
         if: ${{ !cancelled() }}
-        run: python scripts/update_advisories.py index.html
+        run: python scripts/update_news.py index.html
 
       - name: Commit and push if changed
         if: ${{ !cancelled() }}
