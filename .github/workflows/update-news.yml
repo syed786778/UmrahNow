@@ -2,13 +2,19 @@ name: Update news and advisories
 
 on:
   schedule:
-    - cron: "17 */6 * * *"   # every 6 hours (at :17 past, to avoid GitHub's busy top-of-hour slots)
-  workflow_dispatch:          # also lets you run it manually from the Actions tab
+    - cron: "17 3 * * *"         # every day: refresh, then email the digest (about 08:50 IST)
+    - cron: "17 9,15,21 * * *"   # three more refreshes during the day (no email)
+  workflow_dispatch:              # run it by hand from the Actions tab
+    inputs:
+      send_digest:
+        description: "Also send the email digest to subscribers"
+        type: boolean
+        default: false
 
 permissions:
-  contents: write             # needed so the job can commit the refreshed page
+  contents: write                 # lets the job commit the refreshed page
 
-# Only one run at a time, so two runs can't push over each other.
+# One run at a time, so two runs can never push over each other.
 concurrency:
   group: update-news
   cancel-in-progress: false
@@ -23,14 +29,14 @@ jobs:
         with:
           python-version: "3.12"
 
-      # If your page isn't called index.html, change the filename in both steps.
+      # If your page isn't called index.html, change the filename in the three steps below.
       - name: Refresh the news cards
         run: python scripts/update_news.py index.html
 
-      # Runs even if the news step failed, so one broken source never blocks the other.
+      # Runs even if the news step failed, so one broken source never blocks another.
       - name: Refresh the travel advisories
         if: ${{ !cancelled() }}
-        run: python scripts/update_news.py index.html
+        run: python scripts/update_advisories.py index.html
 
       - name: Commit and push if changed
         if: ${{ !cancelled() }}
@@ -46,3 +52,15 @@ jobs:
           # Pull anything pushed since this job started, then push.
           git pull --rebase origin main
           git push origin HEAD:main
+
+      # Emails subscribers once a day (the 03:17 UTC run), or when you tick the box on a manual run.
+      # Does nothing until the Brevo secret/variables below are set up.
+      - name: Send the daily email digest
+        if: ${{ !cancelled() && (github.event.schedule == '17 3 * * *' || inputs.send_digest) }}
+        env:
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          BREVO_LIST_ID: ${{ vars.BREVO_LIST_ID }}
+          BREVO_SENDER_EMAIL: ${{ vars.BREVO_SENDER_EMAIL }}
+          BREVO_SENDER_NAME: ${{ vars.BREVO_SENDER_NAME }}
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: python scripts/send_digest.py index.html
