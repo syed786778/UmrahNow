@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UmrahNow — Everything for a Comfortable Umrah</title>
+<title>UmrahNow - Everything for a Comfortable Umrah</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
@@ -166,9 +166,16 @@
   .advisory-track{display:flex;list-style:none;margin:0;padding:0;width:max-content;align-items:center;min-height:44px;}
   .advisory-track li{flex-shrink:0;padding-right:56px;white-space:nowrap;}
   .advisory-bar.is-marquee .advisory-track{animation:advScroll var(--adv-duration,120s) linear infinite;}
-  .advisory-bar.is-marquee:hover .advisory-track,
-  .advisory-bar.is-marquee:focus-within .advisory-track,
-  .advisory-bar.is-paused .advisory-track{animation-play-state:paused;}
+  /* Pause while the mouse is over the TEXT (mouse devices only -- on phones a
+     tap would leave a sticky :hover and freeze the ticker), when the visitor
+     pressed Pause, or while a link has keyboard focus. Deliberately NOT
+     :focus-within -- clicking the Details/Pause buttons leaves focus inside
+     the bar, which kept the ticker frozen. */
+  @media (hover:hover){
+    .advisory-bar.is-marquee .advisory-viewport:hover .advisory-track{animation-play-state:paused;}
+  }
+  .advisory-bar.is-paused .advisory-track,
+  .advisory-bar.is-focus-paused .advisory-track{animation-play-state:paused;}
   @keyframes advScroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
   .adv-link{display:inline-flex;align-items:center;gap:8px;color:inherit;text-decoration:none;}
   .adv-link:hover .adv-txt,.adv-link:focus-visible .adv-txt{text-decoration:underline;}
@@ -1202,15 +1209,16 @@
      GitHub workflow). They summarise ONLY what the official sources publish
      and link to them. Don't hand-edit the list; it will be overwritten. -->
 <div class="advisory-wrap" id="advisories">
-  <div class="advisory-bar" id="advisoryBar" role="region" aria-label="Latest travel advisories for Saudi Arabia" data-checked="2026-10-22T09:24:00Z">
+  <div class="advisory-bar" id="advisoryBar" role="region" aria-label="Latest travel advisories for Saudi Arabia" data-checked="2026-10-15T02:57:15Z">
     <div class="advisory-label"><span class="adv-dot" aria-hidden="true"></span><span class="adv-label-text">Travel advisories</span><span class="adv-checked" id="advisoryChecked"></span></div>
     <div class="advisory-viewport" id="advisoryViewport">
       <ul class="advisory-track" id="advisoryTrack">
 <!-- ADVISORY_LIST_START -->
-      <li data-key="in" data-date="2026-10-13" data-checked="2026-10-22T09:24:00Z"><a class="adv-link" href="https://www.eoiriyadh.gov.in/content/EoI-Riyadh-Advisory-13.10.2026-3.pdf" target="_blank" rel="noopener"><span class="adv-badge adv-badge--in">IN</span><span class="adv-src">Embassy of India, Riyadh</span><span class="adv-txt">Important Update/Advisory- 1700 hrs · 24×7 helpline 800 247 1234 (toll-free in Saudi Arabia)</span><span class="adv-date">13 Oct</span></a></li>
-      <li data-key="in" data-date="2026-10-08" data-checked="2026-10-22T09:24:00Z"><a class="adv-link" href="https://www.eoiriyadh.gov.in/section/news/mportant-advisory/" target="_blank" rel="noopener"><span class="adv-badge adv-badge--in">IN</span><span class="adv-src">Embassy of India, Riyadh</span><span class="adv-txt">Important advisory</span><span class="adv-date">8 Oct</span></a></li>
-      <li data-key="us" data-date="2026-10-21" data-checked="2026-10-22T09:24:00Z"><a class="adv-link" href="https://sa.usembassy.gov/security-alert-u-s-mission-to-saudi-arabia-october-21-2026/" target="_blank" rel="noopener"><span class="adv-badge adv-badge--us">US</span><span class="adv-src">US Embassy</span><span class="adv-txt">Security Alert: U.S. Mission to Saudi Arabia – October 21, 2026</span><span class="adv-date">21 Oct</span></a></li>
-      <li data-key="uk" data-date="2026-10-21" data-checked="2026-10-22T09:24:00Z"><a class="adv-link" href="https://www.gov.uk/foreign-travel-advice/saudi-arabia" target="_blank" rel="noopener"><span class="adv-badge adv-badge--uk">UK</span><span class="adv-src">UK FCDO</span><span class="adv-txt">Advises against: all travel to within 10km of the border with Yemen · all but essential travel to the rest of Saudi Arabia</span><span class="adv-date">21 Oct</span></a></li>
+      <li data-key="in" data-date="2026-10-08" data-checked="2026-10-15T02:57:15Z"><a class="adv-link" href="https://www.eoiriyadh.gov.in/section/news/" target="_blank" rel="noopener"><span class="adv-badge adv-badge--in">IN</span><span class="adv-src">Embassy of India, Riyadh</span><span class="adv-txt">Important advisory for Indian nationals in Saudi Arabia: remain alert, stay indoors as necessary and follow instructions from Saudi authorities; Embassy, Consulate in Jeddah and VFS centres reported as functioning normally · 24×7 helpline 800 247 1234 (toll-free in Saudi Arabia)</span><span class="adv-date">8 Oct</span></a></li>
+      <li data-key="in" data-date="2026-10-08" data-checked="2026-10-15T02:57:15Z"><a class="adv-link" href="https://www.eoiriyadh.gov.in/section/news/" target="_blank" rel="noopener"><span class="adv-badge adv-badge--in">IN</span><span class="adv-src">Embassy of India, Riyadh</span><span class="adv-txt">Statement on attacks targeting airports in Riyadh</span><span class="adv-date">8 Oct</span></a></li>
+      <li data-key="us" data-date="2026-10-12" data-checked="2026-10-15T02:57:15Z"><a class="adv-link" href="https://travel.state.gov/en/international-travel/travel-advisories/saudi-arabia.html" target="_blank" rel="noopener"><span class="adv-badge adv-badge--us">US</span><span class="adv-src">US State Dept</span><span class="adv-txt">Level 3: Reconsider travel — risk of drone and missile attacks (Iran / Houthis), armed conflict and terrorism. Do not travel to the Yemen border area. US government employees need special authorization to use any Saudi airport</span><span class="adv-date">12 Oct</span></a></li>
+      <li data-key="us" data-date="2026-10-05" data-checked="2026-10-15T02:57:15Z"><a class="adv-link" href="https://sa.usembassy.gov/security-alert-u-s-mission-saudi-arabia-october-5-2026/" target="_blank" rel="noopener"><span class="adv-badge adv-badge--us">US</span><span class="adv-src">US Embassy</span><span class="adv-txt">Security alert: U.S. citizens urged to remain vigilant and follow Saudi Civil Defense alerts</span><span class="adv-date">5 Oct</span></a></li>
+      <li data-key="uk" data-date="2026-10-11" data-checked="2026-10-15T02:57:15Z"><a class="adv-link" href="https://www.gov.uk/foreign-travel-advice/saudi-arabia" target="_blank" rel="noopener"><span class="adv-badge adv-badge--uk">UK</span><span class="adv-src">UK FCDO</span><span class="adv-txt">Advises against: all travel within 10km of Saudi Arabia's border with Yemen · all but essential travel to Aseer, Riyadh, Najran and Jizan provinces and the cities of Taif, Jeddah and Dammam · all but essential travel to all Saudi airports except Medina International Airport</span><span class="adv-date">11 Oct</span></a></li>
     <!-- ADVISORY_LIST_END -->
       </ul>
     </div>
@@ -1236,93 +1244,32 @@
   </div>
 </div>
 
-    <form class="subscribe-card" id="subscribeForm" novalidate>
+    <div class="subscribe-card" id="subscribeCard">
       <div class="subscribe-copy">
         <strong>Get the daily update by email</strong>
-        <span>Saudi travel advisories and the latest Umrah updates, in your inbox every morning. Free — unsubscribe any time.</span>
+        <span>Saudi travel advisories and the latest Umrah updates, in your inbox every morning. Free — you'll confirm your email first, and can unsubscribe any time.</span>
       </div>
       <div class="subscribe-fields">
-        <label class="sr-only" for="subscribeEmail">Email address</label>
-        <input type="email" id="subscribeEmail" name="EMAIL" placeholder="you@example.com" autocomplete="email" required>
-        <input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
-        <button type="submit" class="btn btn-gold" id="subscribeBtn">Subscribe</button>
+        <a class="btn btn-gold" id="subscribeBtn" href="#" target="_blank" rel="noopener">Subscribe by email</a>
       </div>
       <p class="subscribe-status" id="subscribeStatus" role="status"></p>
-    </form>
+    </div>
 
     <div class="news-grid" id="newsGrid">
       <!-- NEWS_LIST_START -->
-      <article class="news-card" data-date="2026-10-24">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=tribuneindia.com" alt="" loading="lazy">The Tribune</span><span class="news-date">24 Oct 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMizwFBVV95cUxORElIbVY3c09TbkpuaU1JeVkxbWUwcDdBbE5BaFFiaEpzelJaT09IZHUtTDM1R0tLeEJzWVZqVEpUQkhaUGlrNTJSZmVCVC1KZlZSNXFjeGh0MWJtNTA0OW5sa1dYNjhXUUt3cE1ybjFOWkRwV0dJdkl4R1RocUtjVnY3SGhIamxpVUF4c05TVjBjU2hfVy1kTnZWUVh5aXpQWUdWZDZSTVJLbHVHeERWVDhoVVZRZ2RZOUlaYkNHYS1rUEZPZjBhSzRiYXhJZDDSAdMBQVVfeXFMT2xuaHhBSmZlLXNjSk5OdldVa0FIM3hlU2Z3bFdTVU9tMUlxUGFwdU5ZY2ZOMmJFQWo5ZmJmdnNnV0t6Wm9mYjVZaGdxc3cxVVRRY2hldDJZMGtTRV9URjc4VWZEeG53RlVMNlh3TmZhbkJuX2tTeEM2V2F0R2dPNXYyRG5vbUZPYnRLSi1teHhZV1VSam93YjZLOU9faWVmSnRFX3Z2bXJNYXNWdnRYcmY5V1BmcUx4bnp3cElvMG5wZlVUcTVhQkp4OUFjX2kySWVEcw?oc=5" target="_blank" rel="noopener nofollow">‘Elderly pilgrims facing anxiety’: Stranded Kashmiri Umrah pilgrims in Saudi Arabia seek govt help</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMizwFBVV95cUxORElIbVY3c09TbkpuaU1JeVkxbWUwcDdBbE5BaFFiaEpzelJaT09IZHUtTDM1R0tLeEJzWVZqVEpUQkhaUGlrNTJSZmVCVC1KZlZSNXFjeGh0MWJtNTA0OW5sa1dYNjhXUUt3cE1ybjFOWkRwV0dJdkl4R1RocUtjVnY3SGhIamxpVUF4c05TVjBjU2hfVy1kTnZWUVh5aXpQWUdWZDZSTVJLbHVHeERWVDhoVVZRZ2RZOUlaYkNHYS1rUEZPZjBhSzRiYXhJZDDSAdMBQVVfeXFMT2xuaHhBSmZlLXNjSk5OdldVa0FIM3hlU2Z3bFdTVU9tMUlxUGFwdU5ZY2ZOMmJFQWo5ZmJmdnNnV0t6Wm9mYjVZaGdxc3cxVVRRY2hldDJZMGtTRV9URjc4VWZEeG53RlVMNlh3TmZhbkJuX2tTeEM2V2F0R2dPNXYyRG5vbUZPYnRLSi1teHhZV1VSam93YjZLOU9faWVmSnRFX3Z2bXJNYXNWdnRYcmY5V1BmcUx4bnp3cElvMG5wZlVUcTVhQkp4OUFjX2kySWVEcw?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
+      <article class="news-card" data-date="2026-09-25">
+        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div>
+        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=gulfnews.com" alt="" loading="lazy">Gulf News</span><span class="news-date">25 Sep 2026</span></div>
+        <h3><a href="https://gulfnews.com/world/gulf/saudi/saudi-arabia-launches-365-day-umrah-visa-with-90-day-stay-1.500613885" target="_blank" rel="noopener nofollow">Saudi Arabia's multiple-entry Umrah visa: what pilgrims need to know</a></h3>
+        <p>The one-year, multiple-entry Umrah visa lets eligible pilgrims return to the Kingdom several times over 365 days without reapplying each trip, with a cumulative stay capped at 90 days and a fresh Nusuk service package required before every visit.</p>
+        <a class="map-link" href="https://gulfnews.com/world/gulf/saudi/saudi-arabia-launches-365-day-umrah-visa-with-90-day-stay-1.500613885" target="_blank" rel="noopener nofollow">Read more ↗</a>
       </article>
-      <article class="news-card" data-date="2026-10-24">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2m20 0h-2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=themorning.lk" alt="" loading="lazy">The Morning</span><span class="news-date">24 Oct 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMiZkFVX3lxTE9oWGtQWXkwcDhVMUdjOHFUS3Ata2QzSm9qMUxoaFM0b3lRVkFsUkNFTVdlQ3hsRE5waE93ekxWejZUVHNKRE92UXp2Mm0takdIV2ZkQWRPemUyUjR5SzV2bnFpSE41dw?oc=5" target="_blank" rel="noopener nofollow">Attacks on Saudi Arabia: Safety concerns mount for Lankan Umrah pilgrims</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMiZkFVX3lxTE9oWGtQWXkwcDhVMUdjOHFUS3Ata2QzSm9qMUxoaFM0b3lRVkFsUkNFTVdlQ3hsRE5waE93ekxWejZUVHNKRE92UXp2Mm0takdIV2ZkQWRPemUyUjR5SzV2bnFpSE41dw?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-10-24">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=gallinews.com" alt="" loading="lazy">Gallinews</span><span class="news-date">24 Oct 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMiugFBVV95cUxQbU1YVEpXdERnQnBHMzMxMnI3TnNkMy10aVE2d2dza2ZYTHg0b2tJZmNVODJrSzlQU1RTVUFjMVY3MXdBbVhjaXE3UzVJUG4yNXVXR1VCVTRLcTkycGlXbC1HMVFnNEJIQ0R5VWI1N205ZTRvSTNvUVlBajhHTnl6ZHFZMGNtb2VjMlJ6SG0tWXlKa3FTVXF2NnVHN0hTcmZZWVgwNzVaZGY1WXZiSk5kakRwd1NSZV95enc?oc=5" target="_blank" rel="noopener nofollow">Read Saudi Arabia Mein Phase 3,000 Umrah Zaireen Wapas Lautey, Baaki Ki Wapsi Ke Liye Koshishein Jaari.</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMiugFBVV95cUxQbU1YVEpXdERnQnBHMzMxMnI3TnNkMy10aVE2d2dza2ZYTHg0b2tJZmNVODJrSzlQU1RTVUFjMVY3MXdBbVhjaXE3UzVJUG4yNXVXR1VCVTRLcTkycGlXbC1HMVFnNEJIQ0R5VWI1N205ZTRvSTNvUVlBajhHTnl6ZHFZMGNtb2VjMlJ6SG0tWXlKa3FTVXF2NnVHN0hTcmZZWVgwNzVaZGY1WXZiSk5kakRwd1NSZV95enc?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-10-24">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=thekashmirimages.com" alt="" loading="lazy">Kashmir Images</span><span class="news-date">24 Oct 2026</span></div>
-        <h3><a href="https://thekashmirimages.com/2026/10/25/cm-omar-abdullah-expresses-concern-over-jks-umrah-pilgrims-stranded-in-saudi-arabia/" target="_blank" rel="noopener nofollow">CM Omar Abdullah expresses concern over J&amp;K’s Umrah pilgrims stranded in Saudi Arabia</a></h3>
-        <a class="map-link" href="https://thekashmirimages.com/2026/10/25/cm-omar-abdullah-expresses-concern-over-jks-umrah-pilgrims-stranded-in-saudi-arabia/" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-10-24">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=newindianexpress.com" alt="" loading="lazy">The New Indian Express</span><span class="news-date">24 Oct 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMi2gFBVV95cUxOeDhFRzdIMUlfeWtLcmUwTDVDZVhoSXprb01ralFKY0lZVkoycWhscFpteHJxQkg3ZEZTaHY2anBleWNwcUxaRnRXR2NuMkJ1MDZuOXlZOU9SWngxUWNnVDVJWE5QLWxIcVAwbTlJTGVoNGJMakl5VU5oZkltN0RjTHZ6NVpBMTJ1V1pVMWJBZzZ3XzZwUEpmQ0tIVHFNdzFRdFVTYmRSSXdLTU5MTndzbUd4bHYtd1JMaU1NbWkzQkJ1bVA2Qk1DeldXUWVsN00ybjVGNzlJNG1iZ9IB5wFBVV95cUxOUDU4MWdLZkt2WUtPb09hd3JRdDEtTE5lVkdZaEFWSHJkejFJbGU0bmd4RG85MGVMeFZpczdTWnFENTEzNG9tMi1mUHBNbm9CY0QtekgwdFlWMndweC1UVk15c1k1RnVJano0dUhmakJBeGNDcVhPY2VhMk91WlN4dzNsUWE2MDc0Q3o4V1pKYnJiSHFEX3lISnB4RDd4N2dHSnR3TGNrQjU5aUFqWkphRkJ2RlJ2UmVDLVAyM19FTU5WRG1QSjdxMERJa0xCeFR4cWxzUkZRY3JLcjdDTFhkYkhxajhEQ2c?oc=5" target="_blank" rel="noopener nofollow">Air India, IndiGo extend Saudi flight suspensions, with some services halted until November 7</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMi2gFBVV95cUxOeDhFRzdIMUlfeWtLcmUwTDVDZVhoSXprb01ralFKY0lZVkoycWhscFpteHJxQkg3ZEZTaHY2anBleWNwcUxaRnRXR2NuMkJ1MDZuOXlZOU9SWngxUWNnVDVJWE5QLWxIcVAwbTlJTGVoNGJMakl5VU5oZkltN0RjTHZ6NVpBMTJ1V1pVMWJBZzZ3XzZwUEpmQ0tIVHFNdzFRdFVTYmRSSXdLTU5MTndzbUd4bHYtd1JMaU1NbWkzQkJ1bVA2Qk1DeldXUWVsN00ybjVGNzlJNG1iZ9IB5wFBVV95cUxOUDU4MWdLZkt2WUtPb09hd3JRdDEtTE5lVkdZaEFWSHJkejFJbGU0bmd4RG85MGVMeFZpczdTWnFENTEzNG9tMi1mUHBNbm9CY0QtekgwdFlWMndweC1UVk15c1k1RnVJano0dUhmakJBeGNDcVhPY2VhMk91WlN4dzNsUWE2MDc0Q3o4V1pKYnJiSHFEX3lISnB4RDd4N2dHSnR3TGNrQjU5aUFqWkphRkJ2RlJ2UmVDLVAyM19FTU5WRG1QSjdxMERJa0xCeFR4cWxzUkZRY3JLcjdDTFhkYkhxajhEQ2c?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-10-24">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=sentinelassam.com" alt="" loading="lazy">The Sentinel</span><span class="news-date">24 Oct 2026</span></div>
-        <h3><a href="https://www.sentinelassam.com/more-news/national-news/stranded-umrah-pilgrims-returned-safely-to-india-kiren-rijiju" target="_blank" rel="noopener nofollow">Stranded Umrah pilgrims returned safely to India: Kiren Rijiju</a></h3>
-        <a class="map-link" href="https://www.sentinelassam.com/more-news/national-news/stranded-umrah-pilgrims-returned-safely-to-india-kiren-rijiju" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-10-24">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2m20 0h-2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=indiatoday.in" alt="" loading="lazy">India Today</span><span class="news-date">24 Oct 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMiwwFBVV95cUxNSWRpeFJEMnRKMVFLWmZnazVoRE9zVnJvd2dmb3ZnbmhaYmIwVjJuUkVBSFJncEZJX3BfRTZtMjVLRXk0ODNNRERUdEFvSGhYVkNOU3lhZW9TWnB1Rktja2hYaVYzYlFyay1HTWhMNTdCRHJ6VWdsck5uQnJmbnR2cU85Z1lDVWNBWm1GeXlhZjA1Zlg1aTcyeFFEblhZdGJJbm1aTGNEemdVVUhPLTVLVkUyV3VWZkdHQ2R6Z0RhMXdHV2_SAcgBQVVfeXFMUFRMdE1KNDk3ejdMY2xfOExvdHA0dlJRZV9VV0lrUmlmWF9ON05TN3hDRTB3UTUxTzJYRWIweVg2T1RnN0RDS3dmcFUyMERRZHU5U2ZFcnRYNnpZaXdCTXlKT25tY1k3MHZwRFRWRXRNNWZWamtGeFpsNl9VazY1MHMwNzdpVDQxUmNzSFZlM1ZiS3RrRXBhNzFoVVA3emppdkJJQnpaVXBRc2ptOUwwd1pNUmNJeTRadFREY3dQSzl0ZkxoWm54eUM?oc=5" target="_blank" rel="noopener nofollow">India issues fresh Saudi advisory for Umrah pilgrims amid flight cancellations</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMiwwFBVV95cUxNSWRpeFJEMnRKMVFLWmZnazVoRE9zVnJvd2dmb3ZnbmhaYmIwVjJuUkVBSFJncEZJX3BfRTZtMjVLRXk0ODNNRERUdEFvSGhYVkNOU3lhZW9TWnB1Rktja2hYaVYzYlFyay1HTWhMNTdCRHJ6VWdsck5uQnJmbnR2cU85Z1lDVWNBWm1GeXlhZjA1Zlg1aTcyeFFEblhZdGJJbm1aTGNEemdVVUhPLTVLVkUyV3VWZkdHQ2R6Z0RhMXdHV2_SAcgBQVVfeXFMUFRMdE1KNDk3ejdMY2xfOExvdHA0dlJRZV9VV0lrUmlmWF9ON05TN3hDRTB3UTUxTzJYRWIweVg2T1RnN0RDS3dmcFUyMERRZHU5U2ZFcnRYNnpZaXdCTXlKT25tY1k3MHZwRFRWRXRNNWZWamtGeFpsNl9VazY1MHMwNzdpVDQxUmNzSFZlM1ZiS3RrRXBhNzFoVVA3emppdkJJQnpaVXBRc2ptOUwwd1pNUmNJeTRadFREY3dQSzl0ZkxoWm54eUM?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-10-24">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=aninews.in" alt="" loading="lazy">ANI News</span><span class="news-date">24 Oct 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMiqwJBVV95cUxPQmxEWnBiWlkyOWIyX0lIRS0yMDNIWjZ3eHJsNUJBMEVHY24wSWQyUm0xeVREZDBkSDM1VHVHRDRyNnBuUmNiSk9BQ2Z4d0FzYU9PR1QwSTA1M0hMWnlZU2s3bWowVmZSWUNhVkYyakVSYzhYaTdHUDlPN2t1S1VBekJWMmlZaG1TcThFQkJxNjhSNEowS3A3aEZlU3dDV09Jbnp4c0RNV2lHa2toMkNud1lvX2EtNnlTVFg2TWlwQk1WTHBmWk5RWWtPSm05eGR1QWxrN09TOFlYbkZsejJOLUhGcnJwWGU2UjRqWGpyQjgwX0pDMmxXa01mU2EteDVfeDJVXzdZUjRTbzM1Ym9vLTdBaXBsWU9UUFNJVjlzNnhhcmZSWlphb29Fbw?oc=5" target="_blank" rel="noopener nofollow">&quot;Ensure interim assistance is extended to stranded Karnataka Umrah pilgrims in Saudi Arabia&quot;: Karnataka CM Shivakumar writes to EAM Jaishankar</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMiqwJBVV95cUxPQmxEWnBiWlkyOWIyX0lIRS0yMDNIWjZ3eHJsNUJBMEVHY24wSWQyUm0xeVREZDBkSDM1VHVHRDRyNnBuUmNiSk9BQ2Z4d0FzYU9PR1QwSTA1M0hMWnlZU2s3bWowVmZSWUNhVkYyakVSYzhYaTdHUDlPN2t1S1VBekJWMmlZaG1TcThFQkJxNjhSNEowS3A3aEZlU3dDV09Jbnp4c0RNV2lHa2toMkNud1lvX2EtNnlTVFg2TWlwQk1WTHBmWk5RWWtPSm05eGR1QWxrN09TOFlYbkZsejJOLUhGcnJwWGU2UjRqWGpyQjgwX0pDMmxXa01mU2EteDVfeDJVXzdZUjRTbzM1Ym9vLTdBaXBsWU9UUFNJVjlzNnhhcmZSWlphb29Fbw?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-10-24">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=voi.id" alt="" loading="lazy">VOI.ID</span><span class="news-date">24 Oct 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMiQ0FVX3lxTE56NUg2QlpsRmt1V3ZRZXg1cXlqOGlOSk1IampuWlVHV0VIa0VUOU5pWUtGRGdROW5vVVdkRXBlckt4dVnSAUJBVV95cUxONGFVRU5ReXgyLTZLVWZ6UzhsODZ0NlVKSWloOVp2Z1lVRUx6Z3A1WXZsYnVXblpVSXBBalpGanMteVE?oc=5" target="_blank" rel="noopener nofollow">This is the Complete Answer of the Minister of Hajj and Umrah regarding the Appointment of Experts and the Beginning of the Formation of the Ministry</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMiQ0FVX3lxTE56NUg2QlpsRmt1V3ZRZXg1cXlqOGlOSk1IampuWlVHV0VIa0VUOU5pWUtGRGdROW5vVVdkRXBlckt4dVnSAUJBVV95cUxONGFVRU5ReXgyLTZLVWZ6UzhsODZ0NlVKSWloOVp2Z1lVRUx6Z3A1WXZsYnVXblpVSXBBalpGanMteVE?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-10-24">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=thelogicalindian.com" alt="" loading="lazy">The Logical Indian</span><span class="news-date">24 Oct 2026</span></div>
-        <h3><a href="https://thelogicalindian.com/india-helps-stranded-umrah-131606/" target="_blank" rel="noopener nofollow">India Helps 3,000 Stranded Umrah Pilgrims Return From Saudi Arabia, Efforts Continue For Others: MEA</a></h3>
-        <a class="map-link" href="https://thelogicalindian.com/india-helps-stranded-umrah-131606/" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-10-24">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=deccanchronicle.com" alt="" loading="lazy">Deccan Chronicle</span><span class="news-date">24 Oct 2026</span></div>
-        <h3><a href="https://www.deccanchronicle.com/southern-states/karnataka/dk-shivakumar-seeks-mea-intervention-to-repatriate-over-600-stranded-umrah-pilgrims-1998380" target="_blank" rel="noopener nofollow">DK Shivakumar Seeks MEA Intervention to Repatriate over 600 Stranded Umrah Pilgrims</a></h3>
-        <a class="map-link" href="https://www.deccanchronicle.com/southern-states/karnataka/dk-shivakumar-seeks-mea-intervention-to-repatriate-over-600-stranded-umrah-pilgrims-1998380" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-10-24">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=thedailyjagran.com" alt="" loading="lazy">thedailyjagran.com</span><span class="news-date">24 Oct 2026</span></div>
-        <h3><a href="https://www.thedailyjagran.com/world/news/indigo-extends-saudi-arabia-flight-cancellations-amid-security-concerns-check-routes-and-dates-10333801" target="_blank" rel="noopener nofollow">IndiGo Extends Saudi Arabia Flight Cancellations Amid Security Concerns | Check Routes And Dates</a></h3>
-        <a class="map-link" href="https://www.thedailyjagran.com/world/news/indigo-extends-saudi-arabia-flight-cancellations-amid-security-concerns-check-routes-and-dates-10333801" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
+      <article class="news-card" data-date="2026-08-26">
+        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V10l8-6 8 6v11"/><path d="M10 21v-6h4v6"/></svg></div>
+        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=ttnworldwide.com" alt="" loading="lazy">TTN Worldwide</span><span class="news-date">26 Aug 2026</span></div>
+        <h3><a href="https://www.ttnworldwide.com/ArticleTA/466955/saudi-hotel-sector-defies-travel-disruptions-as-makkah-revpar-rises-87pc_colon-jll" target="_blank" rel="noopener nofollow">Makkah hotel revenue climbs as Saudi hospitality sector holds steady</a></h3>
+        <p>A JLL market report for Q2 2026 shows Makkah occupancy up 4 points year-on-year with room revenue rising 8.7%, while Madinah posted the Kingdom's highest occupancy at over 75% — both cities also added new hotel supply during the quarter.</p>
+        <a class="map-link" href="https://www.ttnworldwide.com/ArticleTA/466955/saudi-hotel-sector-defies-travel-disruptions-as-makkah-revpar-rises-87pc_colon-jll" target="_blank" rel="noopener nofollow">Read more ↗</a>
       </article>
       <!-- NEWS_LIST_END -->
     </div>
@@ -2834,7 +2781,7 @@
   <div class="container">
     <div class="section-head reveal">
       <div class="section-icon-row"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v10H8l-4 4z"/></svg></span><div class="kicker-ar">ملاحظاتكم</div></div>
-      <h2>Help us make this guide better</h2>
+      <h2>Help us make this site better</h2>
       <p class="desc">Missing a du'a, found an outdated rule, or wish there was a section on something else? Tell us what would make your Umrah journey smoother — this goes straight to the person building the site.</p>
     </div>
 
@@ -3054,6 +3001,10 @@
     setUp();
     window.addEventListener('resize', setSpeed);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(setSpeed);
+    track.addEventListener('focusin', (e) => {
+      if (e.target.matches && e.target.matches(':focus-visible')) bar.classList.add('is-focus-paused');
+    });
+    track.addEventListener('focusout', () => bar.classList.remove('is-focus-paused'));
     if (pauseBtn) {
       pauseBtn.addEventListener('click', () => {
         const paused = bar.classList.toggle('is-paused');
@@ -3065,41 +3016,22 @@
   })();
 
   // ---- Daily email signup ----
-  // Posts to a Brevo hosted signup form (Brevo sends the confirmation email,
-  // keeps the list and handles unsubscribes). Paste your form's URL below.
+  // Opens your Brevo-hosted signup form (Brevo shows the real result, sends the
+  // confirmation email, keeps the list and handles unsubscribes).
+  // Paste the form's "share" link between the quotes below.
   (function subscribeInit() {
-    const SUBSCRIBE_URL = 'https://77e03d40.sibforms.com/serve/MUIFAEukH6cnCGTQkln-ZNDJs1w8IFGxkqsc3-eiPXccyij25tgY-fP2Zhp2WkpiDQV_PQVc5mVU8Bz_9n9nZAVr6-ghxgfoNQl7E9wGBF9t3GsWOTkrpGM6xWm6negrpLUzb3WluTmvbaeWOKrxqrzFF2yIvU2XffU0Hw2JsDAaIOrH95aD1SxCi46Sm84YVzGmxD7eHoIf2HHV3g==';
-    const form = document.getElementById('subscribeForm');
-    if (!form) return;
-    const status = document.getElementById('subscribeStatus');
+    const SUBSCRIBE_FORM_URL = 'https://77e03d40.sibforms.com/serve/MUIFAEukH6cnCGTQkln-ZNDJs1w8IFGxkqsc3-eiPXccyij25tgY-fP2Zhp2WkpiDQV_PQVc5mVU8Bz_9n9nZAVr6-ghxgfoNQl7E9wGBF9t3GsWOTkrpGM6xWm6negrpLUzb3WluTmvbaeWOKrxqrzFF2yIvU2XffU0Hw2JsDAaIOrH95aD1SxCi46Sm84YVzGmxD7eHoIf2HHV3g==';
     const btn = document.getElementById('subscribeBtn');
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      status.classList.remove('error');
-      const email = form.EMAIL.value.trim();
-      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
-        status.classList.add('error');
-        status.textContent = 'Please enter a valid email address.';
-        return;
-      }
-      if (SUBSCRIBE_URL.indexOf('http') !== 0) {
+    const status = document.getElementById('subscribeStatus');
+    if (!btn) return;
+    if (SUBSCRIBE_FORM_URL.indexOf('http') === 0) {
+      btn.href = SUBSCRIBE_FORM_URL;
+    } else {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
         status.textContent = 'Email updates are launching shortly — please check back soon.';
-        return;
-      }
-      btn.disabled = true;
-      status.textContent = 'Subscribing…';
-      try {
-        const body = new URLSearchParams({ EMAIL: email, email_address_check: form.email_address_check.value, locale: 'en', html_type: 'simple' });
-        await fetch(SUBSCRIBE_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body });
-        status.textContent = 'Almost done — check your inbox and confirm your email to start receiving the daily update.';
-        form.reset();
-      } catch (err) {
-        status.classList.add('error');
-        status.textContent = "Couldn't subscribe right now — please try again in a moment.";
-      } finally {
-        btn.disabled = false;
-      }
-    });
+      });
+    }
   })();
 
   // ---- Mobile nav ----
