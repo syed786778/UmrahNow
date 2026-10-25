@@ -51,7 +51,7 @@ jobs:
 
       # Emails subscribers once a day (the 03:17 UTC run), or when you tick the box on a manual run.
       # Does nothing until the Brevo secret/variables are set up (see EMAIL-SETUP.md).
-            - name: Send the daily email digest
+      - name: Send the daily email digest
         if: ${{ !cancelled() && (github.event.schedule == '17 3 * * *' || inputs.send_digest) }}
         env:
           BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
