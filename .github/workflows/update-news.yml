@@ -51,12 +51,12 @@ jobs:
 
       # Emails subscribers once a day (the 03:17 UTC run), or when you tick the box on a manual run.
       # Does nothing until the Brevo secret/variables are set up (see EMAIL-SETUP.md).
-      - name: Send the daily email digest
+            - name: Send the daily email digest
         if: ${{ !cancelled() && (github.event.schedule == '17 3 * * *' || inputs.send_digest) }}
         env:
           BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
-          BREVO_LIST_ID: ${{ vars.BREVO_LIST_ID }}
-          BREVO_SENDER_EMAIL: ${{ vars.BREVO_SENDER_EMAIL }}
-          BREVO_SENDER_NAME: ${{ vars.BREVO_SENDER_NAME }}
-          SITE_URL: ${{ vars.SITE_URL }}
+          BREVO_LIST_ID: ${{ secrets.BREVO_LIST_ID }}
+          BREVO_SENDER_EMAIL: ${{ secrets.BREVO_SENDER_EMAIL }}
+          BREVO_SENDER_NAME: ${{ secrets.BREVO_SENDER_NAME }}
+          SITE_URL: ${{ secrets.SITE_URL }}
         run: python scripts/update_news.py index.html --digest
