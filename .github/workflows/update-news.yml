@@ -56,9 +56,9 @@ jobs:
         if: ${{ !cancelled() && (github.event.schedule == '17 18 * * *' || inputs.send_digest) }}
         env:
           BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
-          BREVO_LIST_ID: ${{ vars.BREVO_LIST_ID }}
-          BREVO_SENDER_EMAIL: ${{ vars.BREVO_SENDER_EMAIL }}
-          BREVO_SENDER_NAME: ${{ vars.BREVO_SENDER_NAME }}
-          SITE_URL: ${{ vars.SITE_URL }}
+          BREVO_LIST_ID: ${{ secrets.BREVO_LIST_ID }}
+          BREVO_SENDER_EMAIL: ${{ secrets.BREVO_SENDER_EMAIL }}
+          BREVO_SENDER_NAME: ${{ secrets.BREVO_SENDER_NAME }}
+          SITE_URL: ${{ secrets.SITE_URL }}
           DIGEST_SEND_AT_UTC: ${{ vars.DIGEST_SEND_AT_UTC }}
         run: python scripts/update_news.py index.html --digest ${{ github.event_name == 'workflow_dispatch' && '--now' || '' }}
