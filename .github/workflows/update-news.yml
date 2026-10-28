@@ -2,8 +2,8 @@ name: Update news and advisories
 
 on:
   schedule:
-    - cron: "17 3 * * *"         # every day: refresh, then email the digest (about 08:50 IST)
-    - cron: "17 9,15,21 * * *"   # three more refreshes during the day (no email)
+    - cron: "17 18 * * *"        # every evening: refresh, then PREPARE tomorrow's email (Brevo delivers it at 08:30 IST)
+    - cron: "17 3,9,15 * * *"    # three more refreshes during the day (no email)
   workflow_dispatch:              # run it by hand from the Actions tab
     inputs:
       send_digest:
@@ -49,14 +49,16 @@ jobs:
           git pull --rebase origin main
           git push origin HEAD:main
 
-      # Emails subscribers once a day (the 03:17 UTC run), or when you tick the box on a manual run.
-      # Does nothing until the Brevo secret/variables are set up (see EMAIL-SETUP.md).
+      # GitHub starts scheduled jobs hours late, so this step only PREPARES the email; Brevo then
+      # delivers it at an exact time (03:00 UTC = 08:30 IST by default). A manual run with the box
+      # ticked sends immediately. Does nothing until the Brevo settings exist (see EMAIL-SETUP.md).
       - name: Send the daily email digest
-        if: ${{ !cancelled() && (github.event.schedule == '17 3 * * *' || inputs.send_digest) }}
+        if: ${{ !cancelled() && (github.event.schedule == '17 18 * * *' || inputs.send_digest) }}
         env:
           BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
-          BREVO_LIST_ID: ${{ secrets.BREVO_LIST_ID }}
-          BREVO_SENDER_EMAIL: ${{ secrets.BREVO_SENDER_EMAIL }}
-          BREVO_SENDER_NAME: ${{ secrets.BREVO_SENDER_NAME }}
-          SITE_URL: ${{ secrets.SITE_URL }}
-        run: python scripts/update_news.py index.html --digest
+          BREVO_LIST_ID: ${{ vars.BREVO_LIST_ID }}
+          BREVO_SENDER_EMAIL: ${{ vars.BREVO_SENDER_EMAIL }}
+          BREVO_SENDER_NAME: ${{ vars.BREVO_SENDER_NAME }}
+          SITE_URL: ${{ vars.SITE_URL }}
+          DIGEST_SEND_AT_UTC: ${{ vars.DIGEST_SEND_AT_UTC }}
+        run: python scripts/update_news.py index.html --digest ${{ github.event_name == 'workflow_dispatch' && '--now' || '' }}
