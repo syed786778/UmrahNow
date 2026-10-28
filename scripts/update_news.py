@@ -11,7 +11,8 @@ UmrahNow automation -- ONE file that keeps the page fresh:
 
 Usage (the page is index.html in your repo):
     python scripts/update_news.py index.html                 # 1 + 2  (what the workflow runs)
-    python scripts/update_news.py index.html --digest        # send the daily email (3)
+    python scripts/update_news.py index.html --digest        # prepare the daily email; Brevo delivers it at 08:30 IST
+    python scripts/update_news.py index.html --digest --now  # send it immediately (manual test)
     python scripts/update_news.py index.html --digest --dry-run   # build the email, don't send
     python scripts/update_news.py index.html --advisories-only --dry-run   # preview advisories
     (also: --news-only)
@@ -817,9 +818,9 @@ def pretty(d):
 
 
 # ------------------------------------------------------------ build the email
-def build_email(advisories, news, site, unsubscribe_tag="{{ unsubscribe }}"):
+def build_email(advisories, news, site, unsubscribe_tag="{{ unsubscribe }}", when=None):
     esc = htmllib.escape
-    today = datetime.now(timezone.utc).date()
+    today = when or datetime.now(timezone.utc).date()
     subject = f"UmrahNow daily · Saudi travel advisories & Umrah updates · {today.day} {today:%b}"
     preheader = "Today's travel advisories for Saudi Arabia and the latest Umrah news."
 
@@ -887,32 +888,62 @@ def brevo(method, path, key, payload=None):
         raise BrevoError(f"HTTP {e.code} from Brevo {method} {path}: {e.read().decode('utf-8', errors='replace')[:400]}")
 
 
-def send(advisories, news, site, key, list_id, sender_email, sender_name):
-    today = datetime.now(timezone.utc).date()
-    name = f"UmrahNow daily digest {today.isoformat()}"
+def next_send_time(now=None):
+    """Next delivery moment (UTC). GitHub starts scheduled jobs hours late, so
+    the job only PREPARES the email; Brevo delivers it at this exact time.
+    Default 03:00 UTC = 08:30 IST; change with the DIGEST_SEND_AT_UTC variable (HH:MM)."""
+    now = now or datetime.now(timezone.utc)
+    hh, mm = (os.environ.get("DIGEST_SEND_AT_UTC") or "03:00").strip().split(":")
+    t = now.replace(hour=int(hh), minute=int(mm), second=0, microsecond=0)
+    if t <= now + timedelta(minutes=20):
+        t += timedelta(days=1)
+    return t
 
-    # Don't send twice in one day if the workflow is re-run.
+
+def send(advisories, news, site, key, list_id, sender_email, sender_name, send_at=None):
+    """send_at=None sends immediately; otherwise Brevo delivers at that UTC time."""
+    when = (send_at or datetime.now(timezone.utc)).date()
+    name = f"UmrahNow daily digest {when.isoformat()}"
+
+    # Never create two digests for the same delivery day (re-runs, manual tests).
     try:
         recent = brevo("GET", "/emailCampaigns?limit=30&sort=desc", key).get("campaigns", [])
         if any(c.get("name") == name for c in recent):
-            print(f"A campaign named '{name}' already exists -- not sending again today.")
+            print(f"A digest for {when.isoformat()} already exists -- not creating another.")
             return
     except Exception as e:
         print(f"(could not check for an existing campaign: {e}; continuing)")
 
     last_err = None
     for tag in ("{{ unsubscribe }}", "[UNSUBSCRIBE]"):  # current tag first, legacy tag as a fallback
-        subject, body = build_email(advisories, news, site, tag)
+        subject, body = build_email(advisories, news, site, tag, when)
         payload = {"name": name, "subject": subject, "htmlContent": body,
                    "sender": {"name": sender_name, "email": sender_email},
                    "recipients": {"listIds": [int(list_id)]}}
+        if send_at:
+            payload["scheduledAt"] = send_at.strftime("%Y-%m-%dT%H:%M:%S.000Z")
         try:
             created = brevo("POST", "/emailCampaigns", key, payload)
             cid = created.get("id")
             if not cid:
                 raise BrevoError(f"campaign created but no id returned: {created}")
-            brevo("POST", f"/emailCampaigns/{cid}/sendNow", key)
-            print(f"Sent campaign {cid}: {subject}")
+            if not send_at:
+                brevo("POST", f"/emailCampaigns/{cid}/sendNow", key)
+                print(f"Sent campaign {cid}: {subject}")
+                return
+            # Scheduled: confirm Brevo really queued it; if it's still a draft, send now rather than never.
+            status = ""
+            try:
+                status = (brevo("GET", f"/emailCampaigns/{cid}", key).get("status") or "")
+            except BrevoError as e:
+                print(f"(could not read campaign status: {e})")
+            if status == "draft":
+                print(f"Campaign {cid} was left as a draft by Brevo -- sending it now instead.")
+                brevo("POST", f"/emailCampaigns/{cid}/sendNow", key)
+                print(f"Sent campaign {cid}: {subject}")
+            else:
+                print(f"Scheduled campaign {cid} for {send_at:%Y-%m-%d %H:%M} UTC "
+                      f"(status: {status or 'unknown'}): {subject}")
             return
         except BrevoError as e:
             last_err = e
@@ -953,8 +984,9 @@ def digest_main():
         return
     if not list_id.isdigit():
         sys.exit("BREVO_LIST_ID must be the numeric list ID.")
+    send_at = None if "--now" in sys.argv else next_send_time()
     try:
-        send(advisories, news, site, key, list_id, sender_email, sender_name)
+        send(advisories, news, site, key, list_id, sender_email, sender_name, send_at)
     except BrevoError as e:
         sys.exit(f"Brevo error: {e}")
 
@@ -971,12 +1003,12 @@ def main():
     page = paths[0] if paths else next((n for n in ("index.html", "umrahnow.html") if Path(n).exists()), None)
     if not page or not Path(page).exists():
         sys.exit("Page not found. Usage: python scripts/update_news.py index.html "
-                 "[--digest] [--dry-run] [--news-only] [--advisories-only]")
+                 "[--digest [--now]] [--dry-run] [--news-only] [--advisories-only]")
     prog = sys.argv[0]
     dry = ["--dry-run"] if "--dry-run" in flags else []
 
     if "--digest" in flags:
-        sys.argv = [prog, page] + dry
+        sys.argv = [prog, page] + dry + (["--now"] if "--now" in flags else [])
         digest_main()
         return
 
