@@ -958,6 +958,144 @@
 
   .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease;}
   .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* ==========================================================================
+     DESIGN SYSTEM LAYER — deliberately last, so it wins. One set of tokens
+     (radius, shadow, gradients, type scale) now drives every section, so the
+     page reads as one product instead of a collection of sections.
+       Fonts   : Amiri (headings, Arabic)  ·  Work Sans (everything else)
+       Type    : section title 1.8–2.5rem · card title 1.15rem · body .95rem · small .88rem · label .78rem
+       Prices  : rupees first, riyals in brackets — always (see renderPrices in the script)
+     ========================================================================== */
+  :root{
+    --radius:10px;--radius-lg:18px;
+    --shadow-sm:0 1px 2px rgba(14,42,40,.05),0 6px 18px rgba(14,42,40,.07);
+    --shadow-md:0 2px 4px rgba(14,42,40,.06),0 16px 36px rgba(14,42,40,.15);
+    --grad-gold:linear-gradient(135deg,#dcb05a,#B7862C);
+    --grad-teal:linear-gradient(135deg,#3FA79A,#144C46);
+    --fs-xs:.78rem;--fs-sm:.88rem;--fs-body:.95rem;--fs-card:1.15rem;
+    --card-border:1px solid rgba(183,134,44,.22);
+  }
+
+  /* ---- section headers ---- */
+  .section-head h2{font-size:clamp(1.8rem,3.4vw,2.5rem);line-height:1.15;letter-spacing:-.01em;}
+  .section-head .desc{font-size:1.04rem;line-height:1.65;}
+  .section-icon{width:44px;height:44px;border:0;background:var(--grad-gold);color:var(--night);box-shadow:0 4px 14px rgba(183,134,44,.38);}
+  .section-icon svg{width:21px;height:21px;}
+  .band-teal .section-icon{background:linear-gradient(135deg,#F0D794,#C9983A);color:var(--night);}
+  .kicker-ar{font-size:1.65rem;}
+  .section-head{position:relative;}
+  .section-head::after{
+    content:"";position:absolute;right:0;top:-6px;width:130px;height:130px;pointer-events:none;opacity:.15;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120' fill='none' stroke='%23B7862C' stroke-width='1.4'%3E%3Crect x='24' y='24' width='72' height='72'/%3E%3Crect x='24' y='24' width='72' height='72' transform='rotate(45 60 60)'/%3E%3Ccircle cx='60' cy='60' r='30'/%3E%3Ccircle cx='60' cy='60' r='8'/%3E%3C/svg%3E") no-repeat center/contain;
+  }
+  .band-teal .section-head::after{opacity:.24;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120' fill='none' stroke='%23E7C77E' stroke-width='1.4'%3E%3Crect x='24' y='24' width='72' height='72'/%3E%3Crect x='24' y='24' width='72' height='72' transform='rotate(45 60 60)'/%3E%3Ccircle cx='60' cy='60' r='30'/%3E%3Ccircle cx='60' cy='60' r='8'/%3E%3C/svg%3E");}
+  @media(max-width:760px){.section-head::after{width:80px;height:80px;opacity:.1;}}
+
+  /* ---- buttons & tabs ---- */
+  .btn,.btn-outline,.download-btn{border-radius:999px;}
+  .btn-gold{background:var(--grad-gold);box-shadow:0 6px 18px rgba(183,134,44,.32);}
+  .btn-gold:hover{background:linear-gradient(135deg,#e8c373,#c8963a);}
+  .download-btn{padding:10px 20px;}
+  .city-tabs{gap:8px;border-bottom:0;margin-bottom:26px;flex-wrap:wrap;}
+  .city-tab{margin-right:0;padding:9px 22px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:1.05rem;color:#6b6659;}
+  .city-tab.active{background:var(--night);border-color:var(--night);color:var(--gold-soft);}
+
+  /* ---- one card system ---- */
+  .panel,.place-card,.hotel-card,.news-card,.download-card,.step-card{background:#fff;border:var(--card-border);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);}
+  .panel:hover,.place-card:hover,.hotel-card:hover,.news-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px);}
+  .panel{position:relative;}
+  .panel.compact{padding:22px;overflow:hidden;}
+  .panel.compact::before,.panel.checklist::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--grad-gold);}
+  .grid-3>.panel.compact:nth-child(3n+2)::before{background:var(--grad-teal);}
+  .grid-3>.panel.compact:nth-child(3n)::before{background:linear-gradient(90deg,#B7862C,#3FA79A);}
+  .panel h3,.panel.compact h3,.place-card h4,.hotel-card h4,.feature-cell h4,.flow-step h4,.download-card h4,.news-card h3{font-size:var(--fs-card);line-height:1.25;}
+  .panel.compact h3{margin-bottom:8px;}
+  .panel p,.panel.compact p,.panel li,.place-card p,.flow-step p,.feature-cell p,.news-card p{font-size:var(--fs-body);line-height:1.62;}
+  .tag{font-size:var(--fs-xs);text-transform:uppercase;letter-spacing:.07em;font-weight:700;padding:5px 12px;border-radius:999px;background:linear-gradient(135deg,rgba(63,167,154,.18),rgba(63,167,154,.07));color:var(--teal);margin-bottom:12px;}
+  .note-box,.note-box.tight{border-radius:var(--radius);border-left:4px solid var(--gold);background:linear-gradient(90deg,rgba(183,134,44,.12),rgba(183,134,44,.04));font-size:var(--fs-body);line-height:1.65;}
+  .map-link{font-size:var(--fs-sm);padding:6px 14px;border:1px solid rgba(20,76,70,.28);border-radius:999px;background:rgba(63,167,154,.08);}
+  .map-link:hover{background:var(--teal);color:#fff;border-bottom-color:rgba(20,76,70,.28);}
+  .place-icon{width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,rgba(183,134,44,.22),rgba(63,167,154,.16));}
+  .step-num{background:var(--grad-gold);color:var(--night);border:0;}
+  .step-toggle h3{font-size:1.2rem;}
+  .feature-grid{border-radius:var(--radius-lg);overflow:hidden;}
+  .emergency-card{border-radius:14px;}
+  .news-card-icon{background:var(--grad-gold);color:var(--night);}
+
+  /* ---- icon feature cards (sadaqah, seasons) ---- */
+  .fc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+  .fc-icon{width:48px;height:48px;border-radius:14px;background:var(--grad-gold);color:var(--night);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(183,134,44,.3);}
+  .fc-icon svg{width:23px;height:23px;}
+  .fc-num{font-family:'Amiri',serif;font-size:2.6rem;font-weight:700;line-height:1;color:rgba(183,134,44,.26);}
+
+  /* ---- pull quotes (hadith) ---- */
+  .pullquotes{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:0 0 28px;}
+  .pullquote{position:relative;margin:0;padding:28px 28px 22px 34px;border-radius:var(--radius-lg);color:var(--ivory);background:linear-gradient(135deg,#0E2A28,#144C46);box-shadow:var(--shadow-md);overflow:hidden;}
+  .pullquote::before{content:"“";position:absolute;top:14px;left:12px;font-family:'Amiri',serif;font-size:4.4rem;line-height:1;color:var(--gold-soft);opacity:.45;}
+  .pullquote p{font-family:'Amiri',serif;font-style:italic;font-size:1.35rem;line-height:1.45;margin:0 0 12px;color:var(--ivory);}
+  .pullquote cite{font-style:normal;font-size:var(--fs-sm);color:var(--gold-soft);letter-spacing:.03em;}
+  @media(max-width:760px){.pullquotes{grid-template-columns:1fr;}}
+
+  /* ---- miqat ---- */
+  .miqat-dir{width:46px;height:46px;background:var(--grad-gold);color:var(--night);box-shadow:0 4px 12px rgba(183,134,44,.35);margin-bottom:12px;}
+  .miqat-dir svg{width:20px;height:20px;}
+  .dist-chip{position:absolute;top:20px;right:18px;background:var(--night);color:var(--gold-soft);font-size:var(--fs-xs);font-weight:700;padding:5px 11px;border-radius:999px;letter-spacing:.02em;}
+  .miqat-ar{font-family:'Amiri',serif;font-size:1.7rem;line-height:1.25;color:var(--gold);margin-bottom:2px;text-align:left;}
+  .miqat-where{font-size:var(--fs-xs);text-transform:uppercase;letter-spacing:.07em;font-weight:700;color:#8a8578;margin:2px 0 8px;}
+  .miqat-finder{background:linear-gradient(135deg,#fff,#faf4e3);}
+
+  /* ---- packing checklist ---- */
+  .panel.checklist{padding:26px;overflow:hidden;}
+  .checklist-icon{width:48px;height:48px;border:0;background:var(--grad-gold);color:var(--night);box-shadow:0 4px 12px rgba(183,134,44,.3);}
+  .check-list li{margin-bottom:3px;}
+  .check-list label{padding:8px 10px;border-radius:10px;font-size:var(--fs-body);line-height:1.5;transition:background .15s;}
+  .check-list label:hover{background:rgba(183,134,44,.09);}
+  .check-list label:has(input:checked){background:rgba(63,167,154,.13);}
+  .pack-progress{max-width:520px;margin-top:18px;background:#fff;border:var(--card-border);border-radius:14px;padding:12px 16px;box-shadow:var(--shadow-sm);}
+  .pack-progress-top{display:flex;justify-content:space-between;font-size:var(--fs-sm);color:var(--night);margin-bottom:8px;}
+  .pack-bar{height:10px;border-radius:999px;background:rgba(183,134,44,.16);overflow:hidden;}
+  .pack-bar span{display:block;height:100%;width:0;border-radius:999px;background:var(--grad-gold);transition:width .35s ease;}
+  .pack-progress.is-done .pack-bar span{background:var(--grad-teal);}
+
+  /* ---- step-by-step flows become a timeline ---- */
+  .flow{gap:14px;position:relative;}
+  .flow::before{content:"";position:absolute;left:38px;top:34px;bottom:34px;width:2px;background:linear-gradient(var(--gold),rgba(183,134,44,.15));}
+  .flow-step{position:relative;display:block;padding:18px 22px 18px 82px;background:#fff;border:var(--card-border);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);}
+  .flow-step:last-child{border-bottom:var(--card-border);}
+  .flow-num{position:absolute;left:18px;top:16px;width:40px;height:40px;border-radius:50%;background:var(--grad-gold);color:var(--night);font-family:'Work Sans',sans-serif;font-weight:700;font-size:1rem;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(183,134,44,.35);}
+  .flow-step h4{margin-bottom:6px;}
+  .flow-step p{margin:0;color:#4a4a44;}
+  @media(max-width:640px){.flow-step{padding:16px 16px 16px 64px;}.flow-num{left:12px;width:36px;height:36px;}.flow::before{left:29px;}}
+
+  /* ---- hotels ---- */
+  .hotel-card,.hotel-card--premium,.hotel-card--comfortable,.hotel-card--affordable{border-top:var(--card-border);}
+  .hotel-card{position:relative;display:block;padding:24px 20px 18px;overflow:hidden;}
+  .hotel-card::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:var(--grad-gold);}
+  .hotel-card--comfortable::before{background:var(--grad-teal);}
+  .hotel-card--affordable::before{background:linear-gradient(135deg,#b9b3a3,#8a8578);}
+  .hotel-icon{position:absolute;right:16px;top:24px;width:38px;}
+  .hotel-card-body{padding-right:0;}
+  .hotel-stars,.hotel-card h4{padding-right:48px;}
+  .hotel-price .sar,.hotel-price small{white-space:nowrap;}
+  .hotel-card h4{margin-bottom:8px;}
+  .hotel-stars{font-size:.85rem;margin-bottom:6px;}
+  .hotel-price{font-size:1.1rem;margin-bottom:8px;color:var(--night);line-height:1.35;}
+  .hotel-price small{font-size:var(--fs-sm);color:#8a8578;font-weight:500;margin-left:3px;}
+  .hotel-rating{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:var(--fs-sm);color:#6b6659;margin-bottom:6px;}
+  .rating-chip{display:inline-flex;align-items:center;gap:4px;background:rgba(183,134,44,.15);color:#7a5a14;font-weight:700;font-size:var(--fs-xs);padding:3px 10px;border-radius:999px;}
+  .hotel-value-tag{margin-left:0;}
+  .hotel-tier-heading{font-size:1.2rem;display:flex;align-items:center;gap:10px;}
+  .hotel-tier-heading::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--grad-gold);flex-shrink:0;}
+
+  /* ---- prices: rupees first, riyals in brackets, everywhere ---- */
+  .price .inr{font-weight:700;color:var(--night);font-variant-numeric:tabular-nums;}
+  .price .sar{font-weight:400;color:#8a8578;font-size:.84em;}
+  .reg-cost .price .inr{color:var(--teal);}
+  .calc-result-row .amount,.calc-summary .amount-big{font-family:'Work Sans',sans-serif;font-weight:700;font-variant-numeric:tabular-nums;}
+  .calc-summary .amount-big{font-size:1.65rem;}
+  .calc-result-row.total .amount{font-size:1.3rem;}
+
 </style>
 </head>
 <body>
@@ -1085,14 +1223,14 @@
             <input type="number" id="calcNightsMadinah" min="0" value="5">
           </div>
           <div class="calc-field">
-            <label for="calcFlight">Flight cost per person, round trip (SAR)</label>
-            <input type="number" id="calcFlight" min="0" value="2500">
+            <label for="calcFlight">Flight cost per person, round trip (₹)</label>
+            <input type="number" id="calcFlight" min="0" step="500" value="64000">
           </div>
           <div class="calc-field">
             <label for="calcVisa">Visa route</label>
             <select id="calcVisa">
-              <option value="545" selected>Saudi Tourist e-Visa (~SAR 545 median)</option>
-              <option value="525">Official Umrah Visa (~SAR 525 median, excl. agent package)</option>
+              <option value="545" selected>Saudi Tourist e-Visa (~₹14,000 · SAR 545)</option>
+              <option value="525">Official Umrah Visa (~₹13,400 · SAR 525, excl. agent package)</option>
             </select>
           </div>
         </div>
@@ -1209,15 +1347,16 @@
      GitHub workflow). They summarise ONLY what the official sources publish
      and link to them. Don't hand-edit the list; it will be overwritten. -->
 <div class="advisory-wrap" id="advisories">
-  <div class="advisory-bar" id="advisoryBar" role="region" aria-label="Latest travel advisories for Saudi Arabia" data-checked="2026-11-01T19:39:09Z">
+  <div class="advisory-bar" id="advisoryBar" role="region" aria-label="Latest travel advisories for Saudi Arabia" data-checked="2026-10-15T02:57:15Z">
     <div class="advisory-label"><span class="adv-dot" aria-hidden="true"></span><span class="adv-label-text">Travel advisories</span><span class="adv-checked" id="advisoryChecked"></span></div>
     <div class="advisory-viewport" id="advisoryViewport">
       <ul class="advisory-track" id="advisoryTrack">
 <!-- ADVISORY_LIST_START -->
-      <li data-key="in" data-date="2026-10-22" data-checked="2026-11-01T19:39:09Z"><a class="adv-link" href="https://www.eoiriyadh.gov.in/section/news/statement-on-attacks-on-civilian-and-energy-infrastructure-in-saudi-arabia/" target="_blank" rel="noopener"><span class="adv-badge adv-badge--in">IN</span><span class="adv-src">Embassy of India, Riyadh</span><span class="adv-txt">Statement on attacks on civilian and energy infrastructure in Saudi Arabia · 24×7 helpline 800 247 1234 (toll-free in Saudi Arabia)</span><span class="adv-date">22 Oct</span></a></li>
-      <li data-key="in" data-date="2026-10-13" data-checked="2026-11-01T19:39:09Z"><a class="adv-link" href="https://www.eoiriyadh.gov.in/content/EoI-Riyadh-Advisory-13.10.2026-3.pdf" target="_blank" rel="noopener"><span class="adv-badge adv-badge--in">IN</span><span class="adv-src">Embassy of India, Riyadh</span><span class="adv-txt">Important Update/Advisory- 1700 hrs</span><span class="adv-date">13 Oct</span></a></li>
-      <li data-key="us" data-date="2026-10-30" data-checked="2026-11-01T19:39:09Z"><a class="adv-link" href="https://sa.usembassy.gov/security-alert-u-s-mission-to-saudi-arabia-october-30-2026/" target="_blank" rel="noopener"><span class="adv-badge adv-badge--us">US</span><span class="adv-src">US Embassy</span><span class="adv-txt">Security Alert: U.S. Mission to Saudi Arabia – October 30, 2026</span><span class="adv-date">30 Oct</span></a></li>
-      <li data-key="uk" data-date="2026-10-27" data-checked="2026-11-01T19:39:09Z"><a class="adv-link" href="https://www.gov.uk/foreign-travel-advice/saudi-arabia" target="_blank" rel="noopener"><span class="adv-badge adv-badge--uk">UK</span><span class="adv-src">UK FCDO</span><span class="adv-txt">Advises against: all travel to within 10km of the border with Yemen · all but essential travel to the rest of Saudi Arabia</span><span class="adv-date">27 Oct</span></a></li>
+      <li data-key="in" data-date="2026-10-08" data-checked="2026-10-15T02:57:15Z"><a class="adv-link" href="https://www.eoiriyadh.gov.in/section/news/" target="_blank" rel="noopener"><span class="adv-badge adv-badge--in">IN</span><span class="adv-src">Embassy of India, Riyadh</span><span class="adv-txt">Important advisory for Indian nationals in Saudi Arabia: remain alert, stay indoors as necessary and follow instructions from Saudi authorities; Embassy, Consulate in Jeddah and VFS centres reported as functioning normally · 24×7 helpline 800 247 1234 (toll-free in Saudi Arabia)</span><span class="adv-date">8 Oct</span></a></li>
+      <li data-key="in" data-date="2026-10-08" data-checked="2026-10-15T02:57:15Z"><a class="adv-link" href="https://www.eoiriyadh.gov.in/section/news/" target="_blank" rel="noopener"><span class="adv-badge adv-badge--in">IN</span><span class="adv-src">Embassy of India, Riyadh</span><span class="adv-txt">Statement on attacks targeting airports in Riyadh</span><span class="adv-date">8 Oct</span></a></li>
+      <li data-key="us" data-date="2026-10-12" data-checked="2026-10-15T02:57:15Z"><a class="adv-link" href="https://travel.state.gov/en/international-travel/travel-advisories/saudi-arabia.html" target="_blank" rel="noopener"><span class="adv-badge adv-badge--us">US</span><span class="adv-src">US State Dept</span><span class="adv-txt">Level 3: Reconsider travel — risk of drone and missile attacks (Iran / Houthis), armed conflict and terrorism. Do not travel to the Yemen border area. US government employees need special authorization to use any Saudi airport</span><span class="adv-date">12 Oct</span></a></li>
+      <li data-key="us" data-date="2026-10-05" data-checked="2026-10-15T02:57:15Z"><a class="adv-link" href="https://sa.usembassy.gov/security-alert-u-s-mission-saudi-arabia-october-5-2026/" target="_blank" rel="noopener"><span class="adv-badge adv-badge--us">US</span><span class="adv-src">US Embassy</span><span class="adv-txt">Security alert: U.S. citizens urged to remain vigilant and follow Saudi Civil Defense alerts</span><span class="adv-date">5 Oct</span></a></li>
+      <li data-key="uk" data-date="2026-10-11" data-checked="2026-10-15T02:57:15Z"><a class="adv-link" href="https://www.gov.uk/foreign-travel-advice/saudi-arabia" target="_blank" rel="noopener"><span class="adv-badge adv-badge--uk">UK</span><span class="adv-src">UK FCDO</span><span class="adv-txt">Advises against: all travel within 10km of Saudi Arabia's border with Yemen · all but essential travel to Aseer, Riyadh, Najran and Jizan provinces and the cities of Taif, Jeddah and Dammam · all but essential travel to all Saudi airports except Medina International Airport</span><span class="adv-date">11 Oct</span></a></li>
     <!-- ADVISORY_LIST_END -->
       </ul>
     </div>
@@ -1256,77 +1395,19 @@
 
     <div class="news-grid" id="newsGrid">
       <!-- NEWS_LIST_START -->
-      <article class="news-card" data-date="2026-11-01">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=eastleighvoice.co.ke" alt="" loading="lazy">The Eastleigh Voice</span><span class="news-date">1 Nov 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMizAFBVV95cUxORTlpX0tfeWtVVzI1UXlZblhaRU83ZjBkN053c2pfcXZZT1BRYjEtWFZnVWtEVFVTU2lFR2txZGM1TVdfSXhGdzg2cDB6dHZyU05aM04zaHFHZUEzWXpReFN1d3BUeGoxXzJydDRrMnBscml1LVU0bTFKVTFmWDBJVFUxV3NhTVdDR1dlaXczSFNGTFdOSlRid25aekFVbVQ0UlZJREtmR3J2elJrTlg5Vk16WmhRWFRIazh0U1dwcVpBeDBrQzJMWVVrSTQ?oc=5" target="_blank" rel="noopener nofollow">Kenyan Muslims face uncertainty as Saudi Arabia halts Umrah travel over Ebola concerns</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMizAFBVV95cUxORTlpX0tfeWtVVzI1UXlZblhaRU83ZjBkN053c2pfcXZZT1BRYjEtWFZnVWtEVFVTU2lFR2txZGM1TVdfSXhGdzg2cDB6dHZyU05aM04zaHFHZUEzWXpReFN1d3BUeGoxXzJydDRrMnBscml1LVU0bTFKVTFmWDBJVFUxV3NhTVdDR1dlaXczSFNGTFdOSlRid25aekFVbVQ0UlZJREtmR3J2elJrTlg5Vk16WmhRWFRIazh0U1dwcVpBeDBrQzJMWVVrSTQ?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-01">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=sabq.org" alt="" loading="lazy">صحيفة سبق الإلكترونية</span><span class="news-date">1 Nov 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMiS0FVX3lxTE1TVjl5cXNXa1hIeGNyaU1vcGtwaVhEMmxpM2tSR1o4VzQ2UHVUOGdvcTlScXc5WkNyaUt4c3pjZlk2S095UThfWWo0NA?oc=5" target="_blank" rel="noopener nofollow">Hajj and Umrah Ministry Reviews Preparations for Hajj Season 1448 AH and Achievements in Service Development for Pilgrims</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMiS0FVX3lxTE1TVjl5cXNXa1hIeGNyaU1vcGtwaVhEMmxpM2tSR1o4VzQ2UHVUOGdvcTlScXc5WkNyaUt4c3pjZlk2S095UThfWWo0NA?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-01">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 12H7z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=saudigulfprojects.com" alt="" loading="lazy">SaudiGulf Projects</span><span class="news-date">1 Nov 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMitgFBVV95cUxOM0ltS2lZR0hfUnpkUmJOQm0ta2dhWnJUQ3V1bTVJU2lUVmxYWUxRaGxUUzJ5WXVYeXhaR0xiQm4xN3FuNlY2YU1jWS1ZT01IWDJsaWw1Nm5wX1NfMTMwSWJXdU81YTFIR1dFRWtxSG9reVJlOHZCcU1sTi1nRk5qZzJSWkVMdXVZZHRrc0FCRXdRUHNFbnI3ZlZqaGExeFY0eVI3eld6S0dwWG4tM3puQXdwbm1OUQ?oc=5" target="_blank" rel="noopener nofollow">Cenomi Centers Awards $220 Million Madinah Downtown Mall and Office Contract to Lynx Contracting</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMitgFBVV95cUxOM0ltS2lZR0hfUnpkUmJOQm0ta2dhWnJUQ3V1bTVJU2lUVmxYWUxRaGxUUzJ5WXVYeXhaR0xiQm4xN3FuNlY2YU1jWS1ZT01IWDJsaWw1Nm5wX1NfMTMwSWJXdU81YTFIR1dFRWtxSG9reVJlOHZCcU1sTi1nRk5qZzJSWkVMdXVZZHRrc0FCRXdRUHNFbnI3ZlZqaGExeFY0eVI3eld6S0dwWG4tM3puQXdwbm1OUQ?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-01">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2m20 0h-2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=gulfnews.com" alt="" loading="lazy">Gulf News</span><span class="news-date">1 Nov 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMi1wFBVV95cUxQWWppS1RYNkhNVmJabUdBM1A1WWcyaVFqYmwwUDhheGpSN2lnMUNXTTh5RGQtb2k3QWlvb0l4Z2JhQ2d4RkRfTjFYdGdxUjJqbUhOcmRCRHlDdy0wbF9qVW9XLUhoLVJtQS1ySnZHb01NTHlNWGZpbGJlVDFrV0llS3ROY3Q2VTRfV0hROFJxWnJWQzhpU09RSk1WbmZyMnN2VjZQclNYS3gycEJjVVF0eEpNYnZ2c3E1LVlPRnBnYjNmT3RjQXdxemN1RUZsZFhtZnM0WHJ4Y9IB6gFBVV95cUxQUE5SVjdFU1p2X280Z3RPMTF1elR4VmJ1YjN0cDVDZHFoazIzcFhpS0MyVFlWeXZaZGN0VUdDeExrN181cVRreVhrZEY4d1hxZEktWnFsdEVieXVNaTR6YkItYV9DZzNPaXNSWThmVzJzOEFjU1B5YWM0M1ZkTV94VXRkQ3NkU0pscjdzUWFWX0ZCa21VMDAyM1J4OERkRDJXVFptTXZLN0h1akU3OHdabjhVSnExQnVzY0RiQjc1alZyS25VTFR5QUN4LU9ORzJ5LXY5YlIxXzd4WHpGZjNrWEpUOEJrZWx0R3c?oc=5" target="_blank" rel="noopener nofollow">India-Saudi flights: Akasa, Air India and IndiGo extend cancellations; Umrah advisory issued</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMi1wFBVV95cUxQWWppS1RYNkhNVmJabUdBM1A1WWcyaVFqYmwwUDhheGpSN2lnMUNXTTh5RGQtb2k3QWlvb0l4Z2JhQ2d4RkRfTjFYdGdxUjJqbUhOcmRCRHlDdy0wbF9qVW9XLUhoLVJtQS1ySnZHb01NTHlNWGZpbGJlVDFrV0llS3ROY3Q2VTRfV0hROFJxWnJWQzhpU09RSk1WbmZyMnN2VjZQclNYS3gycEJjVVF0eEpNYnZ2c3E1LVlPRnBnYjNmT3RjQXdxemN1RUZsZFhtZnM0WHJ4Y9IB6gFBVV95cUxQUE5SVjdFU1p2X280Z3RPMTF1elR4VmJ1YjN0cDVDZHFoazIzcFhpS0MyVFlWeXZaZGN0VUdDeExrN181cVRreVhrZEY4d1hxZEktWnFsdEVieXVNaTR6YkItYV9DZzNPaXNSWThmVzJzOEFjU1B5YWM0M1ZkTV94VXRkQ3NkU0pscjdzUWFWX0ZCa21VMDAyM1J4OERkRDJXVFptTXZLN0h1akU3OHdabjhVSnExQnVzY0RiQjc1alZyS25VTFR5QUN4LU9ORzJ5LXY5YlIxXzd4WHpGZjNrWEpUOEJrZWx0R3c?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-10-31">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2m20 0h-2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=nomadlawyer.org" alt="" loading="lazy">Nomad Lawyer</span><span class="news-date">31 Oct 2026</span></div>
-        <h3><a href="https://www.nomadlawyer.org/akasa-air-saudi-arabia-flight-suspension-jeddah-riyadh-november-2026" target="_blank" rel="noopener nofollow">Akasa Air Extends Saudi Arabia Flight Suspensions Through Late November 2026: Traveler and Umrah Advisory</a></h3>
-        <a class="map-link" href="https://www.nomadlawyer.org/akasa-air-saudi-arabia-flight-suspension-jeddah-riyadh-november-2026" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-10-30">
+      <article class="news-card" data-date="2026-09-25">
         <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=spa.gov.sa" alt="" loading="lazy">Saudi Press Agency</span><span class="news-date">30 Oct 2026</span></div>
-        <h3><a href="https://www.spa.gov.sa/en/N2628490" target="_blank" rel="noopener nofollow">Saudi Arabia Introduces Package Visa to Simplify Tourist Travel to the Kingdom</a></h3>
-        <a class="map-link" href="https://www.spa.gov.sa/en/N2628490" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
+        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=gulfnews.com" alt="" loading="lazy">Gulf News</span><span class="news-date">25 Sep 2026</span></div>
+        <h3><a href="https://gulfnews.com/world/gulf/saudi/saudi-arabia-launches-365-day-umrah-visa-with-90-day-stay-1.500613885" target="_blank" rel="noopener nofollow">Saudi Arabia's multiple-entry Umrah visa: what pilgrims need to know</a></h3>
+        <p>The one-year, multiple-entry Umrah visa lets eligible pilgrims return to the Kingdom several times over 365 days without reapplying each trip, with a cumulative stay capped at 90 days and a fresh Nusuk service package required before every visit.</p>
+        <a class="map-link" href="https://gulfnews.com/world/gulf/saudi/saudi-arabia-launches-365-day-umrah-visa-with-90-day-stay-1.500613885" target="_blank" rel="noopener nofollow">Read more ↗</a>
       </article>
-      <article class="news-card" data-date="2026-10-30">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2m20 0h-2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=nomadlawyer.org" alt="" loading="lazy">Nomad Lawyer</span><span class="news-date">30 Oct 2026</span></div>
-        <h3><a href="https://www.nomadlawyer.org/india-saudi-arabia-flight-suspensions-air-india-indigo-november-2026" target="_blank" rel="noopener nofollow">India–Saudi Arabia Flights Grounded Through Mid-November 2026: Air India, IndiGo, and Pilgrim Travel Advisory</a></h3>
-        <a class="map-link" href="https://www.nomadlawyer.org/india-saudi-arabia-flight-suspensions-air-india-indigo-november-2026" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-10-30">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=english.ajel.sa" alt="" loading="lazy">english.ajel</span><span class="news-date">30 Oct 2026</span></div>
-        <h3><a href="https://english.ajel.sa/saudi-arabia/els3uofty" target="_blank" rel="noopener nofollow">Hajj and Umrah Ministry focuses on developing national talent</a></h3>
-        <a class="map-link" href="https://english.ajel.sa/saudi-arabia/els3uofty" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-10-30">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=inp.polri.go.id" alt="" loading="lazy">inp.polri.go.id</span><span class="news-date">30 Oct 2026</span></div>
-        <h3><a href="https://inp.polri.go.id/artikel/west-papua-immigration-and-hajj-ministry-to-collaborate-in-preventing-visa-misuse" target="_blank" rel="noopener nofollow">West Papua Immigration and Hajj Ministry to Collaborate in Preventing Visa Misuse</a></h3>
-        <a class="map-link" href="https://inp.polri.go.id/artikel/west-papua-immigration-and-hajj-ministry-to-collaborate-in-preventing-visa-misuse" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-10-29">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=nomadlawyer.org" alt="" loading="lazy">Nomad Lawyer</span><span class="news-date">29 Oct 2026</span></div>
-        <h3><a href="https://www.nomadlawyer.org/saudi-arabia-72-countries-visa-free-evisa-tourism-expansion-2026" target="_blank" rel="noopener nofollow">Saudi Arabia Expands Tourism Access to 72 Countries: Visa-Free and eVisa Framework Drives Vision 2030 Growth</a></h3>
-        <a class="map-link" href="https://www.nomadlawyer.org/saudi-arabia-72-countries-visa-free-evisa-tourism-expansion-2026" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-10-29">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=spa.gov.sa" alt="" loading="lazy">Saudi Press Agency</span><span class="news-date">29 Oct 2026</span></div>
-        <h3><a href="https://www.spa.gov.sa/en/N2381933" target="_blank" rel="noopener nofollow">New &#x27;Nusuk Umrah&#x27; Service for International Umrah Performers to Simplify Visa and Travel Bookings</a></h3>
-        <a class="map-link" href="https://www.spa.gov.sa/en/N2381933" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-10-29">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=spa.gov.sa" alt="" loading="lazy">Saudi Press Agency</span><span class="news-date">29 Oct 2026</span></div>
-        <h3><a href="https://www.spa.gov.sa/en/N2403190" target="_blank" rel="noopener nofollow">Hajj and Umrah Ministry: Nusuk App Downloads Reach 30 Million with 150% Yearly Rise</a></h3>
-        <a class="map-link" href="https://www.spa.gov.sa/en/N2403190" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
+      <article class="news-card" data-date="2026-08-26">
+        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V10l8-6 8 6v11"/><path d="M10 21v-6h4v6"/></svg></div>
+        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=ttnworldwide.com" alt="" loading="lazy">TTN Worldwide</span><span class="news-date">26 Aug 2026</span></div>
+        <h3><a href="https://www.ttnworldwide.com/ArticleTA/466955/saudi-hotel-sector-defies-travel-disruptions-as-makkah-revpar-rises-87pc_colon-jll" target="_blank" rel="noopener nofollow">Makkah hotel revenue climbs as Saudi hospitality sector holds steady</a></h3>
+        <p>A JLL market report for Q2 2026 shows Makkah occupancy up 4 points year-on-year with room revenue rising 8.7%, while Madinah posted the Kingdom's highest occupancy at over 75% — both cities also added new hotel supply during the quarter.</p>
+        <a class="map-link" href="https://www.ttnworldwide.com/ArticleTA/466955/saudi-hotel-sector-defies-travel-disruptions-as-makkah-revpar-rises-87pc_colon-jll" target="_blank" rel="noopener nofollow">Read more ↗</a>
       </article>
       <!-- NEWS_LIST_END -->
     </div>
@@ -1348,13 +1429,13 @@
         <span class="tag">Route 1</span>
         <h3>Tourist e-Visa</h3>
         <p>Multi-entry, 1 year, 90 days/visit. Fully online in a few days. Still needs a Nusuk Umrah permit.</p>
-        <p class="reg-cost">~SAR 470–620</p>
+        <p class="reg-cost"><span class="price" data-sar="470" data-sar-max="620" data-approx="1">~SAR 470–620</span></p>
       </div>
       <div class="panel compact">
         <span class="tag">Route 2</span>
         <h3>Official Umrah Visa</h3>
         <p>Via a licensed agent, bundled with a Nusuk service package (stay + transport). The classic packaged-trip route.</p>
-        <p class="reg-cost">~SAR 430–620 + package</p>
+        <p class="reg-cost"><span class="price" data-sar="430" data-sar-max="620" data-approx="1">~SAR 430–620</span> + package</p>
       </div>
       <div class="panel compact">
         <span class="tag">Newer</span>
@@ -1470,33 +1551,27 @@
     <div class="grid-3" id="miqatList">
       <div class="panel compact miqat-card">
         <div class="miqat-dir" style="transform:rotate(0deg);" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 19V5M12 5l-5 5M12 5l5 5"/></svg></div>
-        <h3>Dhul Hulayfah <span style="font-weight:400;color:#8a8578;font-size:0.85em;">(Abyar Ali)</span></h3>
-        <p>~450 km north — for Madinah and those arriving from the north.</p>
+        <span class="dist-chip">~450 km</span><div class="miqat-ar" lang="ar" dir="rtl">ذو الحليفة</div><h3>Dhul Hulayfah <span style="font-weight:400;color:#8a8578;font-size:0.85em;">(Abyar Ali)</span></h3><div class="miqat-where">North of Makkah</div><p>for Madinah and those arriving from the north.</p>
       </div>
       <div class="panel compact miqat-card">
         <div class="miqat-dir" style="transform:rotate(-45deg);" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 19V5M12 5l-5 5M12 5l5 5"/></svg></div>
-        <h3>Al-Juhfah <span style="font-weight:400;color:#8a8578;font-size:0.85em;">(near Rabigh)</span></h3>
-        <p>~185 km NW — Syria, Jordan, Egypt, Turkey, North Africa, Europe &amp; the Americas.</p>
+        <span class="dist-chip">~185 km</span><div class="miqat-ar" lang="ar" dir="rtl">الجحفة</div><h3>Al-Juhfah <span style="font-weight:400;color:#8a8578;font-size:0.85em;">(near Rabigh)</span></h3><div class="miqat-where">North-west of Makkah</div><p>Syria, Jordan, Egypt, Turkey, North Africa, Europe &amp; the Americas.</p>
       </div>
       <div class="panel compact miqat-card">
         <div class="miqat-dir" style="transform:rotate(90deg);" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 19V5M12 5l-5 5M12 5l5 5"/></svg></div>
-        <h3>Qarn al-Manazil <span style="font-weight:400;color:#8a8578;font-size:0.85em;">(As-Sayl al-Kabir)</span></h3>
-        <p>~75 km east — Najd, and most Gulf-state flights (UAE, Oman, Qatar, Kuwait, Bahrain).</p>
+        <span class="dist-chip">~75 km</span><div class="miqat-ar" lang="ar" dir="rtl">قرن المنازل</div><h3>Qarn al-Manazil <span style="font-weight:400;color:#8a8578;font-size:0.85em;">(As-Sayl al-Kabir)</span></h3><div class="miqat-where">East of Makkah</div><p>Najd, and most Gulf-state flights (UAE, Oman, Qatar, Kuwait, Bahrain).</p>
       </div>
       <div class="panel compact miqat-card">
         <div class="miqat-dir" style="transform:rotate(180deg);" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 19V5M12 5l-5 5M12 5l5 5"/></svg></div>
-        <h3>Yalamlam <span style="font-weight:400;color:#8a8578;font-size:0.85em;">(As-Sa'diyah)</span></h3>
-        <p>~92 km south — Yemen, and commonly the miqat for India, Pakistan, Bangladesh &amp; Southeast Asia.</p>
+        <span class="dist-chip">~92 km</span><div class="miqat-ar" lang="ar" dir="rtl">يلملم</div><h3>Yalamlam <span style="font-weight:400;color:#8a8578;font-size:0.85em;">(As-Sa'diyah)</span></h3><div class="miqat-where">South of Makkah</div><p>Yemen, and commonly the miqat for India, Pakistan, Bangladesh &amp; Southeast Asia.</p>
       </div>
       <div class="panel compact miqat-card">
         <div class="miqat-dir" style="transform:rotate(45deg);" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 19V5M12 5l-5 5M12 5l5 5"/></svg></div>
-        <h3>Dhat Irq</h3>
-        <p>~90 km northeast — Iraq, Iran and Central Asia.</p>
+        <span class="dist-chip">~90 km</span><div class="miqat-ar" lang="ar" dir="rtl">ذات عرق</div><h3>Dhat Irq</h3><div class="miqat-where">North-east of Makkah</div><p>Iraq, Iran and Central Asia.</p>
       </div>
       <div class="panel compact miqat-card">
         <div class="miqat-dir" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5.2-6-10a6 6 0 0 1 12 0c0 4.8-6 10-6 10z"/><circle cx="12" cy="11" r="2"/></svg></div>
-        <h3>Masjid Aisha <span style="font-weight:400;color:#8a8578;font-size:0.85em;">(At-Tan'im)</span></h3>
-        <p>~6 km from the Ka'bah — not one of the five; for Makkah residents or pilgrims starting a fresh Umrah.</p>
+        <span class="dist-chip">~6 km</span><div class="miqat-ar" lang="ar" dir="rtl">مسجد عائشة · التنعيم</div><h3>Masjid Aisha <span style="font-weight:400;color:#8a8578;font-size:0.85em;">(At-Tan'im)</span></h3><div class="miqat-where">At the edge of the Haram</div><p>not one of the five; for Makkah residents or pilgrims starting a fresh Umrah.</p>
       </div>
     </div>
 
@@ -1821,21 +1896,29 @@
     <div class="section-head reveal">
       <div class="section-icon-row"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.35-9.5-8.5C.5 8 2 4 6 4c2 0 3.5 1.3 4 2.5C10.5 5.3 12 4 14 4c4 0 5.5 4 3.5 7.5C19 15.65 12 20 12 20z"/></svg></span><div class="kicker-ar">الصدقة</div></div>
       <h2>Making the most of sadaqah on this trip</h2>
-      <p class="desc">Charity is rewarded everywhere, but many scholars hold that good deeds carry extra weight in the two Harams — reason enough for sadaqah to be a deliberate part of the trip, not an afterthought. The Prophet ﷺ said, <em>"Charity does not decrease wealth"</em> (Sahih Muslim), and <em>"Save yourself from the Fire even with half a date given in charity"</em> (Sahih al-Bukhari &amp; Sahih Muslim).</p>
+      <p class="desc">Charity is rewarded everywhere, but many scholars hold that good deeds carry extra weight in the two Harams — reason enough to make sadaqah a deliberate part of the trip, not an afterthought.</p>
+    </div>
+
+    <div class="pullquotes reveal">
+      <blockquote class="pullquote"><p>Charity does not decrease wealth.</p><cite>The Prophet ﷺ · Sahih Muslim</cite></blockquote>
+      <blockquote class="pullquote"><p>Save yourself from the Fire, even with half a date given in charity.</p><cite>The Prophet ﷺ · Sahih al-Bukhari &amp; Sahih Muslim</cite></blockquote>
     </div>
 
     <div class="grid-3">
-      <div class="panel compact">
+      <div class="panel compact fc">
+        <div class="fc-top"><span class="fc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 14.5h2"/></svg></span><span class="fc-num">01</span></div>
         <span class="tag">Before you fly</span>
         <h3>Set a budget</h3>
         <p>Decide a fixed amount in advance, and settle any zakat or debts first — sadaqah doesn't substitute for those.</p>
       </div>
-      <div class="panel compact">
+      <div class="panel compact fc">
+        <div class="fc-top"><span class="fc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11h16a8 8 0 0 1-16 0z"/><path d="M8 7c0-1.2 1-1.2 1-2.5M12 7c0-1.2 1-1.2 1-2.5M16 7c0-1.2 1-1.2 1-2.5"/></svg></span><span class="fc-num">02</span></div>
         <span class="tag">While there</span>
         <h3>Feed someone nearby</h3>
         <p>Dates, Zamzam or a meal at iftar is a loved local custom — give at organised points rather than in a crowd.</p>
       </div>
-      <div class="panel compact">
+      <div class="panel compact fc">
+        <div class="fc-top"><span class="fc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg></span><span class="fc-num">03</span></div>
         <span class="tag">Lasting reward</span>
         <h3>Make it ongoing</h3>
         <p>A Zamzam cooler or Qur'an copies keep earning reward after you've left — mosque waqf offices accept this.</p>
@@ -1930,17 +2013,17 @@
       <div class="panel compact">
         <div class="brand-badge" style="margin-bottom:10px;background:linear-gradient(135deg,#4a1e6b,#2a1040);">STC</div>
         <h3>Sawa Ziyara</h3>
-        <p>~SAR 35, reservable online; fingerprint activation on arrival.</p>
+        <p><span class="price" data-sar="35" data-approx="1">~SAR 35,</span> reservable online; fingerprint activation on arrival.</p>
       </div>
       <div class="panel compact">
         <div class="brand-badge" style="margin-bottom:10px;background:linear-gradient(135deg,#0e6b4a,#083d2b);">MBL</div>
         <h3>Mobily visitor pack</h3>
-        <p>~SAR 30, walk-up at branches, airport kiosks or shops.</p>
+        <p><span class="price" data-sar="30" data-approx="1">~SAR 30,</span> walk-up at branches, airport kiosks or shops.</p>
       </div>
       <div class="panel compact">
         <div class="brand-badge" style="margin-bottom:10px;background:linear-gradient(135deg,#144C46,#0E2A28);">ZN</div>
         <h3>Zain visitor SIM</h3>
-        <p>~SAR 34.5, kiosks at both Jeddah and Madinah airports.</p>
+        <p><span class="price" data-sar="34.5" data-approx="1">~SAR 34.5</span>, kiosks at both Jeddah and Madinah airports.</p>
       </div>
     </div>
     <p class="note-box tight">
@@ -1981,17 +2064,20 @@
     </div>
 
     <div class="grid-3">
-      <div class="panel compact">
+      <div class="panel compact fc">
+        <div class="fc-top"><span class="fc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg></span><span class="fc-num">01</span></div>
         <span class="tag">Jun–Sep</span>
         <h3>Summer</h3>
         <p>42–45°C+, dry heat, little midday shade — but fewer visitors, easier permits and hotels.</p>
       </div>
-      <div class="panel compact">
+      <div class="panel compact fc">
+        <div class="fc-top"><span class="fc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9"/></svg></span><span class="fc-num">02</span></div>
         <span class="tag">Dec–Feb</span>
         <h3>Winter</h3>
         <p>A comfortable 25–30°C — and the most crowded stretch of the year for exactly that reason.</p>
       </div>
-      <div class="panel compact">
+      <div class="panel compact fc">
+        <div class="fc-top"><span class="fc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-8 5-13 14-14 0 9-5 14-13 14z"/><path d="M5 19c3-4 6-6 10-8"/></svg></span><span class="fc-num">03</span></div>
         <span class="tag">Mar–May, Oct–Nov</span>
         <h3>Spring &amp; autumn</h3>
         <p>30–38°C, occasional shoulder-season rain near Jeddah — often the best weather/crowd balance.</p>
@@ -2014,6 +2100,10 @@
       <div class="checklist-actions">
         <button class="download-btn" id="downloadPng">⬇ Download as image</button>
         <button class="download-btn" id="downloadDoc">⬇ Download as Word doc</button>
+      </div>
+      <div class="pack-progress" id="packProgress">
+        <div class="pack-progress-top"><strong id="packCount">0 packed</strong><span id="packPct">0%</span></div>
+        <div class="pack-bar"><span id="packFill"></span></div>
       </div>
     </div>
     <div class="grid-3">
@@ -2187,7 +2277,7 @@
           <div class="hotel-card-body">
             <div class="hotel-stars">★★★★★</div>
             <h4>Fairmont Makkah Clock Royal Tower</h4>
-            <p class="hotel-meta">SAR 790–1,275/night · ~4.3/5 guest rating</p>
+            <div class="hotel-price"><span class="price" data-sar="790" data-sar-max="1275">SAR 790–1,275</span><small>/night</small></div><div class="hotel-rating"><span class="rating-chip">★ 4.3</span><span>guest rating</span></div>
             <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Fairmont+Makkah+Clock+Royal+Tower" target="_blank" rel="noopener">View on map ↗</a>
           </div>
         </div>
@@ -2203,7 +2293,7 @@
           <div class="hotel-card-body">
             <div class="hotel-stars">★★★★★</div>
             <h4>Swissôtel Makkah</h4>
-            <p class="hotel-meta">SAR 600–920/night · ~4.4/5 guest rating</p>
+            <div class="hotel-price"><span class="price" data-sar="600" data-sar-max="920">SAR 600–920</span><small>/night</small></div><div class="hotel-rating"><span class="rating-chip">★ 4.4</span><span>guest rating</span></div>
             <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Swissotel+Makkah" target="_blank" rel="noopener">View on map ↗</a>
           </div>
         </div>
@@ -2219,7 +2309,7 @@
           <div class="hotel-card-body">
             <div class="hotel-stars">★★★★★</div>
             <h4>Conrad Jabal Omar Makkah</h4>
-            <p class="hotel-meta">SAR 430–730/night · ~4.6/5 guest rating</p>
+            <div class="hotel-price"><span class="price" data-sar="430" data-sar-max="730">SAR 430–730</span><small>/night</small></div><div class="hotel-rating"><span class="rating-chip">★ 4.6</span><span>guest rating</span></div>
             <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Conrad+Jabal+Omar+Makkah" target="_blank" rel="noopener">View on map ↗</a>
           </div>
         </div>
@@ -2237,7 +2327,7 @@
           <div class="hotel-card-body">
             <div class="hotel-stars">★★★</div>
             <h4>Elaf Kinda Hotel</h4>
-            <p class="hotel-meta">SAR 470–565/night · ~3.9/5 guest rating</p>
+            <div class="hotel-price"><span class="price" data-sar="470" data-sar-max="565">SAR 470–565</span><small>/night</small></div><div class="hotel-rating"><span class="rating-chip">★ 3.9</span><span>guest rating</span></div>
             <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Elaf+Kinda+Hotel+Makkah" target="_blank" rel="noopener">View on map ↗</a>
           </div>
         </div>
@@ -2251,7 +2341,7 @@
           <div class="hotel-card-body">
             <div class="hotel-stars">★★★</div>
             <h4>Makarem Ajyad Makkah Hotel</h4>
-            <p class="hotel-meta">SAR 450–700/night · ~4.3/5 guest rating</p>
+            <div class="hotel-price"><span class="price" data-sar="450" data-sar-max="700">SAR 450–700</span><small>/night</small></div><div class="hotel-rating"><span class="rating-chip">★ 4.3</span><span>guest rating</span></div>
             <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Makarem+Ajyad+Makkah+Hotel" target="_blank" rel="noopener">View on map ↗</a>
           </div>
         </div>
@@ -2269,7 +2359,7 @@
           <div class="hotel-card-body">
             <div class="hotel-stars">★★</div>
             <h4>Park Inn by Radisson, Makkah Al Naseem</h4>
-            <p class="hotel-meta">SAR 160–195/night · ~4.0/5 guest rating</p>
+            <div class="hotel-price"><span class="price" data-sar="160" data-sar-max="195">SAR 160–195</span><small>/night</small></div><div class="hotel-rating"><span class="rating-chip">★ 4.0</span><span>guest rating</span></div>
             <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Park+Inn+by+Radisson+Makkah+Al+Naseem" target="_blank" rel="noopener">View on map ↗</a>
           </div>
         </div>
@@ -2283,7 +2373,7 @@
           <div class="hotel-card-body">
             <div class="hotel-stars">★★</div>
             <h4>Makarem Umm Al Qura Hotel</h4>
-            <p class="hotel-meta">SAR 175–205/night · ~3.9/5 guest rating</p>
+            <div class="hotel-price"><span class="price" data-sar="175" data-sar-max="205">SAR 175–205</span><small>/night</small></div><div class="hotel-rating"><span class="rating-chip">★ 3.9</span><span>guest rating</span></div>
             <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Makarem+Umm+Al+Qura+Hotel+Makkah" target="_blank" rel="noopener">View on map ↗</a>
           </div>
         </div>
@@ -2305,7 +2395,7 @@
           <div class="hotel-card-body">
             <div class="hotel-stars">★★★★★</div>
             <h4>The Oberoi, Madina</h4>
-            <p class="hotel-meta">SAR 975–1,690/night · ~4.7/5 guest rating</p>
+            <div class="hotel-price"><span class="price" data-sar="975" data-sar-max="1690">SAR 975–1,690</span><small>/night</small></div><div class="hotel-rating"><span class="rating-chip">★ 4.7</span><span>guest rating</span></div>
             <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=The+Oberoi+Madina" target="_blank" rel="noopener">View on map ↗</a>
           </div>
         </div>
@@ -2321,7 +2411,7 @@
           <div class="hotel-card-body">
             <div class="hotel-stars">★★★★★</div>
             <h4>InterContinental Madinah – Dar Al Iman</h4>
-            <p class="hotel-meta">SAR 640–905/night · ~4.4/5 guest rating</p>
+            <div class="hotel-price"><span class="price" data-sar="640" data-sar-max="905">SAR 640–905</span><small>/night</small></div><div class="hotel-rating"><span class="rating-chip">★ 4.4</span><span>guest rating</span></div>
             <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=InterContinental+Dar+Al+Iman+Madinah" target="_blank" rel="noopener">View on map ↗</a>
           </div>
         </div>
@@ -2337,7 +2427,7 @@
           <div class="hotel-card-body">
             <div class="hotel-stars">★★★★★</div>
             <h4>Sofitel Shahd Al Madinah</h4>
-            <p class="hotel-meta">SAR 530–720/night · ~4.2/5 guest rating</p>
+            <div class="hotel-price"><span class="price" data-sar="530" data-sar-max="720">SAR 530–720</span><small>/night</small></div><div class="hotel-rating"><span class="rating-chip">★ 4.2</span><span>guest rating</span></div>
             <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Sofitel+Shahd+Al+Madinah" target="_blank" rel="noopener">View on map ↗</a>
           </div>
         </div>
@@ -2355,7 +2445,7 @@
           <div class="hotel-card-body">
             <div class="hotel-stars">★★★</div>
             <h4>Dallah Taibah Hotel</h4>
-            <p class="hotel-meta">SAR 455–785/night · ~4.3/5 guest rating</p>
+            <div class="hotel-price"><span class="price" data-sar="455" data-sar-max="785">SAR 455–785</span><small>/night</small></div><div class="hotel-rating"><span class="rating-chip">★ 4.3</span><span>guest rating</span></div>
             <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Dallah+Taibah+Hotel+Madinah" target="_blank" rel="noopener">View on map ↗</a>
           </div>
         </div>
@@ -2369,7 +2459,7 @@
           <div class="hotel-card-body">
             <div class="hotel-stars">★★★</div>
             <h4>Al Manakha Rotana Madinah</h4>
-            <p class="hotel-meta">SAR 405–700/night · ~4.6/5 guest rating</p>
+            <div class="hotel-price"><span class="price" data-sar="405" data-sar-max="700">SAR 405–700</span><small>/night</small></div><div class="hotel-rating"><span class="rating-chip">★ 4.6</span><span>guest rating</span></div>
             <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Al+Manakha+Rotana+Madinah" target="_blank" rel="noopener">View on map ↗</a>
           </div>
         </div>
@@ -2387,7 +2477,7 @@
           <div class="hotel-card-body">
             <div class="hotel-stars">★★</div>
             <h4>Pullman Zamzam Madina</h4>
-            <p class="hotel-meta">SAR 310–535/night · ~4.3/5 guest rating <span class="hotel-value-tag">5★ value pick</span></p>
+            <div class="hotel-price"><span class="price" data-sar="310" data-sar-max="535">SAR 310–535</span><small>/night</small></div><div class="hotel-rating"><span class="rating-chip">★ 4.3</span><span>guest rating</span> <span class="hotel-value-tag">5★ value pick</span></div>
             <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Pullman+Zamzam+Madina" target="_blank" rel="noopener">View on map ↗</a>
           </div>
         </div>
@@ -2401,7 +2491,7 @@
           <div class="hotel-card-body">
             <div class="hotel-stars">★★</div>
             <h4>New Madinah Hotel</h4>
-            <p class="hotel-meta">SAR 290–435/night · ~4.2/5 guest rating</p>
+            <div class="hotel-price"><span class="price" data-sar="290" data-sar-max="435">SAR 290–435</span><small>/night</small></div><div class="hotel-rating"><span class="rating-chip">★ 4.2</span><span>guest rating</span></div>
             <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=New+Madinah+Hotel" target="_blank" rel="noopener">View on map ↗</a>
           </div>
         </div>
@@ -2409,7 +2499,7 @@
     </div>
 
     <div class="note-box">
-      <strong>On the numbers here.</strong> Prices and ratings above come from major travel-booking aggregators around the time this page was written, not a live feed — Saudi hotel rates swing sharply with season, Ramadan, and Hajj proximity, sometimes tripling during peak weeks. We can't display real hotel photography or a live Google rating here (that would mean using images we don't hold rights to), so each card uses an illustrated mark instead — tap "View on map" for real photos, the current price and today's rating before you book.
+      <strong>On the numbers here.</strong> Prices are shown in rupees at about ₹25.6 per riyal, with the riyal price alongside. Prices and ratings above come from major travel-booking aggregators around the time this page was written, not a live feed — Saudi hotel rates swing sharply with season, Ramadan, and Hajj proximity, sometimes tripling during peak weeks. We can't display real hotel photography or a live Google rating here (that would mean using images we don't hold rights to), so each card uses an illustrated mark instead — tap "View on map" for real photos, the current price and today's rating before you book.
     </div>
     <p style="text-align:center;margin-top:22px;">
       <a href="#calculator" class="ihram-view-restrictions-link">↑ Use the trip cost calculator at the top of the page</a>
@@ -2502,7 +2592,7 @@
     <div class="place-grid active" id="grid-museums-makkah">
       <div class="place-card">
         <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
-        <div><h4>Makkah Clock Tower Museum</h4><p>Spread over several floors of the Clock Royal Tower itself, ending in a 360° viewing terrace directly over the Haram and Ka'bah. <strong>Entry:</strong> ~SAR 150 (terrace only) to SAR 200 (museum + terrace), SAR 400 for VIP fast-track; children roughly half price. <strong>Hours:</strong> 2pm–11pm daily. <strong>Near:</strong> directly above Abraj Al Bait mall, a short walk from King Abdulaziz Gate.</p><a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=Makkah+Clock+Tower+Museum" target="_blank" rel="noopener">View on map ↗</a></div>
+        <div><h4>Makkah Clock Tower Museum</h4><p>Spread over several floors of the Clock Royal Tower itself, ending in a 360° viewing terrace directly over the Haram and Ka'bah. <strong>Entry:</strong> <span class="price" data-sar="150" data-approx="1">~SAR 150</span> (terrace only) to <span class="price" data-sar="200">SAR 200</span> (museum + terrace), <span class="price" data-sar="400">SAR 400</span> for VIP fast-track; children roughly half price. <strong>Hours:</strong> 2pm–11pm daily. <strong>Near:</strong> directly above Abraj Al Bait mall, a short walk from King Abdulaziz Gate.</p><a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=Makkah+Clock+Tower+Museum" target="_blank" rel="noopener">View on map ↗</a></div>
       </div>
       <div class="place-card">
         <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 19h16M6 19V9l6-5 6 5v10"/></svg></div>
@@ -2510,22 +2600,22 @@
       </div>
       <div class="place-card">
         <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 6c2-1 5-1 8 1 3-2 6-2 8-1v13c-2-1-5-1-8 1-3-2-6-2-8-1z"/></svg></div>
-        <div><h4>International Exhibition of the Prophet's Biography</h4><p>A large, modern exhibition on the Prophet's ﷺ life and the spread of Islam, popular with families and school groups. <strong>Entry:</strong> ~SAR 70–105 per adult. <strong>Hours:</strong> vary by season, typically mid-morning to late evening. <strong>Near:</strong> Hira Cultural District, a short drive from the Haram.</p><a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=International+Exhibition+of+the+Prophet%27s+Biography+Makkah" target="_blank" rel="noopener">View on map ↗</a></div>
+        <div><h4>International Exhibition of the Prophet's Biography</h4><p>A large, modern exhibition on the Prophet's ﷺ life and the spread of Islam, popular with families and school groups. <strong>Entry:</strong> <span class="price" data-sar="70" data-sar-max="105" data-approx="1">~SAR 70–105</span> per adult. <strong>Hours:</strong> vary by season, typically mid-morning to late evening. <strong>Near:</strong> Hira Cultural District, a short drive from the Haram.</p><a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=International+Exhibition+of+the+Prophet%27s+Biography+Makkah" target="_blank" rel="noopener">View on map ↗</a></div>
       </div>
       <div class="place-card">
         <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 19V9l8-6 8 6v10"/><path d="M9 19v-6h6v6"/></svg></div>
-        <div><h4>Holy Qur'an &amp; Revelation Exhibition</h4><p>A focused exhibition on the history of Qur'anic manuscripts and the revelation, part of the wider Hira Cultural District. <strong>Entry:</strong> ~SAR 30–35. <strong>Hours:</strong> typically 2 hours visit, check same-day timing on arrival. <strong>Near:</strong> Hira Cultural District, near Jabal al-Nour.</p><a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=Hira+Cultural+District+Makkah" target="_blank" rel="noopener">View on map ↗</a></div>
+        <div><h4>Holy Qur'an &amp; Revelation Exhibition</h4><p>A focused exhibition on the history of Qur'anic manuscripts and the revelation, part of the wider Hira Cultural District. <strong>Entry:</strong> <span class="price" data-sar="30" data-sar-max="35" data-approx="1">~SAR 30–35</span>. <strong>Hours:</strong> typically 2 hours visit, check same-day timing on arrival. <strong>Near:</strong> Hira Cultural District, near Jabal al-Nour.</p><a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=Hira+Cultural+District+Makkah" target="_blank" rel="noopener">View on map ↗</a></div>
       </div>
       <div class="place-card">
         <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M5 10h14M10 5v14"/></svg></div>
-        <div><h4>Bait Al-Aseel Heritage Museum &amp; Museum of Ancient Crafts</h4><p>Two small, inexpensive heritage stops showing old Hijazi household life and traditional crafts — a quick, budget-friendly add-on rather than a half-day trip. <strong>Entry:</strong> ~SAR 10–20 each. <strong>Near:</strong> central Makkah, within easy reach of the Haram.</p><a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=Bait+Al+Aseel+Heritage+Museum+Makkah" target="_blank" rel="noopener">View on map ↗</a></div>
+        <div><h4>Bait Al-Aseel Heritage Museum &amp; Museum of Ancient Crafts</h4><p>Two small, inexpensive heritage stops showing old Hijazi household life and traditional crafts — a quick, budget-friendly add-on rather than a half-day trip. <strong>Entry:</strong> <span class="price" data-sar="10" data-sar-max="20" data-approx="1">~SAR 10–20</span> each. <strong>Near:</strong> central Makkah, within easy reach of the Haram.</p><a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=Bait+Al+Aseel+Heritage+Museum+Makkah" target="_blank" rel="noopener">View on map ↗</a></div>
       </div>
     </div>
 
     <div class="place-grid" id="grid-museums-madinah">
       <div class="place-card">
         <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="4" y="9" width="16" height="11"/><path d="M4 9l8-5 8 5"/></svg></div>
-        <div><h4>Dar Al-Madinah Museum</h4><p>Madinah's main heritage museum — miniature models recreating the Prophet's ﷺ time and the mosque's historical expansions, inside the old Hijaz Railway station grounds. <strong>Entry:</strong> ~SAR 25 adult, SAR 15 child. <strong>Hours:</strong> roughly 9am–5pm, varies by day. <strong>Near:</strong> Knowledge Economic City, close to Madinah's airport and the Haramain railway station — a taxi ride from the mosque, not walking distance.</p><a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=Dar+Al+Madinah+Museum" target="_blank" rel="noopener">View on map ↗</a></div>
+        <div><h4>Dar Al-Madinah Museum</h4><p>Madinah's main heritage museum — miniature models recreating the Prophet's ﷺ time and the mosque's historical expansions, inside the old Hijaz Railway station grounds. <strong>Entry:</strong> <span class="price" data-sar="25" data-approx="1">~SAR 25</span> adult, <span class="price" data-sar="15">SAR 15</span> child. <strong>Hours:</strong> roughly 9am–5pm, varies by day. <strong>Near:</strong> Knowledge Economic City, close to Madinah's airport and the Haramain railway station — a taxi ride from the mosque, not walking distance.</p><a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=Dar+Al+Madinah+Museum" target="_blank" rel="noopener">View on map ↗</a></div>
       </div>
       <div class="place-card">
         <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M3 17h18M5 17V9l7-4 7 4v8"/><circle cx="9" cy="13" r="1"/><circle cx="15" cy="13" r="1"/></svg></div>
@@ -2533,7 +2623,7 @@
       </div>
       <div class="place-card">
         <div class="place-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 6c2-1 5-1 8 1 3-2 6-2 8-1v13c-2-1-5-1-8 1-3-2-6-2-8-1z"/></svg></div>
-        <div><h4>International Exhibition of the Prophet's Biography — Madinah</h4><p>Madinah's branch of the same Seerah exhibition found in Makkah, telling the story of the migration (Hijrah) and the early Muslim community in the city. <strong>Entry:</strong> ~SAR 40–90 depending on ticket type. <strong>Near:</strong> within the Haramain expansion zone, a short walk or short ride from the mosque.</p><a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=International+Exhibition+of+the+Prophet%27s+Biography+Madinah" target="_blank" rel="noopener">View on map ↗</a></div>
+        <div><h4>International Exhibition of the Prophet's Biography — Madinah</h4><p>Madinah's branch of the same Seerah exhibition found in Makkah, telling the story of the migration (Hijrah) and the early Muslim community in the city. <strong>Entry:</strong> <span class="price" data-sar="40" data-sar-max="90" data-approx="1">~SAR 40–90</span> depending on ticket type. <strong>Near:</strong> within the Haramain expansion zone, a short walk or short ride from the mosque.</p><a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=International+Exhibition+of+the+Prophet%27s+Biography+Madinah" target="_blank" rel="noopener">View on map ↗</a></div>
       </div>
     </div>
     <div class="note-box">
@@ -2718,7 +2808,7 @@
         <span class="tag">Included in your visa</span>
         <h3>What the mandatory insurance covers</h3>
         <ul>
-          <li>Emergency medical treatment and hospitalisation, up to SAR 100,000</li>
+          <li>Emergency medical treatment and hospitalisation, up to <span class="price" data-sar="100000">SAR 100,000</span></li>
           <li>COVID-19 diagnosis and treatment</li>
           <li>Pregnancy complications and emergency childbirth</li>
           <li>Emergency dental care and dialysis</li>
@@ -2838,7 +2928,7 @@
   <div class="container">
     <div class="section-head reveal">
       <div class="section-icon-row"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v10H8l-4 4z"/></svg></span><div class="kicker-ar">ملاحظاتكم</div></div>
-      <h2>Help us make this site better</h2>
+      <h2>Help us make this guide better</h2>
       <p class="desc">Missing a du'a, found an outdated rule, or wish there was a section on something else? Tell us what would make your Umrah journey smoother — this goes straight to the person building the site.</p>
     </div>
 
@@ -2931,6 +3021,36 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
+  // ---- Currency: ONE rate, ONE format, used by every price on the page ----
+  const SAR_TO_INR = 25.6; // approximate; real rates move daily
+  function roundINR(v) { const step = v < 10000 ? 10 : 100; return Math.round(v / step) * step; }
+  function inrNum(sar) { return roundINR(sar * SAR_TO_INR).toLocaleString('en-IN'); }
+  document.querySelectorAll('.price[data-sar]').forEach((el) => {
+    const a = parseFloat(el.dataset.sar);
+    const b = el.dataset.sarMax ? parseFloat(el.dataset.sarMax) : null;
+    const inr = '₹' + inrNum(a) + (b !== null ? '–' + inrNum(b) : '');
+    const sar = 'SAR ' + a.toLocaleString('en-US') + (b !== null ? '–' + b.toLocaleString('en-US') : '');
+    el.innerHTML = '<span class="inr">' + (el.dataset.approx === '1' ? '~' : '') + inr + '</span> <span class="sar">(' + sar + ')</span>';
+  });
+
+  // ---- Packing checklist progress ----
+  (function packInit() {
+    const boxes = Array.from(document.querySelectorAll('#essentials .check-list input[type="checkbox"]'));
+    const box = document.getElementById('packProgress');
+    if (!boxes.length || !box) return;
+    const count = document.getElementById('packCount'), pct = document.getElementById('packPct'), fill = document.getElementById('packFill');
+    const update = () => {
+      const done = boxes.filter((b) => b.checked).length;
+      const p = Math.round((done / boxes.length) * 100);
+      count.textContent = done === boxes.length ? 'All packed — safe travels!' : done + ' of ' + boxes.length + ' packed';
+      pct.textContent = p + '%';
+      fill.style.width = p + '%';
+      box.classList.toggle('is-done', done === boxes.length);
+    };
+    boxes.forEach((b) => b.addEventListener('change', update));
+    update();
+  })();
+
   // ---- Fixed header: keep page content clear of it ----
   // The header is position:fixed (more reliable than sticky on iPhones), so
   // reserve exactly its height at the top of the page. The open mobile menu
@@ -3077,7 +3197,7 @@
   // confirmation email, keeps the list and handles unsubscribes).
   // Paste the form's "share" link between the quotes below.
   (function subscribeInit() {
-    const SUBSCRIBE_FORM_URL = 'https://77e03d40.sibforms.com/serve/MUIFAEukH6cnCGTQkln-ZNDJs1w8IFGxkqsc3-eiPXccyij25tgY-fP2Zhp2WkpiDQV_PQVc5mVU8Bz_9n9nZAVr6-ghxgfoNQl7E9wGBF9t3GsWOTkrpGM6xWm6negrpLUzb3WluTmvbaeWOKrxqrzFF2yIvU2XffU0Hw2JsDAaIOrH95aD1SxCi46Sm84YVzGmxD7eHoIf2HHV3g==';
+    const SUBSCRIBE_FORM_URL = 'YOUR_BREVO_FORM_LINK';
     const btn = document.getElementById('subscribeBtn');
     const status = document.getElementById('subscribeStatus');
     if (!btn) return;
@@ -3612,13 +3732,9 @@
     calcIds.forEach((id) => { calcEls[id] = document.getElementById(id); });
     if (!calcEls.calcPax) return; // calculator not on this page load for some reason — fail quietly
 
-    // Approximate mid-market rate, set at the time this page was written.
-    // Real rates move daily — see the note under the calculator.
-    const SAR_TO_INR = 25.6;
-
+    // Uses the shared SAR_TO_INR / rounding defined at the top of the script.
     function formatAmount(sar) {
-      const inr = sar * SAR_TO_INR;
-      return `₹${Math.round(inr).toLocaleString('en-IN')} <span class="amount-sar">(SAR ${Math.round(sar).toLocaleString('en-US')})</span>`;
+      return `₹${inrNum(sar)} <span class="amount-sar">(SAR ${Math.round(sar).toLocaleString('en-US')})</span>`;
     }
 
     function runCalculator() {
@@ -3628,7 +3744,7 @@
       const seasonMult = parseFloat(calcEls.calcSeason.value);
       const nightsMakkah = Math.max(0, parseInt(calcEls.calcNightsMakkah.value, 10) || 0);
       const nightsMadinah = Math.max(0, parseInt(calcEls.calcNightsMadinah.value, 10) || 0);
-      const flightPerPerson = Math.max(0, parseFloat(calcEls.calcFlight.value) || 0);
+      const flightPerPerson = Math.max(0, parseFloat(calcEls.calcFlight.value) || 0) / SAR_TO_INR; // field is in rupees
       const visaPerPerson = Math.max(0, parseFloat(calcEls.calcVisa.value) || 0);
       const totalNights = nightsMakkah + nightsMadinah;
 
