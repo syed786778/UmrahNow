@@ -1096,6 +1096,103 @@
   .calc-summary .amount-big{font-size:1.65rem;}
   .calc-result-row.total .amount{font-size:1.3rem;}
 
+
+  /* ==========================================================================
+     BUDGET PLANNER
+     ========================================================================== */
+  .calc-cta{display:block;text-align:center;margin-top:12px;}
+  .budget{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:28px;align-items:start;}
+  .budget-form{display:grid;gap:16px;}
+  .bf-card{background:#fff;border:var(--card-border);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);padding:20px 22px;}
+  .bf-title{display:flex;align-items:center;gap:10px;font-size:var(--fs-card);color:var(--night);margin:0 0 16px;}
+  .bf-ico{width:34px;height:34px;border-radius:11px;background:var(--grad-gold);color:var(--night);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 3px 10px rgba(183,134,44,.3);}
+  .bf-ico svg{width:18px;height:18px;}
+  .bf-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:6px;}
+  .stepper-field{flex:1 1 200px;min-width:0;}
+  .stepper-label,.bf-label{display:block;font-size:var(--fs-sm);font-weight:600;color:var(--night);margin-bottom:7px;}
+  .bf-label{margin-top:14px;}
+  .stepper-label small,.bf-label small{font-weight:400;color:#8a8578;}
+  .stepper{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--line);border-radius:999px;padding:4px;background:#fff;}
+  .stepper button{width:38px;height:38px;border-radius:50%;border:0;background:var(--ivory-dim);color:var(--night);font-size:1.3rem;line-height:1;font-weight:700;transition:background .15s;}
+  .stepper button:hover{background:var(--gold-soft);}
+  .stepper output{font-weight:700;font-size:1.15rem;min-width:2ch;text-align:center;font-variant-numeric:tabular-nums;}
+  .seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:6px;background:var(--ivory-dim);padding:5px;border-radius:14px;}
+  .seg label{cursor:pointer;display:block;}
+  .seg input{position:absolute;opacity:0;pointer-events:none;}
+  .seg span{display:block;text-align:center;padding:10px 6px;border-radius:10px;font-size:var(--fs-sm);font-weight:600;color:#5a5a50;line-height:1.25;transition:background .15s,color .15s,box-shadow .15s;}
+  .seg span small{display:block;font-weight:500;color:#8a8578;font-size:var(--fs-xs);margin-top:3px;}
+  .seg label:hover span{background:rgba(255,255,255,.7);}
+  .seg input:checked + span{background:var(--night);color:var(--gold-soft);box-shadow:0 4px 12px rgba(14,42,40,.25);}
+  .seg input:checked + span small{color:#cdbf95;}
+  .seg input:focus-visible + span{outline:2px solid var(--gold);outline-offset:2px;}
+  .money-input{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:var(--radius);background:#fff;overflow:hidden;}
+  .money-input span{padding:0 14px;font-weight:700;color:var(--gold);background:var(--ivory-dim);display:flex;align-items:center;}
+  .money-input input{border:0;padding:12px;font-size:1rem;width:100%;outline:0;font-family:inherit;min-width:0;}
+  .money-input:focus-within,.bf-select:focus{outline:2px solid var(--gold-soft);outline-offset:1px;}
+  .bf-select{width:100%;border:1px solid var(--line);border-radius:var(--radius);padding:12px;font-family:inherit;font-size:.95rem;background:#fff;color:var(--ink);}
+  .bf-help{font-size:var(--fs-sm);color:#6b6659;margin:10px 0 0;line-height:1.55;}
+  .child-policy{display:none;border-left:4px solid var(--turquoise);}
+  .child-policy.open{display:block;animation:fadeIn .35s ease-out;}
+
+  .budget-quote{
+    position:sticky;top:calc(var(--header-h,88px) + 18px);color:var(--ivory);overflow:hidden;
+    background:linear-gradient(160deg,#0E2A28,#144C46);border-radius:22px;padding:26px 24px 22px;box-shadow:var(--shadow-md);
+  }
+  .budget-quote::after{content:"";position:absolute;right:-30px;top:-30px;width:190px;height:190px;opacity:.16;pointer-events:none;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120' fill='none' stroke='%23E7C77E' stroke-width='1.4'%3E%3Crect x='24' y='24' width='72' height='72'/%3E%3Crect x='24' y='24' width='72' height='72' transform='rotate(45 60 60)'/%3E%3Ccircle cx='60' cy='60' r='30'/%3E%3Ccircle cx='60' cy='60' r='8'/%3E%3C/svg%3E") no-repeat center/contain;}
+  .bq-top{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;}
+  .bq-label{font-size:var(--fs-xs);letter-spacing:.08em;text-transform:uppercase;color:var(--gold-soft);font-weight:700;}
+  .bq-pill{font-size:var(--fs-xs);font-weight:700;color:var(--night);background:var(--gold-soft);padding:3px 10px;border-radius:999px;}
+  .bq-total{font-family:'Work Sans',sans-serif;font-weight:700;font-size:clamp(2rem,4vw,2.7rem);line-height:1.1;margin:14px 0 2px;color:#fff;font-variant-numeric:tabular-nums;position:relative;z-index:1;}
+  .bq-total small{display:block;font-size:.92rem;font-weight:500;color:#cdbf95;margin-top:5px;}
+  .bq-range{font-size:var(--fs-sm);color:#CFE3DF;position:relative;z-index:1;}
+  .bq-chips{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 4px;position:relative;z-index:1;}
+  .bq-chips span{font-size:var(--fs-xs);font-weight:600;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.1);color:#E8F0EE;border:1px solid rgba(231,199,126,.25);}
+  .bq-bar{display:flex;height:12px;border-radius:999px;overflow:hidden;background:rgba(255,255,255,.1);margin:16px 0 8px;}
+  .bq-bar span{display:block;height:100%;transition:width .35s ease;}
+  .bq-seg-stay,.dot-stay{background:#E7C77E;}
+  .bq-seg-fl,.dot-fl{background:#3FA79A;}
+  .bq-seg-visa,.dot-visa{background:#F6F1E4;}
+  .bq-lines{list-style:none;margin:0;padding:0;position:relative;z-index:1;}
+  .bq-lines li{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px dashed rgba(231,199,126,.25);font-size:var(--fs-body);}
+  .bq-lines li:last-child{border-bottom:0;}
+  .bq-lines .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:8px;}
+  .bq-lines em{display:block;font-style:normal;color:#9DB2AD;font-size:var(--fs-xs);margin-top:2px;line-height:1.4;}
+  .bq-lines b{font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums;color:#fff;}
+  .bq-lines b small{display:block;font-weight:400;color:#9DB2AD;font-size:var(--fs-xs);text-align:right;}
+  .bq-child{font-size:var(--fs-sm);color:#E8F0EE;background:rgba(63,167,154,.18);border:1px solid rgba(63,167,154,.4);border-radius:12px;padding:10px 12px;margin-top:6px;position:relative;z-index:1;}
+  .bq-child:empty{display:none;}
+  .bq-perf{position:relative;margin:18px -24px 16px;border-top:2px dashed rgba(231,199,126,.35);}
+  .bq-perf::before,.bq-perf::after{content:"";position:absolute;top:-11px;width:20px;height:20px;border-radius:50%;background:var(--ivory-dim);}
+  .bq-perf::before{left:-10px;}
+  .bq-perf::after{right:-10px;}
+  .bq-share{display:flex;width:100%;align-items:center;justify-content:center;gap:10px;background:#25D366;color:#06371b;font-weight:700;font-size:1rem;border:0;border-radius:999px;padding:14px 20px;box-shadow:0 8px 20px rgba(37,211,102,.28);position:relative;z-index:1;font-family:inherit;}
+  .bq-share:hover{background:#38e078;transform:translateY(-1px);}
+  .bq-share svg{width:21px;height:21px;}
+  .bq-note{font-size:var(--fs-xs);color:#9DB2AD;margin:12px 0 0;line-height:1.55;position:relative;z-index:1;}
+  @media(max-width:960px){
+    .budget{grid-template-columns:1fr;}
+    .budget-quote{position:relative;top:auto;}
+  }
+  @media(max-width:520px){.seg span{padding:9px 3px;font-size:.8rem;}.bf-card{padding:18px 16px;}}
+
+  /* ---- WhatsApp share: email first ---- */
+  .qmodal-overlay{position:fixed;inset:0;background:rgba(14,42,40,.6);z-index:400;}
+  .qmodal-overlay[hidden],.qmodal[hidden]{display:none;}
+  .qmodal{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:min(460px,92vw);max-height:88vh;overflow-y:auto;background:var(--ivory);border-radius:20px;padding:30px 26px 26px;box-shadow:0 24px 60px rgba(0,0,0,.35);z-index:401;}
+  .qmodal h3{font-size:1.3rem;margin-bottom:10px;padding-right:24px;}
+  .qmodal p{color:#3f3f38;font-size:var(--fs-body);line-height:1.6;margin:0 0 14px;}
+  .qmodal label{display:block;font-size:var(--fs-sm);font-weight:600;color:var(--night);margin-bottom:6px;}
+  .qmodal input[type="email"]{width:100%;border:1px solid var(--line);border-radius:var(--radius);padding:13px 14px;font-size:1rem;font-family:inherit;background:#fff;}
+  .qmodal input[type="email"]:focus{outline:2px solid var(--gold-soft);outline-offset:1px;}
+  .qmodal .btn{display:block;width:100%;text-align:center;margin-top:12px;}
+  .qmodal-close{position:absolute;top:12px;right:16px;background:none;border:0;font-size:1.7rem;line-height:1;color:var(--night);padding:6px;}
+  .qstatus{min-height:1.2em;font-size:var(--fs-sm)!important;color:var(--teal)!important;margin:8px 0 0!important;}
+  .qstatus.error{color:#8a2f1f!important;}
+  .wa-btn{background:#25D366;color:#06371b;box-shadow:0 8px 20px rgba(37,211,102,.28);}
+  .wa-btn:hover{background:#38e078;}
+  .qpreview{white-space:pre-wrap;font-family:'Work Sans',sans-serif;font-size:.82rem;line-height:1.55;background:#fff;border:var(--card-border);border-radius:12px;padding:12px 14px;margin:14px 0 0;color:#3f3f38;max-height:200px;overflow:auto;}
+
 </style>
 </head>
 <body>
@@ -1179,69 +1276,7 @@
       <p class="hero-calc-kicker">Estimate Your Umrah Cost</p>
       <div class="calculator-panel">
         <div class="calc-summary" id="calcSummary"></div>
-        <button type="button" class="calc-toggle" id="calcToggleBtn" aria-expanded="false">
-          <span class="calc-toggle-label">Customize this estimate</span> <span class="calc-toggle-arrow">▾</span>
-        </button>
-
-        <div class="calc-details" id="calcDetails" style="display:none;">
-        <div class="calc-grid">
-          <div class="calc-field">
-            <label for="calcPax">Number of pilgrims</label>
-            <input type="number" id="calcPax" min="1" value="2">
-          </div>
-          <div class="calc-field">
-            <label for="calcSharing">Room sharing</label>
-            <select id="calcSharing">
-              <option value="1">Single occupancy</option>
-              <option value="2" selected>Double sharing</option>
-              <option value="3">Triple sharing</option>
-              <option value="4">Quad sharing</option>
-            </select>
-          </div>
-          <div class="calc-field">
-            <label for="calcTier">Hotel type</label>
-            <select id="calcTier">
-              <option value="350">Affordable (budget / 2★)</option>
-              <option value="550" selected>Comfortable (2–3★)</option>
-              <option value="900">Premium (4–5★)</option>
-            </select>
-          </div>
-          <div class="calc-field">
-            <label for="calcSeason">Season</label>
-            <select id="calcSeason">
-              <option value="0.85">Off-peak (quieter months)</option>
-              <option value="1" selected>Regular season</option>
-              <option value="1.7">Ramadan / Hajj-adjacent peak</option>
-            </select>
-          </div>
-          <div class="calc-field">
-            <label for="calcNightsMakkah">Nights in Makkah</label>
-            <input type="number" id="calcNightsMakkah" min="0" value="5">
-          </div>
-          <div class="calc-field">
-            <label for="calcNightsMadinah">Nights in Madinah</label>
-            <input type="number" id="calcNightsMadinah" min="0" value="5">
-          </div>
-          <div class="calc-field">
-            <label for="calcFlight">Flight cost per person, round trip (₹)</label>
-            <input type="number" id="calcFlight" min="0" step="500" value="64000">
-          </div>
-          <div class="calc-field">
-            <label for="calcVisa">Visa route</label>
-            <select id="calcVisa">
-              <option value="545" selected>Saudi Tourist e-Visa (~₹14,000 · SAR 545)</option>
-              <option value="525">Official Umrah Visa (~₹13,400 · SAR 525, excl. agent package)</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="calc-result" id="calcResult"></div>
-        <p class="calc-fx-note">Shown in INR with SAR alongside — ₹1 ≈ SAR 0.039 (≈ SAR 1 → ₹25.6), a rough rate that moves daily. Check a live rate before budgeting precisely.</p>
-
-        <div class="ihram-disclaimer" style="margin-top:4px;text-align:left;">
-          <strong>For information only.</strong> This covers stay, flights and the visa fee only — not local transport, food, shopping or ziyarat costs — using approximate hotel-tier medians and the visa's government-set fee range. No hotel, airline or agent has confirmed these numbers. <strong>Booking through a travel agent or in a group usually changes the per-person math</strong>, since most packages bundle local transport, meals and ziyarat trips into one price — compare the whole package against these three line items rather than against the total alone.
-        </div>
-        </div>
+        <a class="btn btn-gold calc-cta" href="#budget">Plan your full budget →</a>
       </div>
     </div>
   </div>
@@ -1347,15 +1382,16 @@
      GitHub workflow). They summarise ONLY what the official sources publish
      and link to them. Don't hand-edit the list; it will be overwritten. -->
 <div class="advisory-wrap" id="advisories">
-  <div class="advisory-bar" id="advisoryBar" role="region" aria-label="Latest travel advisories for Saudi Arabia" data-checked="2026-11-05T21:28:50Z">
+  <div class="advisory-bar" id="advisoryBar" role="region" aria-label="Latest travel advisories for Saudi Arabia" data-checked="2026-10-15T02:57:15Z">
     <div class="advisory-label"><span class="adv-dot" aria-hidden="true"></span><span class="adv-label-text">Travel advisories</span><span class="adv-checked" id="advisoryChecked"></span></div>
     <div class="advisory-viewport" id="advisoryViewport">
       <ul class="advisory-track" id="advisoryTrack">
 <!-- ADVISORY_LIST_START -->
-      <li data-key="in" data-date="2026-10-22" data-checked="2026-11-05T21:28:50Z"><a class="adv-link" href="https://www.eoiriyadh.gov.in/section/news/statement-on-attacks-on-civilian-and-energy-infrastructure-in-saudi-arabia/" target="_blank" rel="noopener"><span class="adv-badge adv-badge--in">IN</span><span class="adv-src">Embassy of India, Riyadh</span><span class="adv-txt">Statement on attacks on civilian and energy infrastructure in Saudi Arabia · 24×7 helpline 800 247 1234 (toll-free in Saudi Arabia)</span><span class="adv-date">22 Oct</span></a></li>
-      <li data-key="in" data-date="2026-10-13" data-checked="2026-11-05T21:28:50Z"><a class="adv-link" href="https://www.eoiriyadh.gov.in/content/EoI-Riyadh-Advisory-13.10.2026-3.pdf" target="_blank" rel="noopener"><span class="adv-badge adv-badge--in">IN</span><span class="adv-src">Embassy of India, Riyadh</span><span class="adv-txt">Important Update/Advisory- 1700 hrs</span><span class="adv-date">13 Oct</span></a></li>
-      <li data-key="us" data-date="2026-11-03" data-checked="2026-11-05T21:28:50Z"><a class="adv-link" href="https://sa.usembassy.gov/security-alert-u-s-mission-to-saudi-arabia-november-3-2026/" target="_blank" rel="noopener"><span class="adv-badge adv-badge--us">US</span><span class="adv-src">US Embassy</span><span class="adv-txt">Security Alert: U.S. Mission to Saudi Arabia – November 3, 2026</span><span class="adv-date">3 Nov</span></a></li>
-      <li data-key="uk" data-date="2026-10-27" data-checked="2026-11-05T21:28:50Z"><a class="adv-link" href="https://www.gov.uk/foreign-travel-advice/saudi-arabia" target="_blank" rel="noopener"><span class="adv-badge adv-badge--uk">UK</span><span class="adv-src">UK FCDO</span><span class="adv-txt">Advises against: all travel to within 10km of the border with Yemen · all but essential travel to the rest of Saudi Arabia</span><span class="adv-date">27 Oct</span></a></li>
+      <li data-key="in" data-date="2026-10-08" data-checked="2026-10-15T02:57:15Z"><a class="adv-link" href="https://www.eoiriyadh.gov.in/section/news/" target="_blank" rel="noopener"><span class="adv-badge adv-badge--in">IN</span><span class="adv-src">Embassy of India, Riyadh</span><span class="adv-txt">Important advisory for Indian nationals in Saudi Arabia: remain alert, stay indoors as necessary and follow instructions from Saudi authorities; Embassy, Consulate in Jeddah and VFS centres reported as functioning normally · 24×7 helpline 800 247 1234 (toll-free in Saudi Arabia)</span><span class="adv-date">8 Oct</span></a></li>
+      <li data-key="in" data-date="2026-10-08" data-checked="2026-10-15T02:57:15Z"><a class="adv-link" href="https://www.eoiriyadh.gov.in/section/news/" target="_blank" rel="noopener"><span class="adv-badge adv-badge--in">IN</span><span class="adv-src">Embassy of India, Riyadh</span><span class="adv-txt">Statement on attacks targeting airports in Riyadh</span><span class="adv-date">8 Oct</span></a></li>
+      <li data-key="us" data-date="2026-10-12" data-checked="2026-10-15T02:57:15Z"><a class="adv-link" href="https://travel.state.gov/en/international-travel/travel-advisories/saudi-arabia.html" target="_blank" rel="noopener"><span class="adv-badge adv-badge--us">US</span><span class="adv-src">US State Dept</span><span class="adv-txt">Level 3: Reconsider travel — risk of drone and missile attacks (Iran / Houthis), armed conflict and terrorism. Do not travel to the Yemen border area. US government employees need special authorization to use any Saudi airport</span><span class="adv-date">12 Oct</span></a></li>
+      <li data-key="us" data-date="2026-10-05" data-checked="2026-10-15T02:57:15Z"><a class="adv-link" href="https://sa.usembassy.gov/security-alert-u-s-mission-saudi-arabia-october-5-2026/" target="_blank" rel="noopener"><span class="adv-badge adv-badge--us">US</span><span class="adv-src">US Embassy</span><span class="adv-txt">Security alert: U.S. citizens urged to remain vigilant and follow Saudi Civil Defense alerts</span><span class="adv-date">5 Oct</span></a></li>
+      <li data-key="uk" data-date="2026-10-11" data-checked="2026-10-15T02:57:15Z"><a class="adv-link" href="https://www.gov.uk/foreign-travel-advice/saudi-arabia" target="_blank" rel="noopener"><span class="adv-badge adv-badge--uk">UK</span><span class="adv-src">UK FCDO</span><span class="adv-txt">Advises against: all travel within 10km of Saudi Arabia's border with Yemen · all but essential travel to Aseer, Riyadh, Najran and Jizan provinces and the cities of Taif, Jeddah and Dammam · all but essential travel to all Saudi airports except Medina International Airport</span><span class="adv-date">11 Oct</span></a></li>
     <!-- ADVISORY_LIST_END -->
       </ul>
     </div>
@@ -1394,77 +1430,19 @@
 
     <div class="news-grid" id="newsGrid">
       <!-- NEWS_LIST_START -->
-      <article class="news-card" data-date="2026-11-05">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=dialoguepakistan.com" alt="" loading="lazy">dialoguepakistan</span><span class="news-date">5 Nov 2026</span></div>
-        <h3><a href="https://www.dialoguepakistan.com/en/world/citizens-of-mexico--serbia-among-four-new-nationalities-eligible-for-saudi-tourist-visas" target="_blank" rel="noopener nofollow">Citizens of Mexico, Serbia among four new nationalities eligible for Saudi tourist visas</a></h3>
-        <a class="map-link" href="https://www.dialoguepakistan.com/en/world/citizens-of-mexico--serbia-among-four-new-nationalities-eligible-for-saudi-tourist-visas" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-05">
+      <article class="news-card" data-date="2026-09-25">
         <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=english.aawsat.com" alt="" loading="lazy">Asharq Al-Awsat</span><span class="news-date">5 Nov 2026</span></div>
-        <h3><a href="https://english.aawsat.com/business/5337965-saudi-arabia-expands-tourist-e-visa-eligibility-four-more-countries" target="_blank" rel="noopener nofollow">Saudi Arabia Expands Tourist E-Visa Eligibility to Four More Countries</a></h3>
-        <a class="map-link" href="https://english.aawsat.com/business/5337965-saudi-arabia-expands-tourist-e-visa-eligibility-four-more-countries" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
+        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=gulfnews.com" alt="" loading="lazy">Gulf News</span><span class="news-date">25 Sep 2026</span></div>
+        <h3><a href="https://gulfnews.com/world/gulf/saudi/saudi-arabia-launches-365-day-umrah-visa-with-90-day-stay-1.500613885" target="_blank" rel="noopener nofollow">Saudi Arabia's multiple-entry Umrah visa: what pilgrims need to know</a></h3>
+        <p>The one-year, multiple-entry Umrah visa lets eligible pilgrims return to the Kingdom several times over 365 days without reapplying each trip, with a cumulative stay capped at 90 days and a fresh Nusuk service package required before every visit.</p>
+        <a class="map-link" href="https://gulfnews.com/world/gulf/saudi/saudi-arabia-launches-365-day-umrah-visa-with-90-day-stay-1.500613885" target="_blank" rel="noopener nofollow">Read more ↗</a>
       </article>
-      <article class="news-card" data-date="2026-11-05">
+      <article class="news-card" data-date="2026-08-26">
         <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V10l8-6 8 6v11"/><path d="M10 21v-6h4v6"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=luxurytravelmagazine.com" alt="" loading="lazy">Luxury Travel Magazine</span><span class="news-date">5 Nov 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxNcW9JUE95OVBKX3pnTjh1dmxjemhuYVFqQzl5M2hPeGprQ1VtRmdLVGJmSk8tUDJsSzJyODJWS2MyQUt4SFJGU3R2cVVZdEZOUlBkTW9Od3FENTdvZ0pyOHhFbGRGcjlVcm9XRnpfNzF4aE5iUS1HWVVuZEUteEdocUYwSmk4UTNzOWZmQV8wUnQ4UlpqcTZoaHBudDdYNnJUZGdma0VBejYwc3lyVmV3OVNGTkFmY2dpa2NTcmF1S2hjUQ?oc=5" target="_blank" rel="noopener nofollow">A Sacred Retreat: Inside the Award-Winning Address Jabal Omar Makkah Hotel</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxNcW9JUE95OVBKX3pnTjh1dmxjemhuYVFqQzl5M2hPeGprQ1VtRmdLVGJmSk8tUDJsSzJyODJWS2MyQUt4SFJGU3R2cVVZdEZOUlBkTW9Od3FENTdvZ0pyOHhFbGRGcjlVcm9XRnpfNzF4aE5iUS1HWVVuZEUteEdocUYwSmk4UTNzOWZmQV8wUnQ4UlpqcTZoaHBudDdYNnJUZGdma0VBejYwc3lyVmV3OVNGTkFmY2dpa2NTcmF1S2hjUQ?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-04">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=english.ajel.sa" alt="" loading="lazy">english.ajel</span><span class="news-date">4 Nov 2026</span></div>
-        <h3><a href="https://english.ajel.sa/saudi-arabia/o9m8wb2wx" target="_blank" rel="noopener nofollow">Makkah deputy governor chairs Hajj and Umrah committee meeting on pilgrimage preparations</a></h3>
-        <a class="map-link" href="https://english.ajel.sa/saudi-arabia/o9m8wb2wx" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-04">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=siasat.com" alt="" loading="lazy">The Siasat Daily</span><span class="news-date">4 Nov 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMiugFBVV95cUxQZHpzem92QUtXUS1mcS1ESHMwMjJxWEhIVHZpUmxHaEo4bVlsUkFnb0pjRkhnc19xd0pSbmZlMFlRMHFUZExRV2I4Z3A0UmplQnlCQzIzM1I4ZUlSN2wyN1lFclBKZlBTcThJVUs1djJCbko0UTNJOVUwX0lNdm16V0JjX09sTWZLc1dtMEZjS29IVjNwN2RhR2pkS1BhN0ZkRGYxZjB1YW9wX0RIRk1zcVByZ0JPb1NKNXc?oc=5" target="_blank" rel="noopener nofollow">Pending refunds: Hyderabad Umrah operators threaten to boycott IndiGo, Air India Express</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMiugFBVV95cUxQZHpzem92QUtXUS1mcS1ESHMwMjJxWEhIVHZpUmxHaEo4bVlsUkFnb0pjRkhnc19xd0pSbmZlMFlRMHFUZExRV2I4Z3A0UmplQnlCQzIzM1I4ZUlSN2wyN1lFclBKZlBTcThJVUs1djJCbko0UTNJOVUwX0lNdm16V0JjX09sTWZLc1dtMEZjS29IVjNwN2RhR2pkS1BhN0ZkRGYxZjB1YW9wX0RIRk1zcVByZ0JPb1NKNXc?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-03">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=spa.gov.sa" alt="" loading="lazy">Saudi Press Agency</span><span class="news-date">3 Nov 2026</span></div>
-        <h3><a href="https://www.spa.gov.sa/en/N2341449" target="_blank" rel="noopener nofollow">Hajj Ministry Suspends Seven Umrah Companies Over Transport Shortcomings</a></h3>
-        <a class="map-link" href="https://www.spa.gov.sa/en/N2341449" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-03">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=yen.com.gh" alt="" loading="lazy">Yen News</span><span class="news-date">3 Nov 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMitAFBVV95cUxNeGdBNHJWcm1mdFRQUnNpQUg0YWoyd0ItcXhBMms4N2hUZUozYmFTUGI0VWtGc3ZrMkxEeWFDa0tCU1ItMU05VDhyeWd4Smg4NjVOY2xJOGdoUjNKZERzZmlDek9uR2xLUGZMcVVJc3AwWVBOcmEyNFNFaVpUY3hTMjVpcHpGSFZoMHhOMk1qTl9iSkVvdlZOX0xpNzRXNU90NFhSOHBWOE91elVibUJCdWxyQk8?oc=5" target="_blank" rel="noopener nofollow">Saudi Arabia Offers Free 6-Month Visit Visa to Yemeni Nationals Without Valid Documents</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMitAFBVV95cUxNeGdBNHJWcm1mdFRQUnNpQUg0YWoyd0ItcXhBMms4N2hUZUozYmFTUGI0VWtGc3ZrMkxEeWFDa0tCU1ItMU05VDhyeWd4Smg4NjVOY2xJOGdoUjNKZERzZmlDek9uR2xLUGZMcVVJc3AwWVBOcmEyNFNFaVpUY3hTMjVpcHpGSFZoMHhOMk1qTl9iSkVvdlZOX0xpNzRXNU90NFhSOHBWOE91elVibUJCdWxyQk8?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-03">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=hyderabadmail.com" alt="" loading="lazy">hyderabadmail</span><span class="news-date">3 Nov 2026</span></div>
-        <h3><a href="https://hyderabadmail.com/hyderabad-umrah-organizers-seek-pilgrim-flight-refunds/" target="_blank" rel="noopener nofollow">Umrah organizers seek 100% refunds for pilgrims hit by flight cancellations</a></h3>
-        <a class="map-link" href="https://hyderabadmail.com/hyderabad-umrah-organizers-seek-pilgrim-flight-refunds/" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-03">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=thehindu.com" alt="" loading="lazy">The Hindu</span><span class="news-date">3 Nov 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMinwFBVV95cUxQV2trTzVhbWxTTHJLTGs4TUtqUUM1WkxKbzQxV21pdlpYRC1aeFdzbndEZ1NuU040UGR3eHRYNjFHZ05Ka1BZcm1zLW9WS0NEdVFWTlNlWUs1dTlfQWpyLWJfS1MyYVVzbTVoU203ZjFQZk9vVGRxWTJlQnlOaVdiR18wUG9GZ0FMdDNCX0JHVjFmQXZvOU1NRHlKQlJHSGPSAaYBQVVfeXFMUEx3V19jX2RnYmpSUkxxaXVKTkktZFFoTnJuR09LVnNtZXFSaUJIZE1zTEVSZUVnZ2J0NlVDUDV2TDZUY1NiLU5DZUd4d05oelJWS2Qxb29ocU1QSTNoWHpKWDYtQWM4UWQwYVBlMW1WRlkyRmJNRDNZcTlBQ0FMcmNqUW5nTm9YSkdkWVVNUTl1d2dnU1RmSjJ0dmd5dXN0VG1NcHpVZw?oc=5" target="_blank" rel="noopener nofollow">Refund ‘umrah’ fare to pilgrims</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMinwFBVV95cUxQV2trTzVhbWxTTHJLTGs4TUtqUUM1WkxKbzQxV21pdlpYRC1aeFdzbndEZ1NuU040UGR3eHRYNjFHZ05Ka1BZcm1zLW9WS0NEdVFWTlNlWUs1dTlfQWpyLWJfS1MyYVVzbTVoU203ZjFQZk9vVGRxWTJlQnlOaVdiR18wUG9GZ0FMdDNCX0JHVjFmQXZvOU1NRHlKQlJHSGPSAaYBQVVfeXFMUEx3V19jX2RnYmpSUkxxaXVKTkktZFFoTnJuR09LVnNtZXFSaUJIZE1zTEVSZUVnZ2J0NlVDUDV2TDZUY1NiLU5DZUd4d05oelJWS2Qxb29ocU1QSTNoWHpKWDYtQWM4UWQwYVBlMW1WRlkyRmJNRDNZcTlBQ0FMcmNqUW5nTm9YSkdkWVVNUTl1d2dnU1RmSjJ0dmd5dXN0VG1NcHpVZw?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-02">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=english.gujaratsamachar.com" alt="" loading="lazy">Gujarat Samachar</span><span class="news-date">2 Nov 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMi8AFBVV95cUxNZUtBUzJiRG41cUNDd3RKbHN5M1VkcWxiRzhJd3JGTXF1VXQ4dngwXzZobXVlTmp2QkV6TC1WQTNEOTk4VUFCYVhNZThxUHZSbG1Nam5HNjFSQkpTUWNnbFRqN2E1WFN6eWhSRk5idzgyNTJjaXE5eGY2TWFsM3FTWFV1a09jZ1NINS1heHhvNFNmbE1QUE9kUDdrMElsUGZBUGxwUDZUQ1dUbEhaVXh3UGJjWGJ1Qkc2emlseS1JcjRRQWg5Ymx5OTFDREFqSnRTOW9uejZuUVpjbGtRZnNfMWN6eWZwNmt2c25WUjVDT3A?oc=5" target="_blank" rel="noopener nofollow">Saudi-Houthi Conflict Disrupts Umrah Travel: Around 500 Guj…</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMi8AFBVV95cUxNZUtBUzJiRG41cUNDd3RKbHN5M1VkcWxiRzhJd3JGTXF1VXQ4dngwXzZobXVlTmp2QkV6TC1WQTNEOTk4VUFCYVhNZThxUHZSbG1Nam5HNjFSQkpTUWNnbFRqN2E1WFN6eWhSRk5idzgyNTJjaXE5eGY2TWFsM3FTWFV1a09jZ1NINS1heHhvNFNmbE1QUE9kUDdrMElsUGZBUGxwUDZUQ1dUbEhaVXh3UGJjWGJ1Qkc2emlseS1JcjRRQWg5Ymx5OTFDREFqSnRTOW9uejZuUVpjbGtRZnNfMWN6eWZwNmt2c25WUjVDT3A?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-02">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=english.ajel.sa" alt="" loading="lazy">english.ajel</span><span class="news-date">2 Nov 2026</span></div>
-        <h3><a href="https://english.ajel.sa/news/3iboy35to" target="_blank" rel="noopener nofollow">Hajj and Umrah Ministry urges compliance with residency regulations</a></h3>
-        <a class="map-link" href="https://english.ajel.sa/news/3iboy35to" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-02">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=agbi.com" alt="" loading="lazy">Arabian Gulf Business Insight | AGBI</span><span class="news-date">2 Nov 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMijwFBVV95cUxObUItbTh2QVB3UEMzald1UUJiSG5RNTVwQnpkR0Jxa1JFcUR1OU83X25tcUJXVGdHczAzcW1SekZHT0JMVHZINm5McV8yUlNCQk5qUXJ2N2xXLVBVVWtJcGRtU3BtbDNyQzJ6VUdvZUhXSXVmdDdfa0lSYlhGcDFRaEdQR0JfMVk5aG83QlRpQQ?oc=5" target="_blank" rel="noopener nofollow">Mecca developer defies regional tourism downturn</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMijwFBVV95cUxObUItbTh2QVB3UEMzald1UUJiSG5RNTVwQnpkR0Jxa1JFcUR1OU83X25tcUJXVGdHczAzcW1SekZHT0JMVHZINm5McV8yUlNCQk5qUXJ2N2xXLVBVVWtJcGRtU3BtbDNyQzJ6VUdvZUhXSXVmdDdfa0lSYlhGcDFRaEdQR0JfMVk5aG83QlRpQQ?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
+        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=ttnworldwide.com" alt="" loading="lazy">TTN Worldwide</span><span class="news-date">26 Aug 2026</span></div>
+        <h3><a href="https://www.ttnworldwide.com/ArticleTA/466955/saudi-hotel-sector-defies-travel-disruptions-as-makkah-revpar-rises-87pc_colon-jll" target="_blank" rel="noopener nofollow">Makkah hotel revenue climbs as Saudi hospitality sector holds steady</a></h3>
+        <p>A JLL market report for Q2 2026 shows Makkah occupancy up 4 points year-on-year with room revenue rising 8.7%, while Madinah posted the Kingdom's highest occupancy at over 75% — both cities also added new hotel supply during the quarter.</p>
+        <a class="map-link" href="https://www.ttnworldwide.com/ArticleTA/466955/saudi-hotel-sector-defies-travel-disruptions-as-makkah-revpar-rises-87pc_colon-jll" target="_blank" rel="noopener nofollow">Read more ↗</a>
       </article>
       <!-- NEWS_LIST_END -->
     </div>
@@ -1505,6 +1483,99 @@
     <p class="note-box tight" style="background:rgba(247,241,228,0.08);border-color:var(--gold-soft);color:#DCE9E5;">
       <strong>Either way:</strong> you need a separate, timed Umrah permit through Nusuk to enter Masjid al-Haram (and another for Al-Rawdah) — apply at <a href="https://www.nusuk.sa" target="_blank" rel="noopener" style="color:var(--gold-soft);">nusuk.sa ↗</a> or <a href="https://visa.visitsaudi.com" target="_blank" rel="noopener" style="color:var(--gold-soft);">visa.visitsaudi.com ↗</a>.
     </p>
+  </div>
+</section>
+
+<!-- ================= BUDGET PLANNER ================= -->
+<section id="budget" class="band-ivory-dim">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-icon-row"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 14.5h2"/></svg></span><div class="kicker-ar">ميزانية العمرة</div></div>
+      <h2>Plan your Umrah budget</h2>
+      <p class="desc">An approximate cost for stay, flights and visa — with children under 12 and typical airline and hotel policies built in. Adjust anything and the quote updates instantly.</p>
+    </div>
+
+    <div class="budget">
+      <div class="budget-form">
+
+        <div class="bf-card">
+          <h3 class="bf-title"><span class="bf-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17.5" cy="9.5" r="2.4"/><path d="M16 14.3c3 .1 5 2 5 5.2"/></svg></span>Who's travelling</h3>
+          <div class="bf-row">
+            <div class="stepper-field"><span class="stepper-label">Adults</span>
+              <div class="stepper" data-key="adults" data-min="1" data-max="10"><button type="button" data-step="-1" aria-label="Fewer adults">−</button><output>2</output><button type="button" data-step="1" aria-label="More adults">+</button></div></div>
+            <div class="stepper-field"><span class="stepper-label">Children <small>under 12</small></span>
+              <div class="stepper" data-key="children" data-min="0" data-max="8"><button type="button" data-step="-1" aria-label="Fewer children">−</button><output>0</output><button type="button" data-step="1" aria-label="More children">+</button></div></div>
+          </div>
+          <div class="bf-label">Room sharing <small>adults per room</small></div>
+          <div class="seg" role="radiogroup" aria-label="Adults per room">
+            <label><input type="radio" name="perRoom" value="1"><span>Single</span></label>
+            <label><input type="radio" name="perRoom" value="2" checked><span>Double</span></label>
+            <label><input type="radio" name="perRoom" value="3"><span>Triple</span></label>
+            <label><input type="radio" name="perRoom" value="4"><span>Quad</span></label>
+          </div>
+        </div>
+
+        <div class="bf-card">
+          <h3 class="bf-title"><span class="bf-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V10l8-6 8 6v11"/><path d="M10 21v-6h4v6"/></svg></span>Hotel &amp; season</h3>
+          <div class="bf-label">Hotel standard <small>typical room, per night</small></div>
+          <div class="seg" role="radiogroup" aria-label="Hotel standard">
+            <label><input type="radio" name="tier" value="budget"><span>Budget<small data-rate="budget"></small></span></label>
+            <label><input type="radio" name="tier" value="comfort" checked><span>Comfort<small data-rate="comfort"></small></span></label>
+            <label><input type="radio" name="tier" value="premium"><span>Premium<small data-rate="premium"></small></span></label>
+          </div>
+          <div class="bf-label">Season</div>
+          <div class="seg" role="radiogroup" aria-label="Season">
+            <label><input type="radio" name="season" value="off"><span>Off-peak<small>about −15%</small></span></label>
+            <label><input type="radio" name="season" value="regular" checked><span>Regular<small>standard rates</small></span></label>
+            <label><input type="radio" name="season" value="peak"><span>Ramadan / peak<small>about +70%</small></span></label>
+          </div>
+        </div>
+
+        <div class="bf-card">
+          <h3 class="bf-title"><span class="bf-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>Length of stay</h3>
+          <div class="bf-row">
+            <div class="stepper-field"><span class="stepper-label">Nights in Makkah</span>
+              <div class="stepper" data-key="nM" data-min="0" data-max="30"><button type="button" data-step="-1" aria-label="Fewer nights in Makkah">−</button><output>5</output><button type="button" data-step="1" aria-label="More nights in Makkah">+</button></div></div>
+            <div class="stepper-field"><span class="stepper-label">Nights in Madinah</span>
+              <div class="stepper" data-key="nD" data-min="0" data-max="30"><button type="button" data-step="-1" aria-label="Fewer nights in Madinah">−</button><output>5</output><button type="button" data-step="1" aria-label="More nights in Madinah">+</button></div></div>
+          </div>
+        </div>
+
+        <div class="bf-card">
+          <h3 class="bf-title"><span class="bf-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16l20-8-6 14-3-6-6-2z"/></svg></span>Flights &amp; visa</h3>
+          <div class="bf-row">
+            <div class="stepper-field"><label class="stepper-label" for="fareInput">Return fare per adult</label>
+              <div class="money-input"><span>₹</span><input type="number" id="fareInput" min="0" step="500" value="64000" inputmode="numeric"></div></div>
+            <div class="stepper-field"><label class="stepper-label" for="visaSelect">Visa route</label>
+              <select id="visaSelect" class="bf-select"><option value="tourist" selected>Saudi Tourist e-Visa (~₹14,000)</option><option value="umrah">Official Umrah Visa (~₹13,400, excl. agent package)</option></select></div>
+          </div>
+        </div>
+
+        <div class="bf-card child-policy" id="childPolicy" aria-hidden="true">
+          <h3 class="bf-title"><span class="bf-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="3"/><path d="M6 21v-5a6 6 0 0 1 12 0v5"/></svg></span>Children under 12: airline &amp; hotel policy</h3>
+          <div class="bf-row">
+            <div class="stepper-field"><label class="stepper-label" for="airlineSelect">Airline fare for children <small>2–11 years</small></label>
+              <select id="airlineSelect" class="bf-select"><option value="75" selected>75% of the adult fare (most full-service airlines)</option><option value="100">Full adult fare (many low-cost airlines)</option></select></div>
+            <div class="stepper-field"><label class="stepper-label" for="bedSelect">Hotel bedding for children</label>
+              <select id="bedSelect" class="bf-select"><option value="share" selected>Share parents' bed — no charge</option><option value="extra">Extra bed for each child (about +30% of room rate)</option></select></div>
+          </div>
+          <p class="bf-help">These are typical policies, not guarantees — airlines and hotels differ, and some charge a child's meals or an extra bed from a younger age. Children need their own visa; we've assumed the same fee as an adult. Up to two children are assumed to share each room. Confirm every policy when you book.</p>
+        </div>
+      </div>
+
+      <aside class="budget-quote" id="budgetQuote" aria-label="Your Umrah budget estimate">
+        <div class="bq-top"><span class="bq-label">Your estimate</span><span class="bq-pill">Approximate</span></div>
+        <div class="bq-total" id="bqTotal" aria-live="polite"></div>
+        <div class="bq-range" id="bqRange"></div>
+        <div class="bq-chips" id="bqChips"></div>
+        <div class="bq-bar" id="bqBar" aria-hidden="true"><span class="bq-seg-stay"></span><span class="bq-seg-fl"></span><span class="bq-seg-visa"></span></div>
+        <ul class="bq-lines" id="bqLines"></ul>
+        <div class="bq-child" id="bqChild"></div>
+        <div class="bq-perf" aria-hidden="true"></div>
+        <button type="button" class="bq-share" id="bqShare"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z"/><path d="M8.5 9.5c.3 2.600 2.300 4.600 5 5l1.300-1.300-1.800-1-.8.7c-.8-.3-1.500-1-1.800-1.800l.7-.8-1-1.800z"/></svg>Share quote on WhatsApp</button>
+        <p class="bq-note">We'll ask for your email first. This covers stay, flights and visa only — not local transport, food, shopping or ziyarat. Booking through a travel agent or in a group usually changes the per-person cost, since packages bundle those in.</p>
+      </aside>
+    </div>
   </div>
 </section>
 
@@ -2156,7 +2227,7 @@
       <p class="desc">A reference checklist, not a rulebook — tick off items as you pack. Nothing here is saved once you close the page, so download a copy before you go.</p>
       <div class="checklist-actions">
         <button class="download-btn" id="downloadPng">⬇ Download as image</button>
-        <button class="download-btn" id="downloadDoc">⬇ Download as Word doc</button>
+        <button class="download-btn" id="downloadPdf">⬇ Download as PDF</button>
       </div>
       <div class="pack-progress" id="packProgress">
         <div class="pack-progress-top"><strong id="packCount">0 packed</strong><span id="packPct">0%</span></div>
@@ -2559,7 +2630,7 @@
       <strong>On the numbers here.</strong> Prices are shown in rupees at about ₹25.6 per riyal, with the riyal price alongside. Prices and ratings above come from major travel-booking aggregators around the time this page was written, not a live feed — Saudi hotel rates swing sharply with season, Ramadan, and Hajj proximity, sometimes tripling during peak weeks. We can't display real hotel photography or a live Google rating here (that would mean using images we don't hold rights to), so each card uses an illustrated mark instead — tap "View on map" for real photos, the current price and today's rating before you book.
     </div>
     <p style="text-align:center;margin-top:22px;">
-      <a href="#calculator" class="ihram-view-restrictions-link">↑ Use the trip cost calculator at the top of the page</a>
+      <a href="#budget" class="ihram-view-restrictions-link">↑ Plan your full Umrah budget</a>
     </p>
   </div>
 </section>
@@ -3037,7 +3108,7 @@
       </div>
       <div>
         <h4>Your data, in plain terms</h4>
-        <p>Anything submitted via the Feedback or Umrah Packages forms is delivered to the site owner's inbox through FormSubmit and used only to respond to you — never sold or shared. UmrahNow uses Cloudflare Web Analytics to see how many people visit and which pages are useful; it sets no cookies and doesn't track you individually or across other sites. If you subscribe to the daily email update, your address is stored with our email provider, Brevo, only to send that update — every email has an unsubscribe link. The packing checklist and du'a audio run entirely in your browser and are never sent anywhere.</p>
+        <p>Anything submitted via the Feedback form, the Umrah Packages form, or the email step before sharing a budget on WhatsApp is delivered to the site owner's inbox through FormSubmit and used only to respond to you — never sold or shared. UmrahNow uses Cloudflare Web Analytics to see how many people visit and which pages are useful; it sets no cookies and doesn't track you individually or across other sites. If you subscribe to the daily email update, your address is stored with our email provider, Brevo, only to send that update — every email has an unsubscribe link. The packing checklist and du'a audio run entirely in your browser and are never sent anywhere.</p>
       </div>
       <div>
         <h4>Accuracy changes; so should your assumptions</h4>
@@ -3075,8 +3146,32 @@
   </div>
 </footer>
 
+<!-- ================= WHATSAPP SHARE (email first) ================= -->
+<div class="qmodal-overlay" id="qOverlay" hidden></div>
+<div class="qmodal" id="qModal" role="dialog" aria-modal="true" aria-labelledby="qTitle" hidden>
+  <button type="button" class="qmodal-close" id="qClose" aria-label="Close">&times;</button>
+  <div id="qStep1">
+    <h3 id="qTitle">Share your budget on WhatsApp</h3>
+    <p>Enter your email to continue. We'll use it to send help with planning this trip and occasional Umrah updates — never sold or shared.</p>
+    <form id="qForm" novalidate>
+      <label for="qEmail">Email address</label>
+      <input type="email" id="qEmail" name="email" required autocomplete="email" placeholder="you@example.com">
+      <input type="text" name="_honey" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;">
+      <p class="qstatus" id="qStatus" role="status"></p>
+      <button type="submit" class="btn btn-gold" id="qSubmit">Continue</button>
+    </form>
+  </div>
+  <div id="qStep2" hidden>
+    <h3>You're all set ✓</h3>
+    <p>Your quote is ready. Tap below to open WhatsApp and choose who to send it to.</p>
+    <a class="btn wa-btn" id="qWhatsApp" href="#" target="_blank" rel="noopener">Open WhatsApp</a>
+    <pre class="qpreview" id="qPreview"></pre>
+  </div>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
   // ---- Currency: ONE rate, ONE format, used by every price on the page ----
   const SAR_TO_INR = 25.6; // approximate; real rates move daily
@@ -3720,14 +3815,125 @@
     });
   });
 
-  document.getElementById('downloadDoc').addEventListener('click', () => {
-    const data = collectChecklistData();
-    const html = '<html><head><meta charset="utf-8"></head><body>' + brandedChecklistMarkup(data) + '</body></html>';
-    const blob = new Blob(['\ufeff', html], { type: 'application/msword' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = 'UmrahNow-Checklist.doc';
-    link.click();
+  // ---- Branded PDF of the packing checklist ----
+  function pdfEl(tag, css, text) { const e = document.createElement(tag); if (css) e.style.cssText = css; if (text != null) e.textContent = text; return e; }
+  function buildPdfPages(data) {
+    const W = 794, H = 1123, SANS = "'Work Sans',Arial,sans-serif", SERIF = "'Amiri',Georgia,serif";
+    const total = data.reduce((n, sec) => n + sec.items.length, 0);
+    const packed = data.reduce((n, sec) => n + sec.items.filter((i) => i.checked).length, 0);
+    const today = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+    const star = (size, color, op) => '<svg width="' + size + '" height="' + size + '" viewBox="0 0 120 120" fill="none" stroke="' + color + '" stroke-width="1.4" style="opacity:' + op + '"><rect x="24" y="24" width="72" height="72"/><rect x="24" y="24" width="72" height="72" transform="rotate(45 60 60)"/><circle cx="60" cy="60" r="30"/><circle cx="60" cy="60" r="8"/></svg>';
+    const mark = '<svg width="46" height="46" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="15" r="11" fill="#E7C77E"/><circle cx="55" cy="12" r="9" fill="#0E2A28"/><rect x="18" y="34" width="64" height="58" rx="2" stroke="#E7C77E" stroke-width="4"/><rect x="18" y="52" width="64" height="10" fill="#E7C77E"/><rect x="42" y="72" width="16" height="20" rx="1.5" stroke="#E7C77E" stroke-width="3"/></svg>';
+
+    const page = () => pdfEl('div', 'width:' + W + 'px;height:' + H + 'px;background:#F6F1E4;position:relative;overflow:hidden;font-family:' + SANS + ';color:#1B1B18;');
+    const brand = () => {
+      const row = pdfEl('div', 'display:flex;align-items:center;gap:14px;position:relative;');
+      const m = pdfEl('div', ''); m.innerHTML = mark; row.appendChild(m);
+      const t = pdfEl('div', '');
+      t.appendChild(pdfEl('div', 'font-family:' + SERIF + ';font-size:34px;color:#F6F1E4;line-height:1.2;', 'UmrahNow'));
+      t.appendChild(pdfEl('div', 'font-size:11px;letter-spacing:.14em;color:#E7C77E;margin-top:4px;line-height:1.3;text-transform:uppercase;', 'Your Umrah Companion'));
+      row.appendChild(t);
+      return row;
+    };
+    const header = (tall) => {
+      const hd = pdfEl('div', 'position:relative;overflow:hidden;padding:' + (tall ? '34px 40px 0' : '24px 40px 0') + ';height:' + (tall ? 214 : 100) + 'px;background:linear-gradient(135deg,#0E2A28,#144C46);border-bottom:5px solid #B7862C;');
+      const wm = pdfEl('div', 'position:absolute;right:-26px;top:-26px;'); wm.innerHTML = star(tall ? 250 : 170, '#E7C77E', 0.22); hd.appendChild(wm);
+      hd.appendChild(brand());
+      if (tall) {
+        hd.appendChild(pdfEl('div', 'position:relative;font-family:' + SERIF + ';font-size:46px;font-weight:700;color:#F6F1E4;margin-top:24px;line-height:1.15;', 'Umrah Packing Checklist'));
+        hd.appendChild(pdfEl('div', 'position:relative;margin-top:12px;font-size:13px;line-height:1.4;color:#CFE3DF;', 'Tick items as you pack · prepared ' + today + ' · ' + packed + ' of ' + total + ' packed'));
+      }
+      return hd;
+    };
+    const footer = (n, count) => {
+      const f = pdfEl('div', 'position:absolute;left:0;right:0;bottom:0;height:58px;background:#0E2A28;border-top:3px solid #B7862C;display:flex;align-items:center;justify-content:space-between;padding:0 40px;');
+      const l = pdfEl('div', 'display:flex;align-items:baseline;gap:12px;');
+      l.appendChild(pdfEl('span', 'font-family:' + SERIF + ';font-size:20px;color:#F6F1E4;', 'UmrahNow'));
+      l.appendChild(pdfEl('span', 'font-size:12px;color:#E7C77E;letter-spacing:.04em;', 'umrahnow.in'));
+      f.appendChild(l);
+      f.appendChild(pdfEl('span', 'font-size:12px;color:#9DB2AD;', 'May Allah accept your Umrah · Page ' + n + ' of ' + count));
+      return f;
+    };
+    const card = (sec, idx) => {
+      const accent = idx % 2 ? 'linear-gradient(90deg,#3FA79A,#144C46)' : 'linear-gradient(90deg,#dcb05a,#B7862C)';
+      const c = pdfEl('div', 'background:#fff;border:1px solid #eadfbf;border-radius:14px;overflow:hidden;margin-bottom:16px;');
+      c.appendChild(pdfEl('div', 'height:5px;background:' + accent + ';'));
+      const body = pdfEl('div', 'padding:14px 16px 12px;');
+      const head = pdfEl('div', 'display:flex;align-items:center;gap:10px;margin-bottom:10px;');
+      head.appendChild(pdfEl('div', 'width:26px;height:26px;border-radius:50%;background:#B7862C;color:#0E2A28;font-weight:700;font-size:13px;line-height:20px;text-align:center;flex-shrink:0;', String(idx + 1)));
+      head.appendChild(pdfEl('div', 'font-family:' + SERIF + ';font-size:19px;font-weight:700;color:#0E2A28;line-height:1.1;', sec.title));
+      body.appendChild(head);
+      sec.items.forEach((it) => {
+        const row = pdfEl('div', 'display:flex;align-items:flex-start;gap:9px;padding:4px 0;');
+        const box = pdfEl('div', 'flex-shrink:0;box-sizing:border-box;width:16px;height:16px;margin-top:1px;border:1.6px solid #B7862C;border-radius:4px;background:' + (it.checked ? '#B7862C' : '#fff') + ';');
+        if (it.checked) box.innerHTML = '<svg width="13" height="13" viewBox="0 0 12 12" style="display:block;margin:0.5px 0 0 0.5px"><path d="M2.2 6.4l2.6 2.6 5-5.6" stroke="#0E2A28" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        row.appendChild(box);
+        row.appendChild(pdfEl('div', 'font-size:12.5px;line-height:1.38;color:#3f3f38;', it.text));
+        body.appendChild(row);
+      });
+      c.appendChild(body);
+      return c;
+    };
+    const columns = (sections, offset) => {
+      const grid = pdfEl('div', 'display:flex;gap:18px;align-items:flex-start;');
+      const cols = [pdfEl('div', 'flex:1;min-width:0;'), pdfEl('div', 'flex:1;min-width:0;')], weight = [0, 0];
+      sections.forEach((sec, i) => {
+        const k = weight[0] <= weight[1] ? 0 : 1;
+        cols[k].appendChild(card(sec, offset + i));
+        weight[k] += sec.items.length + 3;
+      });
+      cols.forEach((c) => grid.appendChild(c));
+      return grid;
+    };
+
+    // page 1 gets the header and up to 24 items; the rest goes to page 2
+    let acc = 0, split = 0;
+    for (; split < data.length; split++) { if (split && acc + data[split].items.length > 24) break; acc += data[split].items.length; }
+    const p1 = page(); p1.appendChild(header(true));
+    const b1 = pdfEl('div', 'padding:26px 36px 0;'); b1.appendChild(columns(data.slice(0, split), 0)); p1.appendChild(b1); p1.appendChild(footer(1, 2));
+
+    const p2 = page(); p2.appendChild(header(false));
+    const b2 = pdfEl('div', 'padding:24px 36px 0;');
+    if (split < data.length) b2.appendChild(columns(data.slice(split), split));
+    const tips = pdfEl('div', 'background:linear-gradient(90deg,rgba(183,134,44,.16),rgba(183,134,44,.06));border-left:5px solid #B7862C;border-radius:12px;padding:14px 18px;margin-bottom:16px;');
+    tips.appendChild(pdfEl('div', 'font-family:' + SERIF + ';font-size:19px;font-weight:700;color:#0E2A28;margin-bottom:6px;', 'Before you fly'));
+    ['Save your Nusuk Umrah and Rawdah permits so they open offline.', 'Keep your hotel name and address written in Arabic.', 'Photograph your passport, visa and insurance, and email them to yourself.', 'Save the emergency numbers (911 · 997) in your phone.']
+      .forEach((t) => tips.appendChild(pdfEl('div', 'font-size:12.5px;line-height:1.5;color:#3f3f38;padding:2px 0 2px 16px;position:relative;', '•  ' + t)));
+    b2.appendChild(tips);
+    const notes = pdfEl('div', 'background:#fff;border:1px solid #eadfbf;border-radius:14px;padding:14px 18px 8px;');
+    notes.appendChild(pdfEl('div', 'font-family:' + SERIF + ';font-size:19px;font-weight:700;color:#0E2A28;margin-bottom:4px;', 'My notes'));
+    for (let i = 0; i < 8; i++) notes.appendChild(pdfEl('div', 'height:30px;border-bottom:1px solid #e3d9b8;'));
+    b2.appendChild(notes);
+    p2.appendChild(b2); p2.appendChild(footer(2, 2));
+    return [p1, p2];
+  }
+  document.getElementById('downloadPdf').addEventListener('click', async (e) => {
+    const btn = e.currentTarget, label = btn.textContent;
+    if (!(window.jspdf && window.jspdf.jsPDF) || !window.html2canvas) { alert("The PDF tool didn't load — please check your connection and try again."); return; }
+    btn.disabled = true; btn.textContent = 'Preparing PDF…';
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'position:fixed;top:0;left:-99999px;';
+    try {
+      const pages = buildPdfPages(collectChecklistData());
+      pages.forEach((p) => wrap.appendChild(p));
+      document.body.appendChild(wrap);
+      if (document.fonts && document.fonts.ready) await document.fonts.ready;
+      const pdf = new window.jspdf.jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait', compress: true });
+      for (let i = 0; i < pages.length; i++) {
+        const canvas = await window.html2canvas(pages[i], { scale: 2, backgroundColor: '#F6F1E4', useCORS: true });
+        if (i) pdf.addPage();
+        pdf.addImage(canvas.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, 210, 297);
+        pdf.link(0, 289, 210, 8, { url: 'https://umrahnow.in' });
+      }
+      pdf.setProperties({ title: 'UmrahNow — Umrah Packing Checklist', author: 'UmrahNow', subject: 'Packing checklist' });
+      pdf.save('UmrahNow-Packing-Checklist.pdf');
+    } catch (err) {
+      console.error('PDF failed:', err);
+      alert("Couldn't create the PDF in this browser — try the image download instead.");
+    } finally {
+      if (wrap.parentNode) wrap.parentNode.removeChild(wrap);
+      btn.disabled = false; btn.textContent = label;
+    }
   });
 
   // ---- Shared sender for both the feedback form and the packages enquiry
@@ -3779,78 +3985,164 @@
     sendFormViaEmail(e.target, document.getElementById('enquiryStatus'), "Thank you — we've received your enquiry and will reach out once verified packages are live.");
   });
 
-  // ---- Trip cost calculator ----
-  // All figures here are rough planning estimates (see the on-page disclaimer) —
-  // hotel-tier rates are the approximate midpoints of the ranges shown in the
-  // Hotels section above, not a live price feed.
-  (function calculatorInit() {
-    const calcIds = ['calcPax', 'calcSharing', 'calcTier', 'calcSeason', 'calcNightsMakkah', 'calcNightsMadinah', 'calcFlight', 'calcVisa'];
-    const calcEls = {};
-    calcIds.forEach((id) => { calcEls[id] = document.getElementById(id); });
-    if (!calcEls.calcPax) return; // calculator not on this page load for some reason — fail quietly
+  // ---- Umrah budget planner ----
+  // Every number here is an approximation; the assumptions are shown on the page.
+  // Currency uses the shared SAR_TO_INR / inrNum helpers defined at the top of this script.
+  (function budgetInit() {
+    const root = document.getElementById('budget');
+    if (!root) return;
+    const TIER = { budget: 350, comfort: 550, premium: 900 };   // SAR per room-night: midpoints of the hotel ranges on this page
+    const SEASON = { off: 0.85, regular: 1, peak: 1.7 };
+    const VISA = { tourist: 545, umrah: 525 };                   // SAR per traveller: median of the government fee ranges
+    const EXTRA_BED = 0.30;                                      // an extra bed is assumed to cost ~30% of the room rate, per child, per night
+    const CHILDREN_PER_ROOM = 2;                                 // children assumed to share each room with their parents
+    const RANGE_LOW = 0.92, RANGE_HIGH = 1.10;                   // "most bookings land between..."
+    const LABEL = {
+      tier: { budget: 'Budget', comfort: 'Comfort', premium: 'Premium' },
+      season: { off: 'off-peak', regular: 'regular season', peak: 'Ramadan / peak' },
+      visa: { tourist: 'Tourist e-Visa', umrah: 'Umrah visa' }
+    };
+    const s = { adults: 2, children: 0, perRoom: 2, nM: 5, nD: 5, tier: 'comfort', season: 'regular', fare: 64000, visa: 'tourist', airline: 75, bed: 'share' };
+    const $ = (id) => document.getElementById(id);
+    const plural = (n, one, many) => n + ' ' + (n === 1 ? one : many);
+    const sarText = (v) => 'SAR ' + Math.round(v).toLocaleString('en-US');
+    const inr = (v) => '₹' + inrNum(v);
 
-    // Uses the shared SAR_TO_INR / rounding defined at the top of the script.
-    function formatAmount(sar) {
-      return `₹${inrNum(sar)} <span class="amount-sar">(SAR ${Math.round(sar).toLocaleString('en-US')})</span>`;
+    function compute(st) {
+      const trav = st.adults + st.children;
+      const nights = st.nM + st.nD;
+      const rooms = Math.max(1, Math.ceil(st.adults / st.perRoom), Math.ceil(st.children / CHILDREN_PER_ROOM));
+      const roomRate = TIER[st.tier] * SEASON[st.season];
+      const stay = rooms * roomRate * nights;
+      const extraBed = st.bed === 'extra' ? st.children * roomRate * EXTRA_BED * nights : 0;
+      const fare = st.fare / SAR_TO_INR;
+      const flights = st.adults * fare + st.children * fare * (st.airline / 100);
+      const visa = trav * VISA[st.visa];
+      return { trav, nights, rooms, stay, extraBed, flights, visa, total: stay + extraBed + flights + visa };
     }
 
-    function runCalculator() {
-      const pax = Math.max(1, parseInt(calcEls.calcPax.value, 10) || 1);
-      const perRoom = parseInt(calcEls.calcSharing.value, 10);
-      const tierRate = parseInt(calcEls.calcTier.value, 10);
-      const seasonMult = parseFloat(calcEls.calcSeason.value);
-      const nightsMakkah = Math.max(0, parseInt(calcEls.calcNightsMakkah.value, 10) || 0);
-      const nightsMadinah = Math.max(0, parseInt(calcEls.calcNightsMadinah.value, 10) || 0);
-      const flightPerPerson = Math.max(0, parseFloat(calcEls.calcFlight.value) || 0) / SAR_TO_INR; // field is in rupees
-      const visaPerPerson = Math.max(0, parseFloat(calcEls.calcVisa.value) || 0);
-      const totalNights = nightsMakkah + nightsMadinah;
+    function render() {
+      const r = compute(s);
+      $('bqTotal').innerHTML = inr(r.total) + '<small>' + sarText(r.total) + ' · approximate</small>';
+      $('bqRange').textContent = 'Most bookings land between ' + inr(r.total * RANGE_LOW) + ' and ' + inr(r.total * RANGE_HIGH);
+      $('bqChips').innerHTML = [plural(s.adults, 'adult', 'adults'), s.children ? plural(s.children, 'child', 'children') + ' under 12' : '',
+        plural(r.nights, 'night', 'nights'), plural(r.rooms, 'room', 'rooms')].filter(Boolean).map((t) => '<span>' + t + '</span>').join('');
 
-      const rooms = Math.ceil(pax / perRoom);
-      const hotelCost = rooms * tierRate * seasonMult * totalNights;
-      const flightCost = flightPerPerson * pax;
-      const visaCost = visaPerPerson * pax;
-      const total = hotelCost + flightCost + visaCost;
-      const perPerson = total / pax;
+      const bar = $('bqBar').children, t = r.total || 1;
+      bar[0].style.width = ((r.stay + r.extraBed) / t * 100) + '%';
+      bar[1].style.width = (r.flights / t * 100) + '%';
+      bar[2].style.width = (r.visa / t * 100) + '%';
 
-      document.getElementById('calcResult').innerHTML = `
-        <div class="calc-result-row"><span>Stay — ${rooms} room${rooms > 1 ? 's' : ''} × ${totalNights} night${totalNights !== 1 ? 's' : ''}</span><span class="amount">${formatAmount(hotelCost)}</span></div>
-        <div class="calc-result-row"><span>Flights — ${pax} × round trip</span><span class="amount">${formatAmount(flightCost)}</span></div>
-        <div class="calc-result-row"><span>Visa — ${pax} × permit fee</span><span class="amount">${formatAmount(visaCost)}</span></div>
-        <div class="calc-result-row total"><span>Estimated total</span><span class="amount">${formatAmount(total)}</span></div>
-        <div class="calc-per-person">≈ ${formatAmount(perPerson)} per person</div>
-      `;
+      const lines = [{ dot: 'stay', name: 'Stay', val: r.stay,
+        detail: plural(r.rooms, 'room', 'rooms') + ' × ' + plural(r.nights, 'night', 'nights') + ' · ' + LABEL.tier[s.tier] + ', ' + LABEL.season[s.season] }];
+      if (r.extraBed > 0) lines.push({ dot: 'stay', name: 'Extra beds', val: r.extraBed, detail: plural(s.children, 'child', 'children') + ' · about 30% of the room rate' });
+      lines.push({ dot: 'fl', name: 'Flights', val: r.flights,
+        detail: plural(s.adults, 'adult', 'adults') + (s.children ? ' + ' + plural(s.children, 'child', 'children') + ' at ' + s.airline + '% fare' : '') });
+      lines.push({ dot: 'visa', name: 'Visa', val: r.visa, detail: plural(r.trav, 'traveller', 'travellers') + ' · ' + LABEL.visa[s.visa] });
+      $('bqLines').innerHTML = lines.map((l) => '<li><span><i class="dot dot-' + l.dot + '"></i>' + l.name + '<em>' + l.detail + '</em></span><b>' + inr(l.val) + '<small>' + sarText(l.val) + '</small></b></li>').join('');
 
-      const summaryEl = document.getElementById('calcSummary');
-      if (summaryEl) {
-        summaryEl.innerHTML = `
-          <div class="amount-big">≈ ${formatAmount(perPerson)} <span style="display:inline-block;font-size:0.6em;font-weight:400;color:#4a4a44;white-space:nowrap;">per person</span></div>
-          <div class="calc-summary-meta">${pax} pilgrim${pax > 1 ? 's' : ''} · ${totalNights} night${totalNights !== 1 ? 's' : ''} · stay, flights &amp; visa only</div>
-        `;
-      }
+      const child = $('bqChild');
+      if (s.children > 0) {
+        const delta = r.total - compute(Object.assign({}, s, { children: 0 })).total;
+        child.textContent = 'Children add about ' + inr(delta) + ' to this budget (' + (s.airline === 100 ? 'full' : s.airline + '%') + ' airfare, ' + (s.bed === 'share' ? 'sharing their parents’ bed' : 'extra bed') + ').';
+      } else child.textContent = '';
+
+      const policy = $('childPolicy');
+      policy.classList.toggle('open', s.children > 0);
+      policy.setAttribute('aria-hidden', String(s.children === 0));
+
+      const sum = $('calcSummary');
+      if (sum) sum.innerHTML = '<div class="amount-big">≈ ' + inr(r.total / r.trav) + ' <span class="amount-sar">(' + sarText(r.total / r.trav) + ')</span> <span style="font-size:.6em;font-weight:400;color:#4a4a44;white-space:nowrap;">per traveller</span></div>' +
+        '<div class="calc-summary-meta">' + plural(s.adults, 'adult', 'adults') + (s.children ? ' + ' + plural(s.children, 'child', 'children') : '') + ' · ' + plural(r.nights, 'night', 'nights') + ' · stay, flights &amp; visa</div>';
     }
 
-    // Collapsible: starts as a compact summary, expands to the full form.
-    const toggleBtn = document.getElementById('calcToggleBtn');
-    const detailsEl = document.getElementById('calcDetails');
-    if (toggleBtn && detailsEl) {
-      toggleBtn.addEventListener('click', () => {
-        const opening = detailsEl.style.display === 'none';
-        detailsEl.style.display = opening ? '' : 'none';
-        // The detailed breakdown already shows the per-person total, so hide
-        // the compact summary while expanded rather than showing it twice.
-        const summaryEl = document.getElementById('calcSummary');
-        if (summaryEl) summaryEl.style.display = opening ? 'none' : '';
-        toggleBtn.classList.toggle('open', opening);
-        toggleBtn.setAttribute('aria-expanded', String(opening));
-        toggleBtn.querySelector('.calc-toggle-label').textContent = opening ? 'Hide details' : 'Customize this estimate';
+    root.querySelectorAll('.stepper').forEach((st) => {
+      const key = st.dataset.key, min = +st.dataset.min, max = +st.dataset.max, out = st.querySelector('output');
+      out.textContent = s[key];
+      st.addEventListener('click', (e) => {
+        const b = e.target.closest('button[data-step]');
+        if (!b) return;
+        s[key] = Math.min(max, Math.max(min, s[key] + Number(b.dataset.step)));
+        if (s.nM + s.nD === 0) s[key] = 1;               // at least one night
+        out.textContent = s[key];
+        root.querySelectorAll('.stepper').forEach((o) => { o.querySelector('output').textContent = s[o.dataset.key]; });
+        render();
       });
-    }
-
-    calcIds.forEach((id) => {
-      calcEls[id].addEventListener('input', runCalculator);
-      calcEls[id].addEventListener('change', runCalculator);
     });
-    runCalculator();
+    root.querySelectorAll('.seg input[type="radio"]').forEach((inp) => {
+      const val = () => (inp.name === 'perRoom' ? Number(inp.value) : inp.value);
+      if (inp.checked) s[inp.name] = val();
+      inp.addEventListener('change', () => { s[inp.name] = val(); render(); });
+    });
+    root.querySelectorAll('[data-rate]').forEach((el) => {
+      const k = roundINR(TIER[el.dataset.rate] * SAR_TO_INR) / 1000;
+      el.textContent = '~₹' + (k % 1 ? k.toFixed(1) : k) + 'k / night';
+    });
+    $('fareInput').addEventListener('input', (e) => { s.fare = Math.max(0, parseFloat(e.target.value) || 0); render(); });
+    $('visaSelect').addEventListener('change', (e) => { s.visa = e.target.value; render(); });
+    $('airlineSelect').addEventListener('change', (e) => { s.airline = Number(e.target.value); render(); });
+    $('bedSelect').addEventListener('change', (e) => { s.bed = e.target.value; render(); });
+
+    // ---- Share on WhatsApp — the email comes first ----
+    const modal = $('qModal'), overlay = $('qOverlay'), step1 = $('qStep1'), step2 = $('qStep2');
+    const form = $('qForm'), status = $('qStatus'), emailIn = $('qEmail'), submitBtn = $('qSubmit');
+    let lastEmail = '';
+    function quoteText() {
+      const r = compute(s);
+      const who = plural(s.adults, 'adult', 'adults') + (s.children ? ' + ' + plural(s.children, 'child', 'children') + ' (under 12)' : '');
+      const lines = [
+        '*UmrahNow — my Umrah budget*', '',
+        '👥 ' + who,
+        '🏨 ' + LABEL.tier[s.tier] + ' hotels · ' + s.nM + ' nights Makkah + ' + s.nD + ' nights Madinah · ' + LABEL.season[s.season],
+        '', '*Stay:* ' + inr(r.stay + r.extraBed), '*Flights:* ' + inr(r.flights), '*Visa:* ' + inr(r.visa), '',
+        '*Total ≈ ' + inr(r.total) + '* (' + sarText(r.total) + ')',
+        'Likely range: ' + inr(r.total * RANGE_LOW) + ' – ' + inr(r.total * RANGE_HIGH)
+      ];
+      if (s.children) lines.push('Children: ' + (s.airline === 100 ? 'full' : s.airline + '%') + ' airfare, ' + (s.bed === 'share' ? 'sharing parents’ bed' : 'extra bed'));
+      lines.push('', 'Approximate — stay, flights and visa only. Plan yours: https://umrahnow.in/#budget');
+      return lines.join('\n');
+    }
+    function openModal() {
+      step1.hidden = false; step2.hidden = true;
+      status.textContent = ''; status.className = 'qstatus';
+      emailIn.value = lastEmail;
+      overlay.hidden = false; modal.hidden = false;
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => emailIn.focus(), 50);
+    }
+    function closeModal() { overlay.hidden = true; modal.hidden = true; document.body.style.overflow = ''; }
+    $('bqShare').addEventListener('click', openModal);
+    $('qClose').addEventListener('click', closeModal);
+    overlay.addEventListener('click', closeModal);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !modal.hidden) closeModal(); });
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.className = 'qstatus';
+      const email = emailIn.value.trim();
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { status.classList.add('error'); status.textContent = 'Please enter a valid email address.'; return; }
+      submitBtn.disabled = true; status.textContent = 'One moment…';
+      const r = compute(s), text = quoteText();
+      const fd = new FormData(form);
+      fd.set('_subject', 'UmrahNow — budget quote shared on WhatsApp');
+      fd.set('_template', 'table'); fd.set('_captcha', 'false');
+      fd.set('Travellers', plural(s.adults, 'adult', 'adults') + (s.children ? ' + ' + plural(s.children, 'child', 'children') : ''));
+      fd.set('Total (INR)', inr(r.total)); fd.set('Total (SAR)', sarText(r.total)); fd.set('Quote', text);
+      try {
+        const res = await fetch('https://formsubmit.co/ajax/rashrockz93@gmail.com', { method: 'POST', headers: { Accept: 'application/json' }, body: fd });
+        let data = null;
+        try { data = await res.json(); } catch (_) { /* not JSON */ }
+        if (!res.ok || (data && (data.success === false || data.success === 'false'))) throw new Error('not saved');
+        lastEmail = email;
+        $('qPreview').textContent = text;
+        $('qWhatsApp').href = 'https://wa.me/?text=' + encodeURIComponent(text);
+        step1.hidden = true; step2.hidden = false;       // WhatsApp only becomes available now
+      } catch (err) {
+        status.classList.add('error');
+        status.textContent = 'Couldn’t save your email just now — please check your connection and try again.';
+      } finally { submitBtn.disabled = false; }
+    });
+
+    render();
   })();
 
   // ================================================================
