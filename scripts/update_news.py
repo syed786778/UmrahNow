@@ -148,30 +148,87 @@ STOPWORDS = {
     "a", "an", "the", "to", "of", "in", "on", "for", "and", "or", "is", "are",
     "with", "as", "at", "by", "from", "after", "before", "its", "amid", "over",
     "new", "says", "say", "said", "set", "will", "now", "more", "than", "into",
-    "amid", "out", "up", "this", "that", "has", "have", "had", "be", "been",
+    "out", "up", "this", "that", "has", "have", "had", "be", "been", "also",
+    "their", "which", "whose", "what", "how", "why", "who", "can", "could", "may",
+    "would", "should", "latest", "news",
+    # in nearly every headline here, so they say nothing about WHICH story it is
+    "saudi", "arabia", "arabian", "kingdom", "ksa",
+}
+
+# Different outlets word the same event differently ("adds", "expands", "lists",
+# "opens", "allows" ...; "4" vs "four"; "nations" vs "countries"). Folding those
+# to one word is what lets the same story from six outlets match as one.
+SYNONYMS = {
+    "one": "1", "two": "2", "three": "3", "four": "4", "five": "5", "six": "6",
+    "seven": "7", "eight": "8", "nine": "9", "ten": "10",
+    "nations": "country", "nation": "country", "countries": "country", "country": "country", "states": "country",
+    "adds": "expand", "add": "expand", "added": "expand", "adding": "expand", "expands": "expand",
+    "expanded": "expand", "expanding": "expand", "expansion": "expand", "extends": "expand",
+    "extend": "expand", "extended": "expand", "lists": "expand", "listed": "expand", "opens": "expand",
+    "open": "expand", "opened": "expand", "widens": "expand", "grants": "expand", "allows": "expand",
+    "allow": "expand", "allowed": "expand", "enables": "expand", "welcome": "expand", "welcomes": "expand",
+    "additional": "expand", "introduces": "expand",
+    "visas": "visa", "evisa": "visa", "evisas": "visa", "tourism": "tourist", "tourists": "tourist",
+    "launches": "launch", "launched": "launch", "unveils": "launch", "announces": "launch", "announced": "launch",
 }
 
 
+def _canon(w):
+    if w in SYNONYMS:
+        return SYNONYMS[w]
+    if w.endswith("ies") and len(w) > 5:
+        return w[:-3] + "y"
+    if w.endswith("s") and not w.endswith("ss") and len(w) > 4:
+        return w[:-1]
+    return w
+
+
 def title_tokens(title):
-    """The meaningful words in a headline, for duplicate detection."""
-    words = re.findall(r"[a-z0-9]+", title.lower())
-    return frozenset(w for w in words if w not in STOPWORDS and len(w) > 2)
+    """The meaningful, normalised words in a headline, for duplicate detection."""
+    out = set()
+    for w in re.findall(r"[a-z0-9]+", title.lower()):
+        if w in STOPWORDS or (len(w) <= 2 and not w.isdigit()):
+            continue
+        c = _canon(w)
+        if c and c not in STOPWORDS:
+            out.add(c)
+    return frozenset(out)
 
 
 def is_near_duplicate(tokens, seen_token_sets, threshold=0.6):
-    """True if `tokens` shares threshold-or-more of its words with any
-    already-seen headline -- catches the same story reworded by a different
-    outlet ("expands visa eligibility" vs "...visa access" vs "...visa
-    scheme"), which an exact-text match misses entirely."""
+    """True if this headline is the same STORY as one already seen: it shares at
+    least 3 of its meaningful words and 60% of the shorter headline (or 4 words
+    and 50%). Handles the same news reworded by different outlets."""
     if not tokens:
         return False
     for other in seen_token_sets:
         if not other:
             continue
-        smaller = min(len(tokens), len(other))
-        if smaller and len(tokens & other) / smaller >= threshold:
+        shared, smaller = len(tokens & other), min(len(tokens), len(other))
+        if smaller and ((shared >= 3 and shared / smaller >= threshold) or (shared >= 4 and shared / smaller >= 0.5)):
             return True
     return False
+
+
+# When several outlets carry one story, keep the most reputable source (lower = better).
+PREFERRED_SOURCES = ["arab news", "saudi gazette", "gulf news", "saudi press agency", "reuters", "associated press",
+                     "bbc", "al jazeera", "the hindu", "times of india", "hindustan times", "indian express",
+                     "ani news", "khaleej times", "the national", "economic times", "ndtv", "pti", "zawya", "news18"]
+
+
+def source_rank(name):
+    n = (name or "").lower()
+    if " on msn" in n:
+        return 80
+    for i, k in enumerate(PREFERRED_SOURCES):
+        if re.search(r"\b" + re.escape(k) + r"\b", n):
+            return i
+    return 50
+
+
+def card_source(raw):
+    m = re.search(r'class="news-source">(?:<img[^>]*>)?([^<]*)</span>', raw)
+    return html.unescape(m.group(1)).strip() if m else ""
 
 
 def parse_feed(xml_bytes):
@@ -256,7 +313,7 @@ def news_main():
     if ok_feeds == 0:
         sys.exit("All feeds failed -- page left unchanged.")
 
-    fetched.sort(key=lambda s: s["date"], reverse=True)
+    fetched.sort(key=lambda s: (-s["date"].toordinal(), source_rank(s["source"])))   # newest first; best source first
     print(f"Fetched {len(fetched)} headlines in total.")
     new_cards, rejected = [], {"duplicate": [], "too old / future": [], "not relevant": []}
     for s in fetched:
@@ -279,7 +336,7 @@ def news_main():
         print(f"  + added: {c[0]}  {c[3][:70]}")
 
     fresh_existing = [c for c in existing if c[0] >= oldest]      # drop stale cards
-    combined = sorted(new_cards + fresh_existing, key=lambda c: c[0], reverse=True)
+    combined = sorted(new_cards + fresh_existing, key=lambda c: (-c[0].toordinal(), source_rank(card_source(c[2]))))
 
     # Final sweep over the WHOLE pool (new + previously-saved cards), not just
     # the incoming batch -- cleans up near-duplicate cards that were saved on
@@ -312,6 +369,7 @@ def news_main():
 # =====================================================================
 # Travel advisories
 # =====================================================================
+import hashlib
 import html as htmllib
 import http.cookiejar
 import json
@@ -727,6 +785,7 @@ def advisories_main():
             print(f"  {key.upper()}: nothing new fetched -- keeping {len(items)} saved item(s)")
         items.sort(key=lambda i: i["date"], reverse=True)
         final.extend(items[:PER_KEY_LIMIT[key]])
+    final.sort(key=lambda i: (-i["date"].toordinal(), ORDER.index(i["key"])))   # latest advisory first
 
     if not final:
         print("No items at all -- page left unchanged.")
@@ -781,14 +840,17 @@ def read_advisories(page_html):
         return []
     block = page_html.split("<!-- ADVISORY_LIST_START -->", 1)[1].split("<!-- ADVISORY_LIST_END -->", 1)[0]
     out = []
-    for m in re.finditer(r'<li data-key="(\w+)" data-date="([\d-]+)"[^>]*>(.*?)</li>', block, re.S):
-        key, d, inner = m.groups()
+    for m in re.finditer(r'<li data-key="(\w+)" data-date="([\d-]+)"([^>]*)>(.*?)</li>', block, re.S):
+        key, d, attrs, inner = m.groups()
+        chk = re.search(r'data-checked="([^"]+)"', attrs)
         href = re.search(r'href="([^"]*)"', inner)
         label = re.search(r'class="adv-src">(.*?)</span>', inner, re.S)
         text = re.search(r'class="adv-txt">(.*?)</span>', inner, re.S)
         if href and label and text:
             out.append({"key": key, "date": d, "url": htmllib.unescape(href.group(1)),
-                        "label": htmllib.unescape(label.group(1)), "text": htmllib.unescape(text.group(1))})
+                        "label": htmllib.unescape(label.group(1)), "text": htmllib.unescape(text.group(1)),
+                        "checked": chk.group(1) if chk else ""})
+    out.sort(key=lambda a: a["date"], reverse=True)       # latest advisory first, same as the site
     return out
 
 
@@ -805,8 +867,14 @@ def read_news(page_html):
             out.append({"date": d, "url": htmllib.unescape(a.group(1)),
                         "title": htmllib.unescape(re.sub(r"<[^>]+>", "", a.group(2))).strip(),
                         "source": htmllib.unescape(re.sub(r"<[^>]+>", "", src.group(1))).strip() if src else ""})
-    out.sort(key=lambda n: n["date"], reverse=True)
-    return out[:MAX_NEWS]
+    out.sort(key=lambda n: (n["date"], -source_rank(n["source"])), reverse=True)
+    unique, seen = [], []
+    for n in out:                                          # one card per story, whoever wrote it
+        tk = title_tokens(n["title"])
+        if not is_near_duplicate(tk, seen):
+            seen.append(tk)
+            unique.append(n)
+    return unique[:MAX_NEWS]
 
 
 def pretty(d):
@@ -825,6 +893,15 @@ def build_email(advisories, news, site, unsubscribe_tag="{{ unsubscribe }}", whe
     preheader = "Today's travel advisories for Saudi Arabia and the latest Umrah news."
 
     adv_rows = ""
+    advisories = sorted(advisories, key=lambda a: a["date"], reverse=True)
+    stamps = [a.get("checked") for a in advisories if a.get("checked")]
+    checked_txt = ""
+    if stamps:
+        try:
+            ist = datetime.strptime(min(stamps), "%Y-%m-%dT%H:%M:%SZ") + timedelta(hours=5, minutes=30)
+            checked_txt = f" Advisories last checked {ist.day} {ist:%b}, {ist:%I:%M %p} IST.".replace(" 0", " ", 1)
+        except ValueError:
+            pass
     for a in advisories:
         color = BADGE_COLORS.get(a["key"], "#f0b24a")
         adv_rows += (
@@ -855,7 +932,7 @@ def build_email(advisories, news, site, unsubscribe_tag="{{ unsubscribe }}", whe
   </div>
   <div style="padding:22px 24px;">
     <h2 style="font-family:Georgia,serif;font-size:20px;color:#0E2A28;margin:0 0 4px;">Travel advisories for Saudi Arabia</h2>
-    <div style="color:#8a8578;font-size:13px;margin-bottom:6px;">From the Indian Embassy, the US and the UK — summaries only; read the full advisory before you travel.</div>
+    <div style="color:#8a8578;font-size:13px;margin-bottom:6px;">From the Indian Embassy, the US and the UK — summaries only; read the full advisory before you travel.{checked_txt}</div>
     {adv_rows}
     <h2 style="font-family:Georgia,serif;font-size:20px;color:#0E2A28;margin:26px 0 4px;">Latest Umrah updates</h2>
     {news_rows or '<p style="color:#3f3f38;">See the site for the latest updates.</p>'}
@@ -900,19 +977,51 @@ def next_send_time(now=None):
     return t
 
 
-def send(advisories, news, site, key, list_id, sender_email, sender_name, send_at=None):
-    """send_at=None sends immediately; otherwise Brevo delivers at that UTC time."""
-    when = (send_at or datetime.now(timezone.utc)).date()
-    name = f"UmrahNow daily digest {when.isoformat()}"
+def content_tag(advisories, news):
+    sig = json.dumps([[a["key"], a["date"], a["text"], a["url"]] for a in advisories] + [[n["date"], n["title"]] for n in news])
+    return hashlib.sha1(sig.encode("utf-8")).hexdigest()[:6]
 
-    # Never create two digests for the same delivery day (re-runs, manual tests).
+
+def send(advisories, news, site, key, list_id, sender_email, sender_name, send_at=None):
+    """send_at=None sends immediately. Otherwise Brevo delivers at that UTC time, and every
+    later run before then re-reads the site and UPDATES the scheduled email if the advisories
+    or news have changed -- so the morning email matches what the site shows."""
+    when = (send_at or datetime.now(timezone.utc)).date()
+    prefix = f"UmrahNow daily digest {when.isoformat()}"
+    name = f"{prefix} [{content_tag(advisories, news)}]"
+
     try:
         recent = brevo("GET", "/emailCampaigns?limit=30&sort=desc", key).get("campaigns", [])
-        if any(c.get("name") == name for c in recent):
-            print(f"A digest for {when.isoformat()} already exists -- not creating another.")
-            return
     except Exception as e:
         print(f"(could not check for an existing campaign: {e}; continuing)")
+        recent = []
+    existing = next((c for c in recent if str(c.get("name", "")).startswith(prefix)), None)
+
+    if existing:
+        if existing.get("name") == name:
+            print(f"The digest for {when.isoformat()} is already scheduled with the latest content.")
+            return
+        status = str(existing.get("status", ""))
+        if send_at is None or status in ("sent", "inProcess", "archive", "suspended"):
+            print(f"A digest for {when.isoformat()} already exists (status: {status or 'unknown'}) -- leaving it as it is.")
+            return
+        last_err = None
+        for tag in ("{{ unsubscribe }}", "[UNSUBSCRIBE]"):
+            subject, body = build_email(advisories, news, site, tag, when)
+            try:
+                brevo("PUT", f"/emailCampaigns/{existing['id']}", key, {"name": name, "subject": subject, "htmlContent": body})
+                print(f"Updated the scheduled digest {existing['id']} for {when.isoformat()} with the latest advisories and news.")
+                return
+            except BrevoError as e:
+                last_err = e
+                low = str(e).lower()
+                if "campaign_sent" in low or "campaign_processing" in low:
+                    print(f"The digest for {when.isoformat()} has already gone out -- leaving it.")
+                    return
+                if "unsubscribe" in low and tag == "{{ unsubscribe }}":
+                    continue
+                break
+        raise last_err
 
     last_err = None
     for tag in ("{{ unsubscribe }}", "[UNSUBSCRIBE]"):  # current tag first, legacy tag as a fallback
@@ -931,7 +1040,6 @@ def send(advisories, news, site, key, list_id, sender_email, sender_name, send_a
                 brevo("POST", f"/emailCampaigns/{cid}/sendNow", key)
                 print(f"Sent campaign {cid}: {subject}")
                 return
-            # Scheduled: confirm Brevo really queued it; if it's still a draft, send now rather than never.
             status = ""
             try:
                 status = (brevo("GET", f"/emailCampaigns/{cid}", key).get("status") or "")
@@ -942,8 +1050,7 @@ def send(advisories, news, site, key, list_id, sender_email, sender_name, send_a
                 brevo("POST", f"/emailCampaigns/{cid}/sendNow", key)
                 print(f"Sent campaign {cid}: {subject}")
             else:
-                print(f"Scheduled campaign {cid} for {send_at:%Y-%m-%d %H:%M} UTC "
-                      f"(status: {status or 'unknown'}): {subject}")
+                print(f"Scheduled campaign {cid} for {send_at:%Y-%m-%d %H:%M} UTC (status: {status or 'unknown'}): {subject}")
             return
         except BrevoError as e:
             last_err = e
