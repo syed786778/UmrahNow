@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UmrahNow — Everything for a Comfortable Umrah</title>
+<title>UmrahNow - Everything for a Comfortable Umrah</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
@@ -1193,6 +1193,16 @@
   .wa-btn:hover{background:#38e078;}
   .qpreview{white-space:pre-wrap;font-family:'Work Sans',sans-serif;font-size:.82rem;line-height:1.55;background:#fff;border:var(--card-border);border-radius:12px;padding:12px 14px;margin:14px 0 0;color:#3f3f38;max-height:200px;overflow:auto;}
 
+
+  /* ---- floating feedback & enquiries, drawer form, share fields ---- */
+  .packages-tab svg{width:19px;height:19px;flex-shrink:0;}
+  @media(max-width:520px){.packages-tab{right:14px;bottom:14px;padding:12px 16px;font-size:.9rem;}}
+  .enq-type{margin-bottom:18px;}
+  .enq-type span{font-size:.9rem;}
+  .enq-only[hidden]{display:none;}
+  .enquiry-form select.bf-select{width:100%;}
+  .qin{width:100%;border:1px solid var(--line);border-radius:var(--radius);padding:13px 14px;font-size:1rem;font-family:inherit;background:#fff;margin-bottom:12px;}
+  .qin:focus{outline:2px solid var(--gold-soft);outline-offset:1px;}
 </style>
 </head>
 <body>
@@ -1236,7 +1246,7 @@
   <div class="mobile-panel" id="mobilePanel">
     <a href="#ihram-mode">🕋 Ihram Mode</a>
     <a href="#news">Latest Updates</a>
-    <a href="javascript:void(0)" id="mobilePackagesLink">Umrah Packages (Coming Soon)</a>
+    <a href="javascript:void(0)" id="mobilePackagesLink">Feedback &amp; Enquiries</a>
     <a href="#regulations">Plan Your Umrah</a>
     <a href="#journey">Journey &amp; Du'as</a>
     <a href="#places">Places &amp; Shopping</a>
@@ -1284,8 +1294,8 @@
 
 <!-- ================= PACKAGES: FLOATING TRIGGER + SLIDE-IN DRAWER ================= -->
 <button type="button" class="packages-tab" id="packagesTabBtn" aria-haspopup="dialog" aria-controls="packagesDrawer">
-  <span class="packages-tab-badge">Coming soon</span>
-  <span>Umrah Packages</span>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.2 7.6L3 21l1.5-5.4A8.5 8.5 0 1 1 21 12z"/><path d="M8.5 11h7M8.5 14.5h4.5"/></svg>
+  <span>Feedback &amp; enquiries</span>
 </button>
 <button type="button" class="share-fab share-btn-fab" id="shareFab" aria-label="Share this guide" title="Share">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="18" cy="5" r="2.4"/><circle cx="6" cy="12" r="2.4"/><circle cx="18" cy="19" r="2.4"/><path d="M8.1 10.7l7.8-4.4M8.1 13.3l7.8 4.4"/></svg>
@@ -1293,39 +1303,52 @@
 <div class="drawer-overlay" id="drawerOverlay"></div>
 <aside class="drawer" id="packagesDrawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
   <button type="button" class="drawer-close" id="drawerCloseBtn" aria-label="Close">&times;</button>
-  <span class="coming-soon-badge">Coming soon</span>
-  <h2 id="drawerTitle">Umrah packages from verified, vetted service providers</h2>
-  <p>We're building a way to connect you directly with trusted operators for flights, stays, and full Umrah packages — every one of them checked before they reach you, so you're not left comparing strangers on your own. Leave your details and we'll reach out once it's live.</p>
+  <h2 id="drawerTitle">Feedback &amp; Umrah enquiries</h2>
+  <p>Tell us what would make this site better - or what you're looking for in an Umrah service: flights, stays, a full package or visa help. Leave your details and we'll get back to you.</p>
   <form id="enquiryForm" class="enquiry-form">
-    <div class="feedback-field">
-      <label for="pkgName">Name</label>
-      <input type="text" id="pkgName" name="Full Name" required>
+    <div class="seg enq-type" role="radiogroup" aria-label="What would you like to do?">
+      <label><input type="radio" name="request_type" value="Umrah service enquiry" checked><span>Enquire about Umrah services</span></label>
+      <label><input type="radio" name="request_type" value="Feedback"><span>Share feedback</span></label>
     </div>
     <div class="feedback-field">
-      <label for="pkgMobile">Mobile number (optional)</label>
-      <input type="tel" id="pkgMobile" name="Mobile Number" placeholder="+91 ...">
+      <label for="enqName">Name</label>
+      <input type="text" id="enqName" name="name" required autocomplete="name">
     </div>
     <div class="feedback-field">
-      <label for="pkgEmail">Email</label>
-      <input type="email" id="pkgEmail" name="Email" required>
+      <label for="enqPhone" id="enqPhoneLabel">Mobile number</label>
+      <input type="tel" id="enqPhone" name="phone" placeholder="+91 ..." autocomplete="tel" inputmode="tel" required>
     </div>
     <div class="feedback-field">
-      <label for="pkgPax">Number of pilgrims</label>
-      <input type="number" id="pkgPax" name="Number of Pax" min="1" value="1" required>
+      <label for="enqEmail">Email (optional)</label>
+      <input type="email" id="enqEmail" name="email" autocomplete="email">
+    </div>
+    <div class="enq-only">
+      <div class="feedback-field">
+        <label for="enqInterest">I'm interested in</label>
+        <select id="enqInterest" name="interested_in" class="bf-select"><option>A full Umrah package</option><option>Flights</option><option>Hotels</option><option>Visa help</option><option>Group or family travel</option><option>Something else</option></select>
+      </div>
+      <div class="feedback-field">
+        <label for="enqPax">Number of pilgrims</label>
+        <input type="number" id="enqPax" name="pilgrims" min="1" value="2">
+      </div>
+      <div class="feedback-field">
+        <label for="enqFrom">Travelling from</label>
+        <input type="text" id="enqFrom" name="travelling_from" placeholder="City, country">
+      </div>
+      <div class="feedback-field">
+        <label for="enqDate">Preferred travel date (optional)</label>
+        <input type="date" id="enqDate" name="travel_date">
+      </div>
     </div>
     <div class="feedback-field">
-      <label for="pkgFrom">Travelling from</label>
-      <input type="text" id="pkgFrom" name="Travelling From" placeholder="City, country" required>
-    </div>
-    <div class="feedback-field">
-      <label for="pkgDate">Preferred travel date</label>
-      <input type="date" id="pkgDate" name="Preferred Travel Date" required>
+      <label for="enqMsg" id="enqMsgLabel">Anything else we should know? (optional)</label>
+      <textarea id="enqMsg" name="message" rows="4"></textarea>
     </div>
     <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
-    <input type="hidden" name="_subject" value="UmrahNow — Umrah package enquiry">
+    <input type="hidden" name="_subject" value="UmrahNow — Umrah service enquiry">
     <input type="hidden" name="_template" value="table">
     <input type="hidden" name="_captcha" value="false">
-    <button type="submit" class="btn btn-gold">Submit enquiry</button>
+    <button type="submit" class="btn btn-gold">Send</button>
     <p id="enquiryStatus" class="feedback-status" role="status"></p>
   </form>
 </aside>
@@ -1382,15 +1405,16 @@
      GitHub workflow). They summarise ONLY what the official sources publish
      and link to them. Don't hand-edit the list; it will be overwritten. -->
 <div class="advisory-wrap" id="advisories">
-  <div class="advisory-bar" id="advisoryBar" role="region" aria-label="Latest travel advisories for Saudi Arabia" data-checked="2026-11-10T02:46:08Z">
+  <div class="advisory-bar" id="advisoryBar" role="region" aria-label="Latest travel advisories for Saudi Arabia" data-checked="2026-10-15T02:57:15Z">
     <div class="advisory-label"><span class="adv-dot" aria-hidden="true"></span><span class="adv-label-text">Travel advisories</span><span class="adv-checked" id="advisoryChecked"></span></div>
     <div class="advisory-viewport" id="advisoryViewport">
       <ul class="advisory-track" id="advisoryTrack">
 <!-- ADVISORY_LIST_START -->
-      <li data-key="us" data-date="2026-11-06" data-checked="2026-11-10T02:46:08Z"><a class="adv-link" href="https://sa.usembassy.gov/security-alert-u-s-mission-saudi-arabia-november-7-2026/" target="_blank" rel="noopener"><span class="adv-badge adv-badge--us">US</span><span class="adv-src">US Embassy</span><span class="adv-txt">Security Alert: U.S. Mission Saudi Arabia – November 7, 2026</span><span class="adv-date">6 Nov</span></a></li>
-      <li data-key="uk" data-date="2026-10-27" data-checked="2026-11-10T02:46:08Z"><a class="adv-link" href="https://www.gov.uk/foreign-travel-advice/saudi-arabia" target="_blank" rel="noopener"><span class="adv-badge adv-badge--uk">UK</span><span class="adv-src">UK FCDO</span><span class="adv-txt">Advises against: all travel to within 10km of the border with Yemen · all but essential travel to the rest of Saudi Arabia</span><span class="adv-date">27 Oct</span></a></li>
-      <li data-key="in" data-date="2026-10-22" data-checked="2026-11-10T02:46:08Z"><a class="adv-link" href="https://www.eoiriyadh.gov.in/section/news/statement-on-attacks-on-civilian-and-energy-infrastructure-in-saudi-arabia/" target="_blank" rel="noopener"><span class="adv-badge adv-badge--in">IN</span><span class="adv-src">Embassy of India, Riyadh</span><span class="adv-txt">Statement on attacks on civilian and energy infrastructure in Saudi Arabia · 24×7 helpline 800 247 1234 (toll-free in Saudi Arabia)</span><span class="adv-date">22 Oct</span></a></li>
-      <li data-key="in" data-date="2026-10-13" data-checked="2026-11-10T02:46:08Z"><a class="adv-link" href="https://www.eoiriyadh.gov.in/content/EoI-Riyadh-Advisory-13.10.2026-3.pdf" target="_blank" rel="noopener"><span class="adv-badge adv-badge--in">IN</span><span class="adv-src">Embassy of India, Riyadh</span><span class="adv-txt">Important Update/Advisory- 1700 hrs</span><span class="adv-date">13 Oct</span></a></li>
+      <li data-key="in" data-date="2026-10-08" data-checked="2026-10-15T02:57:15Z"><a class="adv-link" href="https://www.eoiriyadh.gov.in/section/news/" target="_blank" rel="noopener"><span class="adv-badge adv-badge--in">IN</span><span class="adv-src">Embassy of India, Riyadh</span><span class="adv-txt">Important advisory for Indian nationals in Saudi Arabia: remain alert, stay indoors as necessary and follow instructions from Saudi authorities; Embassy, Consulate in Jeddah and VFS centres reported as functioning normally · 24×7 helpline 800 247 1234 (toll-free in Saudi Arabia)</span><span class="adv-date">8 Oct</span></a></li>
+      <li data-key="in" data-date="2026-10-08" data-checked="2026-10-15T02:57:15Z"><a class="adv-link" href="https://www.eoiriyadh.gov.in/section/news/" target="_blank" rel="noopener"><span class="adv-badge adv-badge--in">IN</span><span class="adv-src">Embassy of India, Riyadh</span><span class="adv-txt">Statement on attacks targeting airports in Riyadh</span><span class="adv-date">8 Oct</span></a></li>
+      <li data-key="us" data-date="2026-10-12" data-checked="2026-10-15T02:57:15Z"><a class="adv-link" href="https://travel.state.gov/en/international-travel/travel-advisories/saudi-arabia.html" target="_blank" rel="noopener"><span class="adv-badge adv-badge--us">US</span><span class="adv-src">US State Dept</span><span class="adv-txt">Level 3: Reconsider travel — risk of drone and missile attacks (Iran / Houthis), armed conflict and terrorism. Do not travel to the Yemen border area. US government employees need special authorization to use any Saudi airport</span><span class="adv-date">12 Oct</span></a></li>
+      <li data-key="us" data-date="2026-10-05" data-checked="2026-10-15T02:57:15Z"><a class="adv-link" href="https://sa.usembassy.gov/security-alert-u-s-mission-saudi-arabia-october-5-2026/" target="_blank" rel="noopener"><span class="adv-badge adv-badge--us">US</span><span class="adv-src">US Embassy</span><span class="adv-txt">Security alert: U.S. citizens urged to remain vigilant and follow Saudi Civil Defense alerts</span><span class="adv-date">5 Oct</span></a></li>
+      <li data-key="uk" data-date="2026-10-11" data-checked="2026-10-15T02:57:15Z"><a class="adv-link" href="https://www.gov.uk/foreign-travel-advice/saudi-arabia" target="_blank" rel="noopener"><span class="adv-badge adv-badge--uk">UK</span><span class="adv-src">UK FCDO</span><span class="adv-txt">Advises against: all travel within 10km of Saudi Arabia's border with Yemen · all but essential travel to Aseer, Riyadh, Najran and Jizan provinces and the cities of Taif, Jeddah and Dammam · all but essential travel to all Saudi airports except Medina International Airport</span><span class="adv-date">11 Oct</span></a></li>
     <!-- ADVISORY_LIST_END -->
       </ul>
     </div>
@@ -1429,77 +1453,19 @@
 
     <div class="news-grid" id="newsGrid">
       <!-- NEWS_LIST_START -->
-      <article class="news-card" data-date="2026-11-09">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=saudigazette.com.sa" alt="" loading="lazy">Saudi Gazette</span><span class="news-date">9 Nov 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMivgFBVV95cUxPLWlpMVExd0c5aDhkSUwzaDlkRW5pRHB5U0dvT0tSbmFlWmhENEtZWWlkSVF5TjRHNmNraVRRUWpSSmpfcEVHMkhPQkZ1OGwwOEVzd0xRanBVODl4X2Z1c1dqam5weHo2QXJSZ1ZJT2FkbnQtUFliRmRrVDNBZTBMcjNwNnFnZU5WOWowQ3VRV2J6NDJXRXZIMUxHcW9VVU9iTGRSYmF0UUVjem9OeTByZWNtVEFadlB0UlR6R2ln?oc=5" target="_blank" rel="noopener nofollow">Hajj minister: Number of foreign Umrah pilgrims doubled in 3 years</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMivgFBVV95cUxPLWlpMVExd0c5aDhkSUwzaDlkRW5pRHB5U0dvT0tSbmFlWmhENEtZWWlkSVF5TjRHNmNraVRRUWpSSmpfcEVHMkhPQkZ1OGwwOEVzd0xRanBVODl4X2Z1c1dqam5weHo2QXJSZ1ZJT2FkbnQtUFliRmRrVDNBZTBMcjNwNnFnZU5WOWowQ3VRV2J6NDJXRXZIMUxHcW9VVU9iTGRSYmF0UUVjem9OeTByZWNtVEFadlB0UlR6R2ln?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-09">
+      <article class="news-card" data-date="2026-09-25">
         <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=legit.ng" alt="" loading="lazy">Legit.ng</span><span class="news-date">9 Nov 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxPTjYwQ0RPRS0tOGptTlY1dThJOTFPUUtXY0RwNldnWVl3WGJrbDliVmExSi1qcHRjckk2dVBFYklTNjdqRS00NzJqZmZOVmlmQ19yT3U0MGdFUTd4bHVWYnlxY0FlaHdFcWRRVHh0STFZYnhHdnBRTkFWM2VIR1FhS2lnamE5TzlCdGNhd2NjQmk2VmdNanc4?oc=5" target="_blank" rel="noopener nofollow">Saudi Arabia Lists 14 Steps Foreigners Must Follow to Get an Umrah Permit and Visa</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMilwFBVV95cUxPTjYwQ0RPRS0tOGptTlY1dThJOTFPUUtXY0RwNldnWVl3WGJrbDliVmExSi1qcHRjckk2dVBFYklTNjdqRS00NzJqZmZOVmlmQ19yT3U0MGdFUTd4bHVWYnlxY0FlaHdFcWRRVHh0STFZYnhHdnBRTkFWM2VIR1FhS2lnamE5TzlCdGNhd2NjQmk2VmdNanc4?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
+        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=gulfnews.com" alt="" loading="lazy">Gulf News</span><span class="news-date">25 Sep 2026</span></div>
+        <h3><a href="https://gulfnews.com/world/gulf/saudi/saudi-arabia-launches-365-day-umrah-visa-with-90-day-stay-1.500613885" target="_blank" rel="noopener nofollow">Saudi Arabia's multiple-entry Umrah visa: what pilgrims need to know</a></h3>
+        <p>The one-year, multiple-entry Umrah visa lets eligible pilgrims return to the Kingdom several times over 365 days without reapplying each trip, with a cumulative stay capped at 90 days and a fresh Nusuk service package required before every visit.</p>
+        <a class="map-link" href="https://gulfnews.com/world/gulf/saudi/saudi-arabia-launches-365-day-umrah-visa-with-90-day-stay-1.500613885" target="_blank" rel="noopener nofollow">Read more ↗</a>
       </article>
-      <article class="news-card" data-date="2026-11-09">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=dazzlingdawn.com" alt="" loading="lazy">The Daily Dazzling Dawn</span><span class="news-date">9 Nov 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMid0FVX3lxTE5wNjBjWm9ZQ2hoRDAyRTdiN1dTcnZiOGNYWGpLRm15YjVUQlhDVlJYbnlKS3E5SFJKU3VfaWxUeHVYS3ZQdFlLaVp4LUcwLXlGV3hzamNORkhjZW81M0pIbk1YMnQtaWo0cFY1UjlOSmNsQ1RNWnh3?oc=5" target="_blank" rel="noopener nofollow">Ramadan 2027 Umrah: Saudi Arabia&#x27;s Mandatory 14-Step Visa Process Explained</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMid0FVX3lxTE5wNjBjWm9ZQ2hoRDAyRTdiN1dTcnZiOGNYWGpLRm15YjVUQlhDVlJYbnlKS3E5SFJKU3VfaWxUeHVYS3ZQdFlLaVp4LUcwLXlGV3hzamNORkhjZW81M0pIbk1YMnQtaWo0cFY1UjlOSmNsQ1RNWnh3?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-09">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=northpennnow.com" alt="" loading="lazy">North Penn Now</span><span class="news-date">9 Nov 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMizgFBVV95cUxNZ01vTjZPNFFEUmNKRWV0Y2hWNUU0aHpSQ1pJRGtCX0VxdUt4WkYyeFdNV25LRDRqZnRfTG5sd1FzZXNaMGtBekNkamhQNGJLczRCTHdyYWFabEVxY0lCX0dQeFRROGJZVzNoNDZvczlCV3dqUGx1M2xSUXU1NjI1YS0zczdoSGhCTUdpQUk3R1dxWTZ6VDQydVZyXzJMbmlta203cXRmRlhGWGZEc2lTc250RWlobkJmcl9ra216MDNJUXBFVklqUXE2R2tMdw?oc=5" target="_blank" rel="noopener nofollow">What Is Ramadan Umrah? Why Millions of Muslims Travel to Makkah During the Holy Month</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMizgFBVV95cUxNZ01vTjZPNFFEUmNKRWV0Y2hWNUU0aHpSQ1pJRGtCX0VxdUt4WkYyeFdNV25LRDRqZnRfTG5sd1FzZXNaMGtBekNkamhQNGJLczRCTHdyYWFabEVxY0lCX0dQeFRROGJZVzNoNDZvczlCV3dqUGx1M2xSUXU1NjI1YS0zczdoSGhCTUdpQUk3R1dxWTZ6VDQydVZyXzJMbmlta203cXRmRlhGWGZEc2lTc250RWlobkJmcl9ra216MDNJUXBFVklqUXE2R2tMdw?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-09">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=sabq.org" alt="" loading="lazy">Sabq</span><span class="news-date">9 Nov 2026</span></div>
-        <h3><a href="https://sabq.org/en/article/8ugvqrr" target="_blank" rel="noopener nofollow">Hajj and Umrah Minister Outlines Seven Major Transformations in the Hajj and Umrah System at the Sixth Hajj Conference</a></h3>
-        <a class="map-link" href="https://sabq.org/en/article/8ugvqrr" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-09">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=english.ajel.sa" alt="" loading="lazy">english.ajel</span><span class="news-date">9 Nov 2026</span></div>
-        <h3><a href="https://english.ajel.sa/saudi-arabia/9pe17u8uw" target="_blank" rel="noopener nofollow">Saudi aviation chief highlights airport upgrades and Hajj services at Jeddah conference</a></h3>
-        <a class="map-link" href="https://english.ajel.sa/saudi-arabia/9pe17u8uw" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-09">
+      <article class="news-card" data-date="2026-08-26">
         <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V10l8-6 8 6v11"/><path d="M10 21v-6h4v6"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=tradingview.com" alt="" loading="lazy">TradingView</span><span class="news-date">9 Nov 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMitAJBVV95cUxPLU9WZmozSFhWcjhYR3RnZWhhZFlFRlJKajYtUmpQRzhsNjdBc0xORTA5OUctRHB6a3h5NE44YXRaWUEwRktNU1g2eVI1cEVWOWI1aG94eUdDNFU3c2dLcGt2NGp1MW5uN0FzMm56OExzd2RXMWdiRXdxejJCd3JVOElRQzZORzhJRGJBYVZ6WG0wZ2RoWFY0QUdiWjJjRnJiMk9kdGstRzhHellQT2lWU2VHcXpZTENZbFJmVnp5ZENJNUd0SWpiR2pLa0dtNVlCRVhFOFU0LVh6eWhGdFJXSkxxUHNwQzMwLTd6dm05UDBGWjZ4R3JROUVYT2o3OW04eldpc09JQ2YtakZxWlFjelkzZ3BqVC01X1BsVHZFczhSUDk4c1M1QlVERWRvcThaU0lXYw?oc=5" target="_blank" rel="noopener nofollow">Makkah Construction and Development: 9M growth continued as hotel renovations and mall expansion advanced toward 2027 milestones</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMitAJBVV95cUxPLU9WZmozSFhWcjhYR3RnZWhhZFlFRlJKajYtUmpQRzhsNjdBc0xORTA5OUctRHB6a3h5NE44YXRaWUEwRktNU1g2eVI1cEVWOWI1aG94eUdDNFU3c2dLcGt2NGp1MW5uN0FzMm56OExzd2RXMWdiRXdxejJCd3JVOElRQzZORzhJRGJBYVZ6WG0wZ2RoWFY0QUdiWjJjRnJiMk9kdGstRzhHellQT2lWU2VHcXpZTENZbFJmVnp5ZENJNUd0SWpiR2pLa0dtNVlCRVhFOFU0LVh6eWhGdFJXSkxxUHNwQzMwLTd6dm05UDBGWjZ4R3JROUVYT2o3OW04eldpc09JQ2YtakZxWlFjelkzZ3BqVC01X1BsVHZFczhSUDk4c1M1QlVERWRvcThaU0lXYw?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-09">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 12H7z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=propnewstime.com" alt="" loading="lazy">Prop News Time</span><span class="news-date">9 Nov 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMi7AFBVV95cUxPSk5oQW5xMGhyaTU5bHFRRHgzNFVHelBMcTRpeGFDOHdrSzFRaXY0blNMMWdocVVYT2dkeW00YjRELTVxRHI4ekUtQ09RR21qeThlQXZGWVZzV09GWHA2OWdJcC1GUWtZdmNUQWU2dm43SXVhdFZ1Z0RGXzFrY21HV0F6UlJqY3VQMUVJQnlIVDVMLWhEUFhCMEoxdjNSV20tcWtGb1lRMFZUenBVQWdpaTlpX0NvNFluZ2swMVFRYW1abl9HWTI0S2dKajRLM0VSbkRUOFVObjlZbVV4Y3FkTElHRktTak1WX1BQdg?oc=5" target="_blank" rel="noopener nofollow">Cenomi Centers signs SAR 825 million contract with Lynx Contracting for Madinah Downtown mall and office</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMi7AFBVV95cUxPSk5oQW5xMGhyaTU5bHFRRHgzNFVHelBMcTRpeGFDOHdrSzFRaXY0blNMMWdocVVYT2dkeW00YjRELTVxRHI4ekUtQ09RR21qeThlQXZGWVZzV09GWHA2OWdJcC1GUWtZdmNUQWU2dm43SXVhdFZ1Z0RGXzFrY21HV0F6UlJqY3VQMUVJQnlIVDVMLWhEUFhCMEoxdjNSV20tcWtGb1lRMFZUenBVQWdpaTlpX0NvNFluZ2swMVFRYW1abl9HWTI0S2dKajRLM0VSbkRUOFVObjlZbVV4Y3FkTElHRktTak1WX1BQdg?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-08">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=khaleejtimes.com" alt="" loading="lazy">Khaleej Times</span><span class="news-date">8 Nov 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxPSHhlOG9MVU1lT3pBTGtfU2NVOW9LS3pxTVNaajZPSlpUUVptUW5RNWJFSG9RMzNXNzBzT2JZMFdkd3M3Smx1Z19IOVFnV0xXaEl2bnAtcUhHWWJXY0c4dEVVQVpJNzh4QkxqbDZuMko2NWZOY09fZzM4WWlSVy1EQldwN0lZM09iTy1fXzZwS1FmRF9fbEtVNllmNDNwek1zR0E3OFo2UVJMQVhiTjcyYXI4Wkw2T2YzbDFSTjEtTHRDQdIBygFBVV95cUxNTDQ1UGtiZE5za2VzX0I4c0dwUGloZzlqdENNMkx6cjhZQXJDdUpIZ0ZVZm9HWC1YbTliTU5PeVlYci1pVXhEeS1RY096eWdEdnRUMmx5ZWdrQnNtbFc1clQ3SkhmbVYtaExDaXN2WFEzT0J3R3FsSVRpTm9FQ3l3NG1jelVCVFItdnRpLVNRTmphbTNpQXFYbGFiM1JCM292d0otVjV2Uy0wVzQxbjU2N2tBV3FyVlQwNk1ubTRTSkRBS1NQVXBPUTdB?oc=5" target="_blank" rel="noopener nofollow">Saudi Arabia adds 4 more countries to tourist e-visa list</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxPSHhlOG9MVU1lT3pBTGtfU2NVOW9LS3pxTVNaajZPSlpUUVptUW5RNWJFSG9RMzNXNzBzT2JZMFdkd3M3Smx1Z19IOVFnV0xXaEl2bnAtcUhHWWJXY0c4dEVVQVpJNzh4QkxqbDZuMko2NWZOY09fZzM4WWlSVy1EQldwN0lZM09iTy1fXzZwS1FmRF9fbEtVNllmNDNwek1zR0E3OFo2UVJMQVhiTjcyYXI4Wkw2T2YzbDFSTjEtTHRDQdIBygFBVV95cUxNTDQ1UGtiZE5za2VzX0I4c0dwUGloZzlqdENNMkx6cjhZQXJDdUpIZ0ZVZm9HWC1YbTliTU5PeVlYci1pVXhEeS1RY096eWdEdnRUMmx5ZWdrQnNtbFc1clQ3SkhmbVYtaExDaXN2WFEzT0J3R3FsSVRpTm9FQ3l3NG1jelVCVFItdnRpLVNRTmphbTNpQXFYbGFiM1JCM292d0otVjV2Uy0wVzQxbjU2N2tBV3FyVlQwNk1ubTRTSkRBS1NQVXBPUTdB?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-08">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=sabq.org" alt="" loading="lazy">Sabq</span><span class="news-date">8 Nov 2026</span></div>
-        <h3><a href="https://sabq.org/en/article/vhfyxjw" target="_blank" rel="noopener nofollow">Sixth Hajj Conference Kicks Off in Jeddah: 5.6 Billion Riyals for Wasel Al-Haram Project and 70 Million Nusuk Users</a></h3>
-        <a class="map-link" href="https://sabq.org/en/article/vhfyxjw" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-08">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=go.kompas.com" alt="" loading="lazy">Kompas.com</span><span class="news-date">8 Nov 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMiwwFBVV95cUxOenB6OS1BLVhHN0NMMVhLbWhhTG1DWEtZdWljaUxPS2JCTWRWbThJd1c5ek52WHZtRTJ6VmJ1VVRod2hwUFk5OXk4b215YzNIMWR2YkYwemRtRUUzRXdnb0lUOGIyVm5FNnFoWnI4QmhpUjQ0RjkybElqSGVWWXVPdngtaExYLTJ0YUFHTjRNSHZlVHFBaTVHMThrUTl6MDBpRXJKeUh6aUwwcHU3YlBCaGFhMk5NMWFrejE3aGFZR2pJR3c?oc=5" target="_blank" rel="noopener nofollow">Minister Gus Irfan Listens to Feedback and Suggestions from Umrah Pilgrims in Saudi Arabia, Affirms Commitment to Improvement</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMiwwFBVV95cUxOenB6OS1BLVhHN0NMMVhLbWhhTG1DWEtZdWljaUxPS2JCTWRWbThJd1c5ek52WHZtRTJ6VmJ1VVRod2hwUFk5OXk4b215YzNIMWR2YkYwemRtRUUzRXdnb0lUOGIyVm5FNnFoWnI4QmhpUjQ0RjkybElqSGVWWXVPdngtaExYLTJ0YUFHTjRNSHZlVHFBaTVHMThrUTl6MDBpRXJKeUh6aUwwcHU3YlBCaGFhMk5NMWFrejE3aGFZR2pJR3c?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-07">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=bd24live.com" alt="" loading="lazy">Bd24live</span><span class="news-date">7 Nov 2026</span></div>
-        <h3><a href="https://www.bd24live.com/new-visa-facilities-in-saudi-arabias-system/" target="_blank" rel="noopener nofollow">New Visa Facilities in Saudi Arabia’s System!</a></h3>
-        <a class="map-link" href="https://www.bd24live.com/new-visa-facilities-in-saudi-arabias-system/" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
+        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=ttnworldwide.com" alt="" loading="lazy">TTN Worldwide</span><span class="news-date">26 Aug 2026</span></div>
+        <h3><a href="https://www.ttnworldwide.com/ArticleTA/466955/saudi-hotel-sector-defies-travel-disruptions-as-makkah-revpar-rises-87pc_colon-jll" target="_blank" rel="noopener nofollow">Makkah hotel revenue climbs as Saudi hospitality sector holds steady</a></h3>
+        <p>A JLL market report for Q2 2026 shows Makkah occupancy up 4 points year-on-year with room revenue rising 8.7%, while Madinah posted the Kingdom's highest occupancy at over 75% — both cities also added new hotel supply during the quarter.</p>
+        <a class="map-link" href="https://www.ttnworldwide.com/ArticleTA/466955/saudi-hotel-sector-defies-travel-disruptions-as-makkah-revpar-rises-87pc_colon-jll" target="_blank" rel="noopener nofollow">Read more ↗</a>
       </article>
       <!-- NEWS_LIST_END -->
     </div>
@@ -3097,7 +3063,7 @@
       <div class="brand-badge" aria-hidden="true">SR</div>
       <div>
         <p>I'm <strong>Syed Rashad</strong>, and I'm preparing for my own first Umrah. Building UmrahNow came out of that preparation — every bit of information I needed was scattered somewhere different: the rites and their exact wording on one forum, visa rules buried in a government PDF, Nusuk instructions passed around in a WhatsApp group, hotel advice in year-old blog comments. Piecing it all together, before I've even travelled, has taken far longer than it should.</p>
-        <p>UmrahNow is my attempt to put everything in one place — the way I wish it existed when I started planning — so the next pilgrim doesn't have to go through the same scramble. It's a free guide, not a travel agency, though I am working on connecting pilgrims with vetted Umrah providers so you don't have to guess who to trust (see Umrah Packages, coming soon). Every du'a here is referenced to its source, and anywhere scholars differ or the wording isn't fixed, that's flagged rather than glossed over. Think of it as a study companion, not a fatwa — for rulings on your own situation, please ask a qualified scholar.</p>
+        <p>UmrahNow is my attempt to put everything in one place — the way I wish it existed when I started planning — so the next pilgrim doesn't have to go through the same scramble. It's a free guide, not a travel agency, though I am working on connecting pilgrims with vetted Umrah providers so you don't have to guess who to trust (tell us what you're looking for with the Feedback &amp; enquiries button). Every du'a here is referenced to its source, and anywhere scholars differ or the wording isn't fixed, that's flagged rather than glossed over. Think of it as a study companion, not a fatwa — for rulings on your own situation, please ask a qualified scholar.</p>
         <p>You can see more of my work at <a href="https://syedrashad.in/" target="_blank" rel="noopener" class="map-link" style="margin-top:0;">syedrashad.in ↗</a>, or use the feedback form below to tell me what's missing or wrong — that's the only way this guide gets better.</p>
       </div>
     </div>
@@ -3113,7 +3079,7 @@
   <div class="container">
     <div class="section-head reveal">
       <div class="section-icon-row"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v10H8l-4 4z"/></svg></span><div class="kicker-ar">ملاحظاتكم</div></div>
-      <h2>Help us make this guide better</h2>
+      <h2>Help us make this site better</h2>
       <p class="desc">Missing a du'a, found an outdated rule, or wish there was a section on something else? Tell us what would make your Umrah journey smoother — this goes straight to the person building the site.</p>
     </div>
 
@@ -3160,12 +3126,12 @@
         <p>Apps, carriers, hospitals, exchange houses and other businesses named here are for reference only. UmrahNow doesn't control, guarantee, or take responsibility for their pricing, availability or conduct, and currently receives no payment for any mention on this page.</p>
       </div>
       <div>
-        <h4>The Umrah Packages enquiry isn't a booking</h4>
-        <p>Submitting that form creates no contract, guarantee or obligation on either side. UmrahNow is not currently a travel agency and doesn't sell, broker or fulfil travel packages. Once the vetted-provider service is live, "vetted" describes a screening process, not a guaranteed outcome — do your own due diligence before paying anyone.</p>
+        <h4>An enquiry isn't a booking</h4>
+        <p>Submitting an enquiry creates no contract, guarantee or obligation on either side. UmrahNow is not currently a travel agency and doesn't sell, broker or fulfil travel packages. Once the vetted-provider service is live, "vetted" describes a screening process, not a guaranteed outcome — do your own due diligence before paying anyone.</p>
       </div>
       <div>
         <h4>Your data, in plain terms</h4>
-        <p>Anything submitted via the Feedback form, the Umrah Packages form, or the email step before sharing a budget on WhatsApp is delivered to the site owner's inbox through FormSubmit and used only to respond to you — never sold or shared. UmrahNow uses Cloudflare Web Analytics to see how many people visit and which pages are useful; it sets no cookies and doesn't track you individually or across other sites. If you subscribe to the daily email update, your address is stored with our email provider, Brevo, only to send that update — every email has an unsubscribe link. The packing checklist and du'a audio run entirely in your browser and are never sent anywhere.</p>
+        <p>Anything submitted via the Feedback form, the Feedback &amp; enquiries form, or the details step before sharing a budget on WhatsApp is delivered to the site owner's inbox through FormSubmit and used only to respond to you — never sold or shared. UmrahNow uses Cloudflare Web Analytics to see how many people visit and which pages are useful; it sets no cookies and doesn't track you individually or across other sites. If you subscribe to the daily email update, your address is stored with our email provider, Brevo, only to send that update — every email has an unsubscribe link. The packing checklist and du'a audio run entirely in your browser and are never sent anywhere.</p>
       </div>
       <div>
         <h4>Accuracy changes; so should your assumptions</h4>
@@ -3209,10 +3175,14 @@
   <button type="button" class="qmodal-close" id="qClose" aria-label="Close">&times;</button>
   <div id="qStep1">
     <h3 id="qTitle">Share your budget on WhatsApp</h3>
-    <p>Enter your email to continue. We'll use it to send help with planning this trip and occasional Umrah updates — never sold or shared.</p>
+    <p>Add your details to continue. We'll use them to help with planning this trip and to send occasional Umrah updates — never sold or shared.</p>
     <form id="qForm" novalidate>
+      <label for="qName">Your name</label>
+      <input type="text" id="qName" class="qin" name="name" required autocomplete="name" placeholder="Full name">
+      <label for="qPhone">Mobile number</label>
+      <input type="tel" id="qPhone" class="qin" name="phone" required autocomplete="tel" inputmode="tel" placeholder="+91 98765 43210">
       <label for="qEmail">Email address</label>
-      <input type="email" id="qEmail" name="email" required autocomplete="email" placeholder="you@example.com">
+      <input type="email" id="qEmail" class="qin" name="email" required autocomplete="email" placeholder="you@example.com">
       <input type="text" name="_honey" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;">
       <p class="qstatus" id="qStatus" role="status"></p>
       <button type="submit" class="btn btn-gold" id="qSubmit">Continue</button>
@@ -3227,7 +3197,6 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="config.js"></script>
 <script>
@@ -3426,7 +3395,7 @@
   const panel = document.getElementById('mobilePanel');
   const packagesTabEl = document.getElementById('packagesTabBtn');
 
-  // The floating "Umrah Packages" button is fixed to the viewport, so it can
+  // The floating "Feedback & enquiries" button is fixed to the viewport, so it can
   // visually collide with two things unless we account for them: the open
   // mobile menu (covering its last links) and the hero's own CTA buttons
   // (which sit in roughly the same bottom-right area on a phone screen).
@@ -3835,42 +3804,128 @@
     return data;
   }
 
-  function brandedChecklistMarkup(data) {
-    const sections = data.map(sec => `
-      <div style="margin-bottom:24px;">
-        <div style="font-family:Georgia,'Amiri',serif;font-size:18px;color:#144C46;border-bottom:1px solid #B7862C;padding-bottom:6px;margin-bottom:12px;">${sec.title}</div>
-        ${sec.items.map(it => `<div style="font-size:14px;color:#1B1B18;margin-bottom:8px;">${it.checked ? '&#9745;' : '&#9744;'}&nbsp;&nbsp;${it.text}</div>`).join('')}
-      </div>`).join('');
-    return `
-      <div style="width:720px;padding:44px;background:#F6F1E4;font-family:Arial,'Work Sans',sans-serif;">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
-          <span style="color:#B7862C;font-size:24px;">&#9733;</span>
-          <span style="font-family:Georgia,'Amiri',serif;font-size:28px;color:#0E2A28;">UmrahNow</span>
-        </div>
-        <div style="font-size:12px;letter-spacing:0.06em;color:#B7862C;margin-bottom:28px;text-transform:uppercase;">Travel Essentials Checklist</div>
-        ${sections}
-        <div style="margin-top:30px;font-size:11px;color:#8a8578;border-top:1px solid #DED4B8;padding-top:12px;">Generated from UmrahNow — a companion for the Umrah journey.</div>
-      </div>`;
-  }
-
-  document.getElementById('downloadPng').addEventListener('click', () => {
-    const data = collectChecklistData();
-    const wrapper = document.createElement('div');
-    wrapper.style.position = 'fixed';
-    wrapper.style.top = '0';
-    wrapper.style.left = '-99999px';
-    wrapper.innerHTML = brandedChecklistMarkup(data);
-    document.body.appendChild(wrapper);
-    html2canvas(wrapper.firstElementChild, { backgroundColor: '#F6F1E4', scale: 2 }).then(canvas => {
-      const link = document.createElement('a');
-      link.download = 'UmrahNow-Checklist.png';
-      link.href = canvas.toDataURL('image/png');
-      link.click();
-      document.body.removeChild(wrapper);
-    }).catch(() => {
-      alert("Couldn't generate the image in this browser — try the Word download instead.");
-      document.body.removeChild(wrapper);
+  // ---- Branded image of the packing checklist ----
+  // Drawn straight onto a canvas, in the same design as the PDF (no screenshots). It is quick, and
+  // everything happens inside the tap, which is what phones need to allow a save or a share.
+  function drawChecklistImage(data) {
+    const W = 900, S = 1.5, M = 40, CW = W - 2 * M, PAD = 28, HEAD = 300, LH = 36, GAP = 14, FOOT = 120;
+    const SERIF = "'Amiri', Georgia, serif", SANS = "'Work Sans', Arial, sans-serif";
+    const C = { night: '#0E2A28', gold: '#B7862C', soft: '#E7C77E', ivory: '#F6F1E4', line: '#EADFBC', text: '#3F3F38', muted: '#9DB2AD', turq: '#3FA79A', mist: '#CFE3DF', star: '#1F5C54', tint: '#F3E9CE' };
+    const total = data.reduce((n, s) => n + s.items.length, 0);
+    const packed = data.reduce((n, s) => n + s.items.filter((i) => i.checked).length, 0);
+    const today = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+    const tips = ['Save your Nusuk Umrah and Rawdah permits so they open offline.', 'Keep your hotel name and address written in Arabic.', 'Photograph your passport, visa and insurance, and email them to yourself.', 'Save the emergency numbers (911 · 997) in your phone.'];
+    const wrap = (ctx, text, maxW) => {
+      const lines = []; let cur = '';
+      String(text).split(/\s+/).forEach((w) => { const t = cur ? cur + ' ' + w : w; if (ctx.measureText(t).width > maxW && cur) { lines.push(cur); cur = w; } else cur = t; });
+      if (cur) lines.push(cur);
+      return lines;
+    };
+    // ---- measure ----
+    const meas = document.createElement('canvas').getContext('2d');
+    meas.font = '400 26px ' + SANS;
+    const cards = data.map((sec) => {
+      const items = sec.items.map((it) => ({ it, lines: wrap(meas, it.text, CW - 2 * PAD - 46) }));
+      return { sec, items, h: 8 + 80 + items.reduce((n, x) => n + x.lines.length * LH + GAP, 0) + 14 };
     });
+    meas.font = '400 24px ' + SANS;
+    const tipLines = tips.map((t) => wrap(meas, t, CW - 2 * PAD - 34));
+    const tipH = 74 + tipLines.reduce((n, l) => n + l.length * 34 + 8, 0) + 16;
+    let y = HEAD + 8 + 40;
+    cards.forEach((c) => { c.y = y; y += c.h + 28; });
+    const tipY = y; y += tipH + 44;
+    const H = y + FOOT;
+
+    // ---- draw ----
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.round(W * S); canvas.height = Math.round(H * S);
+    const ctx = canvas.getContext('2d');
+    ctx.scale(S, S);
+    const rr = (x, yy, w, h, r) => { ctx.beginPath(); ctx.moveTo(x + r, yy); ctx.arcTo(x + w, yy, x + w, yy + h, r); ctx.arcTo(x + w, yy + h, x, yy + h, r); ctx.arcTo(x, yy + h, x, yy, r); ctx.arcTo(x, yy, x + w, yy, r); ctx.closePath(); };
+    const text = (t, x, yy, font, color, align) => { ctx.font = font; ctx.fillStyle = color; ctx.textAlign = align || 'left'; ctx.textBaseline = 'alphabetic'; ctx.fillText(t, x, yy); };
+    ctx.fillStyle = C.ivory; ctx.fillRect(0, 0, W, H);
+
+    // header
+    ctx.fillStyle = C.night; ctx.fillRect(0, 0, W, HEAD);
+    ctx.strokeStyle = C.star; ctx.lineWidth = 2;
+    const sx = W - 150, sy = HEAD / 2 - 6, sq = 190;
+    ctx.strokeRect(sx - sq / 2, sy - sq / 2, sq, sq);
+    const r45 = sq / Math.SQRT2;
+    ctx.beginPath(); ctx.moveTo(sx, sy - r45); ctx.lineTo(sx + r45, sy); ctx.lineTo(sx, sy + r45); ctx.lineTo(sx - r45, sy); ctx.closePath(); ctx.stroke();
+    ctx.beginPath(); ctx.arc(sx, sy, sq * 0.42, 0, 7); ctx.stroke(); ctx.beginPath(); ctx.arc(sx, sy, sq * 0.1, 0, 7); ctx.stroke();
+    const bx = M, by = 44;                                            // logo
+    ctx.fillStyle = C.soft; ctx.beginPath(); ctx.arc(bx + 30, by + 16, 14, 0, 7); ctx.fill();
+    ctx.fillStyle = C.night; ctx.beginPath(); ctx.arc(bx + 37, by + 12, 12, 0, 7); ctx.fill();
+    ctx.strokeStyle = C.soft; ctx.lineWidth = 3.4; ctx.strokeRect(bx, by + 37, 60, 55);
+    ctx.fillStyle = C.gold; ctx.fillRect(bx, by + 57, 60, 10);
+    ctx.lineWidth = 2.6; ctx.strokeRect(bx + 23, by + 71, 14, 20);
+    text('UmrahNow', bx + 84, by + 58, '700 56px ' + SERIF, C.ivory);
+    if ('letterSpacing' in ctx) ctx.letterSpacing = '3px';
+    text('YOUR UMRAH COMPANION', bx + 86, by + 88, '700 15px ' + SANS, C.soft);
+    if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
+    text('Umrah Packing Checklist', M, 206, '700 62px ' + SERIF, C.ivory);
+    text('Tick items as you pack  ·  prepared ' + today + '  ·  ' + packed + ' of ' + total + ' packed', M, 252, '400 22px ' + SANS, C.mist);
+    ctx.fillStyle = C.gold; ctx.fillRect(0, HEAD, W, 8);
+
+    // section cards
+    cards.forEach((c, idx) => {
+      const x = M, y0 = c.y, w = CW;
+      rr(x, y0, w, c.h, 18); ctx.fillStyle = '#FFFFFF'; ctx.fill(); ctx.strokeStyle = C.line; ctx.lineWidth = 2; ctx.stroke();
+      ctx.save(); rr(x, y0, w, c.h, 18); ctx.clip(); ctx.fillStyle = idx % 2 ? C.turq : C.gold; ctx.fillRect(x, y0, w, 8); ctx.restore();
+      ctx.fillStyle = C.gold; ctx.beginPath(); ctx.arc(x + PAD + 22, y0 + 52, 22, 0, 7); ctx.fill();
+      ctx.font = '700 24px ' + SANS; ctx.fillStyle = C.night; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(String(idx + 1), x + PAD + 22, y0 + 53);
+      text(c.sec.title, x + PAD + 58, y0 + 66, '700 40px ' + SERIF, C.night);
+      let iy = y0 + 88;
+      c.items.forEach(({ it, lines }) => {
+        const cx = x + PAD, cy = iy + 3;
+        rr(cx, cy, 28, 28, 7); ctx.fillStyle = it.checked ? C.gold : '#FFFFFF'; ctx.fill(); ctx.strokeStyle = C.gold; ctx.lineWidth = 2.6; ctx.stroke();
+        if (it.checked) { ctx.strokeStyle = C.night; ctx.lineWidth = 4; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.beginPath(); ctx.moveTo(cx + 6, cy + 15); ctx.lineTo(cx + 12, cy + 21); ctx.lineTo(cx + 22, cy + 8); ctx.stroke(); ctx.lineCap = 'butt'; }
+        lines.forEach((ln, i) => text(ln, x + PAD + 46, iy + 26 + i * LH, '400 26px ' + SANS, C.text));
+        iy += lines.length * LH + GAP;
+      });
+    });
+
+    // tips
+    rr(M, tipY, CW, tipH, 18); ctx.fillStyle = C.tint; ctx.fill();
+    ctx.save(); rr(M, tipY, CW, tipH, 18); ctx.clip(); ctx.fillStyle = C.gold; ctx.fillRect(M, tipY, 9, tipH); ctx.restore();
+    text('Before you fly', M + PAD + 8, tipY + 52, '700 36px ' + SERIF, C.night);
+    let ty = tipY + 90;
+    tipLines.forEach((lines) => { lines.forEach((ln, i) => { text((i ? '   ' : '•  ') + ln, M + PAD + 8, ty, '400 24px ' + SANS, C.text); ty += 34; }); ty += 8; });
+
+    // footer
+    ctx.fillStyle = C.night; ctx.fillRect(0, H - FOOT, W, FOOT);
+    ctx.fillStyle = C.gold; ctx.fillRect(0, H - FOOT, W, 6);
+    text('UmrahNow', M, H - 48, '700 44px ' + SERIF, C.ivory);
+    ctx.font = '700 44px ' + SERIF;
+    text('umrahnow.in', M + ctx.measureText('UmrahNow').width + 18, H - 50, '400 22px ' + SANS, C.soft);
+    text('May Allah accept your Umrah', W - M, H - 50, '400 20px ' + SANS, C.muted, 'right');
+    return canvas;
+  }
+  function saveBlob(blob, name) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 30000);
+  }
+  document.getElementById('downloadPng').addEventListener('click', () => {
+    try {
+      const dataUrl = drawChecklistImage(collectChecklistData()).toDataURL('image/png');
+      const bin = atob(dataUrl.split(',')[1]), bytes = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+      const blob = new Blob([bytes], { type: 'image/png' }), name = 'UmrahNow-Packing-Checklist.png';
+      const file = typeof File === 'function' ? new File([blob], name, { type: 'image/png' }) : null;
+      const mobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || (navigator.maxTouchPoints > 1 && /Mac/i.test(navigator.platform));
+      // On phones the share sheet is the dependable way to save an image (to Photos or Files).
+      if (mobile && file && navigator.canShare && navigator.canShare({ files: [file] })) {
+        navigator.share({ files: [file], title: 'My Umrah packing checklist' }).catch((err) => { if (!err || err.name !== 'AbortError') saveBlob(blob, name); });
+        return;
+      }
+      saveBlob(blob, name);
+    } catch (err) {
+      console.error('Image failed:', err);
+      alert("Couldn't create the image in this browser — try the PDF download instead.");
+    }
   });
 
   // ---- Branded PDF of the packing checklist ----
@@ -4057,10 +4112,31 @@
     sendFormViaEmail(e.target, document.getElementById('fbStatus'), 'Thank you — your feedback has been sent.');
   });
 
-  document.getElementById('enquiryForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    sendFormViaEmail(e.target, document.getElementById('enquiryStatus'), "Thank you — we've received your enquiry and will reach out once verified packages are live.");
-  });
+  // ---- Feedback & enquiries drawer ----
+  (function enquiryInit() {
+    const form = document.getElementById('enquiryForm');
+    const only = form.querySelector('.enq-only'), msg = document.getElementById('enqMsg'), phone = document.getElementById('enqPhone');
+    const subject = form.querySelector('input[name="_subject"]');
+    const isEnquiry = () => form.request_type.value === 'Umrah service enquiry';
+    const sync = () => {
+      const enquiry = isEnquiry();
+      only.hidden = !enquiry;
+      msg.required = !enquiry;
+      phone.required = enquiry;
+      document.getElementById('enqPhoneLabel').textContent = enquiry ? 'Mobile number' : 'Mobile number (optional)';
+      document.getElementById('enqMsgLabel').textContent = enquiry ? 'Anything else we should know? (optional)' : 'Your feedback';
+      msg.placeholder = enquiry ? '' : 'What would you add or improve?';
+      subject.value = enquiry ? 'UmrahNow — Umrah service enquiry' : 'UmrahNow — Feedback';
+    };
+    form.querySelectorAll('input[name="request_type"]').forEach((r) => r.addEventListener('change', sync));
+    form.addEventListener('reset', () => setTimeout(sync, 0));
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      sendFormViaEmail(form, document.getElementById('enquiryStatus'),
+        isEnquiry() ? "Thank you — we've received your enquiry and will get back to you soon." : 'Thank you — your feedback has been sent.');
+    });
+    sync();
+  })();
 
   // ---- Umrah budget planner ----
   // Every number here is an approximation; the assumptions are shown on the page.
@@ -4163,7 +4239,7 @@
     // ---- Share on WhatsApp — the email comes first ----
     const modal = $('qModal'), overlay = $('qOverlay'), step1 = $('qStep1'), step2 = $('qStep2');
     const form = $('qForm'), status = $('qStatus'), emailIn = $('qEmail'), submitBtn = $('qSubmit');
-    let lastEmail = '';
+    let lastEmail = '', lastName = '', lastPhone = '';
     function quoteText() {
       const r = compute(s);
       const who = plural(s.adults, 'adult', 'adults') + (s.children ? ' + ' + plural(s.children, 'child', 'children') + ' (under 12)' : '');
@@ -4182,10 +4258,10 @@
     function openModal() {
       step1.hidden = false; step2.hidden = true;
       status.textContent = ''; status.className = 'qstatus';
-      emailIn.value = lastEmail;
+      $('qName').value = lastName; $('qPhone').value = lastPhone; emailIn.value = lastEmail;
       overlay.hidden = false; modal.hidden = false;
       document.body.style.overflow = 'hidden';
-      setTimeout(() => emailIn.focus(), 50);
+      setTimeout(() => $('qName').focus(), 50);
     }
     function closeModal() { overlay.hidden = true; modal.hidden = true; document.body.style.overflow = ''; }
     $('bqShare').addEventListener('click', openModal);
@@ -4195,20 +4271,23 @@
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       status.className = 'qstatus';
-      const email = emailIn.value.trim();
-      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { status.classList.add('error'); status.textContent = 'Please enter a valid email address.'; return; }
+      const name = $('qName').value.trim(), phone = $('qPhone').value.trim(), email = emailIn.value.trim();
+      const fail = (msg) => { status.classList.add('error'); status.textContent = msg; };
+      if (name.length < 2) { fail('Please enter your name.'); return; }
+      if (!/^\+?[\d\s().-]{8,20}$/.test(phone) || phone.replace(/\D/g, '').length < 8 || phone.replace(/\D/g, '').length > 15) { fail('Please enter a valid mobile number.'); return; }
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { fail('Please enter a valid email address.'); return; }
       submitBtn.disabled = true; status.textContent = 'One moment…';
       const r = compute(s), text = quoteText();
       // Same shape as the Feedback form that already works: plain field names, one message field.
       const fd = new FormData();
-      fd.append('email', email);
-      fd.append('message', text + '\n\nTravellers: ' + plural(s.adults, 'adult', 'adults') + (s.children ? ' + ' + plural(s.children, 'child', 'children') : '') + '\nTotal: ' + inr(r.total) + ' (' + sarText(r.total) + ')\nEmail: ' + email);
+      fd.append('name', name); fd.append('phone', phone); fd.append('email', email);
+      fd.append('message', text + '\n\nTravellers: ' + plural(s.adults, 'adult', 'adults') + (s.children ? ' + ' + plural(s.children, 'child', 'children') : '') + '\nTotal: ' + inr(r.total) + ' (' + sarText(r.total) + ')\nName: ' + name + '\nMobile: ' + phone + '\nEmail: ' + email);
       fd.append('_subject', 'UmrahNow — budget quote shared on WhatsApp');
       fd.append('_template', 'table'); fd.append('_captcha', 'false'); fd.append('_honey', '');
       const sent = await submitToFormSubmit(fd);
       const saved = sent.ok;
       if (saved) {
-        lastEmail = email;
+        lastEmail = email; lastName = name; lastPhone = phone;
         $('qPreview').textContent = text;
         $('qWhatsApp').href = 'https://wa.me/?text=' + encodeURIComponent(text);
         step1.hidden = true; step2.hidden = false;       // WhatsApp only becomes available now
