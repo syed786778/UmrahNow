@@ -1203,6 +1203,94 @@
   .enquiry-form select.bf-select{width:100%;}
   .qin{width:100%;border:1px solid var(--line);border-radius:var(--radius);padding:13px 14px;font-size:1rem;font-family:inherit;background:#fff;margin-bottom:12px;}
   .qin:focus{outline:2px solid var(--gold-soft);outline-offset:1px;}
+
+  /* ==========================================================================
+     MAP EXPLORER
+     ========================================================================== */
+  body.map-full{overflow:hidden;}
+  .mapapp{
+    display:grid;grid-template-columns:350px minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);
+    grid-template-areas:"top stage" "list stage";height:700px;background:#fff;
+    border:var(--card-border);border-radius:22px;overflow:hidden;box-shadow:var(--shadow-md);
+  }
+  .mapapp-top{grid-area:top;padding:18px 18px 12px;border-right:1px solid var(--line);display:grid;gap:12px;align-content:start;}
+  .mapapp-stage{grid-area:stage;display:flex;flex-direction:column;min-width:0;min-height:0;}
+  .mapapp-listwrap{grid-area:list;display:flex;flex-direction:column;min-height:0;border-right:1px solid var(--line);border-top:1px solid var(--line);}
+  .mapapp-count{padding:10px 18px 4px;font-size:var(--fs-xs);color:#8a8578;}
+  .mapapp-list{list-style:none;margin:0;padding:4px 10px 14px;overflow:auto;flex:1;}
+  .mapapp-toolbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:10px 12px;border-bottom:1px solid var(--line);background:#FBF8EF;}
+  .mapapp-mapwrap{position:relative;flex:1;min-height:0;}
+  #leafletMap{position:absolute;inset:0;width:100%;height:100%;min-height:0;border:0;border-radius:0;background:#EAE3CF;font-family:'Work Sans',sans-serif;}
+  .mapapp.is-street .leaflet-tile-pane{filter:saturate(.82) sepia(.14) brightness(1.02) contrast(.98);}
+
+  .mapapp-city span{padding:11px 6px;font-size:.95rem;}
+  .mapapp-layer{display:inline-grid;padding:4px;border-radius:999px;}
+  .mapapp-layer span{padding:6px 12px;border-radius:999px;font-size:.8rem;}
+  .mapapp-search{position:relative;display:block;}
+  .mapapp-search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:#8a8578;}
+  .mapapp-search input{width:100%;border:1px solid var(--line);border-radius:999px;padding:11px 14px 11px 41px;font-family:inherit;font-size:.95rem;background:#fff;color:var(--ink);}
+  .mapapp-search input:focus{outline:2px solid var(--gold-soft);outline-offset:1px;}
+  .mapapp-chips{display:flex;flex-wrap:wrap;gap:6px;}
+  .mp-chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-family:inherit;font-weight:600;font-size:.8rem;color:#5a5a50;transition:background .15s,color .15s;}
+  .mp-chip i{width:9px;height:9px;border-radius:50%;display:inline-block;}
+  .mp-chip:hover{background:var(--ivory-dim);}
+  .mp-chip.is-on{background:var(--night);border-color:var(--night);color:var(--gold-soft);}
+  .mapbtn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 11px;font-family:inherit;font-weight:600;font-size:.8rem;color:var(--night);transition:background .15s,color .15s;}
+  .mapbtn svg{width:16px;height:16px;flex-shrink:0;}
+  .mapbtn:hover{background:var(--ivory-dim);}
+  .mapbtn.is-on,.mapbtn[aria-pressed="true"]{background:var(--night);border-color:var(--night);color:var(--gold-soft);}
+
+  .mp-item{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:1px solid transparent;border-radius:14px;padding:9px 10px;font-family:inherit;transition:background .15s,border-color .15s;}
+  .mp-item:hover{background:var(--ivory-dim);}
+  .mp-item.is-selected{background:rgba(231,199,126,.22);border-color:rgba(183,134,44,.5);}
+  .mp-ico{width:38px;height:38px;border-radius:50%;background:var(--c);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .mp-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;}
+  .mp-main strong{font-size:.95rem;color:var(--night);line-height:1.25;font-weight:600;}
+  .mp-main em{font-style:normal;font-family:'Amiri',serif;color:var(--gold);font-size:1.02rem;text-align:left;unicode-bidi:plaintext;}
+  .mp-dist{font-size:.78rem;font-weight:700;color:#7a5a14;background:rgba(183,134,44,.15);padding:3px 9px;border-radius:999px;white-space:nowrap;}
+
+  .mk-wrap{background:none;border:0;}
+  .mk{width:100%;height:100%;border-radius:50%;background:var(--c);color:#fff;display:flex;align-items:center;justify-content:center;border:3px solid #fff;box-shadow:0 4px 12px rgba(14,42,40,.38);transition:transform .15s,box-shadow .15s;}
+  .mk--big{border-color:#E7C77E;}
+  .mk svg{display:block;}
+  .mk-wrap:hover .mk{transform:scale(1.1);}
+  .mk.is-selected{transform:scale(1.2);box-shadow:0 0 0 6px rgba(231,199,126,.6),0 6px 16px rgba(14,42,40,.4);}
+  .leaflet-tooltip.map-label{background:var(--night);color:var(--ivory);border:0;border-radius:8px;font-family:'Work Sans',sans-serif;font-weight:600;font-size:.82rem;padding:5px 10px;box-shadow:var(--shadow-sm);}
+  .leaflet-tooltip-top.map-label::before{border-top-color:var(--night);}
+  .ring-label{background:none;border:0;}
+  .ring-label span{display:inline-block;transform:translate(-50%,-50%);background:rgba(255,255,255,.94);color:#7a5a14;font:700 .72rem 'Work Sans',sans-serif;padding:3px 9px;border-radius:999px;border:1px solid rgba(183,134,44,.5);white-space:nowrap;box-shadow:var(--shadow-sm);}
+  .leaflet-control-zoom{border:0!important;box-shadow:var(--shadow-sm)!important;border-radius:12px!important;overflow:hidden;}
+  .leaflet-control-zoom a{width:36px!important;height:36px!important;line-height:36px!important;color:var(--night)!important;font-weight:700;}
+  .leaflet-control-zoom a:hover{background:var(--ivory-dim)!important;}
+  .mp-popup .leaflet-popup-content-wrapper{border-radius:16px;padding:0;box-shadow:var(--shadow-md);}
+  .mp-popup .leaflet-popup-content{margin:0;min-width:230px;}
+  .pop{padding:16px 18px 14px;font-family:'Work Sans',sans-serif;}
+  .pop-cat{display:inline-block;background:var(--c);color:#fff;font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 10px;border-radius:999px;margin-bottom:8px;}
+  .pop h4{font-family:'Amiri',serif;font-size:1.2rem;line-height:1.2;color:var(--night);margin:0 0 2px;}
+  .pop-ar{font-family:'Amiri',serif;font-size:1.15rem;color:var(--gold);margin-bottom:6px;text-align:left;unicode-bidi:plaintext;}
+  .pop p{font-size:.88rem;line-height:1.5;color:#3f3f38;margin:0 0 8px;}
+  .pop-meta{font-size:.8rem;font-weight:600;color:#7a5a14;background:rgba(183,134,44,.12);padding:6px 10px;border-radius:10px;margin-bottom:10px;}
+  .pop-actions a{display:inline-block;background:var(--night);color:var(--gold-soft)!important;font-weight:700;font-size:.82rem;padding:8px 16px;border-radius:999px;text-decoration:none;}
+  .pop-actions a:hover{background:var(--teal);}
+  .map-toast{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:1200;background:var(--night);color:var(--ivory);padding:10px 18px;border-radius:999px;font-size:.88rem;box-shadow:var(--shadow-md);max-width:90%;text-align:center;}
+  .map-toast[hidden]{display:none;}
+  .map-note{font-size:var(--fs-sm);color:#6b6659;margin:14px 4px 0;line-height:1.55;}
+  .band-teal .map-note{color:#CFE3DF;}
+
+  .mapapp.is-full{position:fixed;inset:0;z-index:700;height:100vh;border-radius:0;border:0;}
+  @media(max-width:900px){
+    .mapapp{grid-template-columns:1fr;grid-template-rows:auto auto auto;grid-template-areas:"top" "stage" "list";height:auto;}
+    .mapapp-top{border-right:0;}
+    .mapapp-mapwrap{height:430px;flex:none;}
+    .mapapp-listwrap{border-right:0;}
+    .mapapp-list{max-height:400px;}
+    .mapapp.is-full{grid-template-rows:auto minmax(0,1fr);grid-template-areas:"top" "stage";}
+    .mapapp.is-full .mapapp-listwrap{display:none;}
+    .mapapp.is-full .mapapp-mapwrap{height:auto;flex:1;}
+    .mapapp-toolbar{gap:6px;padding:10px;}
+    .mapbtn{padding:7px 11px;font-size:.8rem;}
+  }
+
 </style>
 </head>
 <body>
@@ -1304,7 +1392,7 @@
 <aside class="drawer" id="packagesDrawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
   <button type="button" class="drawer-close" id="drawerCloseBtn" aria-label="Close">&times;</button>
   <h2 id="drawerTitle">Feedback &amp; Umrah enquiries</h2>
-  <p>Tell us what would make this site better - or what you're looking for in an Umrah service: flights, stays, a full package or visa help. Leave your details and we'll get back to you.</p>
+  <p>Tell us what would make this guide better — or what you're looking for in an Umrah service: flights, stays, a full package or visa help. Leave your details and we'll get back to you.</p>
   <form id="enquiryForm" class="enquiry-form">
     <div class="seg enq-type" role="radiogroup" aria-label="What would you like to do?">
       <label><input type="radio" name="request_type" value="Umrah service enquiry" checked><span>Enquire about Umrah services</span></label>
@@ -1405,15 +1493,16 @@
      GitHub workflow). They summarise ONLY what the official sources publish
      and link to them. Don't hand-edit the list; it will be overwritten. -->
 <div class="advisory-wrap" id="advisories">
-  <div class="advisory-bar" id="advisoryBar" role="region" aria-label="Latest travel advisories for Saudi Arabia" data-checked="2026-11-13T22:00:09Z">
+  <div class="advisory-bar" id="advisoryBar" role="region" aria-label="Latest travel advisories for Saudi Arabia" data-checked="2026-10-15T02:57:15Z">
     <div class="advisory-label"><span class="adv-dot" aria-hidden="true"></span><span class="adv-label-text">Travel advisories</span><span class="adv-checked" id="advisoryChecked"></span></div>
     <div class="advisory-viewport" id="advisoryViewport">
       <ul class="advisory-track" id="advisoryTrack">
 <!-- ADVISORY_LIST_START -->
-      <li data-key="in" data-date="2026-11-11" data-checked="2026-11-13T22:00:09Z"><a class="adv-link" href="https://www.eoiriyadh.gov.in/section/public-advisories/1-public-advisory-on-fake-attestation-of-documents/" target="_blank" rel="noopener"><span class="adv-badge adv-badge--in">IN</span><span class="adv-src">Embassy of India, Riyadh</span><span class="adv-txt">Public Advisory on Fake Attestation of Documents · 24×7 helpline 800 247 1234 (toll-free in Saudi Arabia)</span><span class="adv-date">11 Nov</span></a></li>
-      <li data-key="us" data-date="2026-11-10" data-checked="2026-11-13T22:00:09Z"><a class="adv-link" href="https://sa.usembassy.gov/security-alert-u-s-mission-to-saudi-arabia-november-10-2026/" target="_blank" rel="noopener"><span class="adv-badge adv-badge--us">US</span><span class="adv-src">US Embassy</span><span class="adv-txt">Security Alert: U.S. Mission to Saudi Arabia – November 10, 2026</span><span class="adv-date">10 Nov</span></a></li>
-      <li data-key="uk" data-date="2026-10-27" data-checked="2026-11-13T22:00:09Z"><a class="adv-link" href="https://www.gov.uk/foreign-travel-advice/saudi-arabia" target="_blank" rel="noopener"><span class="adv-badge adv-badge--uk">UK</span><span class="adv-src">UK FCDO</span><span class="adv-txt">Advises against: all travel to within 10km of the border with Yemen · all but essential travel to the rest of Saudi Arabia</span><span class="adv-date">27 Oct</span></a></li>
-      <li data-key="in" data-date="2026-10-22" data-checked="2026-11-13T22:00:09Z"><a class="adv-link" href="https://www.eoiriyadh.gov.in/section/news/statement-on-attacks-on-civilian-and-energy-infrastructure-in-saudi-arabia/" target="_blank" rel="noopener"><span class="adv-badge adv-badge--in">IN</span><span class="adv-src">Embassy of India, Riyadh</span><span class="adv-txt">Statement on attacks on civilian and energy infrastructure in Saudi Arabia</span><span class="adv-date">22 Oct</span></a></li>
+      <li data-key="in" data-date="2026-10-08" data-checked="2026-10-15T02:57:15Z"><a class="adv-link" href="https://www.eoiriyadh.gov.in/section/news/" target="_blank" rel="noopener"><span class="adv-badge adv-badge--in">IN</span><span class="adv-src">Embassy of India, Riyadh</span><span class="adv-txt">Important advisory for Indian nationals in Saudi Arabia: remain alert, stay indoors as necessary and follow instructions from Saudi authorities; Embassy, Consulate in Jeddah and VFS centres reported as functioning normally · 24×7 helpline 800 247 1234 (toll-free in Saudi Arabia)</span><span class="adv-date">8 Oct</span></a></li>
+      <li data-key="in" data-date="2026-10-08" data-checked="2026-10-15T02:57:15Z"><a class="adv-link" href="https://www.eoiriyadh.gov.in/section/news/" target="_blank" rel="noopener"><span class="adv-badge adv-badge--in">IN</span><span class="adv-src">Embassy of India, Riyadh</span><span class="adv-txt">Statement on attacks targeting airports in Riyadh</span><span class="adv-date">8 Oct</span></a></li>
+      <li data-key="us" data-date="2026-10-12" data-checked="2026-10-15T02:57:15Z"><a class="adv-link" href="https://travel.state.gov/en/international-travel/travel-advisories/saudi-arabia.html" target="_blank" rel="noopener"><span class="adv-badge adv-badge--us">US</span><span class="adv-src">US State Dept</span><span class="adv-txt">Level 3: Reconsider travel — risk of drone and missile attacks (Iran / Houthis), armed conflict and terrorism. Do not travel to the Yemen border area. US government employees need special authorization to use any Saudi airport</span><span class="adv-date">12 Oct</span></a></li>
+      <li data-key="us" data-date="2026-10-05" data-checked="2026-10-15T02:57:15Z"><a class="adv-link" href="https://sa.usembassy.gov/security-alert-u-s-mission-saudi-arabia-october-5-2026/" target="_blank" rel="noopener"><span class="adv-badge adv-badge--us">US</span><span class="adv-src">US Embassy</span><span class="adv-txt">Security alert: U.S. citizens urged to remain vigilant and follow Saudi Civil Defense alerts</span><span class="adv-date">5 Oct</span></a></li>
+      <li data-key="uk" data-date="2026-10-11" data-checked="2026-10-15T02:57:15Z"><a class="adv-link" href="https://www.gov.uk/foreign-travel-advice/saudi-arabia" target="_blank" rel="noopener"><span class="adv-badge adv-badge--uk">UK</span><span class="adv-src">UK FCDO</span><span class="adv-txt">Advises against: all travel within 10km of Saudi Arabia's border with Yemen · all but essential travel to Aseer, Riyadh, Najran and Jizan provinces and the cities of Taif, Jeddah and Dammam · all but essential travel to all Saudi airports except Medina International Airport</span><span class="adv-date">11 Oct</span></a></li>
     <!-- ADVISORY_LIST_END -->
       </ul>
     </div>
@@ -1452,77 +1541,19 @@
 
     <div class="news-grid" id="newsGrid">
       <!-- NEWS_LIST_START -->
-      <article class="news-card" data-date="2026-11-14">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=saudigazette.com.sa" alt="" loading="lazy">Saudi Gazette</span><span class="news-date">14 Nov 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMi0AFBVV95cUxOQ3RZWHNxc193MWtJUy02VS1aWFF5SHFpR2l2aEIzZFRQcHhteVpEcE1xbUJWRzFmVk1DWWNlLTVNNDVoQ3hYMTNlRW9WV19vNFJXZEVvTERtLWxjZzlqQUs3czlIYXo2WjhySXdPQWZNVkw1NjZKNlc1VUpTdHRPV2tMUER0VzRHeDQtdXRYckN3ZXV4Q19leWpMZnBMTFM2MGhCWms2YUpORC1RT3ZUOWxhcG43VmF5RTk5TV9CajZKMVJLZkl5WUVoVnN1cEkz?oc=5" target="_blank" rel="noopener nofollow">Ministry of Hajj and Umrah completes signing of agreements for 2027 Hajj season</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMi0AFBVV95cUxOQ3RZWHNxc193MWtJUy02VS1aWFF5SHFpR2l2aEIzZFRQcHhteVpEcE1xbUJWRzFmVk1DWWNlLTVNNDVoQ3hYMTNlRW9WV19vNFJXZEVvTERtLWxjZzlqQUs3czlIYXo2WjhySXdPQWZNVkw1NjZKNlc1VUpTdHRPV2tMUER0VzRHeDQtdXRYckN3ZXV4Q19leWpMZnBMTFM2MGhCWms2YUpORC1RT3ZUOWxhcG43VmF5RTk5TV9CajZKMVJLZkl5WUVoVnN1cEkz?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-13">
+      <article class="news-card" data-date="2026-09-25">
         <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=blog.wego.com" alt="" loading="lazy">Wego Travel Blog</span><span class="news-date">13 Nov 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTE1odVFEb2VNeVF6eV95OFFncTE3NFhieDhrRmwtRERqaTlxSk10eFRBNUF4aGg4ZU16aVVrSHBBUFc0SHd6d3V6VTNlYklieEx0VXBJ?oc=5" target="_blank" rel="noopener nofollow">Saudi Arabia Tourist Visa 2026: How to Apply for the eVisa to Saudi Arabia</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMiU0FVX3lxTE1odVFEb2VNeVF6eV95OFFncTE3NFhieDhrRmwtRERqaTlxSk10eFRBNUF4aGg4ZU16aVVrSHBBUFc0SHd6d3V6VTNlYklieEx0VXBJ?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
+        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=gulfnews.com" alt="" loading="lazy">Gulf News</span><span class="news-date">25 Sep 2026</span></div>
+        <h3><a href="https://gulfnews.com/world/gulf/saudi/saudi-arabia-launches-365-day-umrah-visa-with-90-day-stay-1.500613885" target="_blank" rel="noopener nofollow">Saudi Arabia's multiple-entry Umrah visa: what pilgrims need to know</a></h3>
+        <p>The one-year, multiple-entry Umrah visa lets eligible pilgrims return to the Kingdom several times over 365 days without reapplying each trip, with a cumulative stay capped at 90 days and a fresh Nusuk service package required before every visit.</p>
+        <a class="map-link" href="https://gulfnews.com/world/gulf/saudi/saudi-arabia-launches-365-day-umrah-visa-with-90-day-stay-1.500613885" target="_blank" rel="noopener nofollow">Read more ↗</a>
       </article>
-      <article class="news-card" data-date="2026-11-13">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=legit.ng" alt="" loading="lazy">Legit News</span><span class="news-date">13 Nov 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMikgFBVV95cUxNeXRTUVVRbG1JVGlvNm04RmFRbWZNNjNiWHJpR3RIYUlMa1hFeTdpd1NKUzhFY2FlaExpakhrWG1NMG5hbktVUkVsRWY4dHlSY3lGVXUtaGlMMC1rNk8xMmFaY2NWZUFRUUlBUWl3R0F5TFNrQnVfeDRzbm5tdzJNZmJvX3UxWV9MQ2dqR0pDVGtoZw?oc=5" target="_blank" rel="noopener nofollow">Saudi Arabia Adds Mexico, serbia and 2 other countries to tourist visa programme</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMikgFBVV95cUxNeXRTUVVRbG1JVGlvNm04RmFRbWZNNjNiWHJpR3RIYUlMa1hFeTdpd1NKUzhFY2FlaExpakhrWG1NMG5hbktVUkVsRWY4dHlSY3lGVXUtaGlMMC1rNk8xMmFaY2NWZUFRUUlBUWl3R0F5TFNrQnVfeDRzbm5tdzJNZmJvX3UxWV9MQ2dqR0pDVGtoZw?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-12">
+      <article class="news-card" data-date="2026-08-26">
         <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V10l8-6 8 6v11"/><path d="M10 21v-6h4v6"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=skyscanner.net" alt="" loading="lazy">Skyscanner</span><span class="news-date">12 Nov 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMipgFBVV95cUxNb0xvOHNORUhJeWRHc2VhYlB0US1qV2xuUG5LZzNDQl91ZFZpRFd5X3lmeXlmYWF6ZEM3allUZTFIdVhCWC1OWWc4RzEwd2Uyc0hyd1pBUnRUMS1LMHJ3T0J5cjJsUjlVaEJFV1hEdmZQR3F3emZaTWFxS0NzOUNxRmk1RkppZG5OSGxtaW5EVVFxeC15QUZZeXh6dXVQWUR2V2VtSGVB?oc=5" target="_blank" rel="noopener nofollow">Al Marzam Hotel, Madinah, from ل.ل.‏ 7,784,081 per night</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMipgFBVV95cUxNb0xvOHNORUhJeWRHc2VhYlB0US1qV2xuUG5LZzNDQl91ZFZpRFd5X3lmeXlmYWF6ZEM3allUZTFIdVhCWC1OWWc4RzEwd2Uyc0hyd1pBUnRUMS1LMHJ3T0J5cjJsUjlVaEJFV1hEdmZQR3F3emZaTWFxS0NzOUNxRmk1RkppZG5OSGxtaW5EVVFxeC15QUZZeXh6dXVQWUR2V2VtSGVB?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-12">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=blog.wego.com" alt="" loading="lazy">Wego Travel Blog</span><span class="news-date">12 Nov 2026</span></div>
-        <h3><a href="https://blog.wego.com/saudi-visitor-card/" target="_blank" rel="noopener nofollow">Saudi Visitor Card 2026: urpay Fees, mada vs Visa and How It Works</a></h3>
-        <a class="map-link" href="https://blog.wego.com/saudi-visitor-card/" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-12">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=cairoscene.com" alt="" loading="lazy">CairoScene</span><span class="news-date">12 Nov 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxQX2NEQ3F2Ul9XNTZSYlpXUEI0cjR1YTYzNFhQanZqYmhHczI2cUR0WU05ZmxKMExlU0tVV1FLN0FNelo0UVRTbWF6Y2VVVkJSalFWT0FGTDVhYUxFM0JRWnVpRmk4S1VpUEdYNkptNXFzTlJsZTdrSjM3TzJKUXI3NUdJYXVOS3NLQmVwZzdVbEQ?oc=5" target="_blank" rel="noopener nofollow">Ministry of Hajj &amp; Umrah Reports 93% Hajj Pilgrim Satisfaction</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMikAFBVV95cUxQX2NEQ3F2Ul9XNTZSYlpXUEI0cjR1YTYzNFhQanZqYmhHczI2cUR0WU05ZmxKMExlU0tVV1FLN0FNelo0UVRTbWF6Y2VVVkJSalFWT0FGTDVhYUxFM0JRWnVpRmk4S1VpUEdYNkptNXFzTlJsZTdrSjM3TzJKUXI3NUdJYXVOS3NLQmVwZzdVbEQ?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-12">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=spa.gov.sa" alt="" loading="lazy">وكالة الأنباء السعودية</span><span class="news-date">12 Nov 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMiSkFVX3lxTE1jYjBCN29Kc0l0RTFhVXVYTVA4RGtTZE9fSUU3MmM0TXRYZ1BsWnpKQ2RJYkNzRktaMnRTeGFmeTRiODZXZDlVU0VB?oc=5" target="_blank" rel="noopener nofollow">Vice Minister of Hajj and Umrah Honors Winners at Conclusion of Hajj Conference and Exhibition</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMiSkFVX3lxTE1jYjBCN29Kc0l0RTFhVXVYTVA4RGtTZE9fSUU3MmM0TXRYZ1BsWnpKQ2RJYkNzRktaMnRTeGFmeTRiODZXZDlVU0VB?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-12">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=etvbharat.com" alt="" loading="lazy">ETV Bharat</span><span class="news-date">12 Nov 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMi0gFBVV95cUxNbUc3cUVmZ0I4Zjlldm5TTWpBbmc0UjI3bGxCdGxIVmdoU19Qdno0bmFNanhRMHZKV0s2ZUFiRWNtdzR6RW16eXctdU85cUJmYlZuX2M2RVFoWTNpSkRrdWlZNzFXU3RYY2t6TFU3ei0zQk41LUhWTEQ4R0pNWm1KUGlqZTVMRUQzcU1STHAxN1JsSE1CY3RRNmtSZjh3VDBxNnBQVm13b2pfVEx6c08zcUF2OEVkVjREWFhDN3JYOXJJTGVJRUFFYlJrNEdIRkpGWlHSAdcBQVVfeXFMT29pX3pGWHVOXy1lRjVyY3U2blB2U0dhRXh5VGxlNFR4US14Z2ZvSENsOTNQTlZkaEFoRWFRNEVqQnNqUXZlZHdOcWVrdERlVHpnS0Z1SWRwUkk1anJEU1Nsdk10SlF0WHZxMVRITklQQ2VaUmVNQVBxTW1WbW1wbmFLR280d1ZiUUlPX0ZnZkFyMXc1MU1OZnd6REVfQ3h5TlM1dzhzVWRaOHUtTWlwbWU0NnIzT1RIUkVaZEN1Uk55OUxja3RVVGRhZmpMYXFqZzBKa1lpeWM?oc=5" target="_blank" rel="noopener nofollow">Umrah Bookings Plunge In Rajasthan Amid Houthi-Saudi Tensions; Travel Agencies Hit Hard</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMi0gFBVV95cUxNbUc3cUVmZ0I4Zjlldm5TTWpBbmc0UjI3bGxCdGxIVmdoU19Qdno0bmFNanhRMHZKV0s2ZUFiRWNtdzR6RW16eXctdU85cUJmYlZuX2M2RVFoWTNpSkRrdWlZNzFXU3RYY2t6TFU3ei0zQk41LUhWTEQ4R0pNWm1KUGlqZTVMRUQzcU1STHAxN1JsSE1CY3RRNmtSZjh3VDBxNnBQVm13b2pfVEx6c08zcUF2OEVkVjREWFhDN3JYOXJJTGVJRUFFYlJrNEdIRkpGWlHSAdcBQVVfeXFMT29pX3pGWHVOXy1lRjVyY3U2blB2U0dhRXh5VGxlNFR4US14Z2ZvSENsOTNQTlZkaEFoRWFRNEVqQnNqUXZlZHdOcWVrdERlVHpnS0Z1SWRwUkk1anJEU1Nsdk10SlF0WHZxMVRITklQQ2VaUmVNQVBxTW1WbW1wbmFLR280d1ZiUUlPX0ZnZkFyMXc1MU1OZnd6REVfQ3h5TlM1dzhzVWRaOHUtTWlwbWU0NnIzT1RIUkVaZEN1Uk55OUxja3RVVGRhZmpMYXFqZzBKa1lpeWM?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-12">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=ocnjdaily.com" alt="" loading="lazy">OCNJ Daily</span><span class="news-date">12 Nov 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMiuwFBVV95cUxNc0RPenlYS2FjZWtjVTE4NkZqRkZjT0NpYlp4U0N4eVlFVTRmUlJONWVqSlE4MTEzN3Q2M2g4YVNVUzQtXzY2blY2eTg5SFZWNW1qZTJVNVdSYXZ2VnVNMHhHZkxUSFZpbl94R051NlVHOW0xRWRRYmJoempmU202bEdkZHB2OUhQQmo4VkY5R25OQ2xYbjlITkFTeDRlZ2xtRER6LWYtX2lJQzFwNnRZZ3BqNGF6SURvZkE4?oc=5" target="_blank" rel="noopener nofollow">Hajj vs Umrah: What UK Pilgrims Need to Know About Dates, Costs and Booking</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMiuwFBVV95cUxNc0RPenlYS2FjZWtjVTE4NkZqRkZjT0NpYlp4U0N4eVlFVTRmUlJONWVqSlE4MTEzN3Q2M2g4YVNVUzQtXzY2blY2eTg5SFZWNW1qZTJVNVdSYXZ2VnVNMHhHZkxUSFZpbl94R051NlVHOW0xRWRRYmJoempmU202bEdkZHB2OUhQQmo4VkY5R25OQ2xYbjlITkFTeDRlZ2xtRER6LWYtX2lJQzFwNnRZZ3BqNGF6SURvZkE4?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-12">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=go.kompas.com" alt="" loading="lazy">Kompas.com</span><span class="news-date">12 Nov 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMitgFBVV95cUxPVkkzaVRpUjFJWkx1WXJFVlJIN0ZHMVRWNXJUcEtsS29hNHktN0xCYXRCcHQtWHFhZGY4c1FCZXJCYTRURXdmeUxpaTBUa19WZDdpb3p5UGtjNXByWHFyT2dLcmlmUy1ER2FaREQ2cThIaTNoNzFLMktOeGI4clB6Um1IQU9kdHR3RzJLdkV3YTVZY0VpbGI4ZXpBQlJPMmE1cjgzTk15QkFRb255RWNNUXg4UGxkQQ?oc=5" target="_blank" rel="noopener nofollow">When Hajj and Umrah Become a Scam, Vulnerable Pilgrims Bear the Loss</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMitgFBVV95cUxPVkkzaVRpUjFJWkx1WXJFVlJIN0ZHMVRWNXJUcEtsS29hNHktN0xCYXRCcHQtWHFhZGY4c1FCZXJCYTRURXdmeUxpaTBUa19WZDdpb3p5UGtjNXByWHFyT2dLcmlmUy1ER2FaREQ2cThIaTNoNzFLMktOeGI4clB6Um1IQU9kdHR3RzJLdkV3YTVZY0VpbGI4ZXpBQlJPMmE1cjgzTk15QkFRb255RWNNUXg4UGxkQQ?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-12">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=go.kompas.com" alt="" loading="lazy">Kompas.com</span><span class="news-date">12 Nov 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMixwFBVV95cUxPb1h2U1pLdVpyem5pTnlCLXVVMjR4T0x5a0RfUlBDYkFfVDNPdEZqTWxQN0lPam5NS2Z1ZFNBMTlSQmN4WkZDV0lKU1RJRlU4eG5WWUNzYU1hcWpFbHV2ZEJKb29YRVRpbVdMdDJYNzV4ejZnLXBVTUdqbEtjVWRIN29QWFg2ZXV4b2sxN2lkZ1YxcVhZVUgwT0Jqc3NJZGtLaUZCeVpiRUVVTUxUUDhNNzZ4cG5EYU5pMTkzVF91aEhDUW9uM3Mw?oc=5" target="_blank" rel="noopener nofollow">Kemenhaj Collaborates with Kemendes PDT to Prevent Hajj and Umrah Fraud in Rural Areas</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMixwFBVV95cUxPb1h2U1pLdVpyem5pTnlCLXVVMjR4T0x5a0RfUlBDYkFfVDNPdEZqTWxQN0lPam5NS2Z1ZFNBMTlSQmN4WkZDV0lKU1RJRlU4eG5WWUNzYU1hcWpFbHV2ZEJKb29YRVRpbVdMdDJYNzV4ejZnLXBVTUdqbEtjVWRIN29QWFg2ZXV4b2sxN2lkZ1YxcVhZVUgwT0Jqc3NJZGtLaUZCeVpiRUVVTUxUUDhNNzZ4cG5EYU5pMTkzVF91aEhDUW9uM3Mw?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
-      </article>
-      <article class="news-card" data-date="2026-11-11">
-        <div class="news-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div>
-        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=spa.gov.sa" alt="" loading="lazy">وكالة الأنباء السعودية</span><span class="news-date">11 Nov 2026</span></div>
-        <h3><a href="https://news.google.com/rss/articles/CBMiSkFVX3lxTFB2TlhSVENNWk5ScV90QXI2Ml9IRDF1VVhmSHZkbXFHeXZ4RUthT0h2WDhlYmJwQXpmYml2aDJsdktuTDRoMllQQjNB?oc=5" target="_blank" rel="noopener nofollow">Hajj Conference Workshops Explore Food Safety, Nusuk Card, and Human Dimension of Hajj</a></h3>
-        <a class="map-link" href="https://news.google.com/rss/articles/CBMiSkFVX3lxTFB2TlhSVENNWk5ScV90QXI2Ml9IRDF1VVhmSHZkbXFHeXZ4RUthT0h2WDhlYmJwQXpmYml2aDJsdktuTDRoMllQQjNB?oc=5" target="_blank" rel="noopener nofollow">Read more &#8599;</a>
+        <div class="news-meta"><span class="news-source"><img src="https://www.google.com/s2/favicons?sz=64&domain=ttnworldwide.com" alt="" loading="lazy">TTN Worldwide</span><span class="news-date">26 Aug 2026</span></div>
+        <h3><a href="https://www.ttnworldwide.com/ArticleTA/466955/saudi-hotel-sector-defies-travel-disruptions-as-makkah-revpar-rises-87pc_colon-jll" target="_blank" rel="noopener nofollow">Makkah hotel revenue climbs as Saudi hospitality sector holds steady</a></h3>
+        <p>A JLL market report for Q2 2026 shows Makkah occupancy up 4 points year-on-year with room revenue rising 8.7%, while Madinah posted the Kingdom's highest occupancy at over 75% — both cities also added new hotel supply during the quarter.</p>
+        <a class="map-link" href="https://www.ttnworldwide.com/ArticleTA/466955/saudi-hotel-sector-defies-travel-disruptions-as-makkah-revpar-rises-87pc_colon-jll" target="_blank" rel="noopener nofollow">Read more ↗</a>
       </article>
       <!-- NEWS_LIST_END -->
     </div>
@@ -2913,20 +2944,44 @@
 <section id="map" class="band-teal">
   <div class="container">
     <div class="section-head reveal">
-      <div class="section-icon-row"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15 9l-2 6-6 2 2-6z"/></svg></span><div class="kicker-ar">الخريطة</div></div>
-      <h2>Finding your way around</h2>
-      <p class="desc">Key sites in both cities, plotted with their names and approximate distance from the main mosque. Switch cities to re-centre the map.</p>
+      <div class="section-icon-row"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg></span><div class="kicker-ar">الخريطة</div></div>
+      <h2>Explore the holy cities</h2>
+      <p class="desc">Tap any place for details and directions. Switch on the walking rings to judge how far a hotel is from the mosque, or press “Locate me” to see where you are.</p>
     </div>
-    <div class="map-toggle">
-      <button id="btn-makkah" class="active">Makkah</button>
-      <button id="btn-madinah">Madinah</button>
+
+    <div class="mapapp is-street" id="mapApp">
+      <div class="mapapp-top">
+        <div class="seg mapapp-city" role="radiogroup" aria-label="City">
+          <label><input type="radio" name="mapCity" value="makkah" checked><span>Makkah</span></label>
+          <label><input type="radio" name="mapCity" value="madinah"><span>Madinah</span></label>
+        </div>
+        <label class="mapapp-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input type="search" id="mapSearch" placeholder="Search places…" aria-label="Search places" autocomplete="off"></label>
+        <div class="mapapp-chips" id="mapChips" role="group" aria-label="Filter by type"></div>
+      </div>
+
+      <div class="mapapp-stage">
+        <div class="mapapp-toolbar">
+          <div class="seg mapapp-layer" role="radiogroup" aria-label="Map style">
+            <label><input type="radio" name="mapLayer" value="street" checked><span>Map</span></label>
+            <label><input type="radio" name="mapLayer" value="sat"><span>Satellite</span></label>
+          </div>
+          <button type="button" class="mapbtn" id="mapRings" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke-dasharray="3 3"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg><span>Walking rings</span></button>
+          <button type="button" class="mapbtn" id="mapLocate"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="3.5"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg><span>Locate me</span></button>
+          <button type="button" class="mapbtn" id="mapFit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span>Show all</span></button>
+          <button type="button" class="mapbtn" id="mapFull" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3H3v6M15 3h6v6M9 21H3v-6M15 21h6v-6"/></svg><span>Full screen</span></button>
+        </div>
+        <div class="mapapp-mapwrap">
+          <div id="leafletMap" role="application" aria-label="Map of Makkah and Madinah"></div>
+          <div class="map-toast" id="mapToast" role="status" hidden></div>
+        </div>
+      </div>
+
+      <div class="mapapp-listwrap">
+        <div class="mapapp-count" id="mapCount" aria-live="polite"></div>
+        <ul class="mapapp-list" id="mapList"></ul>
+      </div>
     </div>
-    <div id="leafletMap"></div>
-    <div class="map-legend">
-      <span><span class="dot"></span> Mosques &amp; mataf</span>
-      <span><span class="dot" style="background:#3FA79A;"></span> Historic &amp; Hajj sites</span>
-    </div>
-    <div class="distance-list" id="distanceList"></div>
+    <p class="map-note">Distances are straight-line from the mosque — real walking or driving routes are longer. Map data © OpenStreetMap contributors; satellite imagery © Esri.</p>
   </div>
 </section>
 
@@ -3751,92 +3806,253 @@
   }, { threshold: 0.15 });
   document.querySelectorAll('.reveal, .tl-item').forEach(el => { el.classList.add('reveal'); io.observe(el); });
 
-  // ---- Leaflet map ----
-  // Everything below is guarded against Leaflet failing to load (slow network,
-  // blocked CDN, ad-blocker, etc.) — a single third-party map library must
-  // never be able to take down the rest of the page's JavaScript, which is
-  // what an unguarded `L.map(...)` call would do if `L` were undefined.
+  // ---- Map: Makkah & Madinah explorer ----
+  // Guarded: a third-party map library failing to load must never take the rest of the page down.
   try {
     if (typeof L === 'undefined') {
       throw new Error('Leaflet failed to load from the CDN — the map section will show as empty, but the rest of the page still works.');
     }
-
-    // Each city's first entry is the "base" (the mosque) that distances are measured from.
-    const makkahSites = [
-      { name: "Masjid al-Haram", lat: 21.4225, lng: 39.8262, type: "mosque" },
-      { name: "Masjid Aisha (Miqat at-Tan'eem)", lat: 21.4694, lng: 39.7472, type: "mosque" },
-      { name: "Masjid al-Jinn", lat: 21.4257, lng: 39.8577, type: "mosque" },
-      { name: "Jabal al-Nour (Cave of Hira)", lat: 21.4578, lng: 39.8592, type: "site" },
-      { name: "Jabal Thawr", lat: 21.3833, lng: 39.8333, type: "site" },
-      { name: "Mina", lat: 21.4133, lng: 39.8933, type: "site" },
-      { name: "Mount Arafat", lat: 21.3549, lng: 39.9840, type: "site" },
-      { name: "Muzdalifah", lat: 21.3839, lng: 39.9364, type: "site" }
-    ];
-    const madinahSites = [
-      { name: "Masjid an-Nabawi", lat: 24.4672, lng: 39.6112, type: "mosque" },
-      { name: "Quba Mosque", lat: 24.4392, lng: 39.6172, type: "mosque" },
-      { name: "Masjid al-Qiblatain", lat: 24.4795, lng: 39.5928, type: "mosque" },
-      { name: "Masjid Abu Bakr", lat: 24.4675, lng: 39.6127, type: "mosque" },
-      { name: "Sab'a Masajid (Seven Mosques)", lat: 24.4770, lng: 39.5892, type: "mosque" },
-      { name: "Mount Uhud", lat: 24.5017, lng: 39.6114, type: "site" },
-      { name: "Jannat al-Baqi", lat: 24.4680, lng: 39.6135, type: "site" }
-    ];
-
-    const haversineKm = (lat1, lon1, lat2, lon2) => {
-      const R = 6371;
-      const dLat = (lat2 - lat1) * Math.PI / 180;
-      const dLon = (lon2 - lon1) * Math.PI / 180;
-      const a = Math.sin(dLat / 2) ** 2 +
-        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) ** 2;
-      return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const $ = (id) => document.getElementById(id);
+    const app = $('mapApp');
+    const ICON = {
+      haram: '<rect x="5" y="7" width="14" height="13" rx="1.5"/><path d="M5 11.5h14"/>',
+      mosque: '<path d="M5 20v-5a7 7 0 0 1 14 0v5"/><path d="M12 8V3.5M3 20h18"/>',
+      site: '<path d="M3 20l6-11 4 7 3-4 5 8z"/>',
+      hajj: '<path d="M3 20L12 5l9 15z"/><path d="M12 20v-6"/>',
+      landmark: '<path d="M12 3v4M9.5 7h5l1.5 13h-8z"/>',
+      transport: '<path d="M2 16l20-8-6 14-3-6-6-2z"/>'
     };
+    const CAT = {
+      haram: { label: 'The Holy Mosques', color: '#0E2A28' },
+      mosque: { label: 'Historic mosques', color: '#B7862C' },
+      site: { label: 'Ziyarat sites', color: '#2F9486' },
+      hajj: { label: 'Hajj sites', color: '#C8644A' },
+      landmark: { label: 'Landmarks', color: '#6B4E9B' },
+      transport: { label: 'Getting there', color: '#4A6FA5' }
+    };
+    // In each city the first entry is the mosque that distances and rings are measured from.
+    const CITIES = {
+      makkah: [
+        { id: 'haram', name: 'Masjid al-Haram', ar: 'المسجد الحرام', cat: 'haram', lat: 21.4225, lng: 39.8262, desc: 'The Grand Mosque and the Ka’bah — where Tawaf and Sa’i take place.' },
+        { id: 'clock', name: 'Abraj Al Bait (Clock Tower)', ar: 'أبراج البيت', cat: 'landmark', lat: 21.4188, lng: 39.8258, desc: 'The hotel-and-mall complex beside the Haram; its clock face can be seen across the city.' },
+        { id: 'aisha', name: 'Masjid Aisha (Miqat at-Tan’im)', ar: 'مسجد عائشة · التنعيم', cat: 'mosque', lat: 21.4694, lng: 39.7472, desc: 'The nearest miqat outside the Haram boundary, used to start a fresh Umrah.' },
+        { id: 'jinn', name: 'Masjid al-Jinn', ar: 'مسجد الجن', cat: 'mosque', lat: 21.4257, lng: 39.8577, desc: 'A mosque associated with the night the jinn listened to the Qur’an.' },
+        { id: 'nour', name: 'Jabal al-Nour (Cave of Hira)', ar: 'جبل النور · غار حراء', cat: 'site', lat: 21.4578, lng: 39.8592, desc: 'Where the first revelation came to the Prophet ﷺ. A steep climb — start early.' },
+        { id: 'thawr', name: 'Jabal Thawr', ar: 'جبل ثور', cat: 'site', lat: 21.3833, lng: 39.8333, desc: 'The mountain whose cave sheltered the Prophet ﷺ and Abu Bakr (RA) during the Hijrah.' },
+        { id: 'mina', name: 'Mina', ar: 'منى', cat: 'hajj', lat: 21.4133, lng: 39.8933, desc: 'The tent city used during Hajj. Not part of Umrah.' },
+        { id: 'muzdalifah', name: 'Muzdalifah', ar: 'مزدلفة', cat: 'hajj', lat: 21.3839, lng: 39.9364, desc: 'Where pilgrims spend the night after Arafat during Hajj. Not part of Umrah.' },
+        { id: 'arafat', name: 'Mount Arafat', ar: 'جبل عرفات', cat: 'hajj', lat: 21.3549, lng: 39.9840, desc: 'Where pilgrims stand on the Day of Arafah during Hajj. Not part of Umrah.' }
+      ],
+      madinah: [
+        { id: 'nabawi', name: 'Masjid an-Nabawi', ar: 'المسجد النبوي', cat: 'haram', lat: 24.4672, lng: 39.6112, desc: 'The Prophet’s ﷺ Mosque, with the Rawdah and his blessed resting place.' },
+        { id: 'abubakr', name: 'Masjid Abu Bakr', ar: 'مسجد أبي بكر', cat: 'mosque', lat: 24.4675, lng: 39.6127, desc: 'One of the historic mosques beside Masjid an-Nabawi.' },
+        { id: 'baqi', name: 'Jannat al-Baqi', ar: 'جنة البقيع', cat: 'site', lat: 24.4680, lng: 39.6135, desc: 'The cemetery beside the Prophet’s Mosque where many Companions and members of his family are buried.' },
+        { id: 'quba', name: 'Quba Mosque', ar: 'مسجد قباء', cat: 'mosque', lat: 24.4392, lng: 39.6172, desc: 'The first mosque built in Islam. Many visitors pray two rak’ahs here.' },
+        { id: 'qiblatain', name: 'Masjid al-Qiblatain', ar: 'مسجد القبلتين', cat: 'mosque', lat: 24.4795, lng: 39.5928, desc: 'Where the direction of prayer was changed from Jerusalem to the Ka’bah.' },
+        { id: 'sabaa', name: 'Sab’a Masajid (Seven Mosques)', ar: 'المساجد السبعة', cat: 'mosque', lat: 24.4770, lng: 39.5892, desc: 'A cluster of small mosques near the site of the Battle of the Trench.' },
+        { id: 'uhud', name: 'Mount Uhud', ar: 'جبل أحد', cat: 'site', lat: 24.5017, lng: 39.6114, desc: 'Site of the Battle of Uhud, and the graves of the martyrs including Hamzah (RA).' },
+        { id: 'airport', name: 'Madinah Airport', ar: 'مطار الأمير محمد بن عبدالعزيز', cat: 'transport', lat: 24.5534, lng: 39.7051, desc: 'Prince Mohammad bin Abdulaziz International — handles many direct Umrah flights.' }
+      ]
+    };
+    const RINGS = [{ m: 500, label: '500 m · 6 min walk' }, { m: 1000, label: '1 km · 12 min walk' }, { m: 2000, label: '2 km · 24 min walk' }];
+    const FLY = { padding: [48, 48], maxZoom: 15 };
 
-    const map = L.map('leafletMap', { scrollWheelZoom: false }).setView([21.4225, 39.8262], 12);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors',
-      maxZoom: 18
-    }).addTo(map);
+    const haversineKm = (a, b, c, d) => {
+      const R = 6371, rad = Math.PI / 180, dLat = (c - a) * rad, dLon = (d - b) * rad;
+      const x = Math.sin(dLat / 2) ** 2 + Math.cos(a * rad) * Math.cos(c * rad) * Math.sin(dLon / 2) ** 2;
+      return R * 2 * Math.atan2(Math.sqrt(x), Math.sqrt(1 - x));
+    };
+    const fmtDist = (km) => (km < 1 ? (Math.round(km * 100) * 10) + ' m' : km.toFixed(1) + ' km');
+    const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const svg = (cat, size) => '<svg viewBox="0 0 24 24" width="' + size + '" height="' + size + '" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICON[cat] + '</svg>';
 
-    let markers = [];
-    const loadCity = (sites, center, zoom) => {
-      markers.forEach(m => map.removeLayer(m));
-      markers = [];
-      const base = sites[0];
-      const distanceList = document.getElementById('distanceList');
-      distanceList.innerHTML = '';
+    // ---- the map ----
+    const map = L.map('leafletMap', { scrollWheelZoom: false, zoomControl: true, zoomSnap: 0.5 });
+    const street = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap contributors', maxZoom: 19 });
+    const sat = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: 'Imagery &copy; Esri, Maxar, Earthstar Geographics', maxZoom: 18 });
+    street.addTo(map);
+    // scroll-wheel zoom only after the visitor clicks the map, so the page never gets hijacked while scrolling past it
+    map.on('click', () => map.scrollWheelZoom.enable());
+    map.getContainer().addEventListener('mouseleave', () => map.scrollWheelZoom.disable());
 
-      sites.forEach(s => {
-        const color = s.type === 'mosque' ? '#B7862C' : '#3FA79A';
-        const marker = L.circleMarker([s.lat, s.lng], {
-          radius: 9, color: '#0E2A28', weight: 2, fillColor: color, fillOpacity: 0.9
-        }).addTo(map);
-        marker.bindTooltip(s.name, { permanent: true, direction: 'top', offset: [0, -8], className: 'map-label' });
+    const state = { city: 'makkah', cat: 'all', q: '', selected: null, rings: null, ringsOn: false, me: null };
+    let markers = {};
+    const sites = () => CITIES[state.city];
+    const base = () => sites()[0];
 
-        const dist = haversineKm(base.lat, base.lng, s.lat, s.lng);
-        const distText = s === base ? 'The Grand Mosque itself' : dist.toFixed(1) + ' km from ' + base.name;
-        marker.bindPopup('<strong>' + s.name + '</strong><br>' + distText);
-        markers.push(marker);
+    function toast(msg, ms) {
+      const t = $('mapToast');
+      t.textContent = msg; t.hidden = false;
+      clearTimeout(toast.t);
+      toast.t = setTimeout(() => { t.hidden = true; }, ms || 5000);
+    }
 
-        const row = document.createElement('div');
-        row.className = 'distance-row';
-        row.innerHTML = '<span class="d-name">' + s.name + '</span><span class="d-km">' +
-          (s === base ? 'City centre' : dist.toFixed(1) + ' km') + '</span>';
-        distanceList.appendChild(row);
+    function pinIcon(s) {
+      const big = s.cat === 'haram';
+      const px = big ? 48 : 38;
+      return L.divIcon({
+        className: 'mk-wrap',
+        html: '<div class="mk mk--' + s.cat + (big ? ' mk--big' : '') + '" style="--c:' + CAT[s.cat].color + '">' + svg(s.cat, big ? 24 : 19) + '</div>',
+        iconSize: [px, px], iconAnchor: [px / 2, px / 2], popupAnchor: [0, -px / 2 + 2], tooltipAnchor: [0, -px / 2]
       });
-      map.setView(center, zoom);
-    };
-    loadCity(makkahSites, [21.42, 39.87], 11);
+    }
+    function popupHtml(s) {
+      const b = base(), km = haversineKm(b.lat, b.lng, s.lat, s.lng);
+      const meta = s === b ? 'Starting point for distances and walking rings'
+        : fmtDist(km) + ' from ' + b.name + (km <= 3 ? ' · about ' + Math.max(1, Math.round(km / 5 * 60)) + ' min on foot' : '');
+      return '<div class="pop"><span class="pop-cat" style="--c:' + CAT[s.cat].color + '">' + esc(CAT[s.cat].label) + '</span>' +
+        '<h4>' + esc(s.name) + '</h4><div class="pop-ar" lang="ar" dir="rtl">' + esc(s.ar) + '</div>' +
+        '<p>' + esc(s.desc) + '</p><div class="pop-meta">' + esc(meta) + '</div>' +
+        '<div class="pop-actions"><a href="https://www.google.com/maps/dir/?api=1&destination=' + s.lat + ',' + s.lng + '" target="_blank" rel="noopener">Directions ↗</a></div></div>';
+    }
 
-    document.getElementById('btn-makkah').addEventListener('click', function () {
-      this.classList.add('active');
-      document.getElementById('btn-madinah').classList.remove('active');
-      loadCity(makkahSites, [21.42, 39.87], 11);
+    function visible(s) {
+      if (state.cat !== 'all' && s.cat !== state.cat) return false;
+      const q = state.q.trim().toLowerCase();
+      return !q || s.name.toLowerCase().includes(q) || s.ar.includes(q) || CAT[s.cat].label.toLowerCase().includes(q);
+    }
+
+    function renderList() {
+      const b = base(), list = $('mapList'), shown = sites().filter(visible);
+      list.innerHTML = '';
+      shown.forEach((s) => {
+        const km = haversineKm(b.lat, b.lng, s.lat, s.lng);
+        const li = document.createElement('li');
+        li.innerHTML = '<button type="button" class="mp-item' + (state.selected === s.id ? ' is-selected' : '') + '" data-id="' + s.id + '">' +
+          '<span class="mp-ico" style="--c:' + CAT[s.cat].color + '">' + svg(s.cat, 18) + '</span>' +
+          '<span class="mp-main"><strong>' + esc(s.name) + '</strong><em lang="ar" dir="rtl">' + esc(s.ar) + '</em></span>' +
+          '<span class="mp-dist">' + (s === b ? 'Start' : fmtDist(km)) + '</span></button>';
+        list.appendChild(li);
+      });
+      $('mapCount').textContent = shown.length ? shown.length + (shown.length === 1 ? ' place' : ' places') + ' · distances from ' + b.name : 'No places match — try a different search or filter.';
+    }
+
+    function applyFilters() {
+      sites().forEach((s) => {
+        const m = markers[s.id];
+        if (visible(s)) { if (!map.hasLayer(m)) m.addTo(map); } else if (map.hasLayer(m)) { map.removeLayer(m); }
+      });
+      renderList();
+    }
+
+    function renderChips() {
+      const present = ['all'].concat(Object.keys(CAT).filter((c) => sites().some((s) => s.cat === c)));
+      $('mapChips').innerHTML = present.map((c) =>
+        '<button type="button" class="mp-chip' + (state.cat === c ? ' is-on' : '') + '" data-cat="' + c + '" aria-pressed="' + (state.cat === c) + '">' +
+        (c === 'all' ? '' : '<i style="background:' + CAT[c].color + '"></i>') + (c === 'all' ? 'All' : CAT[c].label) + '</button>').join('');
+    }
+
+    function select(id, opts) {
+      const s = sites().find((x) => x.id === id), m = markers[id];
+      if (!s || !m) return;
+      state.selected = id;
+      Object.keys(markers).forEach((k) => { const el = markers[k].getElement && markers[k].getElement(); if (el) el.firstChild.classList.toggle('is-selected', k === id); });
+      document.querySelectorAll('.mp-item').forEach((b) => b.classList.toggle('is-selected', b.dataset.id === id));
+      if (!opts || opts.fly !== false) map.flyTo([s.lat, s.lng], Math.max(map.getZoom(), 14), { duration: 0.9 });
+      setTimeout(() => m.openPopup(), opts && opts.fly === false ? 0 : 500);
+      const item = document.querySelector('.mp-item[data-id="' + id + '"]');
+      if (item && item.scrollIntoView) item.scrollIntoView({ block: 'nearest' });
+    }
+
+    function buildRings() {
+      const b = base(), g = L.layerGroup();
+      RINGS.forEach((r) => {
+        L.circle([b.lat, b.lng], { radius: r.m, color: '#B7862C', weight: 2, dashArray: '7 7', fillColor: '#E7C77E', fillOpacity: 0.07, interactive: false }).addTo(g);
+        L.marker([b.lat + r.m / 111320, b.lng], { interactive: false, keyboard: false,
+          icon: L.divIcon({ className: 'ring-label', html: '<span>' + r.label + '</span>', iconSize: [0, 0] }) }).addTo(g);
+      });
+      return g;
+    }
+    function setRings(on) {
+      state.ringsOn = on;
+      if (state.rings) { map.removeLayer(state.rings); state.rings = null; }
+      if (on) {
+        state.rings = buildRings().addTo(map);
+        map.flyToBounds(L.latLng(base().lat, base().lng).toBounds(4800), { padding: [30, 30], duration: 0.9 });
+      }
+      $('mapRings').setAttribute('aria-pressed', String(on));
+      $('mapRings').classList.toggle('is-on', on);
+    }
+
+    function loadCity(key, animate) {
+      state.city = key; state.cat = 'all'; state.q = ''; state.selected = null;
+      $('mapSearch').value = '';
+      Object.keys(markers).forEach((k) => map.removeLayer(markers[k]));
+      markers = {};
+      sites().forEach((s) => {
+        const m = L.marker([s.lat, s.lng], { icon: pinIcon(s), title: s.name, alt: s.name, keyboard: true, riseOnHover: true, zIndexOffset: s.cat === 'haram' ? 1000 : 0 });
+        m.bindTooltip(esc(s.name), { direction: 'top', className: 'map-label' });
+        m.bindPopup(popupHtml(s), { maxWidth: 290, className: 'mp-popup', autoPanPadding: [30, 30] });
+        m.on('click', () => select(s.id, { fly: false }));
+        markers[s.id] = m;
+        m.addTo(map);
+      });
+      renderChips(); renderList();
+      if (state.ringsOn) setRings(true);
+      else {
+        const bounds = L.latLngBounds(sites().map((s) => [s.lat, s.lng]));
+        if (animate) map.flyToBounds(bounds, Object.assign({ duration: 1.1 }, FLY)); else map.fitBounds(bounds, FLY);
+      }
+    }
+
+    // ---- controls ----
+    document.querySelectorAll('input[name="mapCity"]').forEach((r) => r.addEventListener('change', () => loadCity(r.value, true)));
+    document.querySelectorAll('input[name="mapLayer"]').forEach((r) => r.addEventListener('change', () => {
+      const satOn = r.value === 'sat';
+      if (satOn) { map.removeLayer(street); sat.addTo(map); } else { map.removeLayer(sat); street.addTo(map); }
+      app.classList.toggle('is-street', !satOn); app.classList.toggle('is-sat', satOn);
+    }));
+    $('mapSearch').addEventListener('input', (e) => { state.q = e.target.value; applyFilters(); });
+    $('mapChips').addEventListener('click', (e) => {
+      const b = e.target.closest('.mp-chip'); if (!b) return;
+      state.cat = b.dataset.cat; renderChips(); applyFilters();
     });
-    document.getElementById('btn-madinah').addEventListener('click', function () {
-      this.classList.add('active');
-      document.getElementById('btn-makkah').classList.remove('active');
-      loadCity(madinahSites, [24.465, 39.61], 12);
+    $('mapList').addEventListener('click', (e) => {
+      const b = e.target.closest('.mp-item'); if (!b) return;
+      select(b.dataset.id);
+      if (window.matchMedia('(max-width: 900px)').matches) $('leafletMap').scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
+    $('mapRings').addEventListener('click', () => setRings(!state.ringsOn));
+    $('mapFit').addEventListener('click', () => {
+      setRings(false);
+      state.cat = 'all'; state.q = ''; $('mapSearch').value = ''; renderChips(); applyFilters();
+      map.flyToBounds(L.latLngBounds(sites().map((s) => [s.lat, s.lng])), Object.assign({ duration: 0.9 }, FLY));
+    });
+    $('mapLocate').addEventListener('click', () => {
+      if (!navigator.geolocation) { toast('Location isn’t available on this device or browser.'); return; }
+      toast('Finding your location…', 12000);
+      navigator.geolocation.getCurrentPosition((pos) => {
+        const { latitude: la, longitude: lo, accuracy } = pos.coords;
+        if (state.me) map.removeLayer(state.me);
+        state.me = L.layerGroup([
+          L.circle([la, lo], { radius: Math.min(accuracy, 800), color: '#2F6FDE', weight: 1, fillColor: '#2F6FDE', fillOpacity: 0.12, interactive: false }),
+          L.circleMarker([la, lo], { radius: 8, color: '#fff', weight: 3, fillColor: '#2F6FDE', fillOpacity: 1 }).bindTooltip('You are here')
+        ]).addTo(map);
+        const near = ['makkah', 'madinah'].map((k) => ({ k, s: CITIES[k][0] }))
+          .map((o) => Object.assign(o, { km: haversineKm(la, lo, o.s.lat, o.s.lng) })).sort((a, b) => a.km - b.km)[0];
+        if (near.km <= 40) {
+          if (near.k !== state.city) { document.querySelector('input[name="mapCity"][value="' + near.k + '"]').checked = true; loadCity(near.k, false); }
+          map.flyToBounds(L.latLngBounds([[la, lo], [near.s.lat, near.s.lng]]), { padding: [60, 60], maxZoom: 16, duration: 1 });
+          toast('You are ' + fmtDist(near.km) + ' from ' + near.s.name + ' (straight line).');
+        } else {
+          toast('You are about ' + Math.round(near.km).toLocaleString('en-IN') + ' km from ' + near.s.name + '.');
+        }
+      }, (err) => {
+        toast(err && err.code === 1 ? 'Location permission was blocked — allow it in your browser to use this.' : 'Couldn’t find your location just now. Please try again.');
+      }, { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 });
+    });
+    function setFull(on) {
+      app.classList.toggle('is-full', on); document.body.classList.toggle('map-full', on);
+      $('mapFull').setAttribute('aria-pressed', String(on));
+      $('mapFull').lastChild.textContent = on ? 'Exit full screen' : 'Full screen';
+      setTimeout(() => map.invalidateSize(), 80);
+    }
+    $('mapFull').addEventListener('click', () => setFull(!app.classList.contains('is-full')));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && app.classList.contains('is-full')) setFull(false); });
+    window.addEventListener('resize', () => map.invalidateSize());
+
+    loadCity('makkah', false);
+    setTimeout(() => map.invalidateSize(), 300);
   } catch (mapError) {
     console.warn('Map section skipped:', mapError.message);
     const mapEl = document.getElementById('leafletMap');
